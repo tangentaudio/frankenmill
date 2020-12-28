@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [GeckoBreakout.PrjPCB]
+   Generated File[GeckoBreakout.TXT]
+   Generated File[GeckoBreakout.DRL]
+   Generated File[GeckoBreakout.LDP]
+   Generated File[GeckoBreakout.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 8:19:58 PM On 12/30/2011

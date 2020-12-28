@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: Spindle Drive.PcbDoc   1/7/2012  7:24:06 PM
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : Spindle Drive.TXT
+EIA File   : Spindle Drive.DRL
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        15mil (0.381mm)          Round          51               11.99 Inch (304.49 mm)
+T2        39.4mil (1.00076mm)      Round          16               4.98 Inch (126.44 mm)
+T3        50mil (1.27mm)           Round          5                4.34 Inch (110.26 mm)
+T4        59.1mil (1.50114mm)      Round          6                3.83 Inch (97.20 mm)
+---------------------------------------------------------------------------
+Totals                                            78               25.13 Inch (638.39 mm)
+
+Total Processing Time (hh:mm:ss) : 00:00:00

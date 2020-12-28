@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: GeckoBreakout.PcbDoc   12/30/2011  8:19:58 PM
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : GeckoBreakout.TXT
+EIA File   : GeckoBreakout.DRL
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        33.5mil (0.8509mm)       Round          2                1.23 Inch (31.33 mm)
+T2        40mil (1.016mm)          Round          10               2.21 Inch (56.07 mm)
+T3        59.1mil (1.50114mm)      Round          6                1.14 Inch (28.97 mm)
+---------------------------------------------------------------------------
+Totals                                            18               4.58 Inch (116.37 mm)
+
+Total Processing Time (hh:mm:ss) : 00:00:00

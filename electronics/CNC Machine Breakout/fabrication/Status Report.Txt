@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [CNC Machine Breakout.PrjPCB]
+   Generated File[CNC Machine Breakout.TXT]
+   Generated File[CNC Machine Breakout.DRL]
+   Generated File[CNC Machine Breakout.LDP]
+   Generated File[CNC Machine Breakout.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 8:38:08 PM On 1/22/2012

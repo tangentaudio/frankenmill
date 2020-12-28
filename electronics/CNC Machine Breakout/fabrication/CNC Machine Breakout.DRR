@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: CNC Machine Breakout.PcbDoc   1/22/2012  8:38:08 PM
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : CNC Machine Breakout.TXT
+EIA File   : CNC Machine Breakout.DRL
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        15mil (0.381mm)          Round          85               16.04 Inch (407.39 mm)
+T2        39.4mil (1.00076mm)      Round          40               7.36 Inch (186.82 mm)
+T3        51.2mil (1.30048mm)      Round          29               6.00 Inch (152.44 mm)
+T4        125mil (3.175mm)         Round          4                6.50 Inch (165.10 mm)
+---------------------------------------------------------------------------
+Totals                                            158              35.90 Inch (911.74 mm)
+
+Total Processing Time (hh:mm:ss) : 00:00:00

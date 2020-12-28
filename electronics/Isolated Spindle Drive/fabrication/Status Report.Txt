@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Spindle Drive.PrjPCB]
+   Generated File[Spindle Drive.TXT]
+   Generated File[Spindle Drive.DRL]
+   Generated File[Spindle Drive.LDP]
+   Generated File[Spindle Drive.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 7:24:06 PM On 1/7/2012

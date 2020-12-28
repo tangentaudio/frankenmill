@@ -1,0 +1,20 @@
+Field=Designator~String~Designator~109|Field=Comment~String~Comment~100|Field=Quantity~Integer~Quantity~46|Field=Value~String~Value~100|ReportField=ProjectFileName~CNC Main Board.PrjPCB|ReportField=ProjectFullPath~Z:\Engineering\CNC\CNC Main Board\CNC Main Board.PrjPCB|ReportField=Title~Bill of Materials For Project [CNC Main Board.PrjPCB] (No PCB Document Selected)|ReportField=TotalQuantity~82|ReportField=ReportTime~5:46:47 PM|ReportField=ReportDate~2/11/2012|ReportField=ReportDateTime~2/11/2012 5:46:47 PM|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~ReportComponents|ReportField=GeneratorDescription~Component Reports|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~2/11/2012|ReportField=CurrentTime~5:46:34 PM|ReportField=Date~|ReportField=DocumentFullPathAndName~Z:\Engineering\CNC\CNC Main Board\Main Board Interface.SchDoc|ReportField=DocumentName~Main Board Interface.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~2/11/2012|ReportField=Organization~|ReportField=PageSetup~Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintScale=0.32|XCorrection=1.00|YCorrection=1.00|PrintKind=1|BorderSize=5000000|LeftOffset=0|BottomOffset=0|Orientation=2|PaperLength=1000|PaperWidth=1000|Scale=100|PaperSource=261|PrintQuality=600|MediaType=1|DitherType=10|PaperKind=Letter|PrintScaleMode=1|ReportField=Revision~|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~|ReportField=DataSourceFileName~CNC Main Board.PrjPCB|ReportField=DataSourceFullPath~Z:\Engineering\CNC\CNC Main Board\CNC Main Board.PrjPCB
+U10, U11|74ACT14SC|2|
+U5, U7, U9|MC3486D|3|
+U3, U4|MC3487D|2|
+U1, U2, U6, U8|SN74LVC541DB|4|
+R2, R8, R15|Res Pack3|3|47
+R1, R3, R4, R5, R6, R7, R9, R10, R11, R12, R13, R14, R16, R17, R18, R19, R20, R21, R22, R23, R24, R25, R27, R28|Res3|24|0, 1K, 2.2K, 47, 220, 330
+PS0, PS1, PS2, PS3|Header 5X2|4|
+PP0, PP1|Header 8X2|2|
+P10, P11|Header 3|2|
+P8|Header 4|1|
+P5, P6, P7, P9|Header 2|4|
+P3, P4|Header 25X2|2|
+P2|Header 20X2|1|
+P1|Header 10X2|1|
+LED1, LED2, LED3|LED3|3|
+K1, K2, K3, K4, K5, K6|5V REED|6|
+F1, F2|2.5A PTC|2|
+C10, C11, C12, C13|Cap Pol3|4|2.2uF
+C1, C2, C3, C4, C5, C6, C7, C8, C9, C14, C15, C16|Cap Semi|12|0.1uF
