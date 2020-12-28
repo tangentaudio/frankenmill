@@ -1,0 +1,74 @@
+<pyvcp>
+  <vbox>
+    <hbox>
+      <button>
+	<halpin>"set-measure-tool"</halpin>
+	<text>"Set Measure Tool"</text> 
+	<font>('Fixed',16)</font>
+      </button>
+    </hbox>
+    
+    <hbox>
+      <label>
+	<text>"Spindle Command:"</text>
+      </label>
+      <number>
+	<halpin>"spindle-rpm-commanded"</halpin>
+	<format>"+4.0f"</format>
+      </number>
+
+    </hbox>
+    <hbox>
+      <label>
+	<text>"Spindle Speed:"</text>
+      </label>
+      <u32>
+	<halpin>"spindle-rpm-u32"</halpin>
+	<format>"4d"</format>
+	<width>4</width>
+      </u32>
+    </hbox>
+
+    <hbox>
+      <label>
+	<text>"Spindle at Speed:"</text>
+      </label>
+      <led>
+	<halpin>"spindle-at-speed"</halpin>
+	<size>15</size>
+	<on_color>"green"</on_color>
+	<off_color>"red"</off_color>
+      </led>
+    </hbox>
+
+    <hbox>
+      <meter>
+	<halpin>"spindle-rpm-meter"</halpin>
+	<text>"Speed"</text>
+	<subtext>"RPM"</subtext>
+	<size>200</size>
+	<min_>-10000</min_>
+	<max_>10000</max_>
+	<majorscale>2000</majorscale>
+	<minorscale>1000</minorscale>
+      </meter>
+    </hbox>
+
+    <hbox>
+      <bar>
+	<halpin>"spindle-load-meter"</halpin>
+	<text>"Load"</text>
+	<subtext>"%"</subtext>
+	<size>200</size>
+	<min_>0</min_>
+	<max_>120</max_>
+	<majorscale>10</majorscale>
+	<region1>(0,75.0,"green")</region1>
+	<region2>(76.0,95.0,"yellow")</region2>
+	<region3>(95.0,120.0,"red")</region3>
+      </bar>
+    </hbox>
+
+
+  </vbox>
+</pyvcp>

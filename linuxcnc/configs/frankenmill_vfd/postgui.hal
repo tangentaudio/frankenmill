@@ -1,0 +1,8 @@
+# set up the measure tool button
+net remote-set-measure-tool halui.mdi-command-00 <= pyvcp.set-measure-tool
+
+linksp spindle-cmd pyvcp.spindle-rpm-commanded
+#linksp spindle-rpm pyvcp.spindle-rpm-u32
+linksp spindle-rpm pyvcp.spindle-rpm-meter
+linksp spindle-at-speed pyvcp.spindle-at-speed
+linksp spindle-load pyvcp.spindle-load-meter

@@ -1,0 +1,479 @@
+#########################################
+#
+# HAL file for converted Sieg X3 mill with custom breakout
+# Steve Richardson (tangentaudio@gmail.com)
+#
+# Derived from Ted Hyde's original hm2-servo config
+#
+# Based up work and discussion with Seb & Peter & Jeff
+# GNU license references - insert here. www.linuxcnc.org
+#
+#
+# ########################################
+# Firmware files are in /lib/firmware/hm2/7i43/
+# Must symlink the hostmot2 firmware directory of sanbox to
+# /lib/firmware before running EMC2...
+# sudo ln -s $HOME/emc2-sandbox/src/hal/drivers/mesa-hostmot2/firmware /lib/firmware/hm2
+#
+# See also:
+# <http://www.linuxcnc.org/docs/devel/html/man/man9/hostmot2.9.html#config%20modparam>
+# and http://wiki.linuxcnc.org/cgi-bin/emcinfo.pl?HostMot2
+#
+# #####################################################################
+
+
+# ###################################
+# Core EMC/HAL Loads
+# ###################################
+
+# kinematics
+loadrt trivkins
+
+# motion controller, get name and thread periods from ini file
+loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[TRAJ]AXES
+
+# only the 7i43 needs this, but it doesnt hurt the others
+loadrt probe_parport
+
+# hostmot2 driver
+loadrt hostmot2
+
+# load low-level driver
+loadrt [HOSTMOT2](DRIVER) ioaddr=0x378 epp_wide=0 config=[HOSTMOT2](CONFIG)
+
+setp hm2_[HOSTMOT2](BOARD).0.watchdog.timeout_ns 10000000
+
+
+# ################################################
+# THREADS
+# ################################################
+
+addf hm2_[HOSTMOT2](BOARD).0.read         servo-thread
+addf motion-command-handler               servo-thread
+addf motion-controller                    servo-thread
+# revel in the free time here from not having to run PID 
+addf hm2_[HOSTMOT2](BOARD).0.write        servo-thread
+addf hm2_[HOSTMOT2](BOARD).0.pet_watchdog servo-thread
+
+# tangent audio cnc board: stepper output enable
+#
+setp hm2_[HOSTMOT2](BOARD).0.gpio.038.is_output 1
+setp hm2_[HOSTMOT2](BOARD).0.gpio.038.invert_output 1
+setp hm2_[HOSTMOT2](BOARD).0.gpio.038.out 1
+
+# tangent audio cnc board: machine power
+setp hm2_[HOSTMOT2](BOARD).0.gpio.028.is_output 1
+setp hm2_[HOSTMOT2](BOARD).0.gpio.028.invert_output 1
+
+# tangent audio cnc board: homing
+net home-x <= hm2_[HOSTMOT2](BOARD).0.gpio.044.in_not
+net home-y <= hm2_[HOSTMOT2](BOARD).0.gpio.045.in_not
+net home-z <= hm2_[HOSTMOT2](BOARD).0.gpio.046.in_not
+#net home-a <= hm2_[HOSTMOT2](BOARD).0.gpio.047.in_not
+
+
+# ######################################################
+# Axis-of-motion Specific Configs (not the GUI)
+# ######################################################
+
+
+# ################
+# X [0] Axis
+# ################
+
+# axis enable chain
+newsig emcmot.00.enable bit
+sets emcmot.00.enable FALSE
+
+net emcmot.00.enable <= axis.0.amp-enable-out 
+net emcmot.00.enable => hm2_[HOSTMOT2](BOARD).0.stepgen.00.enable
+
+
+# position command and feedback
+net emcmot.00.pos-cmd <= axis.0.motor-pos-cmd
+net emcmot.00.pos-cmd => hm2_[HOSTMOT2](BOARD).0.stepgen.00.position-cmd
+
+net motor.00.pos-fb <= hm2_[HOSTMOT2](BOARD).0.stepgen.00.position-fb
+net motor.00.pos-fb => axis.0.motor-pos-fb
+
+# homing
+net home-x => axis.0.home-sw-in
+
+# other setup
+setp hm2_[HOSTMOT2](BOARD).0.pwmgen.00.output-type	2
+
+# timing parameters
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.00.dirsetup        [AXIS_0]DIRSETUP
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.00.dirhold         [AXIS_0]DIRHOLD
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.00.steplen         [AXIS_0]STEPLEN
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.00.stepspace       [AXIS_0]STEPSPACE
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.00.position-scale  [AXIS_0]SCALE
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.00.maxvel          0
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.00.maxaccel        0
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.00.step_type       0
+
+
+# ################
+# Y [1] Axis
+# ################
+
+# axis enable chain
+newsig emcmot.01.enable bit
+sets emcmot.01.enable FALSE
+
+net emcmot.01.enable <= axis.1.amp-enable-out 
+net emcmot.01.enable => hm2_[HOSTMOT2](BOARD).0.stepgen.01.enable
+
+
+# position command and feedback
+net emcmot.01.pos-cmd <= axis.1.motor-pos-cmd
+net emcmot.01.pos-cmd => hm2_[HOSTMOT2](BOARD).0.stepgen.01.position-cmd
+
+net motor.01.pos-fb <= hm2_[HOSTMOT2](BOARD).0.stepgen.01.position-fb
+net motor.01.pos-fb => axis.1.motor-pos-fb
+
+# homing
+net home-y => axis.1.home-sw-in
+
+
+# timing parameters
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.01.dirsetup        [AXIS_1]DIRSETUP
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.01.dirhold         [AXIS_1]DIRHOLD
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.01.steplen         [AXIS_1]STEPLEN
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.01.stepspace       [AXIS_1]STEPSPACE
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.01.position-scale  [AXIS_1]SCALE
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.01.maxvel          0
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.01.maxaccel        0
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.01.step_type       0
+
+
+# ################
+# Z [2] Axis
+# ################
+
+# axis enable chain
+newsig emcmot.02.enable bit
+sets emcmot.02.enable FALSE
+
+net emcmot.02.enable <= axis.2.amp-enable-out 
+net emcmot.02.enable => hm2_[HOSTMOT2](BOARD).0.stepgen.02.enable
+
+
+# position command and feedback
+net emcmot.02.pos-cmd <= axis.2.motor-pos-cmd
+net emcmot.02.pos-cmd => hm2_[HOSTMOT2](BOARD).0.stepgen.02.position-cmd
+
+net motor.02.pos-fb <= hm2_[HOSTMOT2](BOARD).0.stepgen.02.position-fb
+net motor.02.pos-fb => axis.2.motor-pos-fb
+
+# homing
+net home-z => axis.2.home-sw-in
+
+
+# timing parameters
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.02.dirsetup        [AXIS_2]DIRSETUP
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.02.dirhold         [AXIS_2]DIRHOLD
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.02.steplen         [AXIS_2]STEPLEN
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.02.stepspace       [AXIS_2]STEPSPACE
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.02.position-scale  [AXIS_2]SCALE
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.02.maxvel          0
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.02.maxaccel        0
+
+setp hm2_[HOSTMOT2](BOARD).0.stepgen.02.step_type       0
+
+
+
+
+# 
+# The Mesa AnyIO output pins can be in open-drain mode (drive low, float
+# high) or push/pull mode (drive low, drive high).
+#
+# When a logical output is 1 in open-drain mode, the FPGA lets the pin
+# float and it gets pulled high to +5V via a 10K resistor.
+#
+# When a logical output is 1 in push/pull mode, the FPGA pushes the pin
+# high but only to +3.3V.  This is problematic on some kinds of inputs.
+#
+
+#setp hm2_[HOSTMOT2](BOARD).0.gpio.048.is_opendrain 1
+#setp hm2_[HOSTMOT2](BOARD).0.gpio.049.is_opendrain 1
+
+#setp hm2_[HOSTMOT2](BOARD).0.gpio.054.is_opendrain 1
+#setp hm2_[HOSTMOT2](BOARD).0.gpio.055.is_opendrain 1
+
+#setp hm2_[HOSTMOT2](BOARD).0.gpio.060.is_opendrain 1
+#setp hm2_[HOSTMOT2](BOARD).0.gpio.061.is_opendrain 1
+
+
+
+
+
+
+# ##################################################
+# Standard I/O Block - EStop, Etc
+# ##################################################
+
+# create a signal for the estop loopback
+#net estop-loop iocontrol.0.user-enable-out => iocontrol.0.emc-enable-in
+net estop-loop hm2_[HOSTMOT2](BOARD).0.gpio.039.in_not iocontrol.0.emc-enable-in
+
+net machine_pwr hm2_[HOSTMOT2](BOARD).0.gpio.028.out <= halui.machine.is-on
+
+# create signals for tool loading loopback
+net tool-prep-loop iocontrol.0.tool-prepare => iocontrol.0.tool-prepared
+net tool-change-loop iocontrol.0.tool-change => iocontrol.0.tool-changed
+
+
+# ##################################################
+# Tangent Audio CNC
+# New spindle (Commander SK VFD via Modbus)
+# December 15, 2013
+# ##################################################
+
+# piecewise linear for correcting spindle speed
+loadrt linear8 
+addf linear8.0 servo-thread
+
+ 
+# load module
+loadusr -Wn spindle-vfd cmdrsk_vfd --ini cmdrsk.ini --name spindle-vfd --debug
+
+# connect the spindle direction pins to the VFD
+net spindle-fwd spindle-vfd.spindle-fwd <= motion.spindle-forward
+net spindle-rev spindle-vfd.spindle-rev <= motion.spindle-reverse
+
+# connect the spindle on pin to the VF-S11
+net spindle-run spindle-vfd.spindle-on <= motion.spindle-on
+
+# connect the VF-S11 at speed to the motion at speed
+net spindle-at-speed motion.spindle-at-speed <= spindle-vfd.at-speed
+
+net spindle-rpm <= spindle-vfd.motor-RPM
+
+net spindle-load <= spindle-vfd.current-load-percentage
+
+# connect the spindle RPM to the VF-S11
+#net spindle-cmd spindle-vfd.speed-command <= motion.spindle-speed-out
+
+# connect the VF-S11 DC brake
+# used by default if spindle is stopped - uncomment to use
+#net vfd-spindle-brake motion.spindle-brake => spindle-vfd.dc-brake
+
+# to use the VFD jog mode for spindle orient 
+# see orient.9 and motion.9
+#net spindle-orient motion.spindle-orient spindle-vfd.max-speed spindle-vfd.jog-mode
+
+# take precedence over control panel
+#setp spindle-vfd.enable 1
+
+#####
+# proper spindle commanded rpm
+# output to linear interpolator and near components
+net spindle-cmd <= motion.spindle-speed-out => linear8.0.in 
+
+# do linear interpolation, output to the vfd
+net spindle-cmd-interp <= linear8.0.out => spindle-vfd.speed-command
+
+
+##### 770 spindle in 10K mode
+# commanded     measured
+#===============================
+# 100		164
+# 500		785
+# 1000		1575
+# 2000		3169
+# 3000		4750
+# 4000		6327
+# 5000		7881
+# 6000		9284
+# 6700		10200
+
+
+# Data points 0..7.  xi+1 >= xi.
+#
+# When in is between xi and xi+1, out is a linear interpolation between yi and yi+1.
+#
+# When in is below x0, out is a linear extrapolation between x0 and x1.
+#
+# When in is above xn-1, out is a linear extrapolation between xn-2 and xn-1.
+#
+setp linear8.0.n 8
+setp linear8.0.x0 785
+setp linear8.0.y0 500
+setp linear8.0.x1 1575
+setp linear8.0.y1 1000
+setp linear8.0.x2 3169
+setp linear8.0.y2 2000
+setp linear8.0.x3 4750
+setp linear8.0.y3 3000
+setp linear8.0.x4 6327
+setp linear8.0.y4 4000
+setp linear8.0.x5 7881
+setp linear8.0.y5 5000
+setp linear8.0.x6 9284
+setp linear8.0.y6 6000
+setp linear8.0.x7 10200
+setp linear8.0.y7 6700
+
+
+###
+
+
+# ##################################################
+# Tangent Audio CNC
+# Spindle Management (OLD, kbic-125 based)
+# ##################################################
+
+# scale.0 is used for rpm calculation
+#loadrt scale count=2
+#addf scale.0 servo-thread
+
+# absolute value to express rpm as a positive number regardless of spindle direction
+#loadrt abs count=2
+#addf abs.0 servo-thread
+#addf abs.1 servo-thread
+
+# lowpass to filter rpm readings
+#loadrt lowpass count=1
+#addf lowpass.0 servo-thread
+
+# convert rpm to ints
+#loadrt conv_float_s32 count=2
+#addf conv-float-s32.0 servo-thread
+#addf conv-float-s32.1 servo-thread
+#loadrt conv_float_u32 count=2
+#addf conv-float-u32.0 servo-thread
+#addf conv-float-u32.1 servo-thread
+
+# sum with offset/gain for correcting speed of spindle control
+#loadrt sum2
+#addf sum2.0 servo-thread
+
+# piecewise linear for correcting spindle speed
+#loadrt linear8 
+#addf linear8.0 servo-thread
+
+# for spindle at speed
+#loadrt near
+#addf near.0 servo-thread
+
+
+# Spindle RPM calculation on Tangent Audio X3 conversion
+# 
+# encoder is 512 count/rev
+# it is attached to a shaft with a 28T gear, which meshes with a 34T gear on the spindle itself
+# thus the encoder will count 512 * 34/28 counts per revolution of the spindle
+# or 621.714286 counts/rev
+#
+# to scale the velocity counts/sec into spindle revs/min:
+#
+# gain =  1  / ( (34 / 28) * 512  ) / 60        = 0.096507352
+#                    |        |        |
+#                    gear     counts   seconds
+#                    ratio    per rev  per minute
+#
+# encoder is connected to the encoder 0 instance o the Mesa card
+# the FPGA code handily calculates velocity, expressed in counts/second
+#
+# the hal signal is hm2_[HOSTMOT2](BOARD).0.encoder.00.velocity
+
+# scale factor
+#setp scale.0.gain 0.096507352
+
+# lowpass filter to smooth RPM readings
+#setp lowpass.0.gain 0.10
+
+# raw velocity from the Mesa card
+#net spindle-velocity hm2_[HOSTMOT2](BOARD).0.encoder.00.velocity => scale.0.in
+
+# raw rpm as a float (+ = forward, - = reverse)
+#net spindle-rpm-raw-signed scale.0.out => abs.0.in lowpass.0.in conv-float-s32.0.in motion.spindle-speed-in
+
+# raw rpm as an s32 (+ = forward, - = reverse)
+#net spindle-rpm-raw-s32 conv-float-s32.0.out
+
+# raw rpm as a float (absolute value)
+#net spindle-rpm-raw abs.0.out => conv-float-u32.0.in
+
+# raw rpm as a u32 (absolute value)
+#net spindle-rpm-raw-u32 conv-float-u32.0.out
+
+# averaged rpm as a float (+ = forward, - = reverse)
+#net spindle-rpm-avg-signed lowpass.0.out => abs.1.in conv-float-s32.1.in
+
+# averaged rpm as a s32 (+ = forward, - = reverse)
+#net spindle-rpm-avg-s32 conv-float-s32.1.out
+
+# averaged rpm as a float (absolute value)
+#net spindle-rpm-avg abs.1.out => conv-float-u32.1.in near.0.in2
+
+# averaged rpm as a u32 (absolute value)
+#net spindle-rpm-avg-u32 conv-float-u32.1.out
+
+
+# tangent audio cnc board: PWM spindle control: set to type 2
+# UP on OUT0, DOWN on OUT1
+#setp hm2_[HOSTMOT2](BOARD).0.pwmgen.00.output-type 2
+#setp hm2_[HOSTMOT2](BOARD).0.pwmgen.01.output-type 2
+#setp hm2_[HOSTMOT2](BOARD).0.pwmgen.pwm_frequency 10000
+#setp hm2_[HOSTMOT2](BOARD).0.pwmgen.00.scale 2250.0
+
+#net spindle-rev <= motion.spindle-reverse
+
+# proper spindle commanded rpm
+# output to linear interpolator and near components
+#net spindle-cmd <= motion.spindle-speed-out => linear8.0.in near.0.in1
+
+# do linear interpolation, output to the sum 
+#net spindle-cmd-interp <= linear8.0.out => sum2.0.in0
+
+# Data points 0..7.  xi+1 >= xi.
+#
+# When in is between xi and xi+1, out is a linear interpolation between yi and yi+1.
+#
+# When in is below x0, out is a linear extrapolation between x0 and x1.
+#
+# When in is above xn-1, out is a linear extrapolation between xn-2 and xn-1.
+#
+#setp linear8.0.n 7
+#setp linear8.0.x0 375
+#setp linear8.0.y0 510
+#setp linear8.0.x1 750
+#setp linear8.0.y1 745
+#setp linear8.0.x2 1125
+#setp linear8.0.y2 1020
+#setp linear8.0.x3 1500
+#setp linear8.0.y3 1350
+#setp linear8.0.x4 1875
+#setp linear8.0.y4 1740
+#setp linear8.0.x5 2100
+#setp linear8.0.y5 2030
+#setp linear8.0.x6 2200
+#setp linear8.0.y6 2175
+
+
+# set gain and offset - negative to flip spindle direction for hardware bug
+#setp sum2.0.gain0 -1
+#setp sum2.0.offset 0
+#setp sum2.0.in1 0.0
+
+# reversed spindle commanded rpm for bug in hardware, with gain+offset applied
+#net spindle-reversed-cmd sum2.0.out => hm2_[HOSTMOT2](BOARD).0.pwmgen.00.value
+
+# spindle enable
+#net spindle-enable <= motion.spindle-on => hm2_[HOSTMOT2](BOARD).0.pwmgen.00.enable
+
+# spindle at speed
+#net spindle-at-speed motion.spindle-at-speed <= near.0.out
+#setp near.0.scale 1.05
