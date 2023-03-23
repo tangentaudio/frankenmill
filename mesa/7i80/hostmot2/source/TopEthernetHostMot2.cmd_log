@@ -1,0 +1,29 @@
+xst -intstyle ise -ifn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.xst" -ofn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.syr" 
+xst -intstyle ise -ifn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.xst" -ofn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.syr" 
+xst -intstyle ise -ifn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.xst" -ofn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.syr" 
+xst -intstyle ise -ifn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.xst" -ofn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.syr" 
+ngdbuild -intstyle ise -dd _ngo -aut -nt timestamp -uc 7i80hd.ucf -p xc6slx25-ftg256-2 TopEthernetHostMot2.ngc TopEthernetHostMot2.ngd  
+map -intstyle ise -p xc6slx25-ftg256-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o TopEthernetHostMot2_map.ncd TopEthernetHostMot2.ngd TopEthernetHostMot2.pcf 
+par -w -intstyle ise -ol high -mt off TopEthernetHostMot2_map.ncd TopEthernetHostMot2.ncd TopEthernetHostMot2.pcf 
+trce -intstyle ise -v 10 -s 2 -n 3 -fastpaths -xml TopEthernetHostMot2.twx TopEthernetHostMot2.ncd -o TopEthernetHostMot2.twr TopEthernetHostMot2.pcf -ucf 7i80hd.ucf 
+bitgen -intstyle ise -f TopEthernetHostMot2.ut TopEthernetHostMot2.ncd 
+xst -intstyle ise -ifn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.xst" -ofn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.syr" 
+ngdbuild -intstyle ise -dd _ngo -aut -nt timestamp -uc 7i80hd.ucf -p xc6slx16-ftg256-2 TopEthernetHostMot2.ngc TopEthernetHostMot2.ngd  
+map -intstyle ise -p xc6slx16-ftg256-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o TopEthernetHostMot2_map.ncd TopEthernetHostMot2.ngd TopEthernetHostMot2.pcf 
+par -w -intstyle ise -ol high -mt off TopEthernetHostMot2_map.ncd TopEthernetHostMot2.ncd TopEthernetHostMot2.pcf 
+trce -intstyle ise -v 10 -s 2 -n 3 -fastpaths -xml TopEthernetHostMot2.twx TopEthernetHostMot2.ncd -o TopEthernetHostMot2.twr TopEthernetHostMot2.pcf -ucf 7i80hd.ucf 
+bitgen -intstyle ise -f TopEthernetHostMot2.ut TopEthernetHostMot2.ncd 
+xst -intstyle ise -ifn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.xst" -ofn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.syr" 
+xst -intstyle ise -ifn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.xst" -ofn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.syr" 
+xst -intstyle ise -ifn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.xst" -ofn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.syr" 
+ngdbuild -intstyle ise -dd _ngo -aut -nt timestamp -uc 7i80hd.ucf -p xc6slx16-ftg256-2 TopEthernetHostMot2.ngc TopEthernetHostMot2.ngd  
+map -intstyle ise -p xc6slx16-ftg256-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o TopEthernetHostMot2_map.ncd TopEthernetHostMot2.ngd TopEthernetHostMot2.pcf 
+par -w -intstyle ise -ol high -mt off TopEthernetHostMot2_map.ncd TopEthernetHostMot2.ncd TopEthernetHostMot2.pcf 
+trce -intstyle ise -v 10 -s 2 -n 3 -fastpaths -xml TopEthernetHostMot2.twx TopEthernetHostMot2.ncd -o TopEthernetHostMot2.twr TopEthernetHostMot2.pcf -ucf 7i80hd.ucf 
+bitgen -intstyle ise -f TopEthernetHostMot2.ut TopEthernetHostMot2.ncd 
+xst -intstyle ise -ifn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.xst" -ofn "/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.syr" 
+ngdbuild -intstyle ise -dd _ngo -aut -nt timestamp -uc 7i80hd.ucf -p xc6slx16-ftg256-2 TopEthernetHostMot2.ngc TopEthernetHostMot2.ngd  
+map -intstyle ise -p xc6slx16-ftg256-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o TopEthernetHostMot2_map.ncd TopEthernetHostMot2.ngd TopEthernetHostMot2.pcf 
+par -w -intstyle ise -ol high -mt off TopEthernetHostMot2_map.ncd TopEthernetHostMot2.ncd TopEthernetHostMot2.pcf 
+trce -intstyle ise -v 10 -s 2 -n 3 -fastpaths -xml TopEthernetHostMot2.twx TopEthernetHostMot2.ncd -o TopEthernetHostMot2.twr TopEthernetHostMot2.pcf -ucf 7i80hd.ucf 
+bitgen -intstyle ise -f TopEthernetHostMot2.ut TopEthernetHostMot2.ncd 

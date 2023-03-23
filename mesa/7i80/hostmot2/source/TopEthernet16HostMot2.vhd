@@ -76,14 +76,14 @@ use work.IDROMConst.all;
 
 -------------------- option selection area ----------------------------
 
-use work.@Card@.all;
+--use work.@Card@.all;
 
 -------------------- select one card type------------------------------
 
 
 --use work.i80db_x16card.all; 			-- needs 7i80db.ucf and SP6 x16 256 pin
 --use work.i80db_x25card.all; 			-- needs 7i80db.ucf and SP6 x25 256 pin
---use work.i80hd_x16card.all;      		-- needs 7i80hd.ucf and SP6 x16 256 pin
+use work.i80hd_x16card.all;      		-- needs 7i80hd.ucf and SP6 x16 256 pin
 --use work.i80hd_x25card.all; 			-- needs 7i80hd.ucf and SP6 x25 256 pin
 --use work.i76E_x16card.all;           -- needs 7i76e.ucf and SP6 x16 256 pin
 --use work.i92_x9card.all; 				-- needs 7i92.ucf and SP6 x9 144 pin
@@ -95,7 +95,7 @@ use work.@Card@.all;
 --use work.i98_x9card.all; 				-- needs 7i98.ucf and SP6 x9 144 pin
 -----------------------------------------------------------------------
 
-use work.@Pin@.all;
+--use work.@Pin@.all;
 
 -------------------- select (or add) one pinout -----------------------
 --use work.PIN_FALLBACK_34.all;			-- IO only configuration for fast compiles whilst debugging PCI and fallback config
@@ -268,7 +268,9 @@ use work.@Pin@.all;
 --use work.PIN_JUSTIO_72.all;
 --use work.PIN_SVST8_4IM2_72.all;
 --use work.PIN_SVST8_4_72.all;
+use work.PIN_SVST8_4D_72.all; -- modified to add DPLL by Steve Richardson 3/23/2023
 --use work.PIN_SVST4_8_72.all;
+--use work.PIN_SVST4_8D_72.all; -- modified to add DPLL by Steve Richardson 3/23/2023
 --use work.PIN_SVST4_8_ADO_72.all;
 --use work.PIN_SVST8_8IM2_72.all;
 --use work.PIN_SVST1_4_7I47S_72.all;

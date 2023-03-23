@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.ncd
+OUTFILE=/home/steve/7i80/configs/hostmot2/source/TopEthernetHostMot2.bit
+FAMILY=Spartan6
+PART=xc6slx16-2ftg256
+WORKINGDIR=/home/steve/7i80/configs/hostmot2/source
+LICENSE=WebPack
+USER_INFO=211852853_0_0_253

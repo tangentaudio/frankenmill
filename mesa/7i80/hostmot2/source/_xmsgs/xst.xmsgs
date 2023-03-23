@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLCompiler" num="1369" delta="old" >"/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 2582: Possible infinite loop; process does not have a wait statement
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1369" delta="old" >"/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 2609: Possible infinite loop; process does not have a wait statement
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="746" delta="old" >"/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 156: Range is empty (null range)
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="746" delta="old" >"/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 302: Range is empty (null range)
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="89" delta="old" >"/home/steve/7i80/configs/hostmot2/source/kubstepgenzd.vhd" Line 154: &lt;<arg fmt="%s" index="1">srl16e</arg>&gt; remains a black-box since it has no binding entity.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="92" delta="old" >"/home/steve/7i80/configs/hostmot2/source/timestampd.vhd" Line 113: <arg fmt="%s" index="1">timerenable</arg> should be on the sensitivity list of the process
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="old" >"/home/steve/7i80/configs/hostmot2/source/qcountersfd.vhd" Line 101: Net &lt;<arg fmt="%s" index="1">sampledcont[13]</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="746" delta="old" >"/home/steve/7i80/configs/hostmot2/source/boutreg.vhd" Line 107: Range is empty (null range)
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="220" delta="old" >"/home/steve/7i80/configs/hostmot2/source/boutreg.vhd" Line 107: Assignment ignored
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 267: Net &lt;<arg fmt="%s" index="1">AltData[41]</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="old" >"/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 469: Net &lt;<arg fmt="%s" index="1">makehm2dpllmod.DPLLSyncIn</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 992: Net &lt;<arg fmt="%s" index="1">makeqcounters.IndexMask[7]</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="92" delta="old" >"/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" Line 1008: <arg fmt="%s" index="1">readrates</arg> should be on the sensitivity list of the process
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="92" delta="old" >"/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" Line 1009: <arg fmt="%s" index="1">rates</arg> should be on the sensitivity list of the process
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="92" delta="old" >"/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" Line 1101: <arg fmt="%s" index="1">icapo</arg> should be on the sensitivity list of the process
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd</arg>&quot; line <arg fmt="%s" index="2">523</arg>: Output port &lt;<arg fmt="%s" index="3">int</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ahostmot2</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd</arg>&quot; line <arg fmt="%s" index="2">523</arg>: Output port &lt;<arg fmt="%s" index="3">dreq</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ahostmot2</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd</arg>&quot; line <arg fmt="%s" index="2">523</arg>: Output port &lt;<arg fmt="%s" index="3">demandmode</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ahostmot2</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd</arg>&quot; line <arg fmt="%s" index="2">684</arg>: Output port &lt;<arg fmt="%s" index="3">carryflg</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">processor</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd</arg>&quot; line <arg fmt="%s" index="2">712</arg>: Output port &lt;<arg fmt="%s" index="3">douta</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DataRam</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">clkmed</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="new" >Signal &apos;<arg fmt="%s" index="1">AltData&lt;41:36&gt;</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">HostMot2</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">000000</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="new" >Signal &apos;<arg fmt="%s" index="1">AltData&lt;29:24&gt;</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">HostMot2</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">000000</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="old" >Signal &apos;<arg fmt="%s" index="1">AltData&lt;17:12&gt;</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">HostMot2</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">000000</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="2935" delta="old" >Signal &apos;<arg fmt="%s" index="1">AltData&lt;5:0&gt;</arg>&apos;, unconnected in block &apos;<arg fmt="%s" index="2">HostMot2</arg>&apos;, is tied to its initial value (<arg fmt="%s" index="3">000000</arg>).
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="old" >Signal &lt;<arg fmt="%s" index="1">makeqcounters.IndexMask</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="old" >Signal &lt;<arg fmt="%s" index="1">makehm2dpllmod.DPLLSyncIn</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">ibus&lt;31:24&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">ibus&lt;31:5&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="2404" delta="old" > FFs/Latches &lt;<arg fmt="%s" index="1">SyncInD</arg>&lt;<arg fmt="%d" index="2">0</arg>:<arg fmt="%d" index="3">0</arg>&gt;&gt; (without init value) have a constant value of <arg fmt="%c" index="4">0</arg> in block &lt;<arg fmt="%s" index="5">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">readsteprate</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">readstepmode</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">readdirsetuptime</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">readdirholdtime</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">readpulseactivetime</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">readpulseidletime</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">readtable</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">readtablemax</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="old" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">stout&lt;5&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="old" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">stout&lt;4&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="old" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">stout&lt;3&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="old" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">stout&lt;2&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">ibus&lt;31:16&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">ibus&lt;2:0&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">ibus&lt;13:12&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">ibus&lt;31:16&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="old" >Signal &lt;<arg fmt="%s" index="1">sampledcont&lt;13:12&gt;</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">ibus&lt;31:8&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">ibus&lt;15:6&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">ibus&lt;30:28&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">ibus&lt;31:1&gt;</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/steve/7i80/configs/hostmot2/source/d16w.vhd</arg>&quot; line <arg fmt="%s" index="2">293</arg>: Output port &lt;<arg fmt="%s" index="3">douta</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">StackRam</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="1767" delta="old" >HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">wbena3</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">processor</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;opcode3_2&gt; </arg>
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_4</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_5</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_6</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_7</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">BoundedPhaseErr_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">BoundedPhaseErr_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">BoundedPhaseErr_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">BoundedPhaseErr_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">makehm2dpllmod.hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="info" file="Xst" num="3226" delta="old" >The RAM &lt;<arg fmt="%s" index="1">IDROM/Mram_RAM</arg>&gt; will be implemented as a BLOCK RAM, absorbing the following register(s):</msg>
+
+<msg type="info" file="Xst" num="3226" delta="old" >The RAM &lt;<arg fmt="%s" index="1">DataRam/Mram_RAM1</arg>&gt; will be implemented as a BLOCK RAM, absorbing the following register(s):</msg>
+
+<msg type="info" file="Xst" num="3231" delta="old" >The small RAM &lt;<arg fmt="%s" index="1">Mram_RAM</arg>&gt; will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+</msg>
+
+<msg type="info" file="Xst" num="3231" delta="old" >The small RAM &lt;<arg fmt="%s" index="1">Mram_RAM1</arg>&gt; will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+</msg>
+
+<msg type="info" file="Xst" num="3226" delta="old" >The RAM &lt;<arg fmt="%s" index="1">Mram_RAM</arg>&gt; will be implemented as a BLOCK RAM, absorbing the following register(s):</msg>
+
+<msg type="info" file="Xst" num="3231" delta="old" >The small RAM &lt;<arg fmt="%s" index="1">Mram_mask</arg>&gt; will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+</msg>
+
+<msg type="info" file="Xst" num="3231" delta="old" >The small RAM &lt;<arg fmt="%s" index="1">Mram_stepaccum[31]_GND_285_o_Mux_43_o</arg>&gt; will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_4</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_5</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_6</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">PhaseErr_7</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">BoundedPhaseErr_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">BoundedPhaseErr_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">BoundedPhaseErr_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">BoundedPhaseErr_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">hm2dpll</arg>&gt;.
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_10</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_10&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_11</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_11&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">processor/opcode3_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/wbena3&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_1</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_1&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_2&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_3</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_3&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_4</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_4&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_5</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_5&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_6</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_6&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_7</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_7&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_8</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_8&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ioradd_9</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;processor/maddpipe1_9&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[7].qcounterxd/dtimer</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">HostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">7 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[6].qcounterxd/dtimer&gt; &lt;makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[5].qcounterxd/dtimer&gt; &lt;makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[4].qcounterxd/dtimer&gt; &lt;makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[3].qcounterxd/dtimer&gt; &lt;makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[2].qcounterxd/dtimer&gt; &lt;makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[1].qcounterxd/dtimer&gt; &lt;makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[0].qcounterxd/dtimer&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="1901" delta="old" >Instance <arg fmt="%s" index="1">ClockMult1</arg> in unit <arg fmt="%s" index="2">TopEthernetHostMot2</arg> of type <arg fmt="%s" index="3">DCM</arg> has been replaced by <arg fmt="%s" index="4">DCM_SP</arg>
+</msg>
+
+<msg type="info" file="Xst" num="1901" delta="old" >Instance <arg fmt="%s" index="1">ClockMult2</arg> in unit <arg fmt="%s" index="2">TopEthernetHostMot2</arg> of type <arg fmt="%s" index="3">DCM</arg> has been replaced by <arg fmt="%s" index="4">DCM_SP</arg>
+</msg>
+
+<msg type="warning" file="Xst" num="2040" delta="old" >Unit <arg fmt="%s" index="1">TopEthernetHostMot2</arg>: <arg fmt="%d" index="2">48</arg> multi-source signals are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">hostmotid</arg>: <arg fmt="%d" index="2">32</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">wordrb</arg>: <arg fmt="%d" index="2">32</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">boutreg_2</arg>: <arg fmt="%d" index="2">4</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">timestampd</arg>: <arg fmt="%d" index="2">16</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">boutreg_3</arg>: <arg fmt="%d" index="2">32</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">boutreg_1</arg>: <arg fmt="%d" index="2">32</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">qcounterated</arg>: <arg fmt="%d" index="2">32</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">stepgend</arg>: <arg fmt="%d" index="2">32</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">rategend</arg>: <arg fmt="%d" index="2">32</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">hm2dpll</arg>: <arg fmt="%d" index="2">32</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">irqlogics</arg>: <arg fmt="%d" index="2">32</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">watchdog</arg>: <arg fmt="%d" index="2">32</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="warning" file="Xst" num="2042" delta="old" >Unit <arg fmt="%s" index="1">simplespi8</arg>: <arg fmt="%d" index="2">8</arg> internal tristates are replaced by logic (pull-up <arg fmt="%s" index="3">yes</arg>): </msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/dtimer</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">3 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;ahostmot2/makestepgens.makestepgends.generatestepgends[2].usgd.stepgenx/dtimer&gt; &lt;ahostmot2/makestepgens.makestepgends.generatestepgends[1].usgd.stepgenx/dtimer&gt; &lt;ahostmot2/makestepgens.makestepgends.generatestepgends[0].usgd.stepgenx/dtimer&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">ahostmot2/makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[7].qcounterxd/dtimer</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;ahostmot2/makeqcounters.dpllqcrate.timestampxd/dtimer&gt; </arg>
+</msg>
+
+<msg type="warning" file="Xst" num="0" delta="new" >Edge <arg fmt="%s" index="1">LIOBITS&lt;3&gt;</arg> has no source ports and will not be translated to ABC.</msg>
+
+<msg type="warning" file="Xst" num="0" delta="new" >Edge <arg fmt="%s" index="1">LIOBITS&lt;2&gt;</arg> has no source ports and will not be translated to ABC.</msg>
+
+<msg type="warning" file="Xst" num="0" delta="new" >Edge <arg fmt="%s" index="1">LIOBITS&lt;1&gt;</arg> has no source ports and will not be translated to ABC.</msg>
+
+<msg type="warning" file="Xst" num="0" delta="new" >Edge <arg fmt="%s" index="1">LIOBITS&lt;0&gt;</arg> has no source ports and will not be translated to ABC.</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">asimplspi/RateDiv_2</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">TopEthernetHostMot2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1293" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">asimplspi/RateDiv_1</arg>&gt; has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">TopEthernetHostMot2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">ahostmot2/makehm2dpllmod.hm2dpll/SyncInFilter_3</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">TopEthernetHostMot2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">ahostmot2/makehm2dpllmod.hm2dpll/SyncInFilter_2</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">TopEthernetHostMot2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">ahostmot2/makehm2dpllmod.hm2dpll/SyncInFilter_1</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">TopEthernetHostMot2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">ahostmot2/makehm2dpllmod.hm2dpll/SyncInFilter_0</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">TopEthernetHostMot2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">ahostmot2/makehm2dpllmod.hm2dpll/FilteredSync_0</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">TopEthernetHostMot2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1895" delta="old" >Due to other FF/Latch trimming, FF/Latch &lt;<arg fmt="%s" index="1">ahostmot2/makehm2dpllmod.hm2dpll/FilteredSync_1</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">TopEthernetHostMot2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">ahostmot2/makepwms.pwmref/count_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;ahostmot2/makepwms.pwmref/oldpwmratemsb&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="3203" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">asimplspi/Dav</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">TopEthernetHostMot2</arg>&gt; is the opposite to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;asimplspi/Go&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2169" delta="old" >HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+</msg>
+
+</messages>
+

@@ -1,0 +1,2294 @@
+--------------------------------------------------------------------------------
+Release 14.5 Trace  (lin64)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+/opt/Xilinx/14.5/ISE_DS/ISE/bin/lin64/unwrapped/trce -intstyle ise -v 10 -s 2
+-n 3 -fastpaths -xml TopEthernetHostMot2.twx TopEthernetHostMot2.ncd -o
+TopEthernetHostMot2.twr TopEthernetHostMot2.pcf -ucf 7i80hd.ucf
+
+Design file:              TopEthernetHostMot2.ncd
+Physical constraint file: TopEthernetHostMot2.pcf
+Device,package,speed:     xc6slx16,ftg256,C,-2 (PRODUCTION 1.23 2013-03-26)
+Report level:             verbose report, limited to 10 items per endpoint, 3 endpoints per constraint
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+================================================================================
+Timing constraint: TS_CLK = PERIOD TIMEGRP "CLK" 19.5 ns HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 0 paths analyzed, 0 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 component switching limit errors)
+ Minimum period is   8.000ns.
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_CLK = PERIOD TIMEGRP "CLK" 19.5 ns HIGH 50%;
+--------------------------------------------------------------------------------
+Slack: 1.875ns (period - min period limit)
+  Period: 4.875ns
+  Min period limit: 3.000ns (333.333MHz) (Tdcmper_CLKFX)
+  Physical resource: ClockMult1/CLKFX
+  Logical resource: ClockMult1/CLKFX
+  Location pin: DCM_X0Y1.CLKFX
+  Clock network: clk1fx
+--------------------------------------------------------------------------------
+Slack: 6.750ns (period - min period limit)
+  Period: 9.750ns
+  Min period limit: 3.000ns (333.333MHz) (Tdcmper_CLKFX)
+  Physical resource: ClockMult2/CLKFX
+  Logical resource: ClockMult2/CLKFX
+  Location pin: DCM_X0Y0.CLKFX
+  Clock network: clk0fx
+--------------------------------------------------------------------------------
+Slack: 11.500ns (period - (min low pulse limit / (low pulse / period)))
+  Period: 19.500ns
+  Low pulse: 9.750ns
+  Low pulse limit: 4.000ns (Tdcmpw_CLKIN_50_100)
+  Physical resource: ClockMult1/CLKIN
+  Logical resource: ClockMult1/CLKIN
+  Location pin: DCM_X0Y1.CLKIN
+  Clock network: ClockMult1_ML_NEW_DIVCLK
+--------------------------------------------------------------------------------
+Slack: 11.500ns (period - (min high pulse limit / (high pulse / period)))
+  Period: 19.500ns
+  High pulse: 9.750ns
+  High pulse limit: 4.000ns (Tdcmpw_CLKIN_50_100)
+  Physical resource: ClockMult1/CLKIN
+  Logical resource: ClockMult1/CLKIN
+  Location pin: DCM_X0Y1.CLKIN
+  Clock network: ClockMult1_ML_NEW_DIVCLK
+--------------------------------------------------------------------------------
+Slack: 11.500ns (period - (min low pulse limit / (low pulse / period)))
+  Period: 19.500ns
+  Low pulse: 9.750ns
+  Low pulse limit: 4.000ns (Tdcmpw_CLKIN_50_100)
+  Physical resource: ClockMult2/CLKIN
+  Logical resource: ClockMult2/CLKIN
+  Location pin: DCM_X0Y0.CLKIN
+  Clock network: ClockMult2_ML_NEW_DIVCLK
+--------------------------------------------------------------------------------
+Slack: 11.500ns (period - (min high pulse limit / (high pulse / period)))
+  Period: 19.500ns
+  High pulse: 9.750ns
+  High pulse limit: 4.000ns (Tdcmpw_CLKIN_50_100)
+  Physical resource: ClockMult2/CLKIN
+  Logical resource: ClockMult2/CLKIN
+  Location pin: DCM_X0Y0.CLKIN
+  Clock network: ClockMult2_ML_NEW_DIVCLK
+--------------------------------------------------------------------------------
+Slack: 15.500ns (period - min period limit)
+  Period: 19.500ns
+  Min period limit: 4.000ns (250.000MHz) (Tdcmper_CLKIN)
+  Physical resource: ClockMult1/CLKIN
+  Logical resource: ClockMult1/CLKIN
+  Location pin: DCM_X0Y1.CLKIN
+  Clock network: ClockMult1_ML_NEW_DIVCLK
+--------------------------------------------------------------------------------
+Slack: 15.500ns (period - min period limit)
+  Period: 19.500ns
+  Min period limit: 4.000ns (250.000MHz) (Tdcmper_CLKOUT)
+  Physical resource: ClockMult1/CLK0
+  Logical resource: ClockMult1/CLK0
+  Location pin: DCM_X0Y1.CLK0
+  Clock network: clk1
+--------------------------------------------------------------------------------
+Slack: 15.500ns (period - min period limit)
+  Period: 19.500ns
+  Min period limit: 4.000ns (250.000MHz) (Tdcmper_CLKIN)
+  Physical resource: ClockMult2/CLKIN
+  Logical resource: ClockMult2/CLKIN
+  Location pin: DCM_X0Y0.CLKIN
+  Clock network: ClockMult2_ML_NEW_DIVCLK
+--------------------------------------------------------------------------------
+Slack: 15.500ns (period - min period limit)
+  Period: 19.500ns
+  Min period limit: 4.000ns (250.000MHz) (Tdcmper_CLKOUT)
+  Physical resource: ClockMult2/CLK0
+  Logical resource: ClockMult2/CLK0
+  Location pin: DCM_X0Y0.CLK0
+  Clock network: clk0
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: TS_clk1fx = PERIOD TIMEGRP "clk1fx" TS_CLK / 4 HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 5126 paths analyzed, 1944 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is   4.702ns.
+--------------------------------------------------------------------------------
+
+Paths for end point ahostmot2/makepwms.makepwmgens[5].pwmgenx/modereg_5 (SLICE_X8Y59.BX), 1 path
+--------------------------------------------------------------------------------
+Slack (setup path):     0.173ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.makepwmgens[5].pwmgenx/premodereg_5 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[5].pwmgenx/modereg_5 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      3.962ns (Levels of Logic = 0)
+  Clock Path Skew:      0.068ns (-2.161 - -2.229)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.808ns
+
+  Clock Uncertainty:          0.808ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.498ns
+    Phase Error (PE):           0.523ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.makepwmgens[5].pwmgenx/premodereg_5 to ahostmot2/makepwms.makepwmgens[5].pwmgenx/modereg_5
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X9Y59.DMUX     Tshcko                0.518   ahostmot2/makepwms.makepwmgens[5].pwmgenx/premodereg<4>
+                                                       ahostmot2/makepwms.makepwmgens[5].pwmgenx/premodereg_5
+    SLICE_X8Y59.BX       net (fanout=2)        3.330   ahostmot2/makepwms.makepwmgens[5].pwmgenx/premodereg<5>
+    SLICE_X8Y59.CLK      Tdick                 0.114   ahostmot2/makepwms.makepwmgens[5].pwmgenx/modereg<5>
+                                                       ahostmot2/makepwms.makepwmgens[5].pwmgenx/modereg_5
+    -------------------------------------------------  ---------------------------
+    Total                                      3.962ns (0.632ns logic, 3.330ns route)
+                                                       (16.0% logic, 84.0% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11 (SLICE_X3Y57.B3), 6 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     0.606ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.pwmref/count_9 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      4.102ns (Levels of Logic = 2)
+  Clock Path Skew:      0.018ns (0.455 - 0.437)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.pwmref/count_9 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y57.BQ      Tcko                  0.476   ahostmot2/makepwms.pwmref/count<11>
+                                                       ahostmot2/makepwms.pwmref/count_9
+    SLICE_X4Y55.D3       net (fanout=17)       1.785   ahostmot2/makepwms.pwmref/count<9>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.373   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT31
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    -------------------------------------------------  ---------------------------
+    Total                                      4.102ns (1.084ns logic, 3.018ns route)
+                                                       (26.4% logic, 73.6% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.646ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.pwmref/count_11 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      4.062ns (Levels of Logic = 2)
+  Clock Path Skew:      0.018ns (0.455 - 0.437)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.pwmref/count_11 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y57.DQ      Tcko                  0.476   ahostmot2/makepwms.pwmref/count<11>
+                                                       ahostmot2/makepwms.pwmref/count_11
+    SLICE_X4Y55.D4       net (fanout=17)       1.745   ahostmot2/makepwms.pwmref/count<11>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.373   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT31
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    -------------------------------------------------  ---------------------------
+    Total                                      4.062ns (1.084ns logic, 2.978ns route)
+                                                       (26.7% logic, 73.3% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.762ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.pwmref/count_12 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      3.943ns (Levels of Logic = 2)
+  Clock Path Skew:      0.015ns (0.455 - 0.440)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.pwmref/count_12 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y58.AQ      Tcko                  0.476   ahostmot2/makepwms.pwmref/count<12>
+                                                       ahostmot2/makepwms.pwmref/count_12
+    SLICE_X4Y55.D6       net (fanout=9)        1.626   ahostmot2/makepwms.pwmref/count<12>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.373   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT31
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    -------------------------------------------------  ---------------------------
+    Total                                      3.943ns (1.084ns logic, 2.859ns route)
+                                                       (27.5% logic, 72.5% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.879ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.pwmref/count_10 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      3.829ns (Levels of Logic = 2)
+  Clock Path Skew:      0.018ns (0.455 - 0.437)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.pwmref/count_10 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y57.CQ      Tcko                  0.476   ahostmot2/makepwms.pwmref/count<11>
+                                                       ahostmot2/makepwms.pwmref/count_10
+    SLICE_X4Y55.D5       net (fanout=17)       1.512   ahostmot2/makepwms.pwmref/count<10>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.373   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT31
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    -------------------------------------------------  ---------------------------
+    Total                                      3.829ns (1.084ns logic, 2.745ns route)
+                                                       (28.3% logic, 71.7% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     1.479ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_0 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      3.199ns (Levels of Logic = 2)
+  Clock Path Skew:      -0.012ns (0.335 - 0.347)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_0 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X5Y53.AQ       Tcko                  0.430   ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg<3>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_0
+    SLICE_X4Y55.D1       net (fanout=2)        0.928   ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg<0>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.373   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT31
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    -------------------------------------------------  ---------------------------
+    Total                                      3.199ns (1.038ns logic, 2.161ns route)
+                                                       (32.4% logic, 67.6% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     1.480ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_1 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      3.198ns (Levels of Logic = 2)
+  Clock Path Skew:      -0.012ns (0.335 - 0.347)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_1 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X5Y53.BQ       Tcko                  0.430   ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg<3>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_1
+    SLICE_X4Y55.D2       net (fanout=3)        0.927   ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg<1>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.373   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT31
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_11
+    -------------------------------------------------  ---------------------------
+    Total                                      3.198ns (1.038ns logic, 2.160ns route)
+                                                       (32.5% logic, 67.5% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1 (SLICE_X3Y57.B3), 6 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     0.715ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.pwmref/count_9 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      3.993ns (Levels of Logic = 2)
+  Clock Path Skew:      0.018ns (0.455 - 0.437)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.pwmref/count_9 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y57.BQ      Tcko                  0.476   ahostmot2/makepwms.pwmref/count<11>
+                                                       ahostmot2/makepwms.pwmref/count_9
+    SLICE_X4Y55.D3       net (fanout=17)       1.785   ahostmot2/makepwms.pwmref/count<9>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.264   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT41
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    -------------------------------------------------  ---------------------------
+    Total                                      3.993ns (0.975ns logic, 3.018ns route)
+                                                       (24.4% logic, 75.6% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.755ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.pwmref/count_11 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      3.953ns (Levels of Logic = 2)
+  Clock Path Skew:      0.018ns (0.455 - 0.437)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.pwmref/count_11 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y57.DQ      Tcko                  0.476   ahostmot2/makepwms.pwmref/count<11>
+                                                       ahostmot2/makepwms.pwmref/count_11
+    SLICE_X4Y55.D4       net (fanout=17)       1.745   ahostmot2/makepwms.pwmref/count<11>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.264   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT41
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    -------------------------------------------------  ---------------------------
+    Total                                      3.953ns (0.975ns logic, 2.978ns route)
+                                                       (24.7% logic, 75.3% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.871ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.pwmref/count_12 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      3.834ns (Levels of Logic = 2)
+  Clock Path Skew:      0.015ns (0.455 - 0.440)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.pwmref/count_12 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y58.AQ      Tcko                  0.476   ahostmot2/makepwms.pwmref/count<12>
+                                                       ahostmot2/makepwms.pwmref/count_12
+    SLICE_X4Y55.D6       net (fanout=9)        1.626   ahostmot2/makepwms.pwmref/count<12>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.264   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT41
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    -------------------------------------------------  ---------------------------
+    Total                                      3.834ns (0.975ns logic, 2.859ns route)
+                                                       (25.4% logic, 74.6% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.988ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.pwmref/count_10 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      3.720ns (Levels of Logic = 2)
+  Clock Path Skew:      0.018ns (0.455 - 0.437)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.pwmref/count_10 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y57.CQ      Tcko                  0.476   ahostmot2/makepwms.pwmref/count<11>
+                                                       ahostmot2/makepwms.pwmref/count_10
+    SLICE_X4Y55.D5       net (fanout=17)       1.512   ahostmot2/makepwms.pwmref/count<10>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.264   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT41
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    -------------------------------------------------  ---------------------------
+    Total                                      3.720ns (0.975ns logic, 2.745ns route)
+                                                       (26.2% logic, 73.8% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     1.588ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_0 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      3.090ns (Levels of Logic = 2)
+  Clock Path Skew:      -0.012ns (0.335 - 0.347)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_0 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X5Y53.AQ       Tcko                  0.430   ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg<3>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_0
+    SLICE_X4Y55.D1       net (fanout=2)        0.928   ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg<0>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.264   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT41
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    -------------------------------------------------  ---------------------------
+    Total                                      3.090ns (0.929ns logic, 2.161ns route)
+                                                       (30.1% logic, 69.9% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     1.589ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_1 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1 (FF)
+  Requirement:          4.875ns
+  Data Path Delay:      3.089ns (Levels of Logic = 2)
+  Clock Path Skew:      -0.012ns (0.335 - 0.347)
+  Source Clock:         hm2fastclock rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 4.875ns
+  Clock Uncertainty:    0.185ns
+
+  Clock Uncertainty:          0.185ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.299ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_1 to ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X5Y53.BQ       Tcko                  0.430   ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg<3>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg_1
+    SLICE_X4Y55.D2       net (fanout=3)        0.927   ahostmot2/makepwms.makepwmgens[0].pwmgenx/modereg<1>
+    SLICE_X4Y55.D        Tilo                  0.235   ahostmot2/makepwms.makepwmgens[0].pwmgenx/oldtoggle
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_toggle11
+    SLICE_X3Y57.B3       net (fanout=7)        1.233   ahostmot2/makepwms.makepwmgens[0].pwmgenx/toggle
+    SLICE_X3Y57.CLK      Tas                   0.264   ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount<11>
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/Mmux_refcount[11]_refcount[11]_mux_9_OUT41
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/fixedrefcount_1
+    -------------------------------------------------  ---------------------------
+    Total                                      3.089ns (0.929ns logic, 2.160ns route)
+                                                       (30.1% logic, 69.9% route)
+
+--------------------------------------------------------------------------------
+
+Hold Paths: TS_clk1fx = PERIOD TIMEGRP "clk1fx" TS_CLK / 4 HIGH 50%;
+--------------------------------------------------------------------------------
+
+Paths for end point ahostmot2/makepwms.pwmref/pwmratelatch_6 (SLICE_X11Y46.CX), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.010ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               ahostmot2/makepwms.pwmref/prepwmratelatch_6 (FF)
+  Destination:          ahostmot2/makepwms.pwmref/pwmratelatch_6 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.437ns (Levels of Logic = 0)
+  Clock Path Skew:      -0.381ns (-1.014 - -0.633)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 0.000ns
+  Clock Uncertainty:    0.808ns
+
+  Clock Uncertainty:          0.808ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.498ns
+    Phase Error (PE):           0.523ns
+
+  Minimum Data Path at Fast Process Corner: ahostmot2/makepwms.pwmref/prepwmratelatch_6 to ahostmot2/makepwms.pwmref/pwmratelatch_6
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y46.CQ      Tcko                  0.234   ahostmot2/makepwms.pwmref/prepwmratelatch<7>
+                                                       ahostmot2/makepwms.pwmref/prepwmratelatch_6
+    SLICE_X11Y46.CX      net (fanout=1)        0.144   ahostmot2/makepwms.pwmref/prepwmratelatch<6>
+    SLICE_X11Y46.CLK     Tckdi       (-Th)    -0.059   ahostmot2/makepwms.pwmref/pwmratelatch<7>
+                                                       ahostmot2/makepwms.pwmref/pwmratelatch_6
+    -------------------------------------------------  ---------------------------
+    Total                                      0.437ns (0.293ns logic, 0.144ns route)
+                                                       (67.0% logic, 33.0% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point ahostmot2/makepwms.makepwmgens[4].pwmgenx/pwmval_8 (SLICE_X23Y62.AX), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.018ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               ahostmot2/makepwms.makepwmgens[4].pwmgenx/prepwmval_8 (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[4].pwmgenx/pwmval_8 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.450ns (Levels of Logic = 0)
+  Clock Path Skew:      -0.376ns (-1.017 - -0.641)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 0.000ns
+  Clock Uncertainty:    0.808ns
+
+  Clock Uncertainty:          0.808ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.498ns
+    Phase Error (PE):           0.523ns
+
+  Minimum Data Path at Fast Process Corner: ahostmot2/makepwms.makepwmgens[4].pwmgenx/prepwmval_8 to ahostmot2/makepwms.makepwmgens[4].pwmgenx/pwmval_8
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X23Y61.CQ      Tcko                  0.198   ahostmot2/makepwms.makepwmgens[4].pwmgenx/prepwmval<8>
+                                                       ahostmot2/makepwms.makepwmgens[4].pwmgenx/prepwmval_8
+    SLICE_X23Y62.AX      net (fanout=2)        0.193   ahostmot2/makepwms.makepwmgens[4].pwmgenx/prepwmval<8>
+    SLICE_X23Y62.CLK     Tckdi       (-Th)    -0.059   ahostmot2/makepwms.makepwmgens[4].pwmgenx/pwmval<11>
+                                                       ahostmot2/makepwms.makepwmgens[4].pwmgenx/pwmval_8
+    -------------------------------------------------  ---------------------------
+    Total                                      0.450ns (0.257ns logic, 0.193ns route)
+                                                       (57.1% logic, 42.9% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point ahostmot2/makepwms.pwmref/pdmratelatch_12 (SLICE_X9Y55.AX), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.020ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               ahostmot2/makepwms.pwmref/prepdmratelatch_12 (FF)
+  Destination:          ahostmot2/makepwms.pwmref/pdmratelatch_12 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.448ns (Levels of Logic = 0)
+  Clock Path Skew:      -0.380ns (-1.017 - -0.637)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    hm2fastclock rising at 0.000ns
+  Clock Uncertainty:    0.808ns
+
+  Clock Uncertainty:          0.808ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.498ns
+    Phase Error (PE):           0.523ns
+
+  Minimum Data Path at Fast Process Corner: ahostmot2/makepwms.pwmref/prepdmratelatch_12 to ahostmot2/makepwms.pwmref/pdmratelatch_12
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X9Y54.AQ       Tcko                  0.198   ahostmot2/makepwms.pwmref/prepdmratelatch<15>
+                                                       ahostmot2/makepwms.pwmref/prepdmratelatch_12
+    SLICE_X9Y55.AX       net (fanout=1)        0.191   ahostmot2/makepwms.pwmref/prepdmratelatch<12>
+    SLICE_X9Y55.CLK      Tckdi       (-Th)    -0.059   ahostmot2/makepwms.pwmref/pdmratelatch<15>
+                                                       ahostmot2/makepwms.pwmref/pdmratelatch_12
+    -------------------------------------------------  ---------------------------
+    Total                                      0.448ns (0.257ns logic, 0.191ns route)
+                                                       (57.4% logic, 42.6% route)
+
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_clk1fx = PERIOD TIMEGRP "clk1fx" TS_CLK / 4 HIGH 50%;
+--------------------------------------------------------------------------------
+Slack: 2.209ns (period - min period limit)
+  Period: 4.875ns
+  Min period limit: 2.666ns (375.094MHz) (Tbcper_I)
+  Physical resource: BUFG1_inst/I0
+  Logical resource: BUFG1_inst/I0
+  Location pin: BUFGMUX_X2Y4.I0
+  Clock network: clk1fx
+--------------------------------------------------------------------------------
+Slack: 4.395ns (period - min period limit)
+  Period: 4.875ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: ahostmot2/makepwms.makepwmgens[7].pwmgenx/pwm/CLK
+  Logical resource: ahostmot2/makepwms.makepwmgens[7].pwmgenx/pwm/CK
+  Location pin: SLICE_X30Y59.CLK
+  Clock network: hm2fastclock
+--------------------------------------------------------------------------------
+Slack: 4.395ns (period - min period limit)
+  Period: 4.875ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: ahostmot2/makepwms.makepwmgens[5].pwmgenx/pwm/CLK
+  Logical resource: ahostmot2/makepwms.makepwmgens[5].pwmgenx/pwm/CK
+  Location pin: SLICE_X10Y61.CLK
+  Clock network: hm2fastclock
+--------------------------------------------------------------------------------
+Slack: 4.395ns (period - min period limit)
+  Period: 4.875ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: ahostmot2/makepwms.makepwmgens[2].pwmgenx/pwm/CLK
+  Logical resource: ahostmot2/makepwms.makepwmgens[2].pwmgenx/pwm/CK
+  Location pin: SLICE_X30Y53.CLK
+  Clock network: hm2fastclock
+--------------------------------------------------------------------------------
+Slack: 4.395ns (period - min period limit)
+  Period: 4.875ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum<3>/CLK
+  Logical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum_0/CK
+  Location pin: SLICE_X22Y60.CLK
+  Clock network: hm2fastclock
+--------------------------------------------------------------------------------
+Slack: 4.395ns (period - min period limit)
+  Period: 4.875ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum<3>/CLK
+  Logical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum_1/CK
+  Location pin: SLICE_X22Y60.CLK
+  Clock network: hm2fastclock
+--------------------------------------------------------------------------------
+Slack: 4.395ns (period - min period limit)
+  Period: 4.875ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum<3>/CLK
+  Logical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum_2/CK
+  Location pin: SLICE_X22Y60.CLK
+  Clock network: hm2fastclock
+--------------------------------------------------------------------------------
+Slack: 4.395ns (period - min period limit)
+  Period: 4.875ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum<3>/CLK
+  Logical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum_3/CK
+  Location pin: SLICE_X22Y60.CLK
+  Clock network: hm2fastclock
+--------------------------------------------------------------------------------
+Slack: 4.395ns (period - min period limit)
+  Period: 4.875ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum<7>/CLK
+  Logical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum_4/CK
+  Location pin: SLICE_X22Y61.CLK
+  Clock network: hm2fastclock
+--------------------------------------------------------------------------------
+Slack: 4.395ns (period - min period limit)
+  Period: 4.875ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum<7>/CLK
+  Logical resource: ahostmot2/makepwms.makepwmgens[4].pwmgenx/pdmaccum_5/CK
+  Location pin: SLICE_X22Y61.CLK
+  Clock network: hm2fastclock
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: TS_clk0fx = PERIOD TIMEGRP "clk0fx" TS_CLK / 2 HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 213909 paths analyzed, 14097 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is   9.416ns.
+--------------------------------------------------------------------------------
+
+Paths for end point processor/prodhigh_10 (SLICE_X23Y45.B5), 485 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     0.334ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_10 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      9.148ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.COUT    Topcyb                0.448   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.AMUX    Tcina                 0.210   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.A5      net (fanout=3)        1.097   processor/GND_539_o_GND_539_o_sub_41_OUT<8>
+    SLICE_X22Y43.CMUX    Topac                 0.633   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<8>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X23Y45.B5      net (fanout=1)        0.626   processor/GND_539_o_GND_539_o_sub_42_OUT<10>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045221
+                                                       processor/prodhigh_10
+    -------------------------------------------------  ---------------------------
+    Total                                      9.148ns (6.035ns logic, 3.113ns route)
+                                                       (66.0% logic, 34.0% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.481ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_10 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      9.001ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.COUT    Topcyb                0.448   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.BMUX    Tcinb                 0.277   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.B6      net (fanout=3)        0.866   processor/GND_539_o_GND_539_o_sub_41_OUT<9>
+    SLICE_X22Y43.CMUX    Topbc                 0.650   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<9>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X23Y45.B5      net (fanout=1)        0.626   processor/GND_539_o_GND_539_o_sub_42_OUT<10>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045221
+                                                       processor/prodhigh_10
+    -------------------------------------------------  ---------------------------
+    Total                                      9.001ns (6.119ns logic, 2.882ns route)
+                                                       (68.0% logic, 32.0% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.488ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_10 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.994ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.DMUX    Topbd                 0.644   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X22Y42.D5      net (fanout=3)        0.999   processor/GND_539_o_GND_539_o_sub_41_OUT<7>
+    SLICE_X22Y42.COUT    Topcyd                0.312   ahostmot2/makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[2].qcounterxd/quadfilter
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<7>
+    SLICE_X22Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<7>
+    SLICE_X22Y43.CMUX    Tcinc                 0.279   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X23Y45.B5      net (fanout=1)        0.626   processor/GND_539_o_GND_539_o_sub_42_OUT<10>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045221
+                                                       processor/prodhigh_10
+    -------------------------------------------------  ---------------------------
+    Total                                      8.994ns (5.979ns logic, 3.015ns route)
+                                                       (66.5% logic, 33.5% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.550ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_10 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.932ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.BX      net (fanout=2)        1.422   processor/product<21>
+    SLICE_X28Y42.COUT    Tbxcy                 0.197   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.AMUX    Tcina                 0.210   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.A5      net (fanout=3)        1.097   processor/GND_539_o_GND_539_o_sub_41_OUT<8>
+    SLICE_X22Y43.CMUX    Topac                 0.633   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<8>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X23Y45.B5      net (fanout=1)        0.626   processor/GND_539_o_GND_539_o_sub_42_OUT<10>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045221
+                                                       processor/prodhigh_10
+    -------------------------------------------------  ---------------------------
+    Total                                      8.932ns (5.784ns logic, 3.148ns route)
+                                                       (64.8% logic, 35.2% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.570ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_10 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.912ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.COUT    Topcyb                0.448   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.BMUX    Tcinb                 0.277   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.BX      net (fanout=3)        1.051   processor/GND_539_o_GND_539_o_sub_41_OUT<9>
+    SLICE_X22Y43.CMUX    Taxc                  0.376   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X23Y45.B5      net (fanout=1)        0.626   processor/GND_539_o_GND_539_o_sub_42_OUT<10>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045221
+                                                       processor/prodhigh_10
+    -------------------------------------------------  ---------------------------
+    Total                                      8.912ns (5.845ns logic, 3.067ns route)
+                                                       (65.6% logic, 34.4% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.668ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_10 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.814ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.BMUX    Topbb                 0.428   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X22Y42.B6      net (fanout=3)        0.864   processor/GND_539_o_GND_539_o_sub_41_OUT<5>
+    SLICE_X22Y42.COUT    Topcyb                0.483   ahostmot2/makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[2].qcounterxd/quadfilter
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<7>
+    SLICE_X22Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<7>
+    SLICE_X22Y43.CMUX    Tcinc                 0.279   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X23Y45.B5      net (fanout=1)        0.626   processor/GND_539_o_GND_539_o_sub_42_OUT<10>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045221
+                                                       processor/prodhigh_10
+    -------------------------------------------------  ---------------------------
+    Total                                      8.814ns (5.934ns logic, 2.880ns route)
+                                                       (67.3% logic, 32.7% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.670ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_10 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.812ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.CMUX    Topbc                 0.613   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X22Y42.CX      net (fanout=3)        1.043   processor/GND_539_o_GND_539_o_sub_41_OUT<6>
+    SLICE_X22Y42.COUT    Tcxcy                 0.117   ahostmot2/makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[2].qcounterxd/quadfilter
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<7>
+    SLICE_X22Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<7>
+    SLICE_X22Y43.CMUX    Tcinc                 0.279   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X23Y45.B5      net (fanout=1)        0.626   processor/GND_539_o_GND_539_o_sub_42_OUT<10>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045221
+                                                       processor/prodhigh_10
+    -------------------------------------------------  ---------------------------
+    Total                                      8.812ns (5.753ns logic, 3.059ns route)
+                                                       (65.3% logic, 34.7% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.696ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_10 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.786ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.COUT    Topcyb                0.448   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CMUX    Tcinc                 0.289   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.C6      net (fanout=3)        0.794   processor/GND_539_o_GND_539_o_sub_41_OUT<10>
+    SLICE_X22Y43.CMUX    Topcc                 0.495   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<10>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X23Y45.B5      net (fanout=1)        0.626   processor/GND_539_o_GND_539_o_sub_42_OUT<10>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045221
+                                                       processor/prodhigh_10
+    -------------------------------------------------  ---------------------------
+    Total                                      8.786ns (5.976ns logic, 2.810ns route)
+                                                       (68.0% logic, 32.0% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.697ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_10 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.785ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.BX      net (fanout=2)        1.422   processor/product<21>
+    SLICE_X28Y42.COUT    Tbxcy                 0.197   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.BMUX    Tcinb                 0.277   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.B6      net (fanout=3)        0.866   processor/GND_539_o_GND_539_o_sub_41_OUT<9>
+    SLICE_X22Y43.CMUX    Topbc                 0.650   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<9>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X23Y45.B5      net (fanout=1)        0.626   processor/GND_539_o_GND_539_o_sub_42_OUT<10>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045221
+                                                       processor/prodhigh_10
+    -------------------------------------------------  ---------------------------
+    Total                                      8.785ns (5.868ns logic, 2.917ns route)
+                                                       (66.8% logic, 33.2% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.727ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_10 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.755ns (Levels of Logic = 4)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_10
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.COUT    Topcyb                0.448   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.AMUX    Tcina                 0.210   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.AX      net (fanout=3)        0.946   processor/GND_539_o_GND_539_o_sub_41_OUT<8>
+    SLICE_X22Y43.CMUX    Taxc                  0.391   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X23Y45.B5      net (fanout=1)        0.626   processor/GND_539_o_GND_539_o_sub_42_OUT<10>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045221
+                                                       processor/prodhigh_10
+    -------------------------------------------------  ---------------------------
+    Total                                      8.755ns (5.793ns logic, 2.962ns route)
+                                                       (66.2% logic, 33.8% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point processor/prodhigh_13 (SLICE_X23Y45.D6), 785 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     0.349ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_13 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      9.133ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.COUT    Topcyb                0.448   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.DMUX    Tcind                 0.289   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.D6      net (fanout=3)        1.286   processor/GND_539_o_GND_539_o_sub_41_OUT<11>
+    SLICE_X22Y43.COUT    Topcyd                0.312   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.BMUX    Tcinb                 0.310   processor/GND_539_o_GND_539_o_sub_42_OUT<15>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_xor<15>
+    SLICE_X23Y45.D6      net (fanout=1)        0.351   processor/GND_539_o_GND_539_o_sub_42_OUT<13>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045251
+                                                       processor/prodhigh_13
+    -------------------------------------------------  ---------------------------
+    Total                                      9.133ns (6.103ns logic, 3.030ns route)
+                                                       (66.8% logic, 33.2% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.398ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_13 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      9.084ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.COUT    Topcyb                0.448   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.DMUX    Tcind                 0.289   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.DX      net (fanout=3)        1.440   processor/GND_539_o_GND_539_o_sub_41_OUT<11>
+    SLICE_X22Y43.COUT    Tdxcy                 0.109   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.BMUX    Tcinb                 0.310   processor/GND_539_o_GND_539_o_sub_42_OUT<15>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_xor<15>
+    SLICE_X23Y45.D6      net (fanout=1)        0.351   processor/GND_539_o_GND_539_o_sub_42_OUT<13>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045251
+                                                       processor/prodhigh_13
+    -------------------------------------------------  ---------------------------
+    Total                                      9.084ns (5.900ns logic, 3.184ns route)
+                                                       (64.9% logic, 35.1% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.455ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_13 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      9.027ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.COUT    Topcyb                0.448   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.AMUX    Tcina                 0.210   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.A5      net (fanout=3)        1.097   processor/GND_539_o_GND_539_o_sub_41_OUT<8>
+    SLICE_X22Y43.COUT    Topcya                0.474   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<8>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.BMUX    Tcinb                 0.310   processor/GND_539_o_GND_539_o_sub_42_OUT<15>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_xor<15>
+    SLICE_X23Y45.D6      net (fanout=1)        0.351   processor/GND_539_o_GND_539_o_sub_42_OUT<13>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045251
+                                                       processor/prodhigh_13
+    -------------------------------------------------  ---------------------------
+    Total                                      9.027ns (6.186ns logic, 2.841ns route)
+                                                       (68.5% logic, 31.5% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.565ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_13 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.917ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.BX      net (fanout=2)        1.422   processor/product<21>
+    SLICE_X28Y42.COUT    Tbxcy                 0.197   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.DMUX    Tcind                 0.289   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.D6      net (fanout=3)        1.286   processor/GND_539_o_GND_539_o_sub_41_OUT<11>
+    SLICE_X22Y43.COUT    Topcyd                0.312   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.BMUX    Tcinb                 0.310   processor/GND_539_o_GND_539_o_sub_42_OUT<15>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_xor<15>
+    SLICE_X23Y45.D6      net (fanout=1)        0.351   processor/GND_539_o_GND_539_o_sub_42_OUT<13>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045251
+                                                       processor/prodhigh_13
+    -------------------------------------------------  ---------------------------
+    Total                                      8.917ns (5.852ns logic, 3.065ns route)
+                                                       (65.6% logic, 34.4% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.610ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_13 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.872ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.COUT    Topcyb                0.448   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.BMUX    Tcinb                 0.277   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.B6      net (fanout=3)        0.866   processor/GND_539_o_GND_539_o_sub_41_OUT<9>
+    SLICE_X22Y43.COUT    Topcyb                0.483   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<9>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.BMUX    Tcinb                 0.310   processor/GND_539_o_GND_539_o_sub_42_OUT<15>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_xor<15>
+    SLICE_X23Y45.D6      net (fanout=1)        0.351   processor/GND_539_o_GND_539_o_sub_42_OUT<13>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045251
+                                                       processor/prodhigh_13
+    -------------------------------------------------  ---------------------------
+    Total                                      8.872ns (6.262ns logic, 2.610ns route)
+                                                       (70.6% logic, 29.4% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.614ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_13 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.868ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.BX      net (fanout=2)        1.422   processor/product<21>
+    SLICE_X28Y42.COUT    Tbxcy                 0.197   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.DMUX    Tcind                 0.289   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.DX      net (fanout=3)        1.440   processor/GND_539_o_GND_539_o_sub_41_OUT<11>
+    SLICE_X22Y43.COUT    Tdxcy                 0.109   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.BMUX    Tcinb                 0.310   processor/GND_539_o_GND_539_o_sub_42_OUT<15>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_xor<15>
+    SLICE_X23Y45.D6      net (fanout=1)        0.351   processor/GND_539_o_GND_539_o_sub_42_OUT<13>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045251
+                                                       processor/prodhigh_13
+    -------------------------------------------------  ---------------------------
+    Total                                      8.868ns (5.649ns logic, 3.219ns route)
+                                                       (63.7% logic, 36.3% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.618ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_13 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.864ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.COUT    Topcyb                0.448   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.COUT    Tbyp                  0.091   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X28Y44.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X28Y44.AMUX    Tcina                 0.210   processor/GND_539_o_GND_539_o_sub_41_OUT<15>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_xor<15>
+    SLICE_X22Y44.A5      net (fanout=3)        1.095   processor/GND_539_o_GND_539_o_sub_41_OUT<12>
+    SLICE_X22Y44.BMUX    Topab                 0.532   processor/GND_539_o_GND_539_o_sub_42_OUT<15>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<12>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_xor<15>
+    SLICE_X23Y45.D6      net (fanout=1)        0.351   processor/GND_539_o_GND_539_o_sub_42_OUT<13>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045251
+                                                       processor/prodhigh_13
+    -------------------------------------------------  ---------------------------
+    Total                                      8.864ns (6.025ns logic, 2.839ns route)
+                                                       (68.0% logic, 32.0% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.636ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_13 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.846ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.DMUX    Topbd                 0.644   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X22Y42.D5      net (fanout=3)        0.999   processor/GND_539_o_GND_539_o_sub_41_OUT<7>
+    SLICE_X22Y42.COUT    Topcyd                0.312   ahostmot2/makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[2].qcounterxd/quadfilter
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<7>
+    SLICE_X22Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<7>
+    SLICE_X22Y43.COUT    Tbyp                  0.093   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.BMUX    Tcinb                 0.310   processor/GND_539_o_GND_539_o_sub_42_OUT<15>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_xor<15>
+    SLICE_X23Y45.D6      net (fanout=1)        0.351   processor/GND_539_o_GND_539_o_sub_42_OUT<13>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045251
+                                                       processor/prodhigh_13
+    -------------------------------------------------  ---------------------------
+    Total                                      8.846ns (6.103ns logic, 2.743ns route)
+                                                       (69.0% logic, 31.0% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.671ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_13 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.811ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.BX      net (fanout=2)        1.422   processor/product<21>
+    SLICE_X28Y42.COUT    Tbxcy                 0.197   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.AMUX    Tcina                 0.210   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.A5      net (fanout=3)        1.097   processor/GND_539_o_GND_539_o_sub_41_OUT<8>
+    SLICE_X22Y43.COUT    Topcya                0.474   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_lut<8>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.BMUX    Tcinb                 0.310   processor/GND_539_o_GND_539_o_sub_42_OUT<15>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_xor<15>
+    SLICE_X23Y45.D6      net (fanout=1)        0.351   processor/GND_539_o_GND_539_o_sub_42_OUT<13>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045251
+                                                       processor/prodhigh_13
+    -------------------------------------------------  ---------------------------
+    Total                                      8.811ns (5.935ns logic, 2.876ns route)
+                                                       (67.4% logic, 32.6% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.752ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/Mmult_product (DSP)
+  Destination:          processor/prodhigh_13 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.730ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.033ns (0.308 - 0.341)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/Mmult_product to processor/prodhigh_13
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    DSP48_X1Y10.M21      Tdspcko_M_B0REG       4.371   processor/Mmult_product
+                                                       processor/Mmult_product
+    SLICE_X28Y42.B5      net (fanout=2)        1.387   processor/product<21>
+    SLICE_X28Y42.COUT    Topcyb                0.448   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_lut<5>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<7>
+    SLICE_X28Y43.BMUX    Tcinb                 0.277   processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_41_OUT<15:0>_cy<11>
+    SLICE_X22Y43.BX      net (fanout=3)        1.051   processor/GND_539_o_GND_539_o_sub_41_OUT<9>
+    SLICE_X22Y43.COUT    Tbxcy                 0.156   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.CIN     net (fanout=1)        0.003   processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_cy<11>
+    SLICE_X22Y44.BMUX    Tcinb                 0.310   processor/GND_539_o_GND_539_o_sub_42_OUT<15>
+                                                       processor/Msub_GND_539_o_GND_539_o_sub_42_OUT<15:0>_xor<15>
+    SLICE_X23Y45.D6      net (fanout=1)        0.351   processor/GND_539_o_GND_539_o_sub_42_OUT<13>
+    SLICE_X23Y45.CLK     Tas                   0.373   processor/prodhigh<13>
+                                                       processor/Mmux__n045251
+                                                       processor/prodhigh_13
+    -------------------------------------------------  ---------------------------
+    Total                                      8.730ns (5.935ns logic, 2.795ns route)
+                                                       (68.0% logic, 32.0% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4 (SLICE_X32Y33.CE), 26 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     0.356ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/opcode3_0 (FF)
+  Destination:          ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      9.163ns (Levels of Logic = 4)
+  Clock Path Skew:      0.004ns (0.550 - 0.546)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/opcode3_0 to ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X23Y30.AQ      Tcko                  0.430   processor/opcode3<3>
+                                                       processor/opcode3_0
+    SLICE_X23Y30.D4      net (fanout=1)        0.916   processor/opcode3<0>
+    SLICE_X23Y30.D       Tilo                  0.259   processor/opcode3<3>
+                                                       processor/mwrite1
+    SLICE_X23Y30.C5      net (fanout=21)       0.429   mwrite
+    SLICE_X23Y30.C       Tilo                  0.259   processor/opcode3<3>
+                                                       ExtAddrInc_mobus[7]_AND_541_o<7>11
+    SLICE_X18Y31.A5      net (fanout=13)       0.790   ExtAddrInc_mobus[7]_AND_541_o<7>1
+    SLICE_X18Y31.A       Tilo                  0.254   N433
+                                                       StartExtWrite1_5
+    SLICE_X33Y47.C3      net (fanout=13)       3.121   StartExtWrite13
+    SLICE_X33Y47.C       Tilo                  0.259   ahostmot2/makehm2dpllmod.hm2dpll/Accum<41>
+                                                       ahostmot2/makehm2dpllmod.LoadDPLLControl11
+    SLICE_X32Y33.CE      net (fanout=7)        2.132   ahostmot2/makehm2dpllmod.LoadDPLLControl1
+    SLICE_X32Y33.CLK     Tceck                 0.314   ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale<4>
+                                                       ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    -------------------------------------------------  ---------------------------
+    Total                                      9.163ns (1.775ns logic, 7.388ns route)
+                                                       (19.4% logic, 80.6% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.491ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/maddpipe3_3 (FF)
+  Destination:          ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      9.052ns (Levels of Logic = 3)
+  Clock Path Skew:      0.028ns (0.550 - 0.522)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/maddpipe3_3 to ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X19Y24.DQ      Tcko                  0.430   processor/maddpipe3<3>
+                                                       processor/maddpipe3_3
+    SLICE_X23Y30.C3      net (fanout=9)        1.493   processor/maddpipe3<3>
+    SLICE_X23Y30.C       Tilo                  0.259   processor/opcode3<3>
+                                                       ExtAddrInc_mobus[7]_AND_541_o<7>11
+    SLICE_X18Y31.A5      net (fanout=13)       0.790   ExtAddrInc_mobus[7]_AND_541_o<7>1
+    SLICE_X18Y31.A       Tilo                  0.254   N433
+                                                       StartExtWrite1_5
+    SLICE_X33Y47.C3      net (fanout=13)       3.121   StartExtWrite13
+    SLICE_X33Y47.C       Tilo                  0.259   ahostmot2/makehm2dpllmod.hm2dpll/Accum<41>
+                                                       ahostmot2/makehm2dpllmod.LoadDPLLControl11
+    SLICE_X32Y33.CE      net (fanout=7)        2.132   ahostmot2/makehm2dpllmod.LoadDPLLControl1
+    SLICE_X32Y33.CLK     Tceck                 0.314   ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale<4>
+                                                       ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    -------------------------------------------------  ---------------------------
+    Total                                      9.052ns (1.516ns logic, 7.536ns route)
+                                                       (16.7% logic, 83.3% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.597ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/maddpipe3_11 (FF)
+  Destination:          ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.933ns (Levels of Logic = 4)
+  Clock Path Skew:      0.015ns (0.343 - 0.328)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/maddpipe3_11 to ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X23Y32.DQ      Tcko                  0.430   processor/maddpipe3<11>
+                                                       processor/maddpipe3_11
+    SLICE_X23Y31.B1      net (fanout=5)        0.773   processor/maddpipe3<11>
+    SLICE_X23Y31.B       Tilo                  0.259   ahostmot2/makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[2].qcounterxd/sampleddata<15>
+                                                       wiosel<11>1
+    SLICE_X23Y30.C6      net (fanout=5)        0.342   wiosel
+    SLICE_X23Y30.C       Tilo                  0.259   processor/opcode3<3>
+                                                       ExtAddrInc_mobus[7]_AND_541_o<7>11
+    SLICE_X18Y31.A5      net (fanout=13)       0.790   ExtAddrInc_mobus[7]_AND_541_o<7>1
+    SLICE_X18Y31.A       Tilo                  0.254   N433
+                                                       StartExtWrite1_5
+    SLICE_X33Y47.C3      net (fanout=13)       3.121   StartExtWrite13
+    SLICE_X33Y47.C       Tilo                  0.259   ahostmot2/makehm2dpllmod.hm2dpll/Accum<41>
+                                                       ahostmot2/makehm2dpllmod.LoadDPLLControl11
+    SLICE_X32Y33.CE      net (fanout=7)        2.132   ahostmot2/makehm2dpllmod.LoadDPLLControl1
+    SLICE_X32Y33.CLK     Tceck                 0.314   ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale<4>
+                                                       ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    -------------------------------------------------  ---------------------------
+    Total                                      8.933ns (1.775ns logic, 7.158ns route)
+                                                       (19.9% logic, 80.1% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.606ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/opcode3_1 (FF)
+  Destination:          ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.913ns (Levels of Logic = 4)
+  Clock Path Skew:      0.004ns (0.550 - 0.546)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/opcode3_1 to ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X23Y30.BQ      Tcko                  0.430   processor/opcode3<3>
+                                                       processor/opcode3_1
+    SLICE_X23Y30.D3      net (fanout=1)        0.666   processor/opcode3<1>
+    SLICE_X23Y30.D       Tilo                  0.259   processor/opcode3<3>
+                                                       processor/mwrite1
+    SLICE_X23Y30.C5      net (fanout=21)       0.429   mwrite
+    SLICE_X23Y30.C       Tilo                  0.259   processor/opcode3<3>
+                                                       ExtAddrInc_mobus[7]_AND_541_o<7>11
+    SLICE_X18Y31.A5      net (fanout=13)       0.790   ExtAddrInc_mobus[7]_AND_541_o<7>1
+    SLICE_X18Y31.A       Tilo                  0.254   N433
+                                                       StartExtWrite1_5
+    SLICE_X33Y47.C3      net (fanout=13)       3.121   StartExtWrite13
+    SLICE_X33Y47.C       Tilo                  0.259   ahostmot2/makehm2dpllmod.hm2dpll/Accum<41>
+                                                       ahostmot2/makehm2dpllmod.LoadDPLLControl11
+    SLICE_X32Y33.CE      net (fanout=7)        2.132   ahostmot2/makehm2dpllmod.LoadDPLLControl1
+    SLICE_X32Y33.CLK     Tceck                 0.314   ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale<4>
+                                                       ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    -------------------------------------------------  ---------------------------
+    Total                                      8.913ns (1.775ns logic, 7.138ns route)
+                                                       (19.9% logic, 80.1% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.698ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/maddpipe3_7 (FF)
+  Destination:          ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.838ns (Levels of Logic = 4)
+  Clock Path Skew:      0.021ns (0.343 - 0.322)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/maddpipe3_7 to ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X21Y32.DQ      Tcko                  0.430   processor/maddpipe3<7>
+                                                       processor/maddpipe3_7
+    SLICE_X23Y31.B3      net (fanout=9)        0.678   processor/maddpipe3<7>
+    SLICE_X23Y31.B       Tilo                  0.259   ahostmot2/makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[2].qcounterxd/sampleddata<15>
+                                                       wiosel<11>1
+    SLICE_X23Y30.C6      net (fanout=5)        0.342   wiosel
+    SLICE_X23Y30.C       Tilo                  0.259   processor/opcode3<3>
+                                                       ExtAddrInc_mobus[7]_AND_541_o<7>11
+    SLICE_X18Y31.A5      net (fanout=13)       0.790   ExtAddrInc_mobus[7]_AND_541_o<7>1
+    SLICE_X18Y31.A       Tilo                  0.254   N433
+                                                       StartExtWrite1_5
+    SLICE_X33Y47.C3      net (fanout=13)       3.121   StartExtWrite13
+    SLICE_X33Y47.C       Tilo                  0.259   ahostmot2/makehm2dpllmod.hm2dpll/Accum<41>
+                                                       ahostmot2/makehm2dpllmod.LoadDPLLControl11
+    SLICE_X32Y33.CE      net (fanout=7)        2.132   ahostmot2/makehm2dpllmod.LoadDPLLControl1
+    SLICE_X32Y33.CLK     Tceck                 0.314   ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale<4>
+                                                       ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    -------------------------------------------------  ---------------------------
+    Total                                      8.838ns (1.775ns logic, 7.063ns route)
+                                                       (20.1% logic, 79.9% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.737ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/opcode3_2 (FF)
+  Destination:          ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.782ns (Levels of Logic = 4)
+  Clock Path Skew:      0.004ns (0.550 - 0.546)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/opcode3_2 to ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X23Y30.CQ      Tcko                  0.430   processor/opcode3<3>
+                                                       processor/opcode3_2
+    SLICE_X23Y30.D1      net (fanout=1)        0.535   processor/opcode3<2>
+    SLICE_X23Y30.D       Tilo                  0.259   processor/opcode3<3>
+                                                       processor/mwrite1
+    SLICE_X23Y30.C5      net (fanout=21)       0.429   mwrite
+    SLICE_X23Y30.C       Tilo                  0.259   processor/opcode3<3>
+                                                       ExtAddrInc_mobus[7]_AND_541_o<7>11
+    SLICE_X18Y31.A5      net (fanout=13)       0.790   ExtAddrInc_mobus[7]_AND_541_o<7>1
+    SLICE_X18Y31.A       Tilo                  0.254   N433
+                                                       StartExtWrite1_5
+    SLICE_X33Y47.C3      net (fanout=13)       3.121   StartExtWrite13
+    SLICE_X33Y47.C       Tilo                  0.259   ahostmot2/makehm2dpllmod.hm2dpll/Accum<41>
+                                                       ahostmot2/makehm2dpllmod.LoadDPLLControl11
+    SLICE_X32Y33.CE      net (fanout=7)        2.132   ahostmot2/makehm2dpllmod.LoadDPLLControl1
+    SLICE_X32Y33.CLK     Tceck                 0.314   ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale<4>
+                                                       ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    -------------------------------------------------  ---------------------------
+    Total                                      8.782ns (1.775ns logic, 7.007ns route)
+                                                       (20.2% logic, 79.8% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.788ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/maddpipe3_10 (FF)
+  Destination:          ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.742ns (Levels of Logic = 4)
+  Clock Path Skew:      0.015ns (0.343 - 0.328)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/maddpipe3_10 to ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X23Y32.CQ      Tcko                  0.430   processor/maddpipe3<11>
+                                                       processor/maddpipe3_10
+    SLICE_X23Y31.B4      net (fanout=5)        0.582   processor/maddpipe3<10>
+    SLICE_X23Y31.B       Tilo                  0.259   ahostmot2/makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[2].qcounterxd/sampleddata<15>
+                                                       wiosel<11>1
+    SLICE_X23Y30.C6      net (fanout=5)        0.342   wiosel
+    SLICE_X23Y30.C       Tilo                  0.259   processor/opcode3<3>
+                                                       ExtAddrInc_mobus[7]_AND_541_o<7>11
+    SLICE_X18Y31.A5      net (fanout=13)       0.790   ExtAddrInc_mobus[7]_AND_541_o<7>1
+    SLICE_X18Y31.A       Tilo                  0.254   N433
+                                                       StartExtWrite1_5
+    SLICE_X33Y47.C3      net (fanout=13)       3.121   StartExtWrite13
+    SLICE_X33Y47.C       Tilo                  0.259   ahostmot2/makehm2dpllmod.hm2dpll/Accum<41>
+                                                       ahostmot2/makehm2dpllmod.LoadDPLLControl11
+    SLICE_X32Y33.CE      net (fanout=7)        2.132   ahostmot2/makehm2dpllmod.LoadDPLLControl1
+    SLICE_X32Y33.CLK     Tceck                 0.314   ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale<4>
+                                                       ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    -------------------------------------------------  ---------------------------
+    Total                                      8.742ns (1.775ns logic, 6.967ns route)
+                                                       (20.3% logic, 79.7% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.899ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/maddpipe3_9 (FF)
+  Destination:          ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.631ns (Levels of Logic = 4)
+  Clock Path Skew:      0.015ns (0.343 - 0.328)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/maddpipe3_9 to ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X23Y32.BQ      Tcko                  0.430   processor/maddpipe3<11>
+                                                       processor/maddpipe3_9
+    SLICE_X23Y31.B5      net (fanout=5)        0.471   processor/maddpipe3<9>
+    SLICE_X23Y31.B       Tilo                  0.259   ahostmot2/makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[2].qcounterxd/sampleddata<15>
+                                                       wiosel<11>1
+    SLICE_X23Y30.C6      net (fanout=5)        0.342   wiosel
+    SLICE_X23Y30.C       Tilo                  0.259   processor/opcode3<3>
+                                                       ExtAddrInc_mobus[7]_AND_541_o<7>11
+    SLICE_X18Y31.A5      net (fanout=13)       0.790   ExtAddrInc_mobus[7]_AND_541_o<7>1
+    SLICE_X18Y31.A       Tilo                  0.254   N433
+                                                       StartExtWrite1_5
+    SLICE_X33Y47.C3      net (fanout=13)       3.121   StartExtWrite13
+    SLICE_X33Y47.C       Tilo                  0.259   ahostmot2/makehm2dpllmod.hm2dpll/Accum<41>
+                                                       ahostmot2/makehm2dpllmod.LoadDPLLControl11
+    SLICE_X32Y33.CE      net (fanout=7)        2.132   ahostmot2/makehm2dpllmod.LoadDPLLControl1
+    SLICE_X32Y33.CLK     Tceck                 0.314   ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale<4>
+                                                       ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    -------------------------------------------------  ---------------------------
+    Total                                      8.631ns (1.775ns logic, 6.856ns route)
+                                                       (20.6% logic, 79.4% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.939ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/writeback3 (FF)
+  Destination:          ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.580ns (Levels of Logic = 4)
+  Clock Path Skew:      0.004ns (0.550 - 0.546)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/writeback3 to ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X22Y30.CQ      Tcko                  0.525   processor/writeback3
+                                                       processor/writeback3
+    SLICE_X23Y30.D5      net (fanout=1)        0.238   processor/writeback3
+    SLICE_X23Y30.D       Tilo                  0.259   processor/opcode3<3>
+                                                       processor/mwrite1
+    SLICE_X23Y30.C5      net (fanout=21)       0.429   mwrite
+    SLICE_X23Y30.C       Tilo                  0.259   processor/opcode3<3>
+                                                       ExtAddrInc_mobus[7]_AND_541_o<7>11
+    SLICE_X18Y31.A5      net (fanout=13)       0.790   ExtAddrInc_mobus[7]_AND_541_o<7>1
+    SLICE_X18Y31.A       Tilo                  0.254   N433
+                                                       StartExtWrite1_5
+    SLICE_X33Y47.C3      net (fanout=13)       3.121   StartExtWrite13
+    SLICE_X33Y47.C       Tilo                  0.259   ahostmot2/makehm2dpllmod.hm2dpll/Accum<41>
+                                                       ahostmot2/makehm2dpllmod.LoadDPLLControl11
+    SLICE_X32Y33.CE      net (fanout=7)        2.132   ahostmot2/makehm2dpllmod.LoadDPLLControl1
+    SLICE_X32Y33.CLK     Tceck                 0.314   ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale<4>
+                                                       ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    -------------------------------------------------  ---------------------------
+    Total                                      8.580ns (1.870ns logic, 6.710ns route)
+                                                       (21.8% logic, 78.2% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     0.945ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               processor/maddpipe3_5 (FF)
+  Destination:          ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4 (FF)
+  Requirement:          9.750ns
+  Data Path Delay:      8.591ns (Levels of Logic = 3)
+  Clock Path Skew:      0.021ns (0.343 - 0.322)
+  Source Clock:         procclk rising at 0.000ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.235ns
+
+  Clock Uncertainty:          0.235ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.398ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: processor/maddpipe3_5 to ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X21Y32.BQ      Tcko                  0.430   processor/maddpipe3<7>
+                                                       processor/maddpipe3_5
+    SLICE_X23Y30.C2      net (fanout=9)        1.032   processor/maddpipe3<5>
+    SLICE_X23Y30.C       Tilo                  0.259   processor/opcode3<3>
+                                                       ExtAddrInc_mobus[7]_AND_541_o<7>11
+    SLICE_X18Y31.A5      net (fanout=13)       0.790   ExtAddrInc_mobus[7]_AND_541_o<7>1
+    SLICE_X18Y31.A       Tilo                  0.254   N433
+                                                       StartExtWrite1_5
+    SLICE_X33Y47.C3      net (fanout=13)       3.121   StartExtWrite13
+    SLICE_X33Y47.C       Tilo                  0.259   ahostmot2/makehm2dpllmod.hm2dpll/Accum<41>
+                                                       ahostmot2/makehm2dpllmod.LoadDPLLControl11
+    SLICE_X32Y33.CE      net (fanout=7)        2.132   ahostmot2/makehm2dpllmod.LoadDPLLControl1
+    SLICE_X32Y33.CLK     Tceck                 0.314   ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale<4>
+                                                       ahostmot2/makehm2dpllmod.hm2dpll/FilterPrescale_4
+    -------------------------------------------------  ---------------------------
+    Total                                      8.591ns (1.516ns logic, 7.075ns route)
+                                                       (17.6% logic, 82.4% route)
+
+--------------------------------------------------------------------------------
+
+Hold Paths: TS_clk0fx = PERIOD TIMEGRP "clk0fx" TS_CLK / 2 HIGH 50%;
+--------------------------------------------------------------------------------
+
+Paths for end point ahostmot2/makepwms.makepwmgens[6].pwmgenx/loadpcrreq (SLICE_X33Y56.SR), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.090ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               ahostmot2/makepwms.makepwmgens[6].pwmgenx/olderloadpcrreq (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[6].pwmgenx/loadpcrreq (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.517ns (Levels of Logic = 0)
+  Clock Path Skew:      -0.381ns (-0.996 - -0.615)
+  Source Clock:         hm2fastclock rising at 9.750ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.808ns
+
+  Clock Uncertainty:          0.808ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.498ns
+    Phase Error (PE):           0.523ns
+
+  Minimum Data Path at Fast Process Corner: ahostmot2/makepwms.makepwmgens[6].pwmgenx/olderloadpcrreq to ahostmot2/makepwms.makepwmgens[6].pwmgenx/loadpcrreq
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X32Y56.DQ      Tcko                  0.200   ahostmot2/makepwms.makepwmgens[6].pwmgenx/olderloadpcrreq
+                                                       ahostmot2/makepwms.makepwmgens[6].pwmgenx/olderloadpcrreq
+    SLICE_X33Y56.SR      net (fanout=2)        0.171   ahostmot2/makepwms.makepwmgens[6].pwmgenx/olderloadpcrreq
+    SLICE_X33Y56.CLK     Tremck      (-Th)    -0.146   ahostmot2/makepwms.makepwmgens[6].pwmgenx/loadpcrreq
+                                                       ahostmot2/makepwms.makepwmgens[6].pwmgenx/loadpcrreq
+    -------------------------------------------------  ---------------------------
+    Total                                      0.517ns (0.346ns logic, 0.171ns route)
+                                                       (66.9% logic, 33.1% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point ahostmot2/makepwms.makepwmgens[5].pwmgenx/loadpwmreq (SLICE_X16Y61.SR), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.155ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               ahostmot2/makepwms.makepwmgens[5].pwmgenx/olderloadpwmreq (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[5].pwmgenx/loadpwmreq (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.583ns (Levels of Logic = 0)
+  Clock Path Skew:      -0.380ns (-1.027 - -0.647)
+  Source Clock:         hm2fastclock rising at 9.750ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.808ns
+
+  Clock Uncertainty:          0.808ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.498ns
+    Phase Error (PE):           0.523ns
+
+  Minimum Data Path at Fast Process Corner: ahostmot2/makepwms.makepwmgens[5].pwmgenx/olderloadpwmreq to ahostmot2/makepwms.makepwmgens[5].pwmgenx/loadpwmreq
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X17Y61.BQ      Tcko                  0.198   ahostmot2/makepwms.makepwmgens[5].pwmgenx/olderloadpwmreq
+                                                       ahostmot2/makepwms.makepwmgens[5].pwmgenx/olderloadpwmreq
+    SLICE_X16Y61.SR      net (fanout=2)        0.268   ahostmot2/makepwms.makepwmgens[5].pwmgenx/olderloadpwmreq
+    SLICE_X16Y61.CLK     Tremck      (-Th)    -0.117   ahostmot2/makepwms.makepwmgens[5].pwmgenx/loadpwmreq
+                                                       ahostmot2/makepwms.makepwmgens[5].pwmgenx/loadpwmreq
+    -------------------------------------------------  ---------------------------
+    Total                                      0.583ns (0.315ns logic, 0.268ns route)
+                                                       (54.0% logic, 46.0% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point ahostmot2/makepwms.makepwmgens[0].pwmgenx/loadpcrreq (SLICE_X0Y52.SR), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.160ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               ahostmot2/makepwms.makepwmgens[0].pwmgenx/olderloadpcrreq (FF)
+  Destination:          ahostmot2/makepwms.makepwmgens[0].pwmgenx/loadpcrreq (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.585ns (Levels of Logic = 0)
+  Clock Path Skew:      -0.383ns (-0.985 - -0.602)
+  Source Clock:         hm2fastclock rising at 9.750ns
+  Destination Clock:    procclk rising at 9.750ns
+  Clock Uncertainty:    0.808ns
+
+  Clock Uncertainty:          0.808ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.498ns
+    Phase Error (PE):           0.523ns
+
+  Minimum Data Path at Fast Process Corner: ahostmot2/makepwms.makepwmgens[0].pwmgenx/olderloadpcrreq to ahostmot2/makepwms.makepwmgens[0].pwmgenx/loadpcrreq
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X0Y51.DQ       Tcko                  0.200   ahostmot2/makepwms.makepwmgens[0].pwmgenx/olderloadpcrreq
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/olderloadpcrreq
+    SLICE_X0Y52.SR       net (fanout=2)        0.268   ahostmot2/makepwms.makepwmgens[0].pwmgenx/olderloadpcrreq
+    SLICE_X0Y52.CLK      Tremck      (-Th)    -0.117   ahostmot2/makepwms.makepwmgens[0].pwmgenx/loadpcrreq
+                                                       ahostmot2/makepwms.makepwmgens[0].pwmgenx/loadpcrreq
+    -------------------------------------------------  ---------------------------
+    Total                                      0.585ns (0.317ns logic, 0.268ns route)
+                                                       (54.2% logic, 45.8% route)
+
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_clk0fx = PERIOD TIMEGRP "clk0fx" TS_CLK / 2 HIGH 50%;
+--------------------------------------------------------------------------------
+Slack: 6.180ns (period - min period limit)
+  Period: 9.750ns
+  Min period limit: 3.570ns (280.112MHz) (Trper_CLKA(Fmax))
+  Physical resource: ahostmot2/IDROM/Mram_RAM/CLKAWRCLK
+  Logical resource: ahostmot2/IDROM/Mram_RAM/CLKAWRCLK
+  Location pin: RAMB8_X1Y13.CLKAWRCLK
+  Clock network: procclk
+--------------------------------------------------------------------------------
+Slack: 6.180ns (period - min period limit)
+  Period: 9.750ns
+  Min period limit: 3.570ns (280.112MHz) (Trper_CLKB(Fmax))
+  Physical resource: ahostmot2/IDROM/Mram_RAM/CLKBRDCLK
+  Logical resource: ahostmot2/IDROM/Mram_RAM/CLKBRDCLK
+  Location pin: RAMB8_X1Y13.CLKBRDCLK
+  Clock network: procclk
+--------------------------------------------------------------------------------
+Slack: 6.180ns (period - min period limit)
+  Period: 9.750ns
+  Min period limit: 3.570ns (280.112MHz) (Trper_CLKA(Fmax))
+  Physical resource: Etherhm2/Mram_RAM1/CLKA
+  Logical resource: Etherhm2/Mram_RAM1/CLKA
+  Location pin: RAMB16_X0Y20.CLKA
+  Clock network: procclk
+--------------------------------------------------------------------------------
+Slack: 6.180ns (period - min period limit)
+  Period: 9.750ns
+  Min period limit: 3.570ns (280.112MHz) (Trper_CLKA(Fmax))
+  Physical resource: Etherhm2/Mram_RAM2/CLKA
+  Logical resource: Etherhm2/Mram_RAM2/CLKA
+  Location pin: RAMB16_X0Y24.CLKA
+  Clock network: procclk
+--------------------------------------------------------------------------------
+Slack: 6.180ns (period - min period limit)
+  Period: 9.750ns
+  Min period limit: 3.570ns (280.112MHz) (Trper_CLKA(Fmax))
+  Physical resource: Etherhm2/Mram_RAM3/CLKA
+  Logical resource: Etherhm2/Mram_RAM3/CLKA
+  Location pin: RAMB16_X0Y22.CLKA
+  Clock network: procclk
+--------------------------------------------------------------------------------
+Slack: 6.180ns (period - min period limit)
+  Period: 9.750ns
+  Min period limit: 3.570ns (280.112MHz) (Trper_CLKA(Fmax))
+  Physical resource: Etherhm2/Mram_RAM4/CLKA
+  Logical resource: Etherhm2/Mram_RAM4/CLKA
+  Location pin: RAMB16_X0Y26.CLKA
+  Clock network: procclk
+--------------------------------------------------------------------------------
+Slack: 6.180ns (period - min period limit)
+  Period: 9.750ns
+  Min period limit: 3.570ns (280.112MHz) (Trper_CLKA(Fmax))
+  Physical resource: Etherhm2/Mram_RAM5/CLKA
+  Logical resource: Etherhm2/Mram_RAM5/CLKA
+  Location pin: RAMB16_X0Y16.CLKA
+  Clock network: procclk
+--------------------------------------------------------------------------------
+Slack: 6.180ns (period - min period limit)
+  Period: 9.750ns
+  Min period limit: 3.570ns (280.112MHz) (Trper_CLKA(Fmax))
+  Physical resource: Etherhm2/Mram_RAM6/CLKA
+  Logical resource: Etherhm2/Mram_RAM6/CLKA
+  Location pin: RAMB16_X0Y18.CLKA
+  Clock network: procclk
+--------------------------------------------------------------------------------
+Slack: 6.180ns (period - min period limit)
+  Period: 9.750ns
+  Min period limit: 3.570ns (280.112MHz) (Trper_CLKA(Fmax))
+  Physical resource: DataRam/Mram_RAM11/CLKA
+  Logical resource: DataRam/Mram_RAM11/CLKA
+  Location pin: RAMB16_X1Y16.CLKA
+  Clock network: procclk
+--------------------------------------------------------------------------------
+Slack: 6.180ns (period - min period limit)
+  Period: 9.750ns
+  Min period limit: 3.570ns (280.112MHz) (Trper_CLKB(Fmax))
+  Physical resource: DataRam/Mram_RAM11/CLKB
+  Logical resource: DataRam/Mram_RAM11/CLKB
+  Location pin: RAMB16_X1Y16.CLKB
+  Clock network: procclk
+--------------------------------------------------------------------------------
+
+
+Derived Constraint Report
+Derived Constraints for TS_CLK
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths Analyzed       |
+|           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|TS_CLK                         |     19.500ns|      8.000ns|     18.832ns|            0|            0|            0|       219035|
+| TS_clk1fx                     |      4.875ns|      4.702ns|          N/A|            0|            0|         5126|            0|
+| TS_clk0fx                     |      9.750ns|      9.416ns|          N/A|            0|            0|       213909|            0|
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+All constraints were met.
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Clock to Setup on destination clock CLK
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |    9.416|         |         |         |
+---------------+---------+---------+---------+---------+
+
+
+Timing summary:
+---------------
+
+Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
+
+Constraints cover 219035 paths, 0 nets, and 20278 connections
+
+Design statistics:
+   Minimum period:   9.416ns{1}   (Maximum frequency: 106.202MHz)
+
+
+------------------------------------Footnotes-----------------------------------
+1)  The minimum period statistic assumes all single cycle delays.
+
+Analysis completed Thu Mar 23 19:38:47 2023 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 476 MB
+
+
+

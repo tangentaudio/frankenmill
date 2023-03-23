@@ -1,0 +1,2481 @@
+Release 14.5 - xst P.58f (lin64)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.06 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.06 secs
+ 
+--> 
+Reading design: TopEthernetHostMot2.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "TopEthernetHostMot2.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "TopEthernetHostMot2"
+Output Format                      : NGC
+Target Device                      : xc6slx16-2-ftg256
+
+---- Source Options
+Top Module Name                    : TopEthernetHostMot2
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : YES
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/log2.vhd" into library work
+Parsing package <log2>.
+Parsing package body <log2>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/dpram.vhd" into library work
+Parsing entity <dpram>.
+Parsing architecture <syn> of entity <dpram>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/adpram.vhd" into library work
+Parsing entity <adpram>.
+Parsing architecture <syn> of entity <adpram>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/waveram.vhd" into library work
+Parsing entity <waveram>.
+Parsing architecture <syn> of entity <waveram>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/uartx8b.vhd" into library work
+Parsing entity <uartx8b>.
+Parsing architecture <Behavioral> of entity <uartx8b>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/uartx8.vhd" into library work
+Parsing entity <uartx8>.
+Parsing architecture <Behavioral> of entity <uartx8>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/uartr8b.vhd" into library work
+Parsing entity <uartr8b>.
+Parsing architecture <Behavioral> of entity <uartr8b>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/uartr8.vhd" into library work
+Parsing entity <uartr8>.
+Parsing architecture <Behavioral> of entity <uartr8>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/twidrom.vhd" into library work
+Parsing entity <twidrom>.
+Parsing architecture <syn> of entity <twidrom>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/syncwavegen.vhd" into library work
+Parsing entity <syncwavegen>.
+Parsing architecture <behavioral> of entity <syncwavegen>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/sslbprom46.vhd" into library work
+Parsing entity <sslbpb>.
+Parsing architecture <syn> of entity <sslbpb>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/sslbprom43.vhd" into library work
+Parsing entity <sslbp>.
+Parsing architecture <syn> of entity <sslbp>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/sslbpram.vhd" into library work
+Parsing entity <sslbpram>.
+Parsing architecture <syn> of entity <sslbpram>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/sine16.vhd" into library work
+Parsing entity <sine16>.
+Parsing architecture <syn> of entity <sine16>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/resrom.vhd" into library work
+Parsing entity <resrom>.
+Parsing architecture <syn> of entity <resrom>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/resolverdaq2.vhd" into library work
+Parsing entity <resolverdaq2>.
+Parsing architecture <behavioral> of entity <resolverdaq2>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/parity.vhd" into library work
+Parsing package <parity>.
+Parsing package body <parity>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/OutputInteg.vhd" into library work
+Parsing entity <OutputInteg>.
+Parsing architecture <Behavioral> of entity <outputinteg>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/oneofndecode.vhd" into library work
+Parsing package <oneofndecode>.
+Parsing package body <oneofndecode>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/IDROMConst.vhd" into library work
+Parsing package <IDROMConst>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/ibound.vhd" into library work
+Parsing package <ibound>.
+Parsing package body <ibound>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/decodedstrobe.vhd" into library work
+Parsing package <decodedstrobe>.
+Parsing package body <decodedstrobe>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/d8o8sqwsb.vhd" into library work
+Parsing entity <DumbAss8sqwsb>.
+Parsing architecture <Behavioral> of entity <dumbass8sqwsb>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/d8o8sqws.vhd" into library work
+Parsing entity <DumbAss8sqws>.
+Parsing architecture <Behavioral> of entity <dumbass8sqws>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/b32qcondmac2ws.vhd" into library work
+Parsing entity <Big32v2>.
+Parsing architecture <Behavioral> of entity <big32v2>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/xy2mod.vhd" into library work
+Parsing entity <xy2mod>.
+Parsing architecture <Behavioral> of entity <xy2mod>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/xfrmrout.vhd" into library work
+Parsing entity <xfrmrout>.
+Parsing architecture <Behavioral> of entity <xfrmrout>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/wordrb.vhd" into library work
+Parsing entity <wordrb>.
+Parsing architecture <behavioral> of entity <wordrb>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/wordpr.vhd" into library work
+Parsing entity <wordpr>.
+Parsing architecture <behavioral> of entity <wordpr>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/wavegen.vhd" into library work
+Parsing entity <wavegen>.
+Parsing architecture <behavioral> of entity <wavegen>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/watchdog.vhd" into library work
+Parsing entity <watchdog>.
+Parsing architecture <Behavioral> of entity <watchdog>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/ubrategend.vhd" into library work
+Parsing entity <rategend>.
+Parsing architecture <Behavioral> of entity <rategend>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/ubrategen.vhd" into library work
+Parsing entity <rategen>.
+Parsing architecture <Behavioral> of entity <rategen>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/uartx.vhd" into library work
+Parsing entity <uartx>.
+Parsing architecture <Behavioral> of entity <uartx>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/uartr.vhd" into library work
+Parsing entity <uartr>.
+Parsing architecture <Behavioral> of entity <uartr>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/twiddle.vhd" into library work
+Parsing entity <twiddle>.
+Parsing architecture <Behavioral> of entity <twiddle>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/timestampd.vhd" into library work
+Parsing entity <timestampd>.
+Parsing architecture <Behavioral> of entity <timestampd>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/timestamp.vhd" into library work
+Parsing entity <timestamp>.
+Parsing architecture <Behavioral> of entity <timestamp>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/threephasepwm.vhd" into library work
+Parsing entity <threephasepwm>.
+Parsing architecture <behavioral> of entity <threephasepwm>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/sserialwab.vhd" into library work
+Parsing entity <sserialwab>.
+Parsing architecture <Behavioral> of entity <sserialwab>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/sserialwa.vhd" into library work
+Parsing entity <sserialwa>.
+Parsing architecture <Behavioral> of entity <sserialwa>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/srl16delay.vhd" into library work
+Parsing entity <srl16delay>.
+Parsing architecture <Behavioral> of entity <srl16delay>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/simplessi.vhd" into library work
+Parsing entity <SimpleSSI>.
+Parsing architecture <Behavioral> of entity <simplessi>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/simplespix.vhd" into library work
+Parsing entity <simplespi>.
+Parsing architecture <behavioral> of entity <simplespi>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/simpledsad.vhd" into library work
+Parsing entity <simpledsad>.
+Parsing architecture <behavioral> of entity <simpledsad>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/scalertimer.vhd" into library work
+Parsing entity <scalertimer>.
+Parsing architecture <Behavioral> of entity <scalertimer>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/scalercounter.vhd" into library work
+Parsing entity <scalercounter>.
+Parsing architecture <Behavioral> of entity <scalercounter>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/resolver.vhd" into library work
+Parsing entity <resolver>.
+Parsing architecture <dataflow> of entity <resolver>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/rcpwmrate.vhd" into library work
+Parsing entity <rcpwmrate>.
+Parsing architecture <Behavioral> of entity <rcpwmrate>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/rcpwmgen.vhd" into library work
+Parsing entity <rcpwmgen>.
+Parsing architecture <Behavioral> of entity <rcpwmgen>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/qcountersfpd.vhd" into library work
+Parsing entity <qcounterpd>.
+Parsing architecture <behavioral> of entity <qcounterpd>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/qcountersfp.vhd" into library work
+Parsing entity <qcounterp>.
+Parsing architecture <behavioral> of entity <qcounterp>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/qcountersfd.vhd" into library work
+Parsing entity <qcounterd>.
+Parsing architecture <behavioral> of entity <qcounterd>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/qcountersf.vhd" into library work
+Parsing entity <qcounter>.
+Parsing architecture <behavioral> of entity <qcounter>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/qcounterateskd.vhd" into library work
+Parsing entity <qcounterateskd>.
+Parsing architecture <Behavioral> of entity <qcounterateskd>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/qcounteratesk.vhd" into library work
+Parsing entity <qcounteratesk>.
+Parsing architecture <Behavioral> of entity <qcounteratesk>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/qcounterated.vhd" into library work
+Parsing entity <qcounterated>.
+Parsing architecture <Behavioral> of entity <qcounterated>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/qcounterate.vhd" into library work
+Parsing entity <qcounterate>.
+Parsing architecture <Behavioral> of entity <qcounterate>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/pwmrefh.vhd" into library work
+Parsing entity <pwmrefh>.
+Parsing architecture <behavioral> of entity <pwmrefh>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/pwmpdmgenh.vhd" into library work
+Parsing entity <pwmpdmgenh>.
+Parsing architecture <behavioral> of entity <pwmpdmgenh>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/pktuartx.vhd" into library work
+Parsing entity <pktuartx>.
+Parsing architecture <Behavioral> of entity <pktuartx>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/pktuartr.vhd" into library work
+Parsing entity <pktuartr>.
+Parsing architecture <Behavioral> of entity <pktuartr>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/PinExists.vhd" into library work
+Parsing package <PinExists>.
+Parsing package body <PinExists>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/OutputPinsPerModule.vhd" into library work
+Parsing package <OutputPinsPerModule>.
+Parsing package body <OutputPinsPerModule>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/outm.vhd" into library work
+Parsing entity <outm>.
+Parsing architecture <behavioral> of entity <outm>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/oneshot.vhd" into library work
+Parsing entity <oneshot>.
+Parsing architecture <Behavioral> of entity <oneshot>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/NumberOfModules.vhd" into library work
+Parsing package <NumberOfModules>.
+Parsing package body <NumberOfModules>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/ModuleExists.vhd" into library work
+Parsing package <ModuleExists>.
+Parsing package body <ModuleExists>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/MaxPinsPerModule.vhd" into library work
+Parsing package <MaxPinsPerModule>.
+Parsing package body <MaxPinsPerModule>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/MaxOutputPinsPerModule.vhd" into library work
+Parsing package <MaxOutputPinsPerModule>.
+Parsing package body <MaxOutputPinsPerModule>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/MaxIOPinsPerModule.vhd" into library work
+Parsing package <MaxIOPinsPerModule>.
+Parsing package body <MaxIOPinsPerModule>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/MaxInputPinsPerModule.vhd" into library work
+Parsing package <MaxInputPinsPerModule>.
+Parsing package body <MaxInputPinsPerModule>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/kubstepgenzid.vhd" into library work
+Parsing entity <stepgenid>.
+Parsing architecture <Behavioral> of entity <stepgenid>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/kubstepgenzi.vhd" into library work
+Parsing entity <stepgeni>.
+Parsing architecture <Behavioral> of entity <stepgeni>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/kubstepgenzd.vhd" into library work
+Parsing entity <stepgend>.
+Parsing architecture <Behavioral> of entity <stepgend>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/kubstepgenz.vhd" into library work
+Parsing entity <stepgen>.
+Parsing architecture <Behavioral> of entity <stepgen>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/irqlogics.vhd" into library work
+Parsing entity <irqlogics>.
+Parsing architecture <Behavioral> of entity <irqlogics>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/InputPinsPerModule.vhd" into library work
+Parsing package <InputPinsPerModule>.
+Parsing package body <InputPinsPerModule>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/inmuxm.vhd" into library work
+Parsing entity <inmuxm>.
+Parsing architecture <behavioral> of entity <inmuxm>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/inm.vhd" into library work
+Parsing entity <inm>.
+Parsing architecture <behavioral> of entity <inm>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/idrom.vhd" into library work
+Parsing entity <IDROM>.
+Parsing architecture <syn> of entity <idrom>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/hostmotid.vhd" into library work
+Parsing entity <hostmotid>.
+Parsing architecture <Behavioral> of entity <hostmotid>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/hmtimers.vhd" into library work
+Parsing entity <hm2dpll>.
+Parsing architecture <behavioral> of entity <hm2dpll>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/GetModuleHint.vhd" into library work
+Parsing package <GetModuleHint>.
+Parsing package body <GetModuleHint>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/fanucabs.vhd" into library work
+Parsing entity <FanucAbs>.
+Parsing architecture <Behavioral> of entity <fanucabs>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/drqlogic.vhd" into library work
+Parsing entity <dmdrqlogic>.
+Parsing architecture <Behavioral> of entity <dmdrqlogic>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/dpainter.vhd" into library work
+Parsing entity <dpainterd>.
+Parsing architecture <Behavioral> of entity <dpainterd>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/daqfifo16.vhd" into library work
+Parsing entity <DAQFIFO16>.
+Parsing architecture <Behavioral> of entity <daqfifo16>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/cpdrive.vhd" into library work
+Parsing entity <cpdrive>.
+Parsing architecture <Behavioral> of entity <cpdrive>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/CountPinsInRange.vhd" into library work
+Parsing package <CountPinsInRange>.
+Parsing package body <CountPinsInRange>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/bufferedspi.vhd" into library work
+Parsing entity <bufferedspi>.
+Parsing architecture <behavioral> of entity <bufferedspi>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/boutreg.vhd" into library work
+Parsing entity <boutreg>.
+Parsing architecture <Behavioral> of entity <boutreg>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/biss_loop.vhd" into library work
+Parsing entity <biss>.
+Parsing architecture <Behavioral> of entity <biss>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/binosc.vhd" into library work
+Parsing entity <binosc>.
+Parsing architecture <Behavioral> of entity <binosc>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/simplespi8x.vhd" into library work
+Parsing entity <simplespi8>.
+Parsing architecture <behavioral> of entity <simplespi8>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/PIN_SVST8_4D_72.vhd" into library work
+Parsing package <PIN_SVST8_4D_72>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/i80hd_x16card.vhd" into library work
+Parsing package <i80hd_x16card>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" into library work
+Parsing entity <HostMot2>.
+Parsing architecture <dataflow> of entity <hostmot2>.
+WARNING:HDLCompiler:1369 - "/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 2582: Possible infinite loop; process does not have a wait statement
+WARNING:HDLCompiler:1369 - "/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 2609: Possible infinite loop; process does not have a wait statement
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/fixicap.vhd" into library work
+Parsing package <FixICap>.
+Parsing package body <fixicap>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/etherhm2.vhd" into library work
+Parsing entity <etherhm2>.
+Parsing architecture <syn> of entity <etherhm2>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/d16w.vhd" into library work
+Parsing entity <D16w>.
+Parsing architecture <Behavioral> of entity <d16w>.
+Parsing VHDL file "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" into library work
+Parsing entity <TopEthernetHostMot2>.
+Parsing architecture <Behavioral> of entity <topethernethostmot2>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <TopEthernetHostMot2> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <HostMot2> (architecture <dataflow>) with generics from library <work>.
+WARNING:HDLCompiler:746 - "/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 156: Range is empty (null range)
+WARNING:HDLCompiler:746 - "/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 302: Range is empty (null range)
+
+Elaborating entity <hostmotid> (architecture <Behavioral>) with generics from library <work>.
+INFO:HDLCompiler:679 - "/home/steve/7i80/configs/hostmot2/source/hostmotid.vhd" Line 98. Case statement is complete. others clause is never selected
+
+Elaborating entity <wordpr> (architecture <behavioral>) with generics from library <work>.
+
+Elaborating entity <wordrb> (architecture <behavioral>) with generics from library <work>.
+
+Elaborating entity <watchdog> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <irqlogics> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <hm2dpll> (architecture <behavioral>) from library <work>.
+
+Elaborating entity <rategend> (architecture <Behavioral>) from library <work>.
+
+Elaborating entity <stepgend> (architecture <Behavioral>) with generics from library <work>.
+WARNING:HDLCompiler:89 - "/home/steve/7i80/configs/hostmot2/source/kubstepgenzd.vhd" Line 154: <srl16e> remains a black-box since it has no binding entity.
+INFO:HDLCompiler:679 - "/home/steve/7i80/configs/hostmot2/source/kubstepgenzd.vhd" Line 367. Case statement is complete. others clause is never selected
+
+Elaborating entity <qcounterated> (architecture <Behavioral>) with generics from library <work>.
+Note: "Encoder rate divisor: 4.0"
+
+Elaborating entity <timestampd> (architecture <Behavioral>) from library <work>.
+WARNING:HDLCompiler:92 - "/home/steve/7i80/configs/hostmot2/source/timestampd.vhd" Line 113: timerenable should be on the sensitivity list of the process
+
+Elaborating entity <qcounterd> (architecture <behavioral>) with generics from library <work>.
+WARNING:HDLCompiler:634 - "/home/steve/7i80/configs/hostmot2/source/qcountersfd.vhd" Line 101: Net <sampledcont[13]> does not have a driver.
+
+Elaborating entity <pwmrefh> (architecture <behavioral>) with generics from library <work>.
+
+Elaborating entity <boutreg> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <pwmpdmgenh> (architecture <behavioral>) with generics from library <work>.
+INFO:HDLCompiler:679 - "/home/steve/7i80/configs/hostmot2/source/pwmpdmgenh.vhd" Line 159. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/steve/7i80/configs/hostmot2/source/pwmpdmgenh.vhd" Line 188. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/steve/7i80/configs/hostmot2/source/pwmpdmgenh.vhd" Line 229. Case statement is complete. others clause is never selected
+
+Elaborating entity <boutreg> (architecture <Behavioral>) with generics from library <work>.
+WARNING:HDLCompiler:746 - "/home/steve/7i80/configs/hostmot2/source/boutreg.vhd" Line 107: Range is empty (null range)
+WARNING:HDLCompiler:220 - "/home/steve/7i80/configs/hostmot2/source/boutreg.vhd" Line 107: Assignment ignored
+
+Elaborating entity <boutreg> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <IDROM> (architecture <syn>) with generics from library <work>.
+WARNING:HDLCompiler:634 - "/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 267: Net <AltData[41]> does not have a driver.
+WARNING:HDLCompiler:634 - "/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 469: Net <makehm2dpllmod.DPLLSyncIn> does not have a driver.
+WARNING:HDLCompiler:634 - "/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd" Line 992: Net <makeqcounters.IndexMask[7]> does not have a driver.
+
+Elaborating entity <simplespi8> (architecture <behavioral>) with generics from library <work>.
+
+Elaborating entity <D16w> (architecture <Behavioral>) with generics from library <work>.
+
+Elaborating entity <adpram> (architecture <syn>) with generics from library <work>.
+INFO:HDLCompiler:679 - "/home/steve/7i80/configs/hostmot2/source/d16w.vhd" Line 360. Case statement is complete. others clause is never selected
+
+Elaborating entity <etherhm2> (architecture <syn>) from library <work>.
+
+Elaborating entity <dpram> (architecture <syn>) with generics from library <work>.
+INFO:HDLCompiler:679 - "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" Line 977. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" Line 1004. Case statement is complete. others clause is never selected
+WARNING:HDLCompiler:92 - "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" Line 1008: readrates should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" Line 1009: rates should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" Line 1101: icapo should be on the sensitivity list of the process
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <TopEthernetHostMot2>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd".
+        ThePinDesc =
+("00000011000000010000010000000010","00000011000000010000010000000001","00000011000000000000010000000010","00000011000000000000010000000001","00000011000000010000010000000011","00000011000000000000010000000011","00000011000000010000011010000001","00000011000000000000011010000001","00000011000000010000011010000010","00000011000000000000011010000010","00000011000000010000011010000011","00000011000000000000011010000011","00000011000000110000010000000010","00000011000000110000010000000001","00000011000000100000010000000010","00000011000000100000010000000001","00000011000000110000010000000011","00000011000000100000010000000011","00000011000000110000011010000001","00000011000000100000011010000001","00000011000000110000011010000010","00000011000000100000011010000010","00000011000000110000011010000011","00000011000000100000011010000011","00000011000001010000010000000010","00000011000001010000010000000001","00000011000001000000010000000010","00000011000001000000010000000001","00000011000001010000010000000011","0000001
+1000001000000010000000011","00000011000001010000011010000001","00000011000001000000011010000001","00000011000001010000011010000010","00000011000001000000011010000010","00000011000001010000011010000011","00000011000001000000011010000011","00000011000001110000010000000010","00000011000001110000010000000001","00000011000001100000010000000010","00000011000001100000010000000001","00000011000001110000010000000011","00000011000001100000010000000011","00000011000001110000011010000001","00000011000001100000011010000001","00000011000001110000011010000010","00000011000001100000011010000010","00000011000001110000011010000011","00000011000001100000011010000011","00000011000000000000010110000001","00000011000000000000010110000010","00000011000000000000010110000011","00000011000000000000010110000100","00000011000000000000010110000101","00000011000000000000010110000110","00000011000000010000010110000001","00000011000000010000010110000010","00000011000000010000010110000011","00000011000000010000010110000100","0000001100000001
+0000010110000101","00000011000000010000010110000110","00000011000000100000010110000001","00000011000000100000010110000010","00000011000000100000010110000011","00000011000000100000010110000100","00000011000000100000010110000101","00000011000000100000010110000110","00000011000000110000010110000001","00000011000000110000010110000010","00000011000000110000010110000011","00000011000000110000010110000100","00000011000000110000010110000101","00000011000000110000010110000110","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","0000000000000000000000000
+0000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000",
+"00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000")
+        TheModuleID =
+(("00011010","00000000","00000001","00000001","0111000000000000","00000111","00000000","00000000000000000000000000000000"),("00000010","00000000","00000001","00000001","0000110000000000","00000011","00000000","00000000000000000000000000000000"),("00000011","00000000","00000001","00000011","0001000000000000","00000101","00000000","00000000000000000000000000011111"),("00000100","00000010","00000001","00001000","0011000000000000","00000101","00000000","00000000000000000000000000000011"),("00000110","00000000","00000010","00001000","0100000100000000","00000101","00000000","00000000000000000000000000000011"),("00000101","00000010","00000001","00000100","0010000000000000","00001010","00000000","00000000000000000000000111111111"),("10000000","00000000","00000001","00000001","0000001000000000","00000001","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0
+000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000
+000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000
+","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"))
+        PWMRefWidth = 13
+        IDROMType = 3
+        UseStepGenPrescaler = true
+        UseIRQLogic = true
+        UseWatchDog = true
+        OffsetToModules = 64
+        OffsetToPinDesc = 448
+        BusWidth = 32
+        AddrWidth = 16
+        InstStride0 = 4
+        InstStride1 = 64
+        RegStride0 = 256
+        RegStride1 = 256
+        FallBack = false
+INFO:Xst:3210 - "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" line 523: Output port <int> of the instance <ahostmot2> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" line 523: Output port <dreq> of the instance <ahostmot2> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" line 523: Output port <demandmode> of the instance <ahostmot2> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" line 684: Output port <carryflg> of the instance <processor> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/steve/7i80/configs/hostmot2/source/TopEthernet16HostMot2.vhd" line 712: Output port <douta> of the instance <DataRam> is unconnected or connected to loadless signal.
+    Found 1-bit register for signal <Read32>.
+    Found 4-bit register for signal <LocalLEDs>.
+    Found 1-bit register for signal <LEDMode>.
+    Found 1-bit register for signal <LEDErrFF>.
+    Found 32-bit register for signal <HM2WriteBuffer>.
+    Found 16-bit register for signal <ExtAddress>.
+    Found 32-bit register for signal <HM2ReadBuffer>.
+    Found 5-bit register for signal <EthContReg>.
+    Found 16-bit register for signal <EthDataReg>.
+    Found 1-bit register for signal <EthResetReg>.
+    Found 2-bit register for signal <EthDiv>.
+    Found 8-bit register for signal <PreScale>.
+    Found 16-bit register for signal <Timer>.
+    Found 16-bit register for signal <ICapI>.
+    Found 1-bit register for signal <ICapRW>.
+    Found 1-bit register for signal <ICapClk>.
+    Found 2-bit register for signal <TP>.
+    Found 12-bit register for signal <ioradd>.
+    Found 16-bit adder for signal <ExtAddress[15]_GND_10_o_add_45_OUT> created at line 991.
+    Found 2-bit adder for signal <EthDiv[1]_GND_10_o_add_64_OUT> created at line 1059.
+    Found 16-bit adder for signal <Timer[15]_GND_10_o_add_70_OUT> created at line 1080.
+    Found 8-bit subtractor for signal <GND_10_o_GND_10_o_sub_70_OUT<7:0>> created at line 1077.
+    Found 1-bit tristate buffer for signal <mibus_io<15>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<14>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<13>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<12>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<11>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<10>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<9>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<8>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<7>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<6>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<5>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<4>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<3>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<2>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<1>> created at line 954
+    Found 1-bit tristate buffer for signal <mibus_io<0>> created at line 954
+    Found 1-bit tristate buffer for signal <ED<15>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<14>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<13>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<12>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<11>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<10>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<9>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<8>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<7>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<6>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<5>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<4>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<3>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<2>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<1>> created at line 1024
+    Found 1-bit tristate buffer for signal <ED<0>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<15>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<14>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<13>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<12>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<11>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<10>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<9>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<8>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<7>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<6>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<5>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<4>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<3>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<2>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<1>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<0>> created at line 1024
+    Found 1-bit tristate buffer for signal <mibus_io<15>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<14>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<13>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<12>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<11>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<10>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<9>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<8>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<7>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<6>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<5>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<4>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<3>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<2>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<1>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<0>> created at line 1070
+    Found 1-bit tristate buffer for signal <mibus_io<15>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<14>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<13>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<12>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<11>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<10>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<9>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<8>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<7>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<6>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<5>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<4>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<3>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<2>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<1>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<0>> created at line 1085
+    Found 1-bit tristate buffer for signal <mibus_io<1>> created at line 1107
+    Found 1-bit tristate buffer for signal <mibus_io<0>> created at line 1107
+    Summary:
+	inferred   4 Adder/Subtractor(s).
+	inferred 167 D-type flip-flop(s).
+	inferred  62 Multiplexer(s).
+	inferred  82 Tristate(s).
+Unit <TopEthernetHostMot2> synthesized.
+
+Synthesizing Unit <HostMot2>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/hostmot2.vhd".
+        ThePinDesc =
+("00000011000000010000010000000010","00000011000000010000010000000001","00000011000000000000010000000010","00000011000000000000010000000001","00000011000000010000010000000011","00000011000000000000010000000011","00000011000000010000011010000001","00000011000000000000011010000001","00000011000000010000011010000010","00000011000000000000011010000010","00000011000000010000011010000011","00000011000000000000011010000011","00000011000000110000010000000010","00000011000000110000010000000001","00000011000000100000010000000010","00000011000000100000010000000001","00000011000000110000010000000011","00000011000000100000010000000011","00000011000000110000011010000001","00000011000000100000011010000001","00000011000000110000011010000010","00000011000000100000011010000010","00000011000000110000011010000011","00000011000000100000011010000011","00000011000001010000010000000010","00000011000001010000010000000001","00000011000001000000010000000010","00000011000001000000010000000001","00000011000001010000010000000011","0000001
+1000001000000010000000011","00000011000001010000011010000001","00000011000001000000011010000001","00000011000001010000011010000010","00000011000001000000011010000010","00000011000001010000011010000011","00000011000001000000011010000011","00000011000001110000010000000010","00000011000001110000010000000001","00000011000001100000010000000010","00000011000001100000010000000001","00000011000001110000010000000011","00000011000001100000010000000011","00000011000001110000011010000001","00000011000001100000011010000001","00000011000001110000011010000010","00000011000001100000011010000010","00000011000001110000011010000011","00000011000001100000011010000011","00000011000000000000010110000001","00000011000000000000010110000010","00000011000000000000010110000011","00000011000000000000010110000100","00000011000000000000010110000101","00000011000000000000010110000110","00000011000000010000010110000001","00000011000000010000010110000010","00000011000000010000010110000011","00000011000000010000010110000100","0000001100000001
+0000010110000101","00000011000000010000010110000110","00000011000000100000010110000001","00000011000000100000010110000010","00000011000000100000010110000011","00000011000000100000010110000100","00000011000000100000010110000101","00000011000000100000010110000110","00000011000000110000010110000001","00000011000000110000010110000010","00000011000000110000010110000011","00000011000000110000010110000100","00000011000000110000010110000101","00000011000000110000010110000110","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","0000000000000000000000000
+0000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000",
+"00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000")
+        TheModuleID =
+(("00011010","00000000","00000001","00000001","0111000000000000","00000111","00000000","00000000000000000000000000000000"),("00000010","00000000","00000001","00000001","0000110000000000","00000011","00000000","00000000000000000000000000000000"),("00000011","00000000","00000001","00000011","0001000000000000","00000101","00000000","00000000000000000000000000011111"),("00000100","00000010","00000001","00001000","0011000000000000","00000101","00000000","00000000000000000000000000000011"),("00000110","00000000","00000010","00001000","0100000100000000","00000101","00000000","00000000000000000000000000000011"),("00000101","00000010","00000001","00000100","0010000000000000","00001010","00000000","00000000000000000000000111111111"),("10000000","00000000","00000001","00000001","0000001000000000","00000001","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0
+000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000
+000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000
+","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"))
+        IDROMType = 3
+        SepClocks = true
+        OneWS = true
+        UseIRQLogic = true
+        PWMRefWidth = 13
+        UseWatchDog = true
+        OffsetToModules = 64
+        OffsetToPinDesc = 448
+        ClockHigh = 200000000
+        ClockMed = 100000000
+        ClockLow = 100000000
+        BoardNameLow = "01000001010100110100010101001101"
+        BoardNameHigh = "00110000001110000100100100110111"
+        FPGASize = 16
+        FPGAPins = 256
+        IOPorts = 3
+        IOWidth = 72
+        LIOWidth = 4
+        PortWidth = 24
+        BusWidth = 32
+        AddrWidth = 16
+        InstStride0 = 4
+        InstStride1 = 64
+        RegStride0 = 256
+        RegStride1 = 256
+        LEDCount = 4
+WARNING:Xst:647 - Input <clkmed> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:2935 - Signal 'AltData<41:36>', unconnected in block 'HostMot2', is tied to its initial value (000000).
+WARNING:Xst:2935 - Signal 'AltData<29:24>', unconnected in block 'HostMot2', is tied to its initial value (000000).
+WARNING:Xst:2935 - Signal 'AltData<17:12>', unconnected in block 'HostMot2', is tied to its initial value (000000).
+WARNING:Xst:2935 - Signal 'AltData<5:0>', unconnected in block 'HostMot2', is tied to its initial value (000000).
+WARNING:Xst:653 - Signal <makeqcounters.IndexMask> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <makehm2dpllmod.DPLLSyncIn> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+    Found 14-bit register for signal <A>.
+    Summary:
+	inferred  14 D-type flip-flop(s).
+	inferred  31 Multiplexer(s).
+Unit <HostMot2> synthesized.
+
+Synthesizing Unit <hostmotid>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/hostmotid.vhd".
+        buswidth = 32
+        cookie = "01010101101010101100101011111110"
+        namelow = "01010100010100110100111101001000"
+        namehigh = "00110010010101000100111101001101"
+        idromoffset = "00000000000000000000010000000000"
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 89
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 89
+    Summary:
+	inferred  32 Tristate(s).
+Unit <hostmotid> synthesized.
+
+Synthesizing Unit <wordpr>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/wordpr.vhd".
+        size = 24
+        buswidth = 32
+WARNING:Xst:647 - Input <ibus<31:24>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 24-bit register for signal <ddrreg>.
+    Found 24-bit register for signal <altdatasel>.
+    Found 24-bit register for signal <opendrainsel>.
+    Found 24-bit register for signal <invertsel>.
+    Found 24-bit register for signal <outreg>.
+    Found 1-bit tristate buffer for signal <tsoutreg<23>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<22>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<21>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<20>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<19>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<18>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<17>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<16>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<15>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<14>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<13>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<12>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<11>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<10>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<9>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<8>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<7>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<6>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<5>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<4>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<3>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<2>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<1>> created at line 103
+    Found 1-bit tristate buffer for signal <tsoutreg<0>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 103
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 103
+    Summary:
+	inferred 120 D-type flip-flop(s).
+	inferred 120 Multiplexer(s).
+	inferred  56 Tristate(s).
+Unit <wordpr> synthesized.
+
+Synthesizing Unit <wordrb>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/wordrb.vhd".
+        size = 24
+        buswidth = 32
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 82
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 82
+    Summary:
+	inferred  32 Tristate(s).
+Unit <wordrb> synthesized.
+
+Synthesizing Unit <watchdog>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/watchdog.vhd".
+        buswidth = 32
+    Found 32-bit register for signal <wdtimer>.
+    Found 32-bit register for signal <wdtime>.
+    Found 1-bit register for signal <wdstatus>.
+    Found 1-bit register for signal <wdbite>.
+    Found 1-bit register for signal <oldwdtimermsb>.
+    Found 32-bit subtractor for signal <GND_151_o_GND_151_o_sub_1_OUT<31:0>> created at line 106.
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 97
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 97
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  67 D-type flip-flop(s).
+	inferred  36 Multiplexer(s).
+	inferred  32 Tristate(s).
+Unit <watchdog> synthesized.
+
+Synthesizing Unit <irqlogics>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/irqlogics.vhd".
+        buswidth = 32
+WARNING:Xst:647 - Input <ibus<31:5>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 5-bit register for signal <statusreg>.
+    Found 2-bit register for signal <rated>.
+    Found 1-bit 5-to-1 multiplexer for signal <rate> created at line 116.
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 96
+    Summary:
+	inferred   7 D-type flip-flop(s).
+	inferred   4 Multiplexer(s).
+	inferred  32 Tristate(s).
+Unit <irqlogics> synthesized.
+
+Synthesizing Unit <hm2dpll>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/hmtimers.vhd".
+    Found 4-bit register for signal <SyncInFilter>.
+    Found 2-bit register for signal <FilteredSync>.
+    Found 8-bit register for signal <PrescaleCount>.
+    Found 42-bit register for signal <Accum>.
+    Found 24-bit register for signal <BoundedPhaseErr>.
+    Found 16-bit register for signal <FilterPrescaleCount>.
+    Found 24-bit register for signal <FilteredPhaseErr>.
+    Found 24-bit register for signal <ITerm>.
+    Found 24-bit register for signal <DPLLCorrection>.
+    Found 32-bit register for signal <PhaseErr>.
+    Found 32-bit register for signal <BaseRate>.
+    Found 24-bit register for signal <PLimit>.
+    Found 8-bit register for signal <Prescale>.
+    Found 16-bit register for signal <FilterPrescale>.
+    Found 16-bit register for signal <Timer1>.
+    Found 16-bit register for signal <Timer2>.
+    Found 16-bit register for signal <Timer3>.
+    Found 16-bit register for signal <Timer4>.
+    Found 4-bit register for signal <TimerOutReg>.
+    Found 25-bit subtractor for signal <n0345> created at line 156.
+    Found 42-bit adder for signal <Accum[41]_GND_217_o_add_12_OUT> created at line 152.
+    Found 24-bit adder for signal <FilteredPhaseErr[23]_BoundedPhaseErr[23]_add_22_OUT> created at line 162.
+    Found 24-bit adder for signal <ITerm[23]_BoundedPhaseErr[23]_add_27_OUT> created at line 169.
+    Found 24-bit adder for signal <n0410> created at line 178.
+    Found 24-bit adder for signal <FilteredPhaseErr[23]_ITerm[23]_add_40_OUT> created at line 178.
+    Found 16-bit adder for signal <TimerOff1> created at line 256.
+    Found 16-bit adder for signal <TimerOff2> created at line 257.
+    Found 16-bit adder for signal <TimerOff3> created at line 258.
+    Found 16-bit adder for signal <TimerOff4> created at line 259.
+    Found 4-bit subtractor for signal <GND_217_o_GND_217_o_sub_5_OUT<3:0>> created at line 1308.
+    Found 42-bit subtractor for signal <Accum[41]_DPLLCorrection[23]_sub_14_OUT<41:0>> created at line 152.
+    Found 24-bit subtractor for signal <n0402> created at line 0.
+    Found 16-bit subtractor for signal <GND_217_o_GND_217_o_sub_29_OUT<15:0>> created at line 1308.
+    Found 8-bit subtractor for signal <GND_217_o_GND_217_o_sub_33_OUT<7:0>> created at line 1308.
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 125
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 125
+    Found 24-bit comparator greater for signal <PhaseErr[31]_PLimit[23]_LessThan_15_o> created at line 153
+    Found 24-bit comparator greater for signal <PLimit[23]_PhaseErr[31]_LessThan_17_o> created at line 155
+    WARNING:Xst:2404 -  FFs/Latches <SyncInD<0:0>> (without init value) have a constant value of 0 in block <hm2dpll>.
+    HDL ADVISOR - Describing an operational reset or an explicit power-up state for register <FilteredSync> would allow inference of a finite state machine and as consequence better performance and smaller area.
+    Summary:
+	inferred  15 Adder/Subtractor(s).
+	inferred 348 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+	inferred 198 Multiplexer(s).
+	inferred  32 Tristate(s).
+Unit <hm2dpll> synthesized.
+
+Synthesizing Unit <rategend>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/ubrategend.vhd".
+    Found 1-bit register for signal <rateout>.
+    Found 1-bit register for signal <oldratemsb>.
+    Found 32-bit register for signal <ratelatch>.
+    Found 4-bit register for signal <timerselect>.
+    Found 33-bit register for signal <rateaccum>.
+    Found 33-bit adder for signal <rateaccum[32]_rateaccum[32]_mux_1_OUT> created at line 100.
+    Found 1-bit 7-to-1 multiplexer for signal <timer> created at line 129.
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 96
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  71 D-type flip-flop(s).
+	inferred  33 Multiplexer(s).
+	inferred  32 Tristate(s).
+Unit <rategend> synthesized.
+
+Synthesizing Unit <stepgend>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/kubstepgenzd.vhd".
+        buswidth = 32
+        timersize = 14
+        tablewidth = 6
+        asize = 48
+        rsize = 32
+WARNING:Xst:647 - Input <readsteprate> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <readstepmode> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <readdirsetuptime> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <readdirholdtime> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <readpulseactivetime> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <readpulseidletime> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <readtable> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <readtablemax> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1-bit register for signal <dstepdir>.
+    Found 14-bit register for signal <pulsewidthcount>.
+    Found 1-bit register for signal <steppulse>.
+    Found 14-bit register for signal <dirshcount>.
+    Found 1-bit register for signal <dirhold>.
+    Found 1-bit register for signal <stepdirout>.
+    Found 4-bit register for signal <tableptr>.
+    Found 3-bit register for signal <stepmode>.
+    Found 32-bit register for signal <steprate>.
+    Found 1-bit register for signal <dstepmsb>.
+    Found 14-bit register for signal <dirsetuptime>.
+    Found 14-bit register for signal <dirholdtime>.
+    Found 14-bit register for signal <pulseactivetime>.
+    Found 14-bit register for signal <pulseidletime>.
+    Found 4-bit register for signal <tablemax>.
+    Found 32-bit register for signal <steplatch>.
+    Found 1-bit register for signal <dpulsewait>.
+    Found 1-bit register for signal <dtimer>.
+    Found 48-bit register for signal <stepaccum>.
+    Found 4-bit adder for signal <tableptr[3]_GND_285_o_add_11_OUT> created at line 232.
+    Found 48-bit adder for signal <nextaccum> created at line 290.
+    Found 14-bit subtractor for signal <GND_285_o_GND_285_o_sub_2_OUT<13:0>> created at line 199.
+    Found 14-bit subtractor for signal <GND_285_o_GND_285_o_sub_5_OUT<13:0>> created at line 208.
+    Found 4-bit subtractor for signal <GND_285_o_GND_285_o_sub_16_OUT<3:0>> created at line 239.
+    Found 4x1-bit Read Only RAM for signal <stepaccum[31]_GND_285_o_Mux_43_o>
+    Found 1-bit 4-to-1 multiplexer for signal <localout<1>> created at line 354.
+    Found 1-bit 4-to-1 multiplexer for signal <localout<0>> created at line 354.
+WARNING:Xst:737 - Found 1-bit latch for signal <stout<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 186
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 186
+WARNING:Xst:737 - Found 1-bit latch for signal <stout<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <stout<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <stout<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 4-bit comparator equal for signal <tableptr[3]_tablemax[3]_equal_11_o> created at line 229
+    Summary:
+	inferred   1 RAM(s).
+	inferred   4 Adder/Subtractor(s).
+	inferred 214 D-type flip-flop(s).
+	inferred   4 Latch(s).
+	inferred   1 Comparator(s).
+	inferred  45 Multiplexer(s).
+	inferred  32 Tristate(s).
+Unit <stepgend> synthesized.
+
+Synthesizing Unit <qcounterated>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/qcounterated.vhd".
+        clock = 100000000
+WARNING:Xst:647 - Input <ibus<31:16>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 12-bit register for signal <rate>.
+    Found 4-bit register for signal <timerselect>.
+    Found 12-bit register for signal <count>.
+    Found 12-bit subtractor for signal <GND_326_o_GND_326_o_sub_1_OUT<11:0>> created at line 99.
+    Found 1-bit 7-to-1 multiplexer for signal <timer> created at line 119.
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 94
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 94
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  28 D-type flip-flop(s).
+	inferred   2 Multiplexer(s).
+	inferred  32 Tristate(s).
+Unit <qcounterated> synthesized.
+
+Synthesizing Unit <timestampd>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/timestampd.vhd".
+    Found 16-bit register for signal <counter>.
+    Found 16-bit register for signal <counterlatch>.
+    Found 16-bit register for signal <divlatch>.
+    Found 1-bit register for signal <dtimer>.
+    Found 16-bit register for signal <div>.
+    Found 16-bit adder for signal <counter[15]_GND_359_o_add_1_OUT> created at line 102.
+    Found 16-bit subtractor for signal <GND_359_o_GND_359_o_sub_1_OUT<15:0>> created at line 99.
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 96
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 96
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  65 D-type flip-flop(s).
+	inferred  17 Multiplexer(s).
+	inferred  16 Tristate(s).
+Unit <timestampd> synthesized.
+
+Synthesizing Unit <qcounterd>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/qcountersfd.vhd".
+        buswidth = 32
+WARNING:Xst:647 - Input <ibus<2:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ibus<13:12>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ibus<31:16>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:653 - Signal <sampledcont<13:12>> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+    Found 1-bit register for signal <quada1>.
+    Found 1-bit register for signal <quada2>.
+    Found 1-bit register for signal <quadbdel>.
+    Found 1-bit register for signal <quadb1>.
+    Found 1-bit register for signal <quadb2>.
+    Found 1-bit register for signal <indexdel>.
+    Found 1-bit register for signal <index1>.
+    Found 1-bit register for signal <index2>.
+    Found 4-bit register for signal <quadacnt>.
+    Found 1-bit register for signal <quadafilt>.
+    Found 4-bit register for signal <quadbcnt>.
+    Found 1-bit register for signal <quadbfilt>.
+    Found 4-bit register for signal <indexcnt>.
+    Found 1-bit register for signal <indexfilt>.
+    Found 1-bit register for signal <doclear>.
+    Found 1-bit register for signal <clearonindex>.
+    Found 16-bit register for signal <countlatch>.
+    Found 1-bit register for signal <latchonindex>.
+    Found 1-bit register for signal <quaderror>.
+    Found 16-bit register for signal <timestamplatch>.
+    Found 16-bit register for signal <count>.
+    Found 1-bit register for signal <abmaskpol>.
+    Found 1-bit register for signal <quadfilter>.
+    Found 1-bit register for signal <countermode>.
+    Found 1-bit register for signal <useindexmask>.
+    Found 1-bit register for signal <indexmaskpol>.
+    Found 1-bit register for signal <abgateindex>.
+    Found 1-bit register for signal <justonce>.
+    Found 1-bit register for signal <indexpol>.
+    Found 32-bit register for signal <sampleddata>.
+    Found 1-bit register for signal <sampledcont<31>>.
+    Found 1-bit register for signal <sampledcont<30>>.
+    Found 1-bit register for signal <sampledcont<29>>.
+    Found 1-bit register for signal <sampledcont<28>>.
+    Found 1-bit register for signal <sampledcont<27>>.
+    Found 1-bit register for signal <sampledcont<26>>.
+    Found 1-bit register for signal <sampledcont<25>>.
+    Found 1-bit register for signal <sampledcont<24>>.
+    Found 1-bit register for signal <sampledcont<23>>.
+    Found 1-bit register for signal <sampledcont<22>>.
+    Found 1-bit register for signal <sampledcont<21>>.
+    Found 1-bit register for signal <sampledcont<20>>.
+    Found 1-bit register for signal <sampledcont<19>>.
+    Found 1-bit register for signal <sampledcont<18>>.
+    Found 1-bit register for signal <sampledcont<17>>.
+    Found 1-bit register for signal <sampledcont<16>>.
+    Found 1-bit register for signal <sampledcont<15>>.
+    Found 1-bit register for signal <sampledcont<14>>.
+    Found 1-bit register for signal <sampledcont<11>>.
+    Found 1-bit register for signal <sampledcont<10>>.
+    Found 1-bit register for signal <sampledcont<9>>.
+    Found 1-bit register for signal <sampledcont<8>>.
+    Found 1-bit register for signal <sampledcont<7>>.
+    Found 1-bit register for signal <sampledcont<6>>.
+    Found 1-bit register for signal <sampledcont<5>>.
+    Found 1-bit register for signal <sampledcont<4>>.
+    Found 1-bit register for signal <sampledcont<3>>.
+    Found 1-bit register for signal <sampledcont<2>>.
+    Found 1-bit register for signal <sampledcont<1>>.
+    Found 1-bit register for signal <sampledcont<0>>.
+    Found 1-bit register for signal <dtimer>.
+    Found 1-bit register for signal <quadadel>.
+    Found 4-bit adder for signal <quadacnt[3]_GND_376_o_add_2_OUT> created at line 241.
+    Found 4-bit adder for signal <quadbcnt[3]_GND_376_o_add_10_OUT> created at line 255.
+    Found 4-bit adder for signal <indexcnt[3]_GND_376_o_add_18_OUT> created at line 269.
+    Found 16-bit adder for signal <count[15]_GND_376_o_add_29_OUT> created at line 311.
+    Found 4-bit subtractor for signal <GND_376_o_GND_376_o_sub_6_OUT<3:0>> created at line 244.
+    Found 4-bit subtractor for signal <GND_376_o_GND_376_o_sub_14_OUT<3:0>> created at line 258.
+    Found 4-bit subtractor for signal <GND_376_o_GND_376_o_sub_22_OUT<3:0>> created at line 272.
+    Found 16-bit subtractor for signal <GND_376_o_GND_376_o_sub_31_OUT<15:0>> created at line 313.
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 142
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 142
+    Found 4-bit comparator greater for signal <quadacnt[3]_flimit[3]_LessThan_2_o> created at line 240
+    Found 4-bit comparator greater for signal <quadbcnt[3]_flimit[3]_LessThan_10_o> created at line 254
+    Found 4-bit comparator greater for signal <indexcnt[3]_flimit[3]_LessThan_18_o> created at line 268
+    Summary:
+	inferred   4 Adder/Subtractor(s).
+	inferred 147 D-type flip-flop(s).
+	inferred   3 Comparator(s).
+	inferred  40 Multiplexer(s).
+	inferred  32 Tristate(s).
+Unit <qcounterd> synthesized.
+
+Synthesizing Unit <pwmrefh>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/pwmrefh.vhd".
+        buswidth = 16
+        refwidth = 13
+    Found 1-bit register for signal <pdmratelatchloadreq>.
+    Found 1-bit register for signal <pwmratelatchloadreq>.
+    Found 1-bit register for signal <oldpwmratelatchloadreq>.
+    Found 1-bit register for signal <olderpwmratelatchloadreq>.
+    Found 17-bit register for signal <pwmrateacc>.
+    Found 1-bit register for signal <oldpwmratemsb>.
+    Found 13-bit register for signal <count>.
+    Found 16-bit register for signal <pdmratelatch>.
+    Found 1-bit register for signal <oldpdmratelatchloadreq>.
+    Found 1-bit register for signal <olderpdmratelatchloadreq>.
+    Found 17-bit register for signal <pdmrateacc>.
+    Found 1-bit register for signal <oldpdmratemsb>.
+    Found 1-bit register for signal <prate>.
+    Found 16-bit register for signal <prepwmratelatch>.
+    Found 16-bit register for signal <prepdmratelatch>.
+    Found 16-bit register for signal <pwmratelatch>.
+    Found 17-bit adder for signal <pwmrateacc[16]_GND_409_o_add_1_OUT> created at line 124.
+    Found 13-bit adder for signal <count[12]_GND_409_o_add_2_OUT> created at line 127.
+    Found 17-bit adder for signal <pdmrateacc[16]_GND_409_o_add_5_OUT> created at line 136.
+    Summary:
+	inferred   3 Adder/Subtractor(s).
+	inferred 120 D-type flip-flop(s).
+Unit <pwmrefh> synthesized.
+
+Synthesizing Unit <boutreg_1>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/boutreg.vhd".
+        size = 8
+        buswidth = 32
+        invert = true
+WARNING:Xst:647 - Input <ibus<31:8>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 8-bit register for signal <oreg>.
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 93
+    Summary:
+	inferred   8 D-type flip-flop(s).
+	inferred  32 Tristate(s).
+Unit <boutreg_1> synthesized.
+
+Synthesizing Unit <pwmpdmgenh>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/pwmpdmgenh.vhd".
+        buswidth = 32
+        refwidth = 13
+WARNING:Xst:647 - Input <ibus<15:6>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ibus<30:28>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1-bit register for signal <loadpcrreq>.
+    Found 1-bit register for signal <loadpwmreq>.
+    Found 12-bit register for signal <pwmval>.
+    Found 1-bit register for signal <dir>.
+    Found 1-bit register for signal <oldloadpwmreq>.
+    Found 6-bit register for signal <modereg>.
+    Found 1-bit register for signal <olderloadpwmreq>.
+    Found 1-bit register for signal <olderloadpcrreq>.
+    Found 1-bit register for signal <oldloadpcrreq>.
+    Found 1-bit register for signal <pwm>.
+    Found 12-bit register for signal <fixedrefcount>.
+    Found 1-bit register for signal <oldtoggle>.
+    Found 12-bit register for signal <prepwmval>.
+    Found 1-bit register for signal <predir>.
+    Found 6-bit register for signal <premodereg>.
+    Found 13-bit register for signal <pdmaccum>.
+    Found 13-bit adder for signal <GND_444_o_GND_444_o_add_0_OUT> created at line 126.
+    Found 4x12-bit Read Only RAM for signal <mask>
+    Found 1-bit 4-to-1 multiplexer for signal <toggle> created at line 172.
+    Found 1-bit 4-to-1 multiplexer for signal <pwmouta> created at line 211.
+    Found 1-bit 4-to-1 multiplexer for signal <pwmoutb> created at line 211.
+    Found 12-bit comparator greater for signal <maskedrefcount[11]_pwmval[11]_LessThan_5_o> created at line 146
+    Summary:
+	inferred   1 RAM(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred  71 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred   8 Multiplexer(s).
+Unit <pwmpdmgenh> synthesized.
+
+Synthesizing Unit <boutreg_2>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/boutreg.vhd".
+        size = 4
+        buswidth = 4
+        invert = true
+    Found 4-bit register for signal <oreg>.
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 93
+    Summary:
+	inferred   4 D-type flip-flop(s).
+	inferred   4 Tristate(s).
+Unit <boutreg_2> synthesized.
+
+Synthesizing Unit <boutreg_3>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/boutreg.vhd".
+        size = 1
+        buswidth = 32
+        invert = false
+WARNING:Xst:647 - Input <ibus<31:1>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1-bit register for signal <oreg>.
+    Found 1-bit tristate buffer for signal <obus<31>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<30>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<29>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<28>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<27>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<26>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<25>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<24>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<23>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<22>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<21>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<20>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<19>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<18>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<17>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<16>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<15>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<14>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<13>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<12>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<11>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<10>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<9>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<8>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 93
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 93
+    Summary:
+	inferred   1 D-type flip-flop(s).
+	inferred  32 Tristate(s).
+Unit <boutreg_3> synthesized.
+
+Synthesizing Unit <IDROM>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/idrom.vhd".
+        idromtype = 3
+        offsettomodules = 64
+        offsettopindesc = 448
+        boardnamelow = "01000001010100110100010101001101"
+        boardnamehigh = "00110000001110000100100100110111"
+        fpgasize = 16
+        fpgapins = 256
+        ioports = 3
+        iowidth = 72
+        portwidth = 24
+        clocklow = 100000000
+        clockhigh = 200000000
+        inststride0 = 4
+        inststride1 = 64
+        regstride0 = 256
+        regstride1 = 256
+        pindesc =
+("00000011000000010000010000000010","00000011000000010000010000000001","00000011000000000000010000000010","00000011000000000000010000000001","00000011000000010000010000000011","00000011000000000000010000000011","00000011000000010000011010000001","00000011000000000000011010000001","00000011000000010000011010000010","00000011000000000000011010000010","00000011000000010000011010000011","00000011000000000000011010000011","00000011000000110000010000000010","00000011000000110000010000000001","00000011000000100000010000000010","00000011000000100000010000000001","00000011000000110000010000000011","00000011000000100000010000000011","00000011000000110000011010000001","00000011000000100000011010000001","00000011000000110000011010000010","00000011000000100000011010000010","00000011000000110000011010000011","00000011000000100000011010000011","00000011000001010000010000000010","00000011000001010000010000000001","00000011000001000000010000000010","00000011000001000000010000000001","00000011000001010000010000000011","0000001
+1000001000000010000000011","00000011000001010000011010000001","00000011000001000000011010000001","00000011000001010000011010000010","00000011000001000000011010000010","00000011000001010000011010000011","00000011000001000000011010000011","00000011000001110000010000000010","00000011000001110000010000000001","00000011000001100000010000000010","00000011000001100000010000000001","00000011000001110000010000000011","00000011000001100000010000000011","00000011000001110000011010000001","00000011000001100000011010000001","00000011000001110000011010000010","00000011000001100000011010000010","00000011000001110000011010000011","00000011000001100000011010000011","00000011000000000000010110000001","00000011000000000000010110000010","00000011000000000000010110000011","00000011000000000000010110000100","00000011000000000000010110000101","00000011000000000000010110000110","00000011000000010000010110000001","00000011000000010000010110000010","00000011000000010000010110000011","00000011000000010000010110000100","0000001100000001
+0000010110000101","00000011000000010000010110000110","00000011000000100000010110000001","00000011000000100000010110000010","00000011000000100000010110000011","00000011000000100000010110000100","00000011000000100000010110000101","00000011000000100000010110000110","00000011000000110000010110000001","00000011000000110000010110000010","00000011000000110000010110000011","00000011000000110000010110000100","00000011000000110000010110000101","00000011000000110000010110000110","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","0000000000000000000000000
+0000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000",
+"00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000","00000000000000000000000000000000")
+        moduleid =
+(("00011010","00000000","00000001","00000001","0111000000000000","00000111","00000000","00000000000000000000000000000000"),("00000010","00000000","00000001","00000001","0000110000000000","00000011","00000000","00000000000000000000000000000000"),("00000011","00000000","00000001","00000011","0001000000000000","00000101","00000000","00000000000000000000000000011111"),("00000100","00000010","00000001","00001000","0011000000000000","00000101","00000000","00000000000000000000000000000011"),("00000110","00000000","00000010","00001000","0100000100000000","00000101","00000000","00000000000000000000000000000011"),("00000101","00000010","00000001","00000100","0010000000000000","00001010","00000000","00000000000000000000000111111111"),("10000000","00000000","00000001","00000001","0000001000000000","00000001","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0
+000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000
+000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000
+","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"),("00000000","00000000","00000000","00000000","0000000000000000","00000000","00000000","00000000000000000000000000000000"))
+    Found 256x32-bit dual-port RAM <Mram_RAM> for signal <RAM>.
+    Found 8-bit register for signal <dradd>.
+    Found 1-bit tristate buffer for signal <dout<31>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<30>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<29>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<28>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<27>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<26>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<25>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<24>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<23>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<22>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<21>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<20>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<19>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<18>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<17>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<16>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<15>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<14>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<13>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<12>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<11>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<10>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<9>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<8>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<7>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<6>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<5>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<4>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<3>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<2>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<1>> created at line 285
+    Found 1-bit tristate buffer for signal <dout<0>> created at line 285
+    Summary:
+	inferred   1 RAM(s).
+	inferred   8 D-type flip-flop(s).
+	inferred  32 Tristate(s).
+Unit <IDROM> synthesized.
+
+Synthesizing Unit <simplespi8>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/simplespi8x.vhd".
+        buswidth = 8
+        div = 1
+        bits = 8
+    Found 4-bit register for signal <BitCount>.
+    Found 1-bit register for signal <Go>.
+    Found 1-bit register for signal <Dav>.
+    Found 1-bit register for signal <ClockFF>.
+    Found 3-bit register for signal <RateDiv>.
+    Found 1-bit register for signal <CS>.
+    Found 8-bit register for signal <SPISregI>.
+    Found 8-bit register for signal <SPISregO>.
+    Found 4-bit subtractor for signal <GND_530_o_GND_530_o_sub_5_OUT<3:0>> created at line 134.
+    Found 3-bit subtractor for signal <GND_530_o_GND_530_o_sub_10_OUT<2:0>> created at line 141.
+    Found 1-bit tristate buffer for signal <obus<7>> created at line 108
+    Found 1-bit tristate buffer for signal <obus<6>> created at line 108
+    Found 1-bit tristate buffer for signal <obus<5>> created at line 108
+    Found 1-bit tristate buffer for signal <obus<4>> created at line 108
+    Found 1-bit tristate buffer for signal <obus<3>> created at line 108
+    Found 1-bit tristate buffer for signal <obus<2>> created at line 108
+    Found 1-bit tristate buffer for signal <obus<1>> created at line 108
+    Found 1-bit tristate buffer for signal <obus<0>> created at line 108
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  27 D-type flip-flop(s).
+	inferred  11 Multiplexer(s).
+	inferred   8 Tristate(s).
+Unit <simplespi8> synthesized.
+
+Synthesizing Unit <D16w>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/d16w.vhd".
+        width = 16
+        iwidth = 24
+        maddwidth = 12
+        paddwidth = 12
+INFO:Xst:3210 - "/home/steve/7i80/configs/hostmot2/source/d16w.vhd" line 293: Output port <douta> of the instance <StackRam> is unconnected or connected to loadless signal.
+    Found 24-bit register for signal <id1>.
+    Found 24-bit register for signal <id2>.
+    Found 1-bit register for signal <writeback3>.
+    Found 1-bit register for signal <wbena3>.
+    Found 4-bit register for signal <opcode3>.
+    Found 1-bit register for signal <mread>.
+    Found 12-bit register for signal <maddpipe3>.
+    Found 12-bit register for signal <maddpipe2>.
+    Found 12-bit register for signal <maddpipe1>.
+    Found 16-bit register for signal <oprr>.
+    Found 17-bit register for signal <accumcar>.
+    Found 16-bit register for signal <prodhigh>.
+    Found 12-bit register for signal <idx>.
+    Found 12-bit register for signal <idy>.
+    Found 12-bit register for signal <idz>.
+    Found 12-bit register for signal <idt>.
+    Found 4-bit register for signal <spw>.
+    Found 12-bit register for signal <pc>.
+    Found 12-bit adder for signal <pcplus1> created at line 316.
+    Found 12-bit adder for signal <idn0[11]_idbus[11]_add_19_OUT> created at line 366.
+    Found 17-bit adder for signal <n0236> created at line 457.
+    Found 17-bit adder for signal <GND_539_o_GND_539_o_add_74_OUT> created at line 457.
+    Found 4-bit adder for signal <spw[3]_GND_539_o_add_79_OUT> created at line 464.
+    Found 16-bit subtractor for signal <GND_539_o_GND_539_o_sub_41_OUT<15:0>> created at line 412.
+    Found 16-bit subtractor for signal <GND_539_o_GND_539_o_sub_42_OUT<15:0>> created at line 412.
+    Found 17-bit subtractor for signal <GND_539_o_GND_539_o_sub_76_OUT<16:0>> created at line 459.
+    Found 17-bit subtractor for signal <GND_539_o_GND_539_o_sub_77_OUT<16:0>> created at line 459.
+    Found 4-bit subtractor for signal <spr> created at line 248.
+    Found 16x16-bit multiplier for signal <product> created at line 498.
+    Found 12-bit 4-to-1 multiplexer for signal <idn0> created at line 355.
+    Summary:
+	inferred   1 Multiplier(s).
+	inferred   8 Adder/Subtractor(s).
+	inferred 204 D-type flip-flop(s).
+	inferred 147 Multiplexer(s).
+Unit <D16w> synthesized.
+
+Synthesizing Unit <adpram>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/adpram.vhd".
+        width = 16
+        depth = 16
+    Found 16x16-bit dual-port RAM <Mram_RAM> for signal <RAM>.
+    Summary:
+	inferred   2 RAM(s).
+Unit <adpram> synthesized.
+
+Synthesizing Unit <etherhm2>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/etherhm2.vhd".
+    Found 4096x24-bit dual-port RAM <Mram_RAM> for signal <RAM>.
+    Found 12-bit register for signal <daddr>.
+    Summary:
+	inferred   1 RAM(s).
+	inferred  12 D-type flip-flop(s).
+Unit <etherhm2> synthesized.
+
+Synthesizing Unit <dpram>.
+    Related source file is "/home/steve/7i80/configs/hostmot2/source/dpram.vhd".
+        width = 16
+        depth = 4096
+    Found 12-bit register for signal <daddrb>.
+    Found 12-bit register for signal <daddra>.
+    Found 4096x16-bit dual-port RAM <Mram_RAM> for signal <RAM>.
+    Summary:
+	inferred   2 RAM(s).
+	inferred  24 D-type flip-flop(s).
+Unit <dpram> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 18
+ 16x16-bit dual-port RAM                               : 1
+ 16x16-bit single-port RAM                             : 1
+ 256x32-bit dual-port RAM                              : 1
+ 4096x16-bit dual-port RAM                             : 2
+ 4096x24-bit dual-port RAM                             : 1
+ 4x1-bit single-port Read Only RAM                     : 4
+ 4x12-bit single-port Read Only RAM                    : 8
+# Multipliers                                          : 1
+ 16x16-bit multiplier                                  : 1
+# Adders/Subtractors                                   : 93
+ 12-bit adder                                          : 2
+ 12-bit subtractor                                     : 1
+ 13-bit adder                                          : 9
+ 14-bit subtractor                                     : 8
+ 16-bit adder                                          : 7
+ 16-bit addsub                                         : 8
+ 16-bit subtractor                                     : 4
+ 17-bit adder                                          : 2
+ 17-bit addsub                                         : 2
+ 2-bit adder                                           : 1
+ 24-bit adder                                          : 4
+ 24-bit subtractor                                     : 1
+ 25-bit subtractor                                     : 1
+ 3-bit subtractor                                      : 1
+ 32-bit subtractor                                     : 1
+ 33-bit adder                                          : 1
+ 4-bit adder                                           : 1
+ 4-bit addsub                                          : 28
+ 4-bit subtractor                                      : 3
+ 42-bit adder                                          : 1
+ 42-bit subtractor                                     : 1
+ 48-bit adder                                          : 4
+ 8-bit subtractor                                      : 2
+# Registers                                            : 822
+ 1-bit register                                        : 577
+ 12-bit register                                       : 38
+ 13-bit register                                       : 9
+ 14-bit register                                       : 25
+ 16-bit register                                       : 44
+ 17-bit register                                       : 3
+ 2-bit register                                        : 4
+ 24-bit register                                       : 22
+ 3-bit register                                        : 5
+ 32-bit register                                       : 23
+ 33-bit register                                       : 1
+ 4-bit register                                        : 41
+ 42-bit register                                       : 1
+ 48-bit register                                       : 4
+ 5-bit register                                        : 2
+ 6-bit register                                        : 16
+ 8-bit register                                        : 7
+# Latches                                              : 16
+ 1-bit latch                                           : 16
+# Comparators                                          : 38
+ 12-bit comparator greater                             : 8
+ 24-bit comparator greater                             : 2
+ 4-bit comparator equal                                : 4
+ 4-bit comparator greater                              : 24
+# Multiplexers                                         : 1465
+ 1-bit 2-to-1 multiplexer                              : 1284
+ 1-bit 4-to-1 multiplexer                              : 32
+ 1-bit 5-to-1 multiplexer                              : 1
+ 1-bit 7-to-1 multiplexer                              : 2
+ 12-bit 2-to-1 multiplexer                             : 25
+ 12-bit 4-to-1 multiplexer                             : 1
+ 14-bit 2-to-1 multiplexer                             : 20
+ 16-bit 2-to-1 multiplexer                             : 8
+ 17-bit 2-to-1 multiplexer                             : 14
+ 2-bit 2-to-1 multiplexer                              : 1
+ 24-bit 2-to-1 multiplexer                             : 2
+ 3-bit 2-to-1 multiplexer                              : 7
+ 32-bit 2-to-1 multiplexer                             : 5
+ 4-bit 2-to-1 multiplexer                              : 42
+ 42-bit 2-to-1 multiplexer                             : 1
+ 48-bit 2-to-1 multiplexer                             : 4
+ 5-bit 2-to-1 multiplexer                              : 2
+ 6-bit 2-to-1 multiplexer                              : 4
+ 8-bit 2-to-1 multiplexer                              : 10
+# Tristates                                            : 1046
+ 1-bit tristate buffer                                 : 1046
+# Xors                                                 : 27
+ 1-bit xor2                                            : 26
+ 16-bit xor2                                           : 1
+
+=========================================================================
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+INFO:Xst:2261 - The FF/Latch <wbena3> in Unit <processor> is equivalent to the following FF/Latch, which will be removed : <opcode3_2> 
+WARNING:Xst:2677 - Node <PhaseErr_0> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_1> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_2> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_3> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_4> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_5> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_6> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_7> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+WARNING:Xst:2677 - Node <BoundedPhaseErr_0> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+WARNING:Xst:2677 - Node <BoundedPhaseErr_1> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+WARNING:Xst:2677 - Node <BoundedPhaseErr_2> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+WARNING:Xst:2677 - Node <BoundedPhaseErr_3> of sequential type is unconnected in block <makehm2dpllmod.hm2dpll>.
+
+Synthesizing (advanced) Unit <HostMot2>.
+INFO:Xst:3226 - The RAM <IDROM/Mram_RAM> will be implemented as a BLOCK RAM, absorbing the following register(s): <IDROM/dradd>
+    -----------------------------------------------------------------------
+    | ram_type           | Block                               |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 256-word x 32-bit                   |          |
+    |     mode           | read-first                          |          |
+    |     clkA           | connected to signal <clklow>        | rise     |
+    |     weA            | connected to signal <LoadIDROM>     | high     |
+    |     addrA          | connected to signal <A<9:2>>        |          |
+    |     diA            | connected to signal <ibus>          |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 256-word x 32-bit                   |          |
+    |     mode           | read-first                          |          |
+    |     clkB           | connected to signal <clklow>        | rise     |
+    |     addrB          | connected to signal <addr<9:2>>     |          |
+    |     doB            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+Unit <HostMot2> synthesized (advanced).
+
+Synthesizing (advanced) Unit <TopEthernetHostMot2>.
+The following registers are absorbed into counter <EthDiv>: 1 register on signal <EthDiv>.
+The following registers are absorbed into counter <PreScale>: 1 register on signal <PreScale>.
+The following registers are absorbed into counter <Timer>: 1 register on signal <Timer>.
+INFO:Xst:3226 - The RAM <DataRam/Mram_RAM1> will be implemented as a BLOCK RAM, absorbing the following register(s): <DataRam/daddrb>
+    -----------------------------------------------------------------------
+    | ram_type           | Block                               |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 4096-word x 16-bit                  |          |
+    |     mode           | read-first                          |          |
+    |     clkA           | connected to signal <procclk>       | rise     |
+    |     weA            | connected to signal <mwrite>        | high     |
+    |     addrA          | connected to signal <mwadd>         |          |
+    |     diA            | connected to signal <mobus>         |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 4096-word x 16-bit                  |          |
+    |     mode           | write-first                         |          |
+    |     clkB           | connected to signal <procclk>       | rise     |
+    |     addrB          | connected to signal <mradd>         |          |
+    |     doB            | connected to signal <mibus_ram>     |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+Unit <TopEthernetHostMot2> synthesized (advanced).
+
+Synthesizing (advanced) Unit <adpram>.
+INFO:Xst:3231 - The small RAM <Mram_RAM> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 16-word x 16-bit                    |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to signal <wea>           | high     |
+    |     addrA          | connected to signal <addra>         |          |
+    |     diA            | connected to signal <dina>          |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 16-word x 16-bit                    |          |
+    |     addrB          | connected to signal <addrb>         |          |
+    |     doB            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3231 - The small RAM <Mram_RAM1> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 16-word x 16-bit                    |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to signal <wea>           | high     |
+    |     addrA          | connected to signal <addra>         |          |
+    |     diA            | connected to signal <dina>          |          |
+    |     doA            | connected to signal <douta>         |          |
+    -----------------------------------------------------------------------
+Unit <adpram> synthesized (advanced).
+
+Synthesizing (advanced) Unit <etherhm2>.
+INFO:Xst:3226 - The RAM <Mram_RAM> will be implemented as a BLOCK RAM, absorbing the following register(s): <daddr>
+    -----------------------------------------------------------------------
+    | ram_type           | Block                               |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 4096-word x 24-bit                  |          |
+    |     mode           | write-first                         |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <addr>          |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+Unit <etherhm2> synthesized (advanced).
+
+Synthesizing (advanced) Unit <hm2dpll>.
+The following registers are absorbed into accumulator <FilteredPhaseErr>: 1 register on signal <FilteredPhaseErr>.
+The following registers are absorbed into accumulator <ITerm>: 1 register on signal <ITerm>.
+The following registers are absorbed into counter <PrescaleCount>: 1 register on signal <PrescaleCount>.
+The following registers are absorbed into counter <SyncInFilter>: 1 register on signal <SyncInFilter>.
+The following registers are absorbed into counter <FilterPrescaleCount>: 1 register on signal <FilterPrescaleCount>.
+Unit <hm2dpll> synthesized (advanced).
+
+Synthesizing (advanced) Unit <pwmpdmgenh>.
+INFO:Xst:3231 - The small RAM <Mram_mask> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 4-word x 12-bit                     |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <modereg<1:0>>  |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to signal <mask>          |          |
+    -----------------------------------------------------------------------
+Unit <pwmpdmgenh> synthesized (advanced).
+
+Synthesizing (advanced) Unit <pwmrefh>.
+The following registers are absorbed into accumulator <pdmrateacc>: 1 register on signal <pdmrateacc>.
+The following registers are absorbed into accumulator <pwmrateacc>: 1 register on signal <pwmrateacc>.
+The following registers are absorbed into counter <count>: 1 register on signal <count>.
+Unit <pwmrefh> synthesized (advanced).
+
+Synthesizing (advanced) Unit <qcounterated>.
+The following registers are absorbed into counter <count>: 1 register on signal <count>.
+Unit <qcounterated> synthesized (advanced).
+
+Synthesizing (advanced) Unit <qcounterd>.
+The following registers are absorbed into counter <quadacnt>: 1 register on signal <quadacnt>.
+The following registers are absorbed into counter <quadbcnt>: 1 register on signal <quadbcnt>.
+The following registers are absorbed into counter <indexcnt>: 1 register on signal <indexcnt>.
+The following registers are absorbed into counter <count>: 1 register on signal <count>.
+Unit <qcounterd> synthesized (advanced).
+
+Synthesizing (advanced) Unit <rategend>.
+The following registers are absorbed into accumulator <rateaccum>: 1 register on signal <rateaccum>.
+Unit <rategend> synthesized (advanced).
+
+Synthesizing (advanced) Unit <simplespi8>.
+The following registers are absorbed into counter <RateDiv>: 1 register on signal <RateDiv>.
+Unit <simplespi8> synthesized (advanced).
+
+Synthesizing (advanced) Unit <stepgend>.
+INFO:Xst:3231 - The small RAM <Mram_stepaccum[31]_GND_285_o_Mux_43_o> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 4-word x 1-bit                      |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <stepaccum<31:30>> |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <stepgend> synthesized (advanced).
+
+Synthesizing (advanced) Unit <timestampd>.
+The following registers are absorbed into counter <div>: 1 register on signal <div>.
+The following registers are absorbed into counter <counter>: 1 register on signal <counter>.
+Unit <timestampd> synthesized (advanced).
+WARNING:Xst:2677 - Node <PhaseErr_0> of sequential type is unconnected in block <hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_1> of sequential type is unconnected in block <hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_2> of sequential type is unconnected in block <hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_3> of sequential type is unconnected in block <hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_4> of sequential type is unconnected in block <hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_5> of sequential type is unconnected in block <hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_6> of sequential type is unconnected in block <hm2dpll>.
+WARNING:Xst:2677 - Node <PhaseErr_7> of sequential type is unconnected in block <hm2dpll>.
+WARNING:Xst:2677 - Node <BoundedPhaseErr_0> of sequential type is unconnected in block <hm2dpll>.
+WARNING:Xst:2677 - Node <BoundedPhaseErr_1> of sequential type is unconnected in block <hm2dpll>.
+WARNING:Xst:2677 - Node <BoundedPhaseErr_2> of sequential type is unconnected in block <hm2dpll>.
+WARNING:Xst:2677 - Node <BoundedPhaseErr_3> of sequential type is unconnected in block <hm2dpll>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 17
+ 16x16-bit dual-port distributed RAM                   : 1
+ 16x16-bit single-port distributed RAM                 : 1
+ 256x32-bit dual-port block RAM                        : 1
+ 4096x16-bit dual-port block RAM                       : 1
+ 4096x24-bit single-port block RAM                     : 1
+ 4x1-bit single-port distributed Read Only RAM         : 4
+ 4x12-bit single-port distributed Read Only RAM        : 8
+# Multipliers                                          : 1
+ 16x16-bit multiplier                                  : 1
+# Adders/Subtractors                                   : 44
+ 12-bit adder                                          : 2
+ 13-bit adder                                          : 8
+ 14-bit subtractor                                     : 8
+ 16-bit adder                                          : 5
+ 16-bit subtractor                                     : 2
+ 17-bit addsub carry/borrow in                         : 1
+ 24-bit adder                                          : 2
+ 24-bit subtractor                                     : 2
+ 32-bit subtractor                                     : 1
+ 4-bit adder                                           : 1
+ 4-bit addsub                                          : 4
+ 4-bit subtractor                                      : 2
+ 42-bit adder                                          : 1
+ 42-bit subtractor                                     : 1
+ 48-bit adder                                          : 4
+# Counters                                             : 43
+ 12-bit down counter                                   : 1
+ 13-bit up counter                                     : 1
+ 16-bit down counter                                   : 2
+ 16-bit up counter                                     : 2
+ 16-bit updown counter                                 : 8
+ 2-bit up counter                                      : 1
+ 3-bit down counter                                    : 1
+ 4-bit down counter                                    : 1
+ 4-bit updown counter                                  : 24
+ 8-bit down counter                                    : 2
+# Accumulators                                         : 5
+ 17-bit up accumulator                                 : 2
+ 24-bit up accumulator                                 : 2
+ 33-bit up accumulator                                 : 1
+# Registers                                            : 3626
+ Flip-Flops                                            : 3626
+# Comparators                                          : 38
+ 12-bit comparator greater                             : 8
+ 24-bit comparator greater                             : 2
+ 4-bit comparator equal                                : 4
+ 4-bit comparator greater                              : 24
+# Multiplexers                                         : 1724
+ 1-bit 2-to-1 multiplexer                              : 1547
+ 1-bit 4-to-1 multiplexer                              : 44
+ 1-bit 5-to-1 multiplexer                              : 1
+ 1-bit 7-to-1 multiplexer                              : 2
+ 12-bit 2-to-1 multiplexer                             : 23
+ 14-bit 2-to-1 multiplexer                             : 20
+ 16-bit 2-to-1 multiplexer                             : 6
+ 17-bit 2-to-1 multiplexer                             : 13
+ 2-bit 2-to-1 multiplexer                              : 1
+ 24-bit 2-to-1 multiplexer                             : 2
+ 3-bit 2-to-1 multiplexer                              : 7
+ 32-bit 2-to-1 multiplexer                             : 5
+ 4-bit 2-to-1 multiplexer                              : 38
+ 5-bit 2-to-1 multiplexer                              : 2
+ 6-bit 2-to-1 multiplexer                              : 4
+ 8-bit 2-to-1 multiplexer                              : 9
+# Xors                                                 : 27
+ 1-bit xor2                                            : 26
+ 16-bit xor2                                           : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+INFO:Xst:2261 - The FF/Latch <ioradd_10> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_10> 
+INFO:Xst:2261 - The FF/Latch <ioradd_11> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_11> 
+INFO:Xst:2261 - The FF/Latch <processor/opcode3_2> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/wbena3> 
+INFO:Xst:2261 - The FF/Latch <ioradd_0> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_0> 
+INFO:Xst:2261 - The FF/Latch <ioradd_1> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_1> 
+INFO:Xst:2261 - The FF/Latch <ioradd_2> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_2> 
+INFO:Xst:2261 - The FF/Latch <ioradd_3> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_3> 
+INFO:Xst:2261 - The FF/Latch <ioradd_4> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_4> 
+INFO:Xst:2261 - The FF/Latch <ioradd_5> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_5> 
+INFO:Xst:2261 - The FF/Latch <ioradd_6> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_6> 
+INFO:Xst:2261 - The FF/Latch <ioradd_7> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_7> 
+INFO:Xst:2261 - The FF/Latch <ioradd_8> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_8> 
+INFO:Xst:2261 - The FF/Latch <ioradd_9> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <processor/maddpipe1_9> 
+INFO:Xst:2261 - The FF/Latch <makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[7].qcounterxd/dtimer> in Unit <HostMot2> is equivalent to the following 7 FFs/Latches, which will be removed : <makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[6].qcounterxd/dtimer> <makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[5].qcounterxd/dtimer> <makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[4].qcounterxd/dtimer> <makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[3].qcounterxd/dtimer> <makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[2].qcounterxd/dtimer> <makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[1].qcounterxd/dtimer> <makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[0].qcounterxd/dtimer> 
+INFO:Xst:1901 - Instance ClockMult1 in unit TopEthernetHostMot2 of type DCM has been replaced by DCM_SP
+INFO:Xst:1901 - Instance ClockMult2 in unit TopEthernetHostMot2 of type DCM has been replaced by DCM_SP
+WARNING:Xst:2040 - Unit TopEthernetHostMot2: 48 multi-source signals are replaced by logic (pull-up yes): HM2obus<0>, HM2obus<10>, HM2obus<11>, HM2obus<12>, HM2obus<13>, HM2obus<14>, HM2obus<15>, HM2obus<16>, HM2obus<17>, HM2obus<18>, HM2obus<19>, HM2obus<1>, HM2obus<20>, HM2obus<21>, HM2obus<22>, HM2obus<23>, HM2obus<24>, HM2obus<25>, HM2obus<26>, HM2obus<27>, HM2obus<28>, HM2obus<29>, HM2obus<2>, HM2obus<30>, HM2obus<31>, HM2obus<3>, HM2obus<4>, HM2obus<5>, HM2obus<6>, HM2obus<7>, HM2obus<8>, HM2obus<9>, mibus_io<10>, mibus_io<11>, mibus_io<12>, mibus_io<13>, mibus_io<14>, mibus_io<15>, mibus_io<8>, mibus_io<9>, n0309<0>, n0309<1>, n0309<2>, n0309<3>, n0309<4>, n0309<5>, n0309<6>, n0309<7>.
+WARNING:Xst:2042 - Unit hostmotid: 32 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<10>, obus<11>, obus<12>, obus<13>, obus<14>, obus<15>, obus<16>, obus<17>, obus<18>, obus<19>, obus<1>, obus<20>, obus<21>, obus<22>, obus<23>, obus<24>, obus<25>, obus<26>, obus<27>, obus<28>, obus<29>, obus<2>, obus<30>, obus<31>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>, obus<8>, obus<9>.
+WARNING:Xst:2042 - Unit wordrb: 32 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<10>, obus<11>, obus<12>, obus<13>, obus<14>, obus<15>, obus<16>, obus<17>, obus<18>, obus<19>, obus<1>, obus<20>, obus<21>, obus<22>, obus<23>, obus<24>, obus<25>, obus<26>, obus<27>, obus<28>, obus<29>, obus<2>, obus<30>, obus<31>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>, obus<8>, obus<9>.
+WARNING:Xst:2042 - Unit boutreg_2: 4 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<1>, obus<2>, obus<3>.
+WARNING:Xst:2042 - Unit timestampd: 16 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<10>, obus<11>, obus<12>, obus<13>, obus<14>, obus<15>, obus<1>, obus<2>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>, obus<8>, obus<9>.
+WARNING:Xst:2042 - Unit boutreg_3: 32 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<10>, obus<11>, obus<12>, obus<13>, obus<14>, obus<15>, obus<16>, obus<17>, obus<18>, obus<19>, obus<1>, obus<20>, obus<21>, obus<22>, obus<23>, obus<24>, obus<25>, obus<26>, obus<27>, obus<28>, obus<29>, obus<2>, obus<30>, obus<31>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>, obus<8>, obus<9>.
+WARNING:Xst:2042 - Unit boutreg_1: 32 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<10>, obus<11>, obus<12>, obus<13>, obus<14>, obus<15>, obus<16>, obus<17>, obus<18>, obus<19>, obus<1>, obus<20>, obus<21>, obus<22>, obus<23>, obus<24>, obus<25>, obus<26>, obus<27>, obus<28>, obus<29>, obus<2>, obus<30>, obus<31>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>, obus<8>, obus<9>.
+WARNING:Xst:2042 - Unit qcounterated: 32 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<10>, obus<11>, obus<12>, obus<13>, obus<14>, obus<15>, obus<16>, obus<17>, obus<18>, obus<19>, obus<1>, obus<20>, obus<21>, obus<22>, obus<23>, obus<24>, obus<25>, obus<26>, obus<27>, obus<28>, obus<29>, obus<2>, obus<30>, obus<31>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>, obus<8>, obus<9>.
+WARNING:Xst:2042 - Unit stepgend: 32 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<10>, obus<11>, obus<12>, obus<13>, obus<14>, obus<15>, obus<16>, obus<17>, obus<18>, obus<19>, obus<1>, obus<20>, obus<21>, obus<22>, obus<23>, obus<24>, obus<25>, obus<26>, obus<27>, obus<28>, obus<29>, obus<2>, obus<30>, obus<31>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>, obus<8>, obus<9>.
+WARNING:Xst:2042 - Unit rategend: 32 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<10>, obus<11>, obus<12>, obus<13>, obus<14>, obus<15>, obus<16>, obus<17>, obus<18>, obus<19>, obus<1>, obus<20>, obus<21>, obus<22>, obus<23>, obus<24>, obus<25>, obus<26>, obus<27>, obus<28>, obus<29>, obus<2>, obus<30>, obus<31>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>, obus<8>, obus<9>.
+WARNING:Xst:2042 - Unit hm2dpll: 32 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<10>, obus<11>, obus<12>, obus<13>, obus<14>, obus<15>, obus<16>, obus<17>, obus<18>, obus<19>, obus<1>, obus<20>, obus<21>, obus<22>, obus<23>, obus<24>, obus<25>, obus<26>, obus<27>, obus<28>, obus<29>, obus<2>, obus<30>, obus<31>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>, obus<8>, obus<9>.
+WARNING:Xst:2042 - Unit irqlogics: 32 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<10>, obus<11>, obus<12>, obus<13>, obus<14>, obus<15>, obus<16>, obus<17>, obus<18>, obus<19>, obus<1>, obus<20>, obus<21>, obus<22>, obus<23>, obus<24>, obus<25>, obus<26>, obus<27>, obus<28>, obus<29>, obus<2>, obus<30>, obus<31>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>, obus<8>, obus<9>.
+WARNING:Xst:2042 - Unit watchdog: 32 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<10>, obus<11>, obus<12>, obus<13>, obus<14>, obus<15>, obus<16>, obus<17>, obus<18>, obus<19>, obus<1>, obus<20>, obus<21>, obus<22>, obus<23>, obus<24>, obus<25>, obus<26>, obus<27>, obus<28>, obus<29>, obus<2>, obus<30>, obus<31>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>, obus<8>, obus<9>.
+WARNING:Xst:2042 - Unit simplespi8: 8 internal tristates are replaced by logic (pull-up yes): obus<0>, obus<1>, obus<2>, obus<3>, obus<4>, obus<5>, obus<6>, obus<7>.
+INFO:Xst:2261 - The FF/Latch <ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/dtimer> in Unit <TopEthernetHostMot2> is equivalent to the following 3 FFs/Latches, which will be removed : <ahostmot2/makestepgens.makestepgends.generatestepgends[2].usgd.stepgenx/dtimer> <ahostmot2/makestepgens.makestepgends.generatestepgends[1].usgd.stepgenx/dtimer> <ahostmot2/makestepgens.makestepgends.generatestepgends[0].usgd.stepgenx/dtimer> 
+INFO:Xst:2261 - The FF/Latch <ahostmot2/makeqcounters.nuseprobe1.dpllqcounters.makequadcountersd[7].qcounterxd/dtimer> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <ahostmot2/makeqcounters.dpllqcrate.timestampxd/dtimer> 
+
+Optimizing unit <TopEthernetHostMot2> ...
+
+Optimizing unit <pwmrefh> ...
+WARNING:Xst - Edge LIOBITS<3> has no source ports and will not be translated to ABC.WARNING:Xst - Edge LIOBITS<2> has no source ports and will not be translated to ABC.WARNING:Xst - Edge LIOBITS<1> has no source ports and will not be translated to ABC.WARNING:Xst - Edge LIOBITS<0> has no source ports and will not be translated to ABC.WARNING:Xst:1293 - FF/Latch <asimplspi/RateDiv_2> has a constant value of 0 in block <TopEthernetHostMot2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <asimplspi/RateDiv_1> has a constant value of 0 in block <TopEthernetHostMot2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ahostmot2/makehm2dpllmod.hm2dpll/SyncInFilter_3> (without init value) has a constant value of 0 in block <TopEthernetHostMot2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ahostmot2/makehm2dpllmod.hm2dpll/SyncInFilter_2> (without init value) has a constant value of 0 in block <TopEthernetHostMot2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ahostmot2/makehm2dpllmod.hm2dpll/SyncInFilter_1> (without init value) has a constant value of 0 in block <TopEthernetHostMot2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ahostmot2/makehm2dpllmod.hm2dpll/SyncInFilter_0> (without init value) has a constant value of 0 in block <TopEthernetHostMot2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ahostmot2/makehm2dpllmod.hm2dpll/FilteredSync_0> (without init value) has a constant value of 0 in block <TopEthernetHostMot2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ahostmot2/makehm2dpllmod.hm2dpll/FilteredSync_1> (without init value) has a constant value of 0 in block <TopEthernetHostMot2>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <ahostmot2/makepwms.pwmref/count_0> in Unit <TopEthernetHostMot2> is equivalent to the following FF/Latch, which will be removed : <ahostmot2/makepwms.pwmref/oldpwmratemsb> 
+INFO:Xst:3203 - The FF/Latch <asimplspi/Dav> in Unit <TopEthernetHostMot2> is the opposite to the following FF/Latch, which will be removed : <asimplspi/Go> 
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block TopEthernetHostMot2, actual ratio is 82.
+FlipFlop ahostmot2/A_10 has been replicated 1 time(s)
+FlipFlop ahostmot2/A_13 has been replicated 1 time(s)
+FlipFlop ioradd_3 has been replicated 1 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 4048
+ Flip-Flops                                            : 4048
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : TopEthernetHostMot2.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 7458
+#      GND                         : 1
+#      INV                         : 216
+#      LUT1                        : 80
+#      LUT2                        : 768
+#      LUT3                        : 1677
+#      LUT4                        : 586
+#      LUT5                        : 804
+#      LUT6                        : 824
+#      MUXCY                       : 1516
+#      MUXF7                       : 7
+#      VCC                         : 1
+#      XORCY                       : 978
+# FlipFlops/Latches                : 4064
+#      FD                          : 871
+#      FDCE                        : 18
+#      FDE                         : 2831
+#      FDR                         : 53
+#      FDRE                        : 272
+#      FDS                         : 3
+#      LD_1                        : 16
+# RAMS                             : 17
+#      RAM16X1D                    : 4
+#      RAM32M                      : 2
+#      RAMB16BWER                  : 10
+#      RAMB8BWER                   : 1
+# Shift Registers                  : 24
+#      SRL16E                      : 24
+# Clock Buffers                    : 4
+#      BUFG                        : 4
+# IO Buffers                       : 109
+#      IBUF                        : 4
+#      IBUFG                       : 1
+#      IOBUF                       : 88
+#      OBUF                        : 16
+# DCMs                             : 2
+#      DCM_SP                      : 2
+# DSPs                             : 1
+#      DSP48A1                     : 1
+# Others                           : 1
+#      ICAP_SPARTAN6               : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx16ftg256-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:            4064  out of  18224    22%  
+ Number of Slice LUTs:                 4995  out of   9112    54%  
+    Number used as Logic:              4955  out of   9112    54%  
+    Number used as Memory:               40  out of   2176     1%  
+       Number used as RAM:               16
+       Number used as SRL:               24
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:   6455
+   Number with an unused Flip Flop:    2391  out of   6455    37%  
+   Number with an unused LUT:          1460  out of   6455    22%  
+   Number of fully used LUT-FF pairs:  2604  out of   6455    40%  
+   Number of unique control sets:       145
+
+IO Utilization: 
+ Number of IOs:                         113
+ Number of bonded IOBs:                 109  out of    186    58%  
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:               11  out of     32    34%  
+    Number using Block RAM only:         11
+ Number of BUFG/BUFGCTRL/BUFHCEs:         4  out of     16    25%  
+ Number of DSP48A1s:                      1  out of     32     3%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+-------+
+Clock Signal                                                                      | Clock buffer(FF name)                                                                | Load  |
+----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+-------+
+CLK                                                                               | DCM_SP:CLKFX                                                                         | 3605  |
+CLK                                                                               | DCM_SP:CLKFX                                                                         | 485   |
+ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/stepmode_2| NONE(ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/stout_5)| 4     |
+ahostmot2/makestepgens.makestepgends.generatestepgends[2].usgd.stepgenx/stepmode_2| NONE(ahostmot2/makestepgens.makestepgends.generatestepgends[2].usgd.stepgenx/stout_5)| 4     |
+ahostmot2/makestepgens.makestepgends.generatestepgends[1].usgd.stepgenx/stepmode_2| NONE(ahostmot2/makestepgens.makestepgends.generatestepgends[1].usgd.stepgenx/stout_5)| 4     |
+ahostmot2/makestepgens.makestepgends.generatestepgends[0].usgd.stepgenx/stepmode_2| NONE(ahostmot2/makestepgens.makestepgends.generatestepgends[0].usgd.stepgenx/stout_5)| 4     |
+----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: 18.124ns (Maximum Frequency: 55.175MHz)
+   Minimum input arrival time before clock: 5.686ns
+   Maximum output required time after clock: 8.925ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'CLK'
+  Clock period: 18.124ns (frequency: 55.175MHz)
+  Total number of paths / destination ports: 217765 / 7979
+-------------------------------------------------------------------------
+Delay:               9.062ns (Levels of Logic = 7)
+  Source:            ioradd_11 (FF)
+  Destination:       processor/Mmult_product (DSP)
+  Source Clock:      CLK rising 2.0X
+  Destination Clock: CLK rising 2.0X
+
+  Data Path: ioradd_11 to processor/Mmult_product
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               3   0.525   1.196  ioradd_11 (ioradd_11)
+     LUT5:I0->O            1   0.254   0.682  riosel<11>1_1 (riosel<11>1)
+     LUT4:I3->O            7   0.254   0.910  ReadExtAdd11 (ReadExtAdd1)
+     LUT6:I5->O           11   0.254   1.039  ReadSPIReg1 (ReadSPIReg)
+     LUT6:I5->O            1   0.254   0.682  Mmux_mibus83 (Mmux_mibus82)
+     LUT5:I4->O            1   0.254   0.682  Mmux_mibus85_SW0 (N431)
+     LUT6:I5->O            1   0.254   0.682  Mmux_mibus85 (Mmux_mibus84)
+     LUT6:I5->O            2   0.254   0.725  Mmux_mibus86 (mibus<1>)
+     DSP48A1:A1                0.161          processor/Mmult_product
+    ----------------------------------------
+    Total                      9.062ns (2.464ns logic, 6.598ns route)
+                                       (27.2% logic, 72.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'CLK'
+  Total number of paths / destination ports: 169 / 81
+-------------------------------------------------------------------------
+Offset:              5.686ns (Levels of Logic = 4)
+  Source:            ED<7> (PAD)
+  Destination:       processor/Mmult_product (DSP)
+  Destination Clock: CLK rising 2.0X
+
+  Data Path: ED<7> to processor/Mmult_product
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IOBUF:IO->O           1   1.328   1.137  ED_7_IOBUF (N177)
+     LUT6:I0->O            1   0.254   0.910  Mmux_mibus142 (Mmux_mibus141)
+     LUT6:I3->O            1   0.235   0.682  Mmux_mibus145_G (N468)
+     LUT3:I2->O            2   0.254   0.725  Mmux_mibus1451 (mibus<7>)
+     DSP48A1:A7                0.161          processor/Mmult_product
+    ----------------------------------------
+    Total                      5.686ns (2.232ns logic, 3.454ns route)
+                                       (39.3% logic, 60.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'CLK'
+  Total number of paths / destination ports: 1251 / 122
+-------------------------------------------------------------------------
+Offset:              8.925ns (Levels of Logic = 5)
+  Source:            ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/tableptr_0 (FF)
+  Destination:       IOBITS<67> (PAD)
+  Source Clock:      CLK rising 2.0X
+
+  Data Path: ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/tableptr_0 to IOBITS<67>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q              12   0.525   1.068  ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/tableptr_0 (ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/tableptr_0)
+     SRL16E:A0->Q          1   0.254   0.790  ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/steptable[0].asr16e (ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/tabledata<0>)
+     LUT6:I4->O            2   0.250   1.002  ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/stepmode<1>1 (ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/stepmode<1>_mmx_out1)
+     LUT5:I1->O            2   0.254   0.954  ahostmot2/makeoports[2].oportx/Mmux_tdata<19>111 (ahostmot2/makeoports[2].oportx/Mmux_tdata<19>11)
+     LUT4:I1->O            1   0.235   0.681  ahostmot2/makeoports[2].oportx/tdata[19]_ddrreg[19]_MUX_255_o_inv1 (ahostmot2/makeoports[2].oportx/tdata[19]_ddrreg[19]_MUX_255_o_inv)
+     IOBUF:T->IO               2.912          IOBITS_67_IOBUF (IOBITS<67>)
+    ----------------------------------------
+    Total                      8.925ns (4.430ns logic, 4.495ns route)
+                                       (49.6% logic, 50.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/stepmode_2'
+  Total number of paths / destination ports: 8 / 4
+-------------------------------------------------------------------------
+Offset:              5.363ns (Levels of Logic = 2)
+  Source:            ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/stout_5 (LATCH)
+  Destination:       IOBITS<71> (PAD)
+  Source Clock:      ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/stepmode_2 rising
+
+  Data Path: ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/stout_5 to IOBITS<71>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD_1:G->Q             2   0.581   0.954  ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/stout_5 (ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/stout_5)
+     LUT6:I3->O            1   0.235   0.681  ahostmot2/makeoports[2].oportx/tdata[23]_ddrreg[23]_MUX_239_o_inv1 (ahostmot2/makeoports[2].oportx/tdata[23]_ddrreg[23]_MUX_239_o_inv)
+     IOBUF:T->IO               2.912          IOBITS_71_IOBUF (IOBITS<71>)
+    ----------------------------------------
+    Total                      5.363ns (3.728ns logic, 1.635ns route)
+                                       (69.5% logic, 30.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'ahostmot2/makestepgens.makestepgends.generatestepgends[2].usgd.stepgenx/stepmode_2'
+  Total number of paths / destination ports: 8 / 4
+-------------------------------------------------------------------------
+Offset:              5.363ns (Levels of Logic = 2)
+  Source:            ahostmot2/makestepgens.makestepgends.generatestepgends[2].usgd.stepgenx/stout_5 (LATCH)
+  Destination:       IOBITS<65> (PAD)
+  Source Clock:      ahostmot2/makestepgens.makestepgends.generatestepgends[2].usgd.stepgenx/stepmode_2 rising
+
+  Data Path: ahostmot2/makestepgens.makestepgends.generatestepgends[2].usgd.stepgenx/stout_5 to IOBITS<65>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD_1:G->Q             2   0.581   0.954  ahostmot2/makestepgens.makestepgends.generatestepgends[2].usgd.stepgenx/stout_5 (ahostmot2/makestepgens.makestepgends.generatestepgends[2].usgd.stepgenx/stout_5)
+     LUT6:I3->O            1   0.235   0.681  ahostmot2/makeoports[2].oportx/tdata[17]_ddrreg[17]_MUX_263_o_inv1 (ahostmot2/makeoports[2].oportx/tdata[17]_ddrreg[17]_MUX_263_o_inv)
+     IOBUF:T->IO               2.912          IOBITS_65_IOBUF (IOBITS<65>)
+    ----------------------------------------
+    Total                      5.363ns (3.728ns logic, 1.635ns route)
+                                       (69.5% logic, 30.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'ahostmot2/makestepgens.makestepgends.generatestepgends[1].usgd.stepgenx/stepmode_2'
+  Total number of paths / destination ports: 8 / 4
+-------------------------------------------------------------------------
+Offset:              5.363ns (Levels of Logic = 2)
+  Source:            ahostmot2/makestepgens.makestepgends.generatestepgends[1].usgd.stepgenx/stout_5 (LATCH)
+  Destination:       IOBITS<59> (PAD)
+  Source Clock:      ahostmot2/makestepgens.makestepgends.generatestepgends[1].usgd.stepgenx/stepmode_2 rising
+
+  Data Path: ahostmot2/makestepgens.makestepgends.generatestepgends[1].usgd.stepgenx/stout_5 to IOBITS<59>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD_1:G->Q             2   0.581   0.954  ahostmot2/makestepgens.makestepgends.generatestepgends[1].usgd.stepgenx/stout_5 (ahostmot2/makestepgens.makestepgends.generatestepgends[1].usgd.stepgenx/stout_5)
+     LUT6:I3->O            1   0.235   0.681  ahostmot2/makeoports[2].oportx/tdata[11]_ddrreg[11]_MUX_287_o_inv1 (ahostmot2/makeoports[2].oportx/tdata[11]_ddrreg[11]_MUX_287_o_inv)
+     IOBUF:T->IO               2.912          IOBITS_59_IOBUF (IOBITS<59>)
+    ----------------------------------------
+    Total                      5.363ns (3.728ns logic, 1.635ns route)
+                                       (69.5% logic, 30.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'ahostmot2/makestepgens.makestepgends.generatestepgends[0].usgd.stepgenx/stepmode_2'
+  Total number of paths / destination ports: 8 / 4
+-------------------------------------------------------------------------
+Offset:              5.363ns (Levels of Logic = 2)
+  Source:            ahostmot2/makestepgens.makestepgends.generatestepgends[0].usgd.stepgenx/stout_5 (LATCH)
+  Destination:       IOBITS<53> (PAD)
+  Source Clock:      ahostmot2/makestepgens.makestepgends.generatestepgends[0].usgd.stepgenx/stepmode_2 rising
+
+  Data Path: ahostmot2/makestepgens.makestepgends.generatestepgends[0].usgd.stepgenx/stout_5 to IOBITS<53>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD_1:G->Q             2   0.581   0.954  ahostmot2/makestepgens.makestepgends.generatestepgends[0].usgd.stepgenx/stout_5 (ahostmot2/makestepgens.makestepgends.generatestepgends[0].usgd.stepgenx/stout_5)
+     LUT6:I3->O            1   0.235   0.681  ahostmot2/makeoports[2].oportx/tdata[5]_ddrreg[5]_MUX_311_o_inv1 (ahostmot2/makeoports[2].oportx/tdata[5]_ddrreg[5]_MUX_311_o_inv)
+     IOBUF:T->IO               2.912          IOBITS_53_IOBUF (IOBITS<53>)
+    ----------------------------------------
+    Total                      5.363ns (3.728ns logic, 1.635ns route)
+                                       (69.5% logic, 30.5% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock CLK
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |    9.062|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock ahostmot2/makestepgens.makestepgends.generatestepgends[0].usgd.stepgenx/stepmode_2
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |    1.883|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock ahostmot2/makestepgens.makestepgends.generatestepgends[1].usgd.stepgenx/stepmode_2
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |    1.883|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock ahostmot2/makestepgens.makestepgends.generatestepgends[2].usgd.stepgenx/stepmode_2
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |    1.883|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock ahostmot2/makestepgens.makestepgends.generatestepgends[3].usgd.stepgenx/stepmode_2
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+CLK            |    1.883|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 51.00 secs
+Total CPU time to Xst completion: 50.59 secs
+ 
+--> 
+
+
+Total memory usage is 457720 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   96 (   0 filtered)
+Number of infos    :   36 (   0 filtered)
+
