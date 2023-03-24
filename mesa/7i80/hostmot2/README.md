@@ -5,6 +5,12 @@ LinuxCNC, it's necessary to use the DPLL module.  For some reason this
 isn't built into most of the stock bitfiles.  The output from the stepgen is
 very jittery without the DPLL, quite audible in the stepper motors.
 
+Here is an example of the jitter with no DPLL (shown using artificial scope persistence):
+![No DPLL Scope Image](no_dpll.png)
+
+And here is the same move with DPLL turned on:
+![DPLL Enabled Scope Image](dpll.png)
+
 ## Frankenmill Usage
 
 The currently used bitfile is `7i80hd_16_svst8_4D.bit` which is a modified
