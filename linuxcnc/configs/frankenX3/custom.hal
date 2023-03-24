@@ -1,2 +1,8 @@
 # Include your custom HAL commands here
 # This file will not be overwritten when you run PNCconf again
+
+# requires DPLL to be built into the FPGA image, to help with stepper pulse jitter with ethernet cards
+# for the 7i80, SVST4_8 didn't have DPLL built in so it required building a custom bitfile with WebPack
+setp    hm2_7i80.0.dpll.01.timer-us -250
+setp    hm2_7i80.0.stepgen.timer-number 1
+

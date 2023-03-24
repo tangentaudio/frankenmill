@@ -11,11 +11,6 @@ setp    hm2_7i80.0.pwmgen.pwm_frequency 20000
 setp    hm2_7i80.0.pwmgen.pdm_frequency 6000000
 setp    hm2_7i80.0.watchdog.timeout_ns 5000000
 
-# requires DPLL to be built into the FPGA image, to help with stepper pulse jitter with ethernet cards
-# for the 7i80, SVST4_8 didn't have DPLL built in so it required building a custom bitfile with WebPack
-setp    hm2_7i80.0.dpll.01.timer-us -250
-setp    hm2_7i80.0.stepgen.timer-number 1
-
 loadrt pid names=pid.x,pid.y,pid.z,pid.s
 loadrt mux16 names=jogincr,foincr,mvoincr,soincr
 
