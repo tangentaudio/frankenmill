@@ -65,9 +65,10 @@ class HandlerClass:
         self.lineedit_list = ["work_height", "touch_height", "sensor_height",
                               "laser_x", "laser_y", "sensor_x", "sensor_y",
                               "search_vel", "probe_vel", "max_probe"]
-#        self.onoff_list = ["frame_program", "frame_tool", "frame_dro", "frame_override", "frame_status"] ## removed because it disables exit when machine off
-        self.onoff_list = ["frame_program", "frame_tool", "frame_dro", "frame_override"]
-        self.auto_list = ["cmb_gcode_history"]
+        self.onoff_list = ["frame_program", "frame_tool", "frame_dro", "frame_override", "frame_jogging"]
+        self.auto_list = ["cmb_gcode_history", "btn_main"]
+        self.not_auto_list = ["btn_file", "btn_offsets", "btn_tool", "btn_status", "btn_probe", "btn_gcodes", "btn_setup", "btn_settings"]
+
         self.axis_a_list = ["label_axis_a", "dro_axis_a", "action_zero_a", "axistoolbutton_a",
                             "action_home_a", "widget_jog_angular", "widget_increments_angular",
                             "a_plus_jogbutton", "a_minus_jogbutton"]
@@ -89,9 +90,9 @@ class HandlerClass:
         STATUS.connect('general', self.dialog_return)
         STATUS.connect('state-on', lambda w: self.enable_onoff(True))
         STATUS.connect('state-off', lambda w: self.enable_onoff(False))
-        STATUS.connect('mode-manual', lambda w: self.enable_auto(True))
-        STATUS.connect('mode-mdi', lambda w: self.enable_auto(True))
-        STATUS.connect('mode-auto', lambda w: self.enable_auto(False))
+        STATUS.connect('mode-manual', lambda w: self.enable_auto(False))
+        STATUS.connect('mode-mdi', lambda w: self.enable_auto(False))
+        STATUS.connect('mode-auto', lambda w: self.enable_auto(True))
         STATUS.connect('gcode-line-selected', lambda w, line: self.set_start_line(line))
         STATUS.connect('hard-limits-tripped', self.hard_limit_tripped)
         STATUS.connect('interp-idle', lambda w: self.set_start_line(0))
@@ -232,7 +233,7 @@ class HandlerClass:
             self.w.btn_keyboard.show()
         else:
             self.w.btn_keyboard.hide()
-        #TOOLBAR.configure_statusbar(self.w.statusbar,'message_recall')
+        TOOLBAR.configure_statusbar(self.w.statusbar,'message_recall')
 
         if not INFO.MACHINE_IS_METRIC:
             self.w.lbl_jog_linear.setText('JOG RATE (INCH/MIN)')
@@ -378,6 +379,7 @@ class HandlerClass:
     def all_homed(self, obj):
         self.home_all = True
         self.w.lbl_home_all.setText("ALL\nHOMED")
+        self.w.actionbutton_rel.animateClick()
         if self.first_turnon is True:
             self.first_turnon = False
             if self.w.chk_reload_tool.isChecked():
@@ -393,6 +395,7 @@ class HandlerClass:
     def not_all_homed(self, obj, list):
         self.home_all = False
         self.w.lbl_home_all.setText("HOME\nALL")
+        self.w.actionbutton_abs.animateClick()
         for i in INFO.AVAILABLE_JOINTS:
             if str(i) in list:
                 axis = INFO.GET_NAME_FROM_JOINT.get(i).lower()
@@ -441,24 +444,45 @@ class HandlerClass:
             self.w.main_tab_widget.setCurrentIndex(0)
             self.w.btn_main.setChecked(True)
             return
+        
         self.w.main_tab_widget.setCurrentIndex(index)
-
+      
         if index != TAB_MAIN:
-            self.w.jogging_frame.hide()
+            self.w.frame_jogging.hide()
             self.w.frame_program.hide()
-            
+
         if index == TAB_MAIN:
+            self.w.btn_main.setChecked(True)
             self.w.stackedWidget.setCurrentIndex(0)
-            self.w.jogging_frame.show()
+            self.w.frame_jogging.show()
             self.w.frame_program.show()
         elif index == TAB_FILE:
+            self.w.btn_file.setChecked(True)
             self.w.stackedWidget.setCurrentIndex(1)
         elif index == TAB_OFFSETS:
+            self.w.btn_offsets.setChecked(True)
             self.w.stackedWidget.setCurrentIndex(2)
         elif index == TAB_TOOL:
+            self.w.btn_tool.setChecked(True)
             self.w.stackedWidget.setCurrentIndex(3)
+        elif index == TAB_STATUS:
+            self.w.btn_status.setChecked(True)
+            self.w.stackedWidget.setCurrentIndex(0)
+        elif index == TAB_PROBE:
+            self.w.btn_probe.setChecked(True)
+            self.w.stackedWidget.setCurrentIndex(0)
+        elif index == TAB_GCODES:
+            self.w.btn_gcodes.setChecked(True)
+            self.w.stackedWidget.setCurrentIndex(0)
+        elif index == TAB_SETUP:
+            self.w.btn_setup.setChecked(True)
+            self.w.stackedWidget.setCurrentIndex(0)
+        elif index == TAB_SETTINGS:
+            self.w.btn_settings.setChecked(True)
+            self.w.stackedWidget.setCurrentIndex(0)
         else:
             self.w.stackedWidget.setCurrentIndex(0)
+            self.w.btn_main.setChecked(True)
 
     # gcode frame
     def cmb_gcode_history_clicked(self):
@@ -689,14 +713,14 @@ class HandlerClass:
                 return
             self.w.cmb_gcode_history.addItem(fname)
             self.w.cmb_gcode_history.setCurrentIndex(self.w.cmb_gcode_history.count() - 1)
-            ACTION.OPEN_PROGRAM(fname)
             self.add_status("Loaded program file : {}".format(fname))
-            self.w.main_tab_widget.setCurrentIndex(TAB_MAIN)
+            self.main_tab_changed(self.w.btn_main);
+            ACTION.OPEN_PROGRAM(fname)
+            
         elif fname.endswith(".html"):
             self.web_view.load(QtCore.QUrl.fromLocalFile(fname))
             self.add_status("Loaded HTML file : {}".format(fname))
-            self.w.main_tab_widget.setCurrentIndex(TAB_SETUP)
-            self.w.btn_setup.setChecked(True)
+            self.main_tab_changed(self.w.btn_setup);
         else:
             self.add_status("Unknown or invalid filename")
 
@@ -760,15 +784,20 @@ class HandlerClass:
         self.w.statusbar.showMessage(self._m, 5000)
         STATUS.emit('update-machine-log', self._m, 'TIME')
 
-    def enable_auto(self, state):
+    def enable_auto(self, is_auto):
         for widget in self.auto_list:
-            self.w[widget].setEnabled(state)
-        if state is True:
-            self.w.jogging_frame.show()
+            self.w[widget].setEnabled(is_auto)
+
+        for widget in self.not_auto_list:
+            self.w[widget].setEnabled(not is_auto)
+
+            
+        if is_auto is False:
+            self.w.frame_jogging.show()
         else:
-            self.w.jogging_frame.hide()
-            self.w.main_tab_widget.setCurrentIndex(TAB_MAIN)
-            self.w.stackedWidget.setCurrentIndex(0)
+            self.w.frame_jogging.hide()
+            self.main_tab_changed(self.w.btn_main);
+
         self.w.stackedWidget_dro.setCurrentIndex(0)
 
     def enable_onoff(self, state):

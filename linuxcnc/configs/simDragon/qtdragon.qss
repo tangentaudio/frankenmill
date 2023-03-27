@@ -4,7 +4,12 @@ QMainWindow {
 }
 
 QStatusBar {
-    color: #f0e80c;
+    color: #ff7777;
+    font: 11pt "Noto Mono";
+}
+
+GCodeEditor#gcode_viewer {
+    font: 8pt "Noto Mono";
 }
 
 
@@ -29,6 +34,10 @@ QToolButton {
     border-radius: 4px;
     font: 10pt "Noto Mono";
     color: #e0e0e0;
+}
+
+QPushButton#btn_reload_file {
+    font-size: 20pt;
 }
 
 QPushButton::checked:disabled {
@@ -147,6 +156,15 @@ StateLabel {
     border-radius: 4px;
     font: 10pt "Noto Mono";
     color: #68a1fc;
+    padding: 2px 2px 2px 2px;
+
+}
+
+StatusLabel#lbl_clock {
+    background-color: transparent;
+    border: none;
+    font: 12pt "Noto Mono";
+    color: #eeeeee;
 }
 
 DROLabel {
@@ -365,11 +383,61 @@ QScrollBar::sub-page:vertical {
     border-radius: 6px;
 }
 
+ActionButton#action_abort {
+    background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(175, 40, 40, 255), stop:1 rgba(200, 83, 83, 255));
+    font: 12pt "Noto Mono";
+}
+
+ActionButton#action_abort:disabled {
+    background-color: transparent;
+    font: 12pt "Noto Mono";
+}
+
+ActionButton#action_pause {
+    background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(175, 150, 40, 255), stop:1 rgba(200, 175, 83, 255));
+    font: 12pt "Noto Mono";
+}
+
+ActionButton#action_pause:disabled {
+    background-color: transparent;
+    font: 12pt "Noto Mono";
+}
+
+
 QFrame#frame_cycle_start {
+    border: none;
+}
+
+QWidget#widget_cycle_start:hover {
+    border: 1px solid #68a1fc;
+}
+
+QLabel#lbl_cycle_start {
+    font: 12pt "Noto Mono";
+}
+
+QWidget#widget_cycle_start {
     background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 175, 40, 255), stop:1 rgba(83, 200, 83, 255));
     border: 1px solid black;
     border-radius: 4px;
-    font: 14pt "Noto Mono";
+}
+
+QWidget#widget_cycle_start:disabled {
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 4px;
+    font: 12pt "Noto Mono";
+}
+
+QLineEdit#lbl_start_line {
+    background-color: #e0e0e0;
+    color: #000000;
+
+}
+
+QLineEdit#lbl_start_line:disabled {
+    background-color: #272727;
+    color: #ffffff;
 }
 
 QFrame#frame_home_all {
@@ -378,7 +446,6 @@ QFrame#frame_home_all {
     font: 10pt "Noto Mono";
 }
 
-QFrame#frame_cycle_start:hover,
 QFrame#frame_home_all:hover {
     border: 1px solid #68a1fc;
 }
@@ -418,8 +485,8 @@ QListView::item:selected {
     color: #68a1fc;
 }
 
-ToolDialog,CloseDialog,EntryDialog, CalculatorDialog{
-background-color: gray;
+ToolDialog,CloseDialog,EntryDialog, CalculatorDialog {
+    background-color: #272727;
 }
 ToolDialog QPushButton{
     width: 100px;

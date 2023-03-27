@@ -1,23 +1,23 @@
-2023-03-27 12:09:25,185 - QTvcp - INFO - Logging to "/home/cnc/linuxcnc/configs/simDragon/qtdragon.log"
-2023-03-27 12:09:25,391 - QTvcp - INFO - Base log level set to 20
-2023-03-27 12:09:25,392 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - BASENAME qtdragon
-2023-03-27 12:09:25,392 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for handler file in: /home/cnc/linuxcnc/configs/simDragon/qtdragon_handler.py
-2023-03-27 12:09:25,392 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL handler file path: /home/cnc/linuxcnc/configs/simDragon/qtdragon_handler.py
-2023-03-27 12:09:25,392 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .ui in: /home/cnc/linuxcnc/configs/simDragon/qtdragon.ui
-2023-03-27 12:09:25,392 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL ui file from /home/cnc/linuxcnc/configs/simDragon/qtdragon.ui
-2023-03-27 12:09:25,392 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .qss in: /home/cnc/linuxcnc/configs/simDragon/qtdragon.qss
-2023-03-27 12:09:25,393 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL qss file from /home/cnc/linuxcnc/configs/simDragon/qtdragon.qss
-2023-03-27 12:09:25,393 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .qrc in: /home/cnc/linuxcnc/configs/simDragon/qtdragon.qrc
-2023-03-27 12:09:25,393 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL qrc file from /home/cnc/linuxcnc/configs/simDragon/qtdragon.qrc
-2023-03-27 12:09:25,393 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for resources.py in: /home/cnc/linuxcnc/configs/simDragon/resources.py
-2023-03-27 12:09:25,393 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL resources.py file from /home/cnc/linuxcnc/configs/simDragon/resources.py
-2023-03-27 12:09:25,393 - QTvcp - INFO - Building A Linuxcnc Main Screen
-2023-03-27 12:09:25,393 - QTvcp - INFO - No handler file specified on command line
-2023-03-27 12:09:25,393 - QTvcp - INFO - No HAL component base name specified on command line using: qtdragon
-2023-03-27 12:09:25,516 - QTvcp.QTVCP.QT_MAKEGUI - INFO - Imported resources.py filed: /home/cnc/linuxcnc/configs/simDragon/resources.py
-2023-03-27 12:09:26,770 - QTvcp.QTVCP.WIDGETS.BASIC_PROBE - ERROR - No path to BasicProbe Macros Found in INI's [RS274] SUBROUTINE_PATH entry
-2023-03-27 12:09:27,063 - QTvcp - INFO - postgui filename: qtdragon_postgui.hal
-2023-03-27 12:09:27,085 - QTvcp - INFO - Preference path: /home/cnc/frankenmill/linuxcnc/configs/simDragon/qtdragon.pref
-2023-03-27 12:09:48,782 - QTvcp.QTVCP.WIDGETS.DIALOG_WIDGET - DEBUG - Button pressed is: &Yes
-2023-03-27 12:09:48,783 - QTvcp.QTVCP.WIDGETS.DIALOG_WIDGET - DEBUG - Value of pressed button: 16384
-2023-03-27 12:09:48,830 - QTvcp.QTVCP.QT_MAKEPINS - INFO - Closing cleanup on: basicprobe
+2023-03-27 17:11:19,045 - QTvcp - INFO - Logging to "/home/cnc/frankenmill/linuxcnc/configs/simDragon/qtdragon.log"
+2023-03-27 17:11:19,254 - QTvcp - INFO - Base log level set to 20
+2023-03-27 17:11:19,254 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - BASENAME qtdragon
+2023-03-27 17:11:19,254 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for handler file in: /home/cnc/frankenmill/linuxcnc/configs/simDragon/qtdragon_handler.py
+2023-03-27 17:11:19,254 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL handler file path: /home/cnc/frankenmill/linuxcnc/configs/simDragon/qtdragon_handler.py
+2023-03-27 17:11:19,254 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .ui in: /home/cnc/frankenmill/linuxcnc/configs/simDragon/qtdragon.ui
+2023-03-27 17:11:19,255 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL ui file from /home/cnc/frankenmill/linuxcnc/configs/simDragon/qtdragon.ui
+2023-03-27 17:11:19,255 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .qss in: /home/cnc/frankenmill/linuxcnc/configs/simDragon/qtdragon.qss
+2023-03-27 17:11:19,255 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL qss file from /home/cnc/frankenmill/linuxcnc/configs/simDragon/qtdragon.qss
+2023-03-27 17:11:19,255 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .qrc in: /home/cnc/frankenmill/linuxcnc/configs/simDragon/qtdragon.qrc
+2023-03-27 17:11:19,255 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL qrc file from /home/cnc/frankenmill/linuxcnc/configs/simDragon/qtdragon.qrc
+2023-03-27 17:11:19,256 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for resources.py in: /home/cnc/frankenmill/linuxcnc/configs/simDragon/resources.py
+2023-03-27 17:11:19,256 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL resources.py file from /home/cnc/frankenmill/linuxcnc/configs/simDragon/resources.py
+2023-03-27 17:11:19,256 - QTvcp - INFO - Building A Linuxcnc Main Screen
+2023-03-27 17:11:19,256 - QTvcp - INFO - No handler file specified on command line
+2023-03-27 17:11:19,256 - QTvcp - INFO - No HAL component base name specified on command line using: qtdragon
+2023-03-27 17:11:19,375 - QTvcp.QTVCP.QT_MAKEGUI - INFO - Imported resources.py filed: /home/cnc/frankenmill/linuxcnc/configs/simDragon/resources.py
+2023-03-27 17:11:20,778 - QTvcp.QTVCP.WIDGETS.BASIC_PROBE - ERROR - No path to BasicProbe Macros Found in INI's [RS274] SUBROUTINE_PATH entry
+2023-03-27 17:11:21,140 - QTvcp - INFO - postgui filename: qtdragon_postgui.hal
+2023-03-27 17:11:21,161 - QTvcp - INFO - Preference path: /home/cnc/frankenmill/linuxcnc/configs/simDragon/qtdragon.pref
+2023-03-27 17:11:24,711 - QTvcp.QTVCP.WIDGETS.DIALOG_WIDGET - DEBUG - Button pressed is: &Yes
+2023-03-27 17:11:24,712 - QTvcp.QTVCP.WIDGETS.DIALOG_WIDGET - DEBUG - Value of pressed button: 16384
+2023-03-27 17:11:24,765 - QTvcp.QTVCP.QT_MAKEPINS - INFO - Closing cleanup on: basicprobe
