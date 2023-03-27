@@ -66,7 +66,7 @@ class HandlerClass:
                               "laser_x", "laser_y", "sensor_x", "sensor_y",
                               "search_vel", "probe_vel", "max_probe"]
         self.onoff_list = ["frame_program", "frame_tool", "frame_dro", "frame_override", "frame_jogging"]
-        self.auto_list = ["cmb_gcode_history", "btn_main"]
+        self.auto_list = ["cmb_gcode_history"]
         self.not_auto_list = ["btn_file", "btn_offsets", "btn_tool", "btn_status", "btn_probe", "btn_gcodes", "btn_setup", "btn_settings"]
 
         self.axis_a_list = ["label_axis_a", "dro_axis_a", "action_zero_a", "axistoolbutton_a",

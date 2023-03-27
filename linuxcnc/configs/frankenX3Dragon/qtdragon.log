@@ -1,25 +1,25 @@
-2023-03-26 19:57:27,064 - QTvcp - INFO - Logging to "/home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon.log"
-2023-03-26 19:57:28,123 - QTvcp - INFO - Base log level set to 20
-2023-03-26 19:57:28,125 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - BASENAME qtdragon
-2023-03-26 19:57:28,128 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for handler file in: /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon_handler.py
-2023-03-26 19:57:28,130 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL handler file path: /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon_handler.py
-2023-03-26 19:57:28,133 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .ui in: /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.ui
-2023-03-26 19:57:28,135 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL ui file from /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.ui
-2023-03-26 19:57:28,138 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .qss in: /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.qss
-2023-03-26 19:57:28,141 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL qss file from /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.qss
-2023-03-26 19:57:28,146 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .qrc in: /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.qrc
-2023-03-26 19:57:28,148 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL qrc file from /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.qrc
-2023-03-26 19:57:28,149 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for resources.py in: /home/cnc/linuxcnc/configs/frankenX3Dragon/resources.py
-2023-03-26 19:57:28,151 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL resources.py file from /home/cnc/linuxcnc/configs/frankenX3Dragon/resources.py
-2023-03-26 19:57:28,153 - QTvcp - INFO - Building A Linuxcnc Main Screen
-2023-03-26 19:57:28,156 - QTvcp - INFO - No handler file specified on command line
-2023-03-26 19:57:28,158 - QTvcp - INFO - No HAL component base name specified on command line using: qtdragon
-2023-03-26 19:57:28,839 - QTvcp.QTVCP.QT_MAKEGUI - INFO - Imported resources.py filed: /home/cnc/linuxcnc/configs/frankenX3Dragon/resources.py
-2023-03-26 19:57:37,150 - QTvcp.QTVCP.QT_MAKEPINS - WARNING - Preference instance error: Cannot find directory: /home/cnc/linuxcnc/configs/qtdragon for preference file.
-2023-03-26 19:57:38,058 - QTvcp.QTVCP.WIDGETS.BASIC_PROBE - ERROR - No path to BasicProbe Macros Found in INI's [RS274] SUBROUTINE_PATH entry
-2023-03-26 19:57:39,146 - QTvcp.QTVCP.QT_MAKEPINS - INFO - No preference file - can not set preference geometry.
-2023-03-26 19:57:40,540 - QTvcp - INFO - postgui filename: postgui_call_list.hal
-2023-03-26 19:57:40,589 - QTvcp - INFO - Preference path: None
-2023-03-26 20:04:34,195 - QTvcp.QTVCP.WIDGETS.DIALOG_WIDGET - DEBUG - Button pressed is: &Yes
-2023-03-26 20:04:34,198 - QTvcp.QTVCP.WIDGETS.DIALOG_WIDGET - DEBUG - Value of pressed button: 16384
-2023-03-26 20:04:34,444 - QTvcp.QTVCP.QT_MAKEPINS - INFO - Closing cleanup on: basicprobe
+2023-03-27 18:26:38,473 - QTvcp - INFO - Logging to "/home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon.log"
+2023-03-27 18:26:39,768 - QTvcp - INFO - Base log level set to 20
+2023-03-27 18:26:39,770 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - BASENAME qtdragon
+2023-03-27 18:26:39,773 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for handler file in: /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon_handler.py
+2023-03-27 18:26:39,774 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL handler file path: /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon_handler.py
+2023-03-27 18:26:39,777 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .ui in: /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.ui
+2023-03-27 18:26:39,778 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL ui file from /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.ui
+2023-03-27 18:26:39,781 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .qss in: /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.qss
+2023-03-27 18:26:39,782 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL qss file from /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.qss
+2023-03-27 18:26:39,785 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for .qrc in: /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.qrc
+2023-03-27 18:26:39,786 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL qrc file from /home/cnc/linuxcnc/configs/frankenX3Dragon/qtdragon/qtdragon.qrc
+2023-03-27 18:26:39,787 - QtDesigner.QTVCP.QT_PSTAT - DEBUG - Checking for resources.py in: /home/cnc/linuxcnc/configs/frankenX3Dragon/resources.py
+2023-03-27 18:26:39,788 - QtDesigner.QTVCP.QT_PSTAT - INFO - Using LOCAL resources.py file from /home/cnc/linuxcnc/configs/frankenX3Dragon/resources.py
+2023-03-27 18:26:39,789 - QTvcp - INFO - Building A Linuxcnc Main Screen
+2023-03-27 18:26:39,792 - QTvcp - INFO - No handler file specified on command line
+2023-03-27 18:26:39,793 - QTvcp - INFO - No HAL component base name specified on command line using: qtdragon
+2023-03-27 18:26:40,656 - QTvcp.QTVCP.QT_MAKEGUI - INFO - Imported resources.py filed: /home/cnc/linuxcnc/configs/frankenX3Dragon/resources.py
+2023-03-27 18:26:51,248 - QTvcp.QTVCP.QT_MAKEPINS - WARNING - Preference instance error: Cannot find directory: /home/cnc/linuxcnc/configs/qtdragon for preference file.
+2023-03-27 18:26:53,380 - QTvcp.QTVCP.WIDGETS.BASIC_PROBE - ERROR - No path to BasicProbe Macros Found in INI's [RS274] SUBROUTINE_PATH entry
+2023-03-27 18:26:54,761 - QTvcp.QTVCP.QT_MAKEPINS - INFO - No preference file - can not set preference geometry.
+2023-03-27 18:26:56,782 - QTvcp - INFO - postgui filename: postgui_call_list.hal
+2023-03-27 18:26:56,845 - QTvcp - INFO - Preference path: None
+2023-03-27 18:27:49,709 - QTvcp.QTVCP.WIDGETS.DIALOG_WIDGET - DEBUG - Button pressed is: &Yes
+2023-03-27 18:27:49,711 - QTvcp.QTVCP.WIDGETS.DIALOG_WIDGET - DEBUG - Value of pressed button: 16384
+2023-03-27 18:27:49,855 - QTvcp.QTVCP.QT_MAKEPINS - INFO - Closing cleanup on: basicprobe

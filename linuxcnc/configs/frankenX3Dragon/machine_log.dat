@@ -1,6 +1,7 @@
---- Qtvcp Screen Started on: Sun, Mar 26 2023 07:57:38 PM ---
-Sun26 19:57 WARNING -Basic_Probe macro files not found -Probing disabled
-Sun26 19:57 CRITICAL - no preference file found, enable preferences in screenoptions widget
-Sun26 19:57 Machine OFF
-Sun26 19:57 Tool 0: No Tool
-Sun26 19:57 Machine ON
+--- Qtvcp Screen Started on: Mon, Mar 27 2023 06:34:15 PM ---
+Mon27 18:34 WARNING -Basic_Probe macro files not found -Probing disabled
+Mon27 18:34 CRITICAL - no preference file found, enable preferences in screenoptions widget
+Mon27 18:34 Machine OFF
+Mon27 18:34 Tool 0: No Tool
+Mon27 18:34 Machine ON
+Mon27 19:16 Machine OFF
