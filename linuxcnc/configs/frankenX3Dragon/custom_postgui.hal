@@ -1,2 +1,13 @@
 # Include your custom_postgui HAL commands here
 # This file will not be overwritten when you run PNCconf again
+
+
+net tool-change      hal_manualtoolchange.change   <=  iocontrol.0.tool-change
+net tool-changed     hal_manualtoolchange.changed  <=  iocontrol.0.tool-changed
+net tool-prep-number hal_manualtoolchange.number   <=  iocontrol.0.tool-prep-number
+
+net spindle-load qtdragon.spindle_load <= spindle-vfd.current-load-percentage
+
+net modbus-ok qtdragon.hal_led_modbus <= spindle-vfd.modbus-ok
+
+net spindle-at-speed qtdragon.hal_led_spindle_at_speed spindle-vfd.at-speed =>  spindle.0.at-speed

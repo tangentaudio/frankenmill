@@ -6,3 +6,83 @@
 setp    hm2_7i80.0.dpll.01.timer-us -250
 setp    hm2_7i80.0.stepgen.timer-number 1
 
+
+#*******************
+#  SPINDLE
+#*******************
+
+# load the Commander SK VFD module
+loadusr -Wn spindle-vfd ./cmdrsk_vfd --ini cmdrsk.ini --name spindle-vfd --debug
+
+# ---setup spindle control signals---
+
+net spindle-vel-cmd-rps        <=  spindle.0.speed-out-rps
+net spindle-vel-cmd-rps-abs    <=  spindle.0.speed-out-rps-abs
+net spindle-vel-cmd-rpm        <=  spindle.0.speed-out
+net spindle-vel-cmd-rpm-abs    <=  spindle.0.speed-out-abs
+net spindle-enable spindle-vfd.spindle-on <= spindle.0.on
+net spindle-cw spindle-vfd.spindle-fwd  <=  spindle.0.forward
+net spindle-ccw spindle-vfd.spindle-rev <=  spindle.0.reverse
+net spindle-brake              <=  spindle.0.brake
+net spindle-revs <= spindle-vfd.motor-RPM => spindle.0.revs
+
+#net spindle-revs =>  spindle.0.revs
+#net spindle-at-speed spindle-vfd.at-speed =>  spindle.0.at-speed
+net spindle-vel-fb-rps         =>  spindle.0.speed-in
+net spindle-index-enable      <=>  spindle.0.index-enable
+
+
+#net spindle-load <= spindle-vfd.current-load-percentage
+
+#####
+loadrt lincurve personality=8
+addf lincurve.0 servo-thread
+
+# proper spindle commanded rpm
+# output to linear interpolator and near components
+net spindle-vel-cmd-rpm => lincurve.0.in 
+
+
+# do linear interpolation, output to the vfd
+net spindle-cmd-interp <= lincurve.0.out => spindle-vfd.speed-command
+
+##### 770 spindle in 10K belt mode
+# commanded     measured
+#===============================
+# 100		164
+# 500		785
+# 1000		1575
+# 2000		3169
+# 3000		4750
+# 4000		6327
+# 5000		7881
+# 6000		9284
+# 6700		10200
+
+# Data points 0..7.  xi+1 >= xi.
+#
+# When in is between xi and xi+1, out is a linear interpolation between yi and yi+1.
+#
+# When in is below x0, out is a linear extrapolation between x0 and x1.
+#
+# When in is above xn-1, out is a linear extrapolation between xn-2 and xn-1.
+#
+setp lincurve.0.x-val-00 785
+setp lincurve.0.y-val-00 500
+setp lincurve.0.x-val-01 1575
+setp lincurve.0.y-val-01 1000
+setp lincurve.0.x-val-02 3169
+setp lincurve.0.y-val-02 2000
+setp lincurve.0.x-val-03 4750
+setp lincurve.0.y-val-03 3000
+setp lincurve.0.x-val-04 6327
+setp lincurve.0.y-val-04 4000
+setp lincurve.0.x-val-05 7881
+setp lincurve.0.y-val-05 5000
+setp lincurve.0.x-val-06 9284
+setp lincurve.0.y-val-06 6000
+setp lincurve.0.x-val-07 10200
+setp lincurve.0.y-val-07 6700
+
+###
+

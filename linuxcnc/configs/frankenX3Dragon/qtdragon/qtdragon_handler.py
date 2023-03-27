@@ -138,12 +138,12 @@ class HandlerClass:
     #############################
     def init_pins(self):
         # spindle control pins
-        pin = self.h.newpin("spindle_amps", hal.HAL_FLOAT, hal.HAL_IN)
-        hal_glib.GPin(pin).connect("value_changed", self.spindle_pwr_changed)
-        pin = self.h.newpin("spindle_volts", hal.HAL_FLOAT, hal.HAL_IN)
-        hal_glib.GPin(pin).connect("value_changed", self.spindle_pwr_changed)
-        pin = self.h.newpin("spindle_fault", hal.HAL_U32, hal.HAL_IN)
-        hal_glib.GPin(pin).connect("value_changed", self.spindle_fault_changed)
+        pin = self.h.newpin("spindle_load", hal.HAL_FLOAT, hal.HAL_IN)
+        hal_glib.GPin(pin).connect("value_changed", self.spindle_load_changed)
+
+        #pin = self.h.newpin("spindle_fault", hal.HAL_U32, hal.HAL_IN)
+        #hal_glib.GPin(pin).connect("value_changed", self.spindle_fault_changed)
+        
         pin = self.h.newpin("modbus-errors", hal.HAL_U32, hal.HAL_IN)
         hal_glib.GPin(pin).connect("value_changed", self.mb_errors_changed)
         # external offset control pins
@@ -320,18 +320,14 @@ class HandlerClass:
     # CALLBACKS FROM STATUS #
     #########################
 
-    def spindle_pwr_changed(self, data):
-        # this calculation assumes the voltage is line to neutral
-        # and that the synchronous motor spindle has a power factor of 0.9
-        power = self.h['spindle_volts'] * self.h['spindle_amps'] * 2.7 # 3 x V x I x PF
-        amps = "{:1.1f}".format(self.h['spindle_amps'])
-        pwr = "{:1.1f}".format(power)
-        self.w.lbl_spindle_amps.setText(amps)
-        self.w.lbl_spindle_power.setText(pwr)
+    def spindle_load_changed(self, data):
+        load = self.h['spindle_load']
+        print("load={:1.1f}".format(load))
+        self.w.progressSpindleLoad.setValue(int(load))
 
-    def spindle_fault_changed(self, data):
-        fault = hex(self.h['spindle_fault'])
-        self.w.lbl_spindle_fault.setText(fault)
+    #def spindle_fault_changed(self, data):
+    #    fault = hex(self.h['spindle_fault'])
+    #    self.w.lbl_spindle_fault.setText(fault)
 
     def mb_errors_changed(self, data):
         errors = self.h['modbus-errors']
