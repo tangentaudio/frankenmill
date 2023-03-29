@@ -25,6 +25,8 @@ desktop_notify = True
 shutdown_check = True
 sound_player_on = False
 mainwindow_geometry = 125 51 1280 1024
+overlay_play_sound = False
+overlay_sound_type = RING
 
 [MCH_MSG_OPTIONS]
 mchnMsg_play_sound = True

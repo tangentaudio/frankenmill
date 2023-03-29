@@ -77,6 +77,12 @@ ActionButton#action_estop:checked {
     color: #FF0000;
 }
 
+ActionButton:disabled {
+background-color: red;
+}
+
+
+
 /** Checkboxes **/
 QCheckBox {
     spacing: 5px;
@@ -142,10 +148,11 @@ QLabel#label_axis_x,
 QLabel#label_axis_y,
 QLabel#label_axis_z,
 QLabel#label_axis_a {
-    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
+/*    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
     border: 1px solid black;
     border-radius: 4px;
-    font: 12pt "Noto Mono";
+    */
+    font: 12pt bold "Noto Mono";
     color: #e0e0e0;
 }
 
@@ -155,6 +162,26 @@ StateLabel {
     border: 1px solid black;
     border-radius: 4px;
     font: 10pt "Noto Mono";
+    color: #68a1fc;
+    padding: 2px 2px 2px 2px;
+
+}
+
+StatusLabel,
+StateLabel {
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
+    border: 1px solid black;
+    border-radius: 4px;
+    font: 10pt "Noto Mono";
+    color: #68a1fc;
+    padding: 2px 2px 2px 2px;
+
+}
+
+StatusLabel#status_rpm{
+    background: transparent;
+    border: none;
+    font: 12pt "Noto Mono";
     color: #68a1fc;
     padding: 2px 2px 2px 2px;
 

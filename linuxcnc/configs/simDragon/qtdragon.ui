@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author>Persei8</author>
+ <author>TangentAudio</author>
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
@@ -4597,7 +4597,7 @@ ROTATION</string>
                         <enum>QFrame::Sunken</enum>
                        </property>
                        <property name="currentIndex">
-                        <number>0</number>
+                        <number>1</number>
                        </property>
                        <widget class="QWidget" name="page_machine">
                         <layout class="QHBoxLayout" name="horizontalLayout_8">
@@ -4694,7 +4694,7 @@ ROTATION</string>
                      </item>
                      <item>
                       <widget class="QWidget" name="widget_status_log" native="true">
-                       <widget class="QWidget" name="">
+                       <widget class="QWidget" name="layoutWidget">
                         <property name="geometry">
                          <rect>
                           <x>9</x>
@@ -5243,21 +5243,18 @@ TO FILE</string>
                      </item>
                      <item>
                       <widget class="QWidget" name="frm_settings2" native="true">
-                       <layout class="QVBoxLayout" name="verticalLayout_49">
-                        <property name="spacing">
-                         <number>4</number>
-                        </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_13">
                         <property name="leftMargin">
-                         <number>4</number>
+                         <number>2</number>
                         </property>
                         <property name="topMargin">
-                         <number>4</number>
+                         <number>2</number>
                         </property>
                         <property name="rightMargin">
-                         <number>4</number>
+                         <number>2</number>
                         </property>
                         <property name="bottomMargin">
-                         <number>4</number>
+                         <number>2</number>
                         </property>
                         <item>
                          <widget class="QWidget" name="widget_home_header" native="true">
@@ -5928,51 +5925,18 @@ TO FILE</string>
                           </layout>
                          </widget>
                         </item>
-                       </layout>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="Line" name="line_2">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QWidget" name="widget_settings3" native="true">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>100</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <layout class="QVBoxLayout" name="verticalLayout_13">
                         <item>
-                         <widget class="QWidget" name="widget_mb_errors" native="true">
-                          <layout class="QVBoxLayout" name="verticalLayout_37">
-                           <property name="spacing">
-                            <number>4</number>
-                           </property>
-                           <property name="leftMargin">
-                            <number>2</number>
-                           </property>
-                           <property name="topMargin">
-                            <number>2</number>
-                           </property>
-                           <property name="rightMargin">
-                            <number>2</number>
-                           </property>
-                           <property name="bottomMargin">
-                            <number>2</number>
-                           </property>
-                          </layout>
-                         </widget>
+                         <spacer name="verticalSpacer_19">
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>20</width>
+                            <height>40</height>
+                           </size>
+                          </property>
+                         </spacer>
                         </item>
                         <item>
                          <layout class="QHBoxLayout" name="horizontalLayout_56">
@@ -6033,62 +5997,559 @@ TO FILE</string>
                          </layout>
                         </item>
                         <item>
-                         <widget class="QLabel" name="label_42">
-                          <property name="sizePolicy">
-                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                           </sizepolicy>
-                          </property>
-                          <property name="minimumSize">
-                           <size>
-                            <width>80</width>
-                            <height>15</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>80</width>
-                            <height>15</height>
-                           </size>
-                          </property>
-                          <property name="text">
-                           <string>ERRORS</string>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignBottom|Qt::AlignHCenter</set>
-                          </property>
-                         </widget>
+                         <layout class="QHBoxLayout" name="horizontalLayout_61">
+                          <item>
+                           <widget class="QLabel" name="label_42">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="minimumSize">
+                             <size>
+                              <width>100</width>
+                              <height>15</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>80</width>
+                              <height>15</height>
+                             </size>
+                            </property>
+                            <property name="text">
+                             <string>MODBUS ERR</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="lbl_mb_errors">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="minimumSize">
+                             <size>
+                              <width>80</width>
+                              <height>30</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>80</width>
+                              <height>30</height>
+                             </size>
+                            </property>
+                            <property name="text">
+                             <string>0</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                            </property>
+                            <property name="readOnly">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="lbl_mb_errors">
+                         <widget class="QWidget" name="widget_leds" native="true">
                           <property name="sizePolicy">
-                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                             <horstretch>0</horstretch>
                             <verstretch>0</verstretch>
                            </sizepolicy>
                           </property>
                           <property name="minimumSize">
                            <size>
-                            <width>80</width>
-                            <height>30</height>
+                            <width>0</width>
+                            <height>50</height>
                            </size>
                           </property>
                           <property name="maximumSize">
                            <size>
-                            <width>80</width>
-                            <height>30</height>
+                            <width>16777215</width>
+                            <height>50</height>
                            </size>
                           </property>
-                          <property name="text">
-                           <string>0</string>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                          </property>
-                          <property name="readOnly">
-                           <bool>true</bool>
-                          </property>
+                          <layout class="QHBoxLayout" name="horizontalLayout_59">
+                           <property name="spacing">
+                            <number>2</number>
+                           </property>
+                           <property name="leftMargin">
+                            <number>2</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>2</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>2</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>2</number>
+                           </property>
+                           <item>
+                            <widget class="QWidget" name="widget_homes_3" native="true">
+                             <layout class="QVBoxLayout" name="verticalLayout_32">
+                              <property name="spacing">
+                               <number>4</number>
+                              </property>
+                              <property name="leftMargin">
+                               <number>4</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>4</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
+                              <item>
+                               <widget class="QLabel" name="label_37">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>0</width>
+                                  <height>20</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16777215</width>
+                                  <height>20</height>
+                                 </size>
+                                </property>
+                                <property name="text">
+                                 <string>HOME SWITCHES</string>
+                                </property>
+                                <property name="alignment">
+                                 <set>Qt::AlignCenter</set>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QWidget" name="widget_homes_4" native="true">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>0</width>
+                                  <height>20</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16777215</width>
+                                  <height>20</height>
+                                 </size>
+                                </property>
+                                <layout class="QHBoxLayout" name="horizontalLayout_60">
+                                 <property name="spacing">
+                                  <number>4</number>
+                                 </property>
+                                 <property name="leftMargin">
+                                  <number>4</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>4</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <item alignment="Qt::AlignHCenter">
+                                  <widget class="QLabel" name="label_25">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>20</width>
+                                     <height>16</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>20</width>
+                                     <height>16</height>
+                                    </size>
+                                   </property>
+                                   <property name="text">
+                                    <string>X</string>
+                                   </property>
+                                   <property name="alignment">
+                                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="LED" name="hal_led_home_x_2">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>16</width>
+                                     <height>16</height>
+                                    </size>
+                                   </property>
+                                   <property name="diameter">
+                                    <number>15</number>
+                                   </property>
+                                   <property name="color">
+                                    <color>
+                                     <red>0</red>
+                                     <green>255</green>
+                                     <blue>0</blue>
+                                    </color>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_50">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>20</width>
+                                     <height>16</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>20</width>
+                                     <height>16</height>
+                                    </size>
+                                   </property>
+                                   <property name="text">
+                                    <string>Y</string>
+                                   </property>
+                                   <property name="alignment">
+                                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="LED" name="hal_led_home_y_2">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>16</width>
+                                     <height>16</height>
+                                    </size>
+                                   </property>
+                                   <property name="diameter">
+                                    <number>15</number>
+                                   </property>
+                                   <property name="color">
+                                    <color>
+                                     <red>0</red>
+                                     <green>255</green>
+                                     <blue>0</blue>
+                                    </color>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_52">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>20</width>
+                                     <height>16</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>20</width>
+                                     <height>16</height>
+                                    </size>
+                                   </property>
+                                   <property name="text">
+                                    <string>Z</string>
+                                   </property>
+                                   <property name="alignment">
+                                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="LED" name="hal_led_home_z_2">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>16</width>
+                                     <height>16</height>
+                                    </size>
+                                   </property>
+                                   <property name="diameter">
+                                    <number>15</number>
+                                   </property>
+                                   <property name="color">
+                                    <color>
+                                     <red>0</red>
+                                     <green>255</green>
+                                     <blue>0</blue>
+                                    </color>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QWidget" name="widget_probe_2" native="true">
+                             <layout class="QVBoxLayout" name="verticalLayout_34">
+                              <property name="spacing">
+                               <number>4</number>
+                              </property>
+                              <property name="leftMargin">
+                               <number>4</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>4</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
+                              <item>
+                               <widget class="QLabel" name="label_54">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>44</width>
+                                  <height>20</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>44</width>
+                                  <height>20</height>
+                                 </size>
+                                </property>
+                                <property name="text">
+                                 <string>PROBE</string>
+                                </property>
+                                <property name="alignment">
+                                 <set>Qt::AlignCenter</set>
+                                </property>
+                               </widget>
+                              </item>
+                              <item alignment="Qt::AlignHCenter">
+                               <widget class="LED" name="hal_led_probe_2">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>16</width>
+                                  <height>16</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16</width>
+                                  <height>16</height>
+                                 </size>
+                                </property>
+                                <property name="diameter">
+                                 <number>15</number>
+                                </property>
+                                <property name="color">
+                                 <color>
+                                  <red>0</red>
+                                  <green>255</green>
+                                  <blue>0</blue>
+                                 </color>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QWidget" name="widget_alarm_2" native="true">
+                             <layout class="QVBoxLayout" name="verticalLayout_38">
+                              <property name="spacing">
+                               <number>4</number>
+                              </property>
+                              <property name="leftMargin">
+                               <number>4</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>4</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
+                              <item alignment="Qt::AlignHCenter">
+                               <widget class="QLabel" name="label_55">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>44</width>
+                                  <height>20</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>44</width>
+                                  <height>20</height>
+                                 </size>
+                                </property>
+                                <property name="toolTip">
+                                 <string>Motion limited due to external offsets</string>
+                                </property>
+                                <property name="text">
+                                 <string>LIMIT</string>
+                                </property>
+                                <property name="alignment">
+                                 <set>Qt::AlignCenter</set>
+                                </property>
+                               </widget>
+                              </item>
+                              <item alignment="Qt::AlignHCenter">
+                               <widget class="LED" name="led_eoffset_limit_2">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>16</width>
+                                  <height>16</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16</width>
+                                  <height>16</height>
+                                 </size>
+                                </property>
+                                <property name="diameter">
+                                 <number>15</number>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="Line" name="line_2">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QWidget" name="widget_settings3" native="true">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>100</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_43">
+                        <item>
+                         <widget class="QWidget" name="widget_mb_errors" native="true">
+                          <layout class="QVBoxLayout" name="verticalLayout_37">
+                           <property name="spacing">
+                            <number>4</number>
+                           </property>
+                           <property name="leftMargin">
+                            <number>2</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>2</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>2</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>2</number>
+                           </property>
+                          </layout>
                          </widget>
                         </item>
                         <item>
@@ -6740,7 +7201,7 @@ MM/MIN</string>
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>100</width>
+                        <width>0</width>
                         <height>30</height>
                        </size>
                       </property>
@@ -6826,7 +7287,7 @@ MM/MIN</string>
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>100</width>
+                        <width>0</width>
                         <height>30</height>
                        </size>
                       </property>
@@ -7267,7 +7728,8 @@ MM/MIN</string>
                       </property>
                       <property name="icon">
                        <iconset>
-                        <normaloff>images/qtdragon/images/z_plus_jog_button.png</normaloff>images/qtdragon/images/z_plus_jog_button.png</iconset>
+                        <normalon>:/buttons/images/qtdragon/images/z_plus_jog_button.png</normalon>
+                       </iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -7807,7 +8269,7 @@ MM/MIN</string>
                        <enum>QFrame::Box</enum>
                       </property>
                       <property name="text">
-                       <string>0.0</string>
+                       <string>200.0</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -7885,19 +8347,6 @@ MM/MIN</string>
                      <bool>true</bool>
                     </property>
                    </widget>
-                  </item>
-                  <item>
-                   <spacer name="verticalSpacer_22">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>40</height>
-                     </size>
-                    </property>
-                   </spacer>
                   </item>
                  </layout>
                 </widget>
@@ -8968,10 +9417,10 @@ DROLabel[homed=false] {
                          </size>
                         </property>
                         <property name="frameShape">
-                         <enum>QFrame::WinPanel</enum>
+                         <enum>QFrame::NoFrame</enum>
                         </property>
                         <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
+                         <enum>QFrame::Plain</enum>
                         </property>
                         <property name="lineWidth">
                          <number>2</number>
@@ -9005,10 +9454,10 @@ DROLabel[homed=false] {
                          </size>
                         </property>
                         <property name="frameShape">
-                         <enum>QFrame::WinPanel</enum>
+                         <enum>QFrame::NoFrame</enum>
                         </property>
                         <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
+                         <enum>QFrame::Plain</enum>
                         </property>
                         <property name="lineWidth">
                          <number>2</number>
@@ -9042,10 +9491,10 @@ DROLabel[homed=false] {
                          </size>
                         </property>
                         <property name="frameShape">
-                         <enum>QFrame::WinPanel</enum>
+                         <enum>QFrame::NoFrame</enum>
                         </property>
                         <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
+                         <enum>QFrame::Plain</enum>
                         </property>
                         <property name="lineWidth">
                          <number>2</number>
@@ -9220,10 +9669,10 @@ DROLabel[homed=false] {
                          </size>
                         </property>
                         <property name="frameShape">
-                         <enum>QFrame::WinPanel</enum>
+                         <enum>QFrame::NoFrame</enum>
                         </property>
                         <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
+                         <enum>QFrame::Plain</enum>
                         </property>
                         <property name="lineWidth">
                          <number>2</number>
@@ -11797,31 +12246,6 @@ ALL</string>
               <item>
                <widget class="QWidget" name="widget_spindle" native="true">
                 <layout class="QVBoxLayout" name="verticalLayout_23">
-                 <property name="spacing">
-                  <number>4</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>2</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>2</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>4</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>2</number>
-                 </property>
-                 <item>
-                  <widget class="QLabel" name="label_25">
-                   <property name="text">
-                    <string>SPINDLE</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
                  <item>
                   <widget class="QWidget" name="widget_spindle_control" native="true">
                    <property name="sizePolicy">
@@ -12423,6 +12847,153 @@ ALL</string>
                   </widget>
                  </item>
                  <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_58">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="ActionButton" name="actionbutton">
+                     <property name="minimumSize">
+                      <size>
+                       <width>80</width>
+                       <height>38</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>-</string>
+                     </property>
+                     <property name="spindle_down_action" stdset="0">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_14">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_57">
+                       <item>
+                        <widget class="QLabel" name="label_28">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>30</width>
+                           <height>24</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>30</width>
+                           <height>24</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>RPM</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="LED" name="hal_led_spindle_at_speed">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>16</width>
+                           <height>16</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="diameter">
+                          <number>15</number>
+                         </property>
+                         <property name="color">
+                          <color>
+                           <red>0</red>
+                           <green>255</green>
+                           <blue>0</blue>
+                          </color>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <widget class="StatusLabel" name="status_rpm">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>56</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>300</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::NoFrame</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Plain</enum>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                       <property name="textTemplate" stdset="0">
+                        <string>%d</string>
+                       </property>
+                       <property name="actual_spindle_speed_status" stdset="0">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <widget class="ActionButton" name="actionbutton_2">
+                     <property name="minimumSize">
+                      <size>
+                       <width>80</width>
+                       <height>38</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>+</string>
+                     </property>
+                     <property name="spindle_up_action" stdset="0">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
                   <widget class="QWidget" name="widget_spindle_data" native="true">
                    <layout class="QHBoxLayout" name="horizontalLayout_11">
                     <property name="spacing">
@@ -12441,110 +13012,10 @@ ALL</string>
                      <number>2</number>
                     </property>
                     <item>
-                     <layout class="QVBoxLayout" name="verticalLayout_14">
-                      <property name="spacing">
-                       <number>0</number>
-                      </property>
-                      <item alignment="Qt::AlignHCenter">
-                       <widget class="QLabel" name="label_28">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                         <size>
-                          <width>60</width>
-                          <height>24</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>60</width>
-                          <height>24</height>
-                         </size>
-                        </property>
-                        <property name="text">
-                         <string>RPM</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item alignment="Qt::AlignHCenter">
-                       <widget class="StatusLabel" name="status_rpm">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                         <size>
-                          <width>56</width>
-                          <height>24</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>56</width>
-                          <height>24</height>
-                         </size>
-                        </property>
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Plain</enum>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                        <property name="textTemplate" stdset="0">
-                         <string>%d</string>
-                        </property>
-                        <property name="actual_spindle_speed_status" stdset="0">
-                         <bool>true</bool>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
                      <layout class="QVBoxLayout" name="verticalLayout_33">
                       <property name="spacing">
                        <number>0</number>
                       </property>
-                      <item>
-                       <widget class="QLabel" name="label_40">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                         <size>
-                          <width>60</width>
-                          <height>24</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>200</width>
-                          <height>24</height>
-                         </size>
-                        </property>
-                        <property name="text">
-                         <string>LOAD%</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
                       <item>
                        <widget class="QProgressBar" name="progressSpindleLoad">
                         <property name="value">
@@ -12556,69 +13027,8 @@ ALL</string>
                         <property name="invertedAppearance">
                          <bool>false</bool>
                         </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <layout class="QVBoxLayout" name="verticalLayout_32">
-                      <item>
-                       <widget class="QLabel" name="label_37">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                         <size>
-                          <width>60</width>
-                          <height>24</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>60</width>
-                          <height>24</height>
-                         </size>
-                        </property>
-                        <property name="text">
-                         <string>SPEED</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="LED" name="hal_led_spindle_at_speed">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                         <size>
-                          <width>16</width>
-                          <height>16</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>60</width>
-                          <height>16777215</height>
-                         </size>
-                        </property>
-                        <property name="diameter">
-                         <number>15</number>
-                        </property>
-                        <property name="color">
-                         <color>
-                          <red>0</red>
-                          <green>255</green>
-                          <blue>0</blue>
-                         </color>
+                        <property name="format">
+                         <string>LOAD %p%</string>
                         </property>
                        </widget>
                       </item>
@@ -12632,466 +13042,6 @@ ALL</string>
               </item>
               <item>
                <spacer name="verticalSpacer_20">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QWidget" name="widget_leds" native="true">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>50</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>50</height>
-                 </size>
-                </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_18">
-                 <property name="spacing">
-                  <number>2</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>2</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>2</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>2</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>2</number>
-                 </property>
-                 <item>
-                  <widget class="QWidget" name="widget_homes" native="true">
-                   <layout class="QVBoxLayout" name="verticalLayout_18">
-                    <property name="spacing">
-                     <number>4</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>4</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>4</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="label_27">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string>HOME SWITCHES</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QWidget" name="widget_homes" native="true">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                      <layout class="QHBoxLayout" name="horizontalLayout_14">
-                       <property name="spacing">
-                        <number>4</number>
-                       </property>
-                       <property name="leftMargin">
-                        <number>4</number>
-                       </property>
-                       <property name="topMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="rightMargin">
-                        <number>4</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>0</number>
-                       </property>
-                       <item alignment="Qt::AlignHCenter">
-                        <widget class="QLabel" name="label_10">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="minimumSize">
-                          <size>
-                           <width>20</width>
-                           <height>16</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>20</width>
-                           <height>16</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string>X</string>
-                         </property>
-                         <property name="alignment">
-                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="LED" name="hal_led_home_x">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="minimumSize">
-                          <size>
-                           <width>16</width>
-                           <height>16</height>
-                          </size>
-                         </property>
-                         <property name="diameter">
-                          <number>15</number>
-                         </property>
-                         <property name="color">
-                          <color>
-                           <red>0</red>
-                           <green>255</green>
-                           <blue>0</blue>
-                          </color>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QLabel" name="label_11">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="minimumSize">
-                          <size>
-                           <width>20</width>
-                           <height>16</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>20</width>
-                           <height>16</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string>Y</string>
-                         </property>
-                         <property name="alignment">
-                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="LED" name="hal_led_home_y">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="minimumSize">
-                          <size>
-                           <width>16</width>
-                           <height>16</height>
-                          </size>
-                         </property>
-                         <property name="diameter">
-                          <number>15</number>
-                         </property>
-                         <property name="color">
-                          <color>
-                           <red>0</red>
-                           <green>255</green>
-                           <blue>0</blue>
-                          </color>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QLabel" name="label_12">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="minimumSize">
-                          <size>
-                           <width>20</width>
-                           <height>16</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>20</width>
-                           <height>16</height>
-                          </size>
-                         </property>
-                         <property name="text">
-                          <string>Z</string>
-                         </property>
-                         <property name="alignment">
-                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="LED" name="hal_led_home_z">
-                         <property name="sizePolicy">
-                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                           <horstretch>0</horstretch>
-                           <verstretch>0</verstretch>
-                          </sizepolicy>
-                         </property>
-                         <property name="minimumSize">
-                          <size>
-                           <width>16</width>
-                           <height>16</height>
-                          </size>
-                         </property>
-                         <property name="diameter">
-                          <number>15</number>
-                         </property>
-                         <property name="color">
-                          <color>
-                           <red>0</red>
-                           <green>255</green>
-                           <blue>0</blue>
-                          </color>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QWidget" name="widget_probe" native="true">
-                   <layout class="QVBoxLayout" name="verticalLayout_29">
-                    <property name="spacing">
-                     <number>4</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>4</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>4</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="label_13">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>44</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>44</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string>PROBE</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item alignment="Qt::AlignHCenter">
-                     <widget class="LED" name="hal_led_probe">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>16</width>
-                        <height>16</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>16</width>
-                        <height>16</height>
-                       </size>
-                      </property>
-                      <property name="diameter">
-                       <number>15</number>
-                      </property>
-                      <property name="color">
-                       <color>
-                        <red>0</red>
-                        <green>255</green>
-                        <blue>0</blue>
-                       </color>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QWidget" name="widget_alarm" native="true">
-                   <layout class="QVBoxLayout" name="verticalLayout_20">
-                    <property name="spacing">
-                     <number>4</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>4</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>4</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item alignment="Qt::AlignHCenter">
-                     <widget class="QLabel" name="label_5">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>44</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>44</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                      <property name="toolTip">
-                       <string>Motion limited due to external offsets</string>
-                      </property>
-                      <property name="text">
-                       <string>LIMIT</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item alignment="Qt::AlignHCenter">
-                     <widget class="LED" name="led_eoffset_limit">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>16</width>
-                        <height>16</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>16</width>
-                        <height>16</height>
-                       </size>
-                      </property>
-                      <property name="diameter">
-                       <number>15</number>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <spacer name="verticalSpacer_19">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
@@ -13178,7 +13128,7 @@ ALL</string>
                  <number>2</number>
                 </property>
                 <property name="text">
-                 <string>04:37:11 PM</string>
+                 <string>06:42:49 PM</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -13640,70 +13590,6 @@ ALL</string>
    </hints>
   </connection>
   <connection>
-   <sender>slider_maxv_ovr</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slider_maxv_changed()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1020</x>
-     <y>623</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>878</x>
-     <y>840</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_maxv_ovr_100</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>btn_maxv_100_clicked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1066</x>
-     <y>620</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1064</x>
-     <y>880</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_jog_a_slow</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slow_button_clicked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1139</x>
-     <y>555</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1445</x>
-     <y>545</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spindle_pause</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>disable_pause_buttons()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>358</x>
-     <y>794</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>358</x>
-     <y>876</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>action_abort</sender>
    <signal>clicked()</signal>
    <receiver>progressBar</receiver>
@@ -13716,22 +13602,6 @@ ALL</string>
     <hint type="destinationlabel">
      <x>177</x>
      <y>821</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btn_maxv_ovr_50</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>btn_maxv_50_clicked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>902</x>
-     <y>620</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>719</x>
-     <y>429</y>
     </hint>
    </hints>
   </connection>
@@ -13944,6 +13814,70 @@ ALL</string>
    </hints>
   </connection>
   <connection>
+   <sender>btn_maxv_ovr_100</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>btn_maxv_100_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1066</x>
+     <y>620</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1064</x>
+     <y>880</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_jog_a_slow</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slow_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1139</x>
+     <y>555</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1445</x>
+     <y>545</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>slider_maxv_ovr</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slider_maxv_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1020</x>
+     <y>623</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>878</x>
+     <y>840</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_maxv_ovr_50</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>btn_maxv_50_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>902</x>
+     <y>620</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>719</x>
+     <y>429</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>slider_rapid_ovr</sender>
    <signal>valueChanged(int)</signal>
    <receiver>MainWindow</receiver>
@@ -13956,6 +13890,22 @@ ALL</string>
     <hint type="destinationlabel">
      <x>1019</x>
      <y>866</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spindle_pause</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>disable_pause_buttons()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>358</x>
+     <y>794</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>358</x>
+     <y>876</y>
     </hint>
    </hints>
   </connection>
