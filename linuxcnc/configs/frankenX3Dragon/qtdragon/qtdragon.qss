@@ -1,264 +1,513 @@
 QMainWindow {
-    background: #d7d8e3;
-    font: 10pt "Deja Vu Sans Mono";
-    font-weight: 300;
+    background: #272727;
+    color: #ffffff;
 }
 
+QStatusBar {
+    color: #ff7777;
+    font: 11pt "Noto Mono";
+}
+
+GCodeEditor#gcode_viewer {
+    font: 8pt "Noto Mono";
+}
+
+
+QToolTip
+{
+    border: 1px solid black;
+    background-color: #202020;
+    padding: 1px;
+    border-radius: 2px;
+    color: #68a1fc;
+    opacity: 200;
+}
+
+/** Pushbuttons **/
 QPushButton,
 ActionButton,
 SystemToolButton,
-AxisToolButton {
-    border: 2px solid black;
+AxisToolButton,
+QToolButton {
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(20, 20, 20, 255), stop:1 rgba(53, 53, 53, 255));
+    border: 1px solid black;
     border-radius: 4px;
-    font: 10pt "Deja Vu Sans Mono";
-    font-weight: 500;
+    font: 10pt "Noto Mono";
+    color: #e0e0e0;
 }
 
-QPushButton {
-    border: 1px solid #d3d7cf;
-    background: qlineargradient( x1:0 y1:0, x2:0 y2:1, stop:0 #d3d3e3, stop:1 #a3a3b3);}
-    color: #2e3436;
+QPushButton#btn_reload_file {
+    font-size: 20pt;
 }
 
-
-QPushButton:checked,
-QPushButton:pressed {
-    border: 2px solid #3465a4;
-    color: #204a87;
+QPushButton::checked:disabled {
+    color: #68a1fc;
 }
 
 QPushButton:hover,
 ActionButton:hover,
 SystemToolButton:hover,
 AxisToolButton:hover {
-    border: 2px solid #0099cc;
+    border: 1px solid #68a1fc;
 }
 
-QPushButton:disabled,
-ActionButton:disabled {
-    border: 1px solid gray;
-    color: gray;
+QPushButton:pressed,
+QPushButton:checked {
+    border-color: #68a1fc;
+    color: #68a1fc;
 }
 
 ActionButton#action_machine_on {
-    border: 0px;
+    border-color: #FF0000;
     color: #FF0000;
 }
 
 ActionButton#action_machine_on:checked {
-    color: #00AA00;
+    border-color: #68a1fc;
+    color: #68a1fc;
 }
 
 ActionButton#action_estop {
-    border: 0px;
-    color: #007700;
+    border-color: #68a1fc;
+    color: #68a1fc;
 }
 
 ActionButton#action_estop:checked {
+    border-color: #FF0000;
     color: #FF0000;
 }
 
-QLabel {
-    font: 10pt "Deja Vu Sans Mono";
-    color: black;
+/** Checkboxes **/
+QCheckBox {
+    spacing: 5px;
+    outline: none;
+    color: #e0e0e0;
+    margin-bottom: 2px;
 }
 
-QLabel#label_axis_x, 
-QLabel#label_axis_y, 
-QLabel#label_axis_z, 
-QLabel#label_axis_a {
-    border: 2px solid black;
+QCheckBox:disabled {
+    color: #A0A0A0;
+}
+
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+}
+
+QCheckBox::indicator:unchecked {
+    image: url(:/images/images/qtdragon/unchecked.png);
+}
+
+QCheckBox::indicator:checked {
+    image: url(:/images/images/qtdragon/checked.png);
+}
+
+/** ComboBoxes **/
+QComboBox {
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
+    border: 1px solid black;
     border-radius: 4px;
-    font: 24pt "Noto Sans Mono";
-    font-weight: 900;
-    color: blue;
+    min-width: 120px;
+    color: #68a1fc;
+padding: 1px 0px 1px 3px;
 }
 
-QLabel#lbl_cycle_start,
-QLabel#lbl_home_all {
-    font: 10pt "Deja Vu Sans Mono";
-    font-weight: 900;
+QComboBox::drop-down {
+    subcontrol-origin: margin;
+    subcontrol-position: top right;
+    width: 24px;
+}
+
+QComboBox::item {
+    background-color: #404040;
+    font: 10pt "Noto Mono";
+    color: #68a1fc;
+}
+
+QComboBox::item:selected {
+    border: 1px solid #68a1fc;
+}
+
+QComboBox::Indicator {
+    background-color: transparent;
+}
+
+/** Labels **/
+QLabel {
+    font: 10pt "Noto Mono";
+    color: #e0e0e0;
+}
+
+QLabel#label_axis_x,
+QLabel#label_axis_y,
+QLabel#label_axis_z,
+QLabel#label_axis_a {
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
+    border: 1px solid black;
+    border-radius: 4px;
+    font: 12pt "Noto Mono";
+    color: #e0e0e0;
 }
 
 StatusLabel,
 StateLabel {
-    background: rgb(250, 250, 250);
-    font: 10pt "Noto Sans Mono";
-    font-weight: 900;
-    color: black;
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
+    border: 1px solid black;
+    border-radius: 4px;
+    font: 10pt "Noto Mono";
+    color: #68a1fc;
+    padding: 2px 2px 2px 2px;
+
+}
+
+StatusLabel#lbl_clock {
+    background-color: transparent;
+    border: none;
+    font: 12pt "Noto Mono";
+    color: #eeeeee;
 }
 
 DROLabel {
-    background: #202020;
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
     border: 1px solid black;
     border-radius: 4px;
-    font: 12pt "Noto Sans Mono";
-    font-weight: 900;
-    color: #00FF00;
+    font: 20pt "Noto Mono";
+    color: #68a1fc;
 }
 
 DROLabel[homed=false] {
     color: red;
 }
 
-QLineEdit {
-    background: rgb(250, 250, 250);
-    border: 1px solid;
-    border-left-color: black;
-    border-top-color: black;
-    border-right-color: white;
-    border-bottom-color: white;
-    font: 12pt "Noto Sans Mono";
-    font-weight: 900;
-}
-
-QTextEdit {
-    background: rgb(250,250,250);
-    font: 10pt "Noto Sans Mono";
-}
-
-QCheckBox {
-    font: 10pt "Deja Vu Sans Mono";
-}
-
-QCheckBox::indicator {
-    width: 12px;
+/** Sliders **/
+QSlider::groove:horizontal {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:0.5, stop:0 #3b5a8c, stop:1 #68a1fc);
     height: 12px;
-}
-
-QComboBox {
-    border: 1px solid black;
-    width: 20px;
-    font: 10pt "Deja Vu Sans Mono";
-    color: black;    
-}
-
-QGroupBox {
-    border: 1px solid transparent;
     border-radius: 4px;
-    margin-top: 16px;
-    font: 10pt "Deja Vu Sans Mono";
 }
 
-QGroupBox::title {
-    subcontrol-origin: margin;
-    padding: 0 3px;
-    color: black;
+QSlider::groove:vertical {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.5, y2:0, stop:0 #3b5a8c, stop:1 #68a1fc);
+    width: 12px;
+    border-radius: 4px;
+}
+
+QSlider::handle:horizontal {
+    background-color: #3b5a8c;
+    border: 1px solid black;
+    width: 14px;
+    margin-top: -4px;
+    margin-bottom: -4px;
+    border-radius: 4px;
+}
+
+QSlider::handle:vertical {
+    background-color: #3b5a8c;
+    border: 1px solid black;
+    height: 14px;
+    margin-left: -4px;
+    margin-right: -4px;
+    border-radius: 4px;
 }
 
 QProgressBar {
-    background-color: rgb(250, 250, 250);
+    background: #a0a0a0;
     border: 1px solid black;
     border-radius: 4px;
-    font: 10pt "Noto Sans Mono";
 }
 
-QProgressBar::chunk {
-    background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,
-    stop: 0 #bbf, stop: 1 #55f);
+QProgressBar::chunk:horizontal {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.5, y2:0, stop:0 #3b5a8c, stop:1 #68a1fc);
 }
 
-.QFrame {
-}
-
-QFrame#frame_cycle_start,
-QFrame#frame_home_all {
-    background: qlineargradient( x1:0 y1:0, x2:0 y2:1, stop:0 #d3d3e3, stop:1 #a3a3b3);}
-    border: 2px solid black;
+/** LineEdits **/
+QLineEdit {
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
+    border: 1px solid black;
     border-radius: 4px;
-    font: 10pt "Deja Vu Sans Mono";
+    font: 10pt "Noto Mono";
+    color: #68a1fc;
 }
 
-QFrame#frame_cycle_start:hover,
-QFrame#frame_home_all:hover {
-    border: 2px solid blue;
-    border-radius: 4px;
+CalculatorDialog QLineEdit {
+    font: 16pt "Noto Mono";
+}
+
+/** Tables **/
+QTableView,
+QListView,
+QTreeView {
+/*    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
+    color: #e0e0e0;
+*/
+    background-color: #e0e0e0;
+    color: #000000;
+
+    selection-background-color: #83b0f7;
+    selection-color: #000000;
+    border: 1px solid black;
+    gridline-color: black;
+    font: 10pt "Noto Mono";
+}
+
+QTableView::item:hover,
+QListView::item:hover,
+QTreeView::item:hover {
+    border: 1px solid #68a1fc;
+}
+
+QTableView::item:pressed,
+QTreeView::item:pressed {
+    color: #222222;
+}
+
+QTableView::item:selected:active,
+QTreeView::item:selected:active,
+QListView::item:selected:active {
+    border: 1px solid #aa0000;
+    color: #222222;
 }
 
 QHeaderView {
-    background-color: #B0B0D0;
-    border: 0px transparent #32414B;
-    padding: 0px;
+    background-color: #404040;
     margin: 0px;
-    border-radius: 0px;
-    font: 10pt "Deja Vu Sans Mono";
+    padding: 0px;
+    color: #68a1fc;
+}
+
+QHeaderView::section {
+    color: #e0e0e0;
+    padding: 5px;
+    text-align: center;
 }
 
 QHeaderView::section::vertical::first,
 QHeaderView::section::vertical::only-one {
-    width: 60px;
+    border-top: 1px solid #76797C;
 }
 
-OriginOffsetView, ToolOffsetView {
-    font: 10pt "Deja Vu Sans Mono";
+QHeaderView::section::vertical {
+    border-top: transparent;
 }
 
-QSlider::groove:horizontal {
-    border: 1px black;
-    height: 12px;
+QHeaderView::section::horizontal::first,
+QHeaderView::section::horizontal::only-one {
+    border-left: 1px solid #76797C;
 }
 
-QSlider::groove:vertical {
-    border: 1px black;
-    width: 12px;
+QHeaderView::section::horizontal {
+    border-left: transparent;
 }
 
-QSlider::sub-page:horizontal {
-    background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,
-    stop: 0 #bbf stop: 1 #55f);
-    border: 1px solid #777;
-    border-radius: 3px;
-    height: 12px;
-}
+QHeaderView::section:checked {
+    color: #68a1fc;
+ }
 
-QSlider::add-page:horizontal {
-    background: white;
-    border: 1px solid #777;
-    border-radius: 3px;
-    width: 12px;
-}
-
-QSlider::add-page:vertical {
-    background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,
-    stop: 0 #bbf, stop: 1 #55f);
-    border: 1px solid #777;
-    border-radius: 3px;
-    height: 12px;
-}
-
-QSlider::sub-page:vertical {
-    background: white;
-    border: 1px solid #777;
-    border-radius: 3px;
-    width: 12px;
-}
-
-QSlider::handle:horizontal {
-    background: lightgray;
-    border: 1px solid black;
-    width: 12px;
-    margin-top: -2px;
-    margin-bottom: -2px;
+/** ScrollBars **/
+QScrollBar:horizontal {
+    background-color: #a0a0a0;
+    margin: 0px 20px 0px 20px;
     border-radius: 2px;
+    height: 20px;
 }
 
-QSlider::handle:vertical {
-    background: lightgray;
-    border: 1px solid black;
-    height: 12px;
-    margin-top: -2px;
-    margin-bottom: -2px;
+QScrollBar::handle:horizontal {
+    background-color: #7f7f7f;
+    min-width: 15px;
+    margin: 2px 2px 2px 2px;
+    border-radius: 4px;
+}
+
+QScrollBar::add-line:horizontal {
+    margin: 0px 0px 0px 0px;
+    width: 20px;
+    height: 20px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal {
+    margin: 0px 0px 0px 0px;
+    height: 20px;
+    width: 20px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QScrollBar:vertical {
+    background-color: #a0a0a0;
+    margin: 20px 0px 20px 0px;
     border-radius: 2px;
+    width: 20px;
 }
 
-ToolDialog, EntryDialog, CloseDialog {
-    background: darkgray;
+QScrollBar::handle:vertical {
+    background-color: #7f7f7f;
+    min-height: 15px;
+    border-radius: 4px;
+}
+
+QScrollBar::sub-line:vertical {
+    height: 20px;
+    width: 20px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical {
+    margin: 0px 0px 0px 0px;
+    height: 20px;
+    width: 20px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::left-arrow:horizontal,
+QScrollBar::right-arrow:horizontal,
+QScrollBar::up-arrow:vertical,
+QScrollBar::down-arrow:vertical {
+    background: none;
+/*    background-color: #303030;*/
+}
+
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal,
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+/** Miscellaneous **/
+.QFrame {
+    border: 1px solid #373737;
+    border-radius: 6px;
+}
+
+ActionButton#action_abort {
+    background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(175, 40, 40, 255), stop:1 rgba(200, 83, 83, 255));
+    font: 12pt "Noto Mono";
+}
+
+ActionButton#action_abort:disabled {
+    background-color: transparent;
+    font: 12pt "Noto Mono";
+}
+
+ActionButton#action_pause {
+    background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(175, 150, 40, 255), stop:1 rgba(200, 175, 83, 255));
+    font: 12pt "Noto Mono";
+}
+
+ActionButton#action_pause:disabled {
+    background-color: transparent;
+    font: 12pt "Noto Mono";
+}
+
+
+QFrame#frame_cycle_start {
+    border: none;
+}
+
+QWidget#widget_cycle_start:hover {
+    border: 1px solid #68a1fc;
+}
+
+QLabel#lbl_cycle_start {
+    font: 12pt "Noto Mono";
+}
+
+QWidget#widget_cycle_start {
+    background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 175, 40, 255), stop:1 rgba(83, 200, 83, 255));
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+QWidget#widget_cycle_start:disabled {
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 4px;
+    font: 12pt "Noto Mono";
+}
+
+QLineEdit#lbl_start_line {
+    background-color: #e0e0e0;
+    color: #000000;
+
+}
+
+QLineEdit#lbl_start_line:disabled {
+    background-color: #272727;
+    color: #ffffff;
+}
+
+QFrame#frame_home_all {
+    border: 1px solid black;
+    border-radius: 4px;
+    font: 10pt "Noto Mono";
+}
+
+QFrame#frame_home_all:hover {
+    border: 1px solid #68a1fc;
+}
+
+QWidget:disabled {
+    color: #454545;
+    background-color: #323232;
+}
+
+QTextEdit {
+    background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(40, 40, 40, 255), stop:1 rgba(83, 83, 83, 255));
+    color: #e0e0e0;
+}
+
+QPlainTextEdit {
+    background-color: #e0e0e0;
+    color: #000000;
+}
+
+QHeaderView::section {
+    background-color: #404040;
+    color: #68a1fc;
+    padding: 5px;
+}
+
+GCodeEditor#gcode_viewer {
+  background-color: #e0e0e0;
+  color: #000000;
+}
+
+QStackedWidget {
+    border: none;
+}
+
+QListView::item:selected {
+    outline: 0;
+    color: #68a1fc;
+}
+
+ToolDialog,CloseDialog,EntryDialog, CalculatorDialog {
+    background-color: #272727;
 }
 ToolDialog QPushButton{
     width: 100px;
     height: 40px;
 }
-EntryDialog QPushButton, CloseDialog QPushButton{
+CalculatorDialog  QPushButton, EntryDialog QPushButton, CloseDialog QPushButton{
     width: 80px;
     height: 40px;
+}
+QMenu {
+    background-color: red; /* sets background of the menu */
+    border: 1px solid black;
+    color: #68a1fc;
+}
+
+QMenu::item {
+    /* sets background of menu item. set this to something non-transparent
+        if you want menu color and menu item color to be different */
+    background-color: transparent;;
+}
+
+QMenu::item:selected { /* when user selects item using mouse or keyboard */
+    background-color: blue;
 }

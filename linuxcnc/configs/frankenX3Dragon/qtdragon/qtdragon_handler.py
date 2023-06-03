@@ -64,10 +64,11 @@ class HandlerClass:
         self.first_turnon = True
         self.lineedit_list = ["work_height", "touch_height", "sensor_height",
                               "laser_x", "laser_y", "sensor_x", "sensor_y",
-                              "search_vel", "probe_vel", "max_probe", "eoffset_count"]
-#        self.onoff_list = ["frame_program", "frame_tool", "frame_dro", "frame_override", "frame_status"] ## removed because it disables exit when machine off
-        self.onoff_list = ["frame_program", "frame_tool", "frame_dro", "frame_override"]
-        self.auto_list = ["chk_eoffsets", "cmb_gcode_history"]
+                              "search_vel", "probe_vel", "max_probe"]
+        self.onoff_list = ["frame_program", "frame_tool", "frame_dro", "frame_override", "frame_jogging"]
+        self.auto_list = ["cmb_gcode_history"]
+        self.not_auto_list = ["btn_file", "btn_offsets", "btn_tool", "btn_status", "btn_probe", "btn_gcodes", "btn_setup", "btn_settings"]
+
         self.axis_a_list = ["label_axis_a", "dro_axis_a", "action_zero_a", "axistoolbutton_a",
                             "action_home_a", "widget_jog_angular", "widget_increments_angular",
                             "a_plus_jogbutton", "a_minus_jogbutton"]
@@ -89,9 +90,9 @@ class HandlerClass:
         STATUS.connect('general', self.dialog_return)
         STATUS.connect('state-on', lambda w: self.enable_onoff(True))
         STATUS.connect('state-off', lambda w: self.enable_onoff(False))
-        STATUS.connect('mode-manual', lambda w: self.enable_auto(True))
-        STATUS.connect('mode-mdi', lambda w: self.enable_auto(True))
-        STATUS.connect('mode-auto', lambda w: self.enable_auto(False))
+        STATUS.connect('mode-manual', lambda w: self.enable_auto(False))
+        STATUS.connect('mode-mdi', lambda w: self.enable_auto(False))
+        STATUS.connect('mode-auto', lambda w: self.enable_auto(True))
         STATUS.connect('gcode-line-selected', lambda w, line: self.set_start_line(line))
         STATUS.connect('hard-limits-tripped', self.hard_limit_tripped)
         STATUS.connect('interp-idle', lambda w: self.set_start_line(0))
@@ -146,12 +147,6 @@ class HandlerClass:
         
         pin = self.h.newpin("modbus-errors", hal.HAL_U32, hal.HAL_IN)
         hal_glib.GPin(pin).connect("value_changed", self.mb_errors_changed)
-        # external offset control pins
-        self.h.newpin("eoffset_enable", hal.HAL_BIT, hal.HAL_OUT)
-        self.h.newpin("eoffset_clear", hal.HAL_BIT, hal.HAL_OUT)
-        self.h.newpin("eoffset_count", hal.HAL_S32, hal.HAL_OUT)
-        pin = self.h.newpin("eoffset_value", hal.HAL_FLOAT, hal.HAL_IN)
-        hal_glib.GPin(pin).connect("value_changed", self.eoffset_changed)
 
     def init_preferences(self):
         if not self.w.PREFS_:
@@ -169,8 +164,6 @@ class HandlerClass:
         self.w.lineEdit_search_vel.setText(str(self.w.PREFS_.getpref('Search Velocity', 40, float, 'CUSTOM_FORM_ENTRIES')))
         self.w.lineEdit_probe_vel.setText(str(self.w.PREFS_.getpref('Probe Velocity', 10, float, 'CUSTOM_FORM_ENTRIES')))
         self.w.lineEdit_max_probe.setText(str(self.w.PREFS_.getpref('Max Probe', 10, float, 'CUSTOM_FORM_ENTRIES')))
-        self.w.lineEdit_eoffset_count.setText(str(self.w.PREFS_.getpref('Eoffset count', 0, int, 'CUSTOM_FORM_ENTRIES')))
-        self.w.chk_eoffsets.setChecked(self.w.PREFS_.getpref('External offsets', False, bool, 'CUSTOM_FORM_ENTRIES'))
         self.w.chk_reload_program.setChecked(self.w.PREFS_.getpref('Reload program', False, bool,'CUSTOM_FORM_ENTRIES'))
         self.w.chk_reload_tool.setChecked(self.w.PREFS_.getpref('Reload tool', False, bool,'CUSTOM_FORM_ENTRIES'))
         self.w.chk_use_keyboard.setChecked(self.w.PREFS_.getpref('Use keyboard', False, bool, 'CUSTOM_FORM_ENTRIES'))
@@ -194,8 +187,6 @@ class HandlerClass:
         self.w.PREFS_.putpref('Search Velocity', self.w.lineEdit_search_vel.text().encode('utf-8'), float, 'CUSTOM_FORM_ENTRIES')
         self.w.PREFS_.putpref('Probe Velocity', self.w.lineEdit_probe_vel.text().encode('utf-8'), float, 'CUSTOM_FORM_ENTRIES')
         self.w.PREFS_.putpref('Max Probe', self.w.lineEdit_max_probe.text().encode('utf-8'), float, 'CUSTOM_FORM_ENTRIES')
-        self.w.PREFS_.putpref('Eoffset count', self.w.lineEdit_eoffset_count.text().encode('utf-8'), int, 'CUSTOM_FORM_ENTRIES')
-        self.w.PREFS_.putpref('External offsets', self.w.chk_eoffsets.isChecked(), bool, 'CUSTOM_FORM_ENTRIES')
         self.w.PREFS_.putpref('Reload program', self.w.chk_reload_program.isChecked(), bool, 'CUSTOM_FORM_ENTRIES')
         self.w.PREFS_.putpref('Reload tool', self.w.chk_reload_tool.isChecked(), bool, 'CUSTOM_FORM_ENTRIES')
         self.w.PREFS_.putpref('Use keyboard', self.w.chk_use_keyboard.isChecked(), bool, 'CUSTOM_FORM_ENTRIES')
@@ -333,10 +324,6 @@ class HandlerClass:
         errors = self.h['modbus-errors']
         self.w.lbl_mb_errors.setText(str(errors))
 
-    def eoffset_changed(self, data):
-        eoffset = "{:2.3f}".format(self.h['eoffset_value'])
-        self.w.lbl_eoffset_value.setText(eoffset)
-
     def dialog_return(self, w, message):
         rtn = message.get('RETURN')
         name = message.get('NAME')
@@ -348,7 +335,7 @@ class HandlerClass:
         elif sensor_code and name == 'MESSAGE' and rtn is True:
             self.touchoff('sensor')
         elif wait_code and name == 'MESSAGE':
-            self.h['eoffset_clear'] = False
+            pass
 
     def user_system_changed(self, obj, data):
         sys = self.system_list[int(data) - 1]
@@ -392,6 +379,7 @@ class HandlerClass:
     def all_homed(self, obj):
         self.home_all = True
         self.w.lbl_home_all.setText("ALL\nHOMED")
+        self.w.actionbutton_rel.animateClick()
         if self.first_turnon is True:
             self.first_turnon = False
             if self.w.chk_reload_tool.isChecked():
@@ -407,6 +395,7 @@ class HandlerClass:
     def not_all_homed(self, obj, list):
         self.home_all = False
         self.w.lbl_home_all.setText("HOME\nALL")
+        self.w.actionbutton_abs.animateClick()
         for i in INFO.AVAILABLE_JOINTS:
             if str(i) in list:
                 axis = INFO.GET_NAME_FROM_JOINT.get(i).lower()
@@ -455,24 +444,45 @@ class HandlerClass:
             self.w.main_tab_widget.setCurrentIndex(0)
             self.w.btn_main.setChecked(True)
             return
+        
         self.w.main_tab_widget.setCurrentIndex(index)
-
+      
         if index != TAB_MAIN:
-            self.w.jogging_frame.hide()
+            self.w.frame_jogging.hide()
             self.w.frame_program.hide()
-            
+
         if index == TAB_MAIN:
+            self.w.btn_main.setChecked(True)
             self.w.stackedWidget.setCurrentIndex(0)
-            self.w.jogging_frame.show()
+            self.w.frame_jogging.show()
             self.w.frame_program.show()
         elif index == TAB_FILE:
+            self.w.btn_file.setChecked(True)
             self.w.stackedWidget.setCurrentIndex(1)
         elif index == TAB_OFFSETS:
+            self.w.btn_offsets.setChecked(True)
             self.w.stackedWidget.setCurrentIndex(2)
         elif index == TAB_TOOL:
+            self.w.btn_tool.setChecked(True)
             self.w.stackedWidget.setCurrentIndex(3)
+        elif index == TAB_STATUS:
+            self.w.btn_status.setChecked(True)
+            self.w.stackedWidget.setCurrentIndex(0)
+        elif index == TAB_PROBE:
+            self.w.btn_probe.setChecked(True)
+            self.w.stackedWidget.setCurrentIndex(0)
+        elif index == TAB_GCODES:
+            self.w.btn_gcodes.setChecked(True)
+            self.w.stackedWidget.setCurrentIndex(0)
+        elif index == TAB_SETUP:
+            self.w.btn_setup.setChecked(True)
+            self.w.stackedWidget.setCurrentIndex(0)
+        elif index == TAB_SETTINGS:
+            self.w.btn_settings.setChecked(True)
+            self.w.stackedWidget.setCurrentIndex(0)
         else:
             self.w.stackedWidget.setCurrentIndex(0)
+            self.w.btn_main.setChecked(True)
 
     # gcode frame
     def cmb_gcode_history_clicked(self):
@@ -527,14 +537,9 @@ class HandlerClass:
         self.w.action_pause.setEnabled(not state)
         self.w.action_step.setEnabled(not state)
         if state:
-        # set external offsets to lift spindle
-            self.h['eoffset_enable'] = self.w.chk_eoffsets.isChecked()
-            fval = float(self.w.lineEdit_eoffset_count.text())
-            self.h['eoffset_count'] = int(fval)
+            pass
         else:
-            self.h['eoffset_count'] = 0
-            self.h['eoffset_clear'] = True
-        # instantiate warning box
+            # instantiate warning box
             info = "Wait for spindle at speed signal before resuming"
             mess = {'NAME':'MESSAGE', 'ICON':'WARNING', 'ID':'_wait_resume_', 'MESSAGE':'CAUTION', 'MORE':info, 'TYPE':'OK'}
             ACTION.CALL_DIALOG(mess)
@@ -708,19 +713,18 @@ class HandlerClass:
                 return
             self.w.cmb_gcode_history.addItem(fname)
             self.w.cmb_gcode_history.setCurrentIndex(self.w.cmb_gcode_history.count() - 1)
-            ACTION.OPEN_PROGRAM(fname)
             self.add_status("Loaded program file : {}".format(fname))
-            self.w.main_tab_widget.setCurrentIndex(TAB_MAIN)
+            self.main_tab_changed(self.w.btn_main);
+            ACTION.OPEN_PROGRAM(fname)
+            
         elif fname.endswith(".html"):
             self.web_view.load(QtCore.QUrl.fromLocalFile(fname))
             self.add_status("Loaded HTML file : {}".format(fname))
-            self.w.main_tab_widget.setCurrentIndex(TAB_SETUP)
-            self.w.btn_setup.setChecked(True)
+            self.main_tab_changed(self.w.btn_setup);
         else:
             self.add_status("Unknown or invalid filename")
 
     def disable_spindle_pause(self):
-        self.h['eoffset_count'] = 0
         if self.w.spindle_pause.isChecked():
             self.w.spindle_pause.setChecked(False)
 
@@ -780,15 +784,20 @@ class HandlerClass:
         self.w.statusbar.showMessage(self._m, 5000)
         STATUS.emit('update-machine-log', self._m, 'TIME')
 
-    def enable_auto(self, state):
+    def enable_auto(self, is_auto):
         for widget in self.auto_list:
-            self.w[widget].setEnabled(state)
-        if state is True:
-            self.w.jogging_frame.show()
+            self.w[widget].setEnabled(is_auto)
+
+        for widget in self.not_auto_list:
+            self.w[widget].setEnabled(not is_auto)
+
+            
+        if is_auto is False:
+            self.w.frame_jogging.show()
         else:
-            self.w.jogging_frame.hide()
-            self.w.main_tab_widget.setCurrentIndex(TAB_MAIN)
-            self.w.stackedWidget.setCurrentIndex(0)
+            self.w.frame_jogging.hide()
+            self.main_tab_changed(self.w.btn_main);
+
         self.w.stackedWidget_dro.setCurrentIndex(0)
 
     def enable_onoff(self, state):
@@ -797,7 +806,6 @@ class HandlerClass:
         else:
             self.add_status("Machine OFF")
         self.w.spindle_pause.setChecked(False)
-        self.h['eoffset_count'] = 0
         for widget in self.onoff_list:
             self.w[widget].setEnabled(state)
 
