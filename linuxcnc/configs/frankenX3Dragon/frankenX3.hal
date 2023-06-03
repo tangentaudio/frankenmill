@@ -29,31 +29,26 @@ addf hm2_7i80.0.write         servo-thread
 # external output signals
 
 # --- MACHINE-IS-ENABLED ---
-setp hm2_7i80.0.gpio.052.is_output true
-net machine-is-enabled  =>     hm2_7i80.0.gpio.052.out
-setp hm2_7i80.0.gpio.052.invert_output true
-
-# --- MACHINE-IS-ENABLED ---
-setp hm2_7i80.0.gpio.062.is_output true
-net machine-is-enabled  =>     hm2_7i80.0.gpio.062.out
-setp hm2_7i80.0.gpio.062.invert_output true
+setp hm2_7i80.0.gpio.047.is_output true
+net machine-is-enabled  =>     hm2_7i80.0.gpio.047.out
+setp hm2_7i80.0.gpio.047.invert_output true
 
 # external input signals
 
 # --- ESTOP-EXT ---
-net estop-ext     <=  hm2_7i80.0.gpio.063.in_not
+net estop-ext     <=  hm2_7i80.0.gpio.039.in_not
 
 # --- HOME-X ---
-net home-x     <=  hm2_7i80.0.gpio.068.in_not
+net home-x     <=  hm2_7i80.0.gpio.024.in_not
 
 # --- HOME-Y ---
-net home-y     <=  hm2_7i80.0.gpio.069.in_not
+net home-y     <=  hm2_7i80.0.gpio.025.in_not
 
 # --- HOME-Z ---
-net home-z     <=  hm2_7i80.0.gpio.070.in_not
+net home-z     <=  hm2_7i80.0.gpio.026.in_not
 
 # --- HOME-A ---
-net home-a     <=  hm2_7i80.0.gpio.071.in_not
+net home-a     <=  hm2_7i80.0.gpio.027.in_not
 
 #*******************
 #  AXIS X JOINT 0
