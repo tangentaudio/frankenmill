@@ -1,0 +1,60 @@
+component linear8 "Piecewise Linear interpolation with up to 8 data points";
+license "GPL";
+pin in float in_ "Input value";
+pin out float out_ "Output value";
+param rw s32 n=8 "Number of data points given";
+param rw float x0;
+param rw float y0;
+param rw float x1;
+param rw float y1;
+param rw float x2;
+param rw float y2;
+param rw float x3;
+param rw float y3;
+param rw float x4;
+param rw float y4;
+param rw float x5;
+param rw float y5;
+param rw float x6;
+param rw float y6;
+param rw float x7;
+param rw float y7 """Data points 0..7.  \\fBx\\fIi+1 >= \\fBx\\fIi\\fR.
+
+When \\fBin\\fR is between \\fBx\\fIi\\fR and \\fBx\\fIi+1\\fR, \\fBout\\fR
+is a linear interpolation between \\fBy\\fIi\\fR and \\fBy\\fIi+1\\fR.
+
+When \\fBin\\fR is below \\fBx0\\fR, \\fBout\\fR is a linear extrapolation between \\fBx0\\fR and \\fBx1\\fR.
+
+When \\fBin\\fR is above \\fBx\\fIn-1\\fR, \\fBout\\fR is a linear
+extrapolation between \\fBx\\fIn-2\\fR and \\fBx\\fIn-1\\fR.""";
+
+function _ "Compute \\fBout\\fR based \\fBon\\fR in and interpolation data";
+;;
+
+#define EPSILON (1e-5)
+double lerp(double x, double xa, double xb, double ya, double yb) {
+    double dx = xb-xa;
+    if(dx >= -EPSILON && dx < EPSILON) return (ya+yb/2);
+    return ya + (yb-ya) * (x-xa) / dx;
+}
+
+FUNCTION(_) {
+    if(n < 2) n = 2;
+    if(n > 8) n = 8;
+
+    if(n == 2 || in_ < x1) {
+        out_ = lerp(in_, x0, x1, y0, y1);
+    } else if(n == 3 || in_ < x2) {
+        out_ = lerp(in_, x1, x2, y1, y2);
+    } else if(n == 4 || in_ < x3) {
+        out_ = lerp(in_, x2, x3, y2, y3);
+    } else if(n == 5 || in_ < x4) {
+        out_ = lerp(in_, x3, x4, y3, y4);
+    } else if(n == 6 || in_ < x5) {
+        out_ = lerp(in_, x4, x5, y4, y5);
+    } else if(n == 7 || in_ < x6) {
+        out_ = lerp(in_, x5, x6, y5, y6);
+    } else {
+        out_ = lerp(in_, x6, x7, y6, y7);
+    }
+}

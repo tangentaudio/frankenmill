@@ -1,0 +1,6 @@
+;Tool  Pocket Z Offset     Diameter     Remark
+T1     P1     Z+0.511000   D+0.125000   ; 1/8 end mill Sample Tool
+T2     P2     Z+0.100000   D+0.062500   ; 1/16 end mill Sample Tool
+T3     P3     Z+1.273000   D+0.201000   ; #7 tap drill Sample Tool
+T4     P4     Z+0.000000   D+2.000000   ; 2 inch mill Sample Tool
+T99    P0     Z+0.000000   D+0.000000   ; TOUCH PROBE
