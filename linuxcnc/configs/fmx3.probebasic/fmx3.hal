@@ -5,8 +5,6 @@ loadrt hm2_eth board_ip="192.168.1.121" config="num_encoders=0 num_pwmgens=0 num
 setp    hm2_7i80.0.watchdog.timeout_ns 5000000
 loadrt pid names=pid.x,pid.y,pid.z,pid.s
 
-loadrt timedelay names="brake_delay,z_ena_delay"
-
 addf hm2_7i80.0.read          servo-thread
 addf motion-command-handler   servo-thread
 addf motion-controller        servo-thread
@@ -15,8 +13,6 @@ addf pid.y.do-pid-calcs       servo-thread
 addf pid.z.do-pid-calcs       servo-thread
 addf pid.s.do-pid-calcs       servo-thread
 addf hm2_7i80.0.write         servo-thread
-addf brake_delay	      servo-thread
-addf z_ena_delay	      servo-thread
 
 setp hm2_7i80.0.dpll.01.timer-us -50
 setp hm2_7i80.0.stepgen.timer-number 1
@@ -28,35 +24,32 @@ setp hm2_7i80.0.gpio.016.is_output true
 net machine-is-enabled  =>     hm2_7i80.0.gpio.016.out
 setp hm2_7i80.0.gpio.016.invert_output true
 
-# --- Z-ENABLE FOR Z BRAKE ---
-# This waits 2 seconds after Z axis becomes enabled
-# before deactivating the brake to make sure the head does not fall
-setp brake_delay.off-delay 0.0
-setp brake_delay.on-delay 2.0
-setp hm2_7i80.0.gpio.017.is_output true
-setp hm2_7i80.0.gpio.017.invert_output true
-net z-enable  => brake_delay.in
-net z-enable-brake-delayed <= brake_delay.out => hm2_7i80.0.gpio.017.out
-
 # --- X-ENABLE ---
 setp hm2_7i80.0.gpio.050.is_output true
 setp hm2_7i80.0.gpio.050.invert_output true
-net x-enable  =>     hm2_7i80.0.gpio.050.out
+net x-enable => hm2_7i80.0.gpio.050.out
 
 # --- Y-ENABLE ---
 setp hm2_7i80.0.gpio.056.is_output true
 setp hm2_7i80.0.gpio.056.invert_output true
-net y-enable  =>     hm2_7i80.0.gpio.056.out
+net y-enable => hm2_7i80.0.gpio.056.out
+
 
 # --- Z-ENABLE FOR STEPPER DRIVE ---
-# This waits 1 second after Z axis becomes disabled to make sure the brake
-# has time to activate preventing the head from falling
-setp z_ena_delay.off-delay 1.0
-setp z_ena_delay.on-delay 0.0
 setp hm2_7i80.0.gpio.062.is_output true
 setp hm2_7i80.0.gpio.062.invert_output true
-net z-enable  => z_ena_delay.in
-net z_enable_delayed <= z_ena_delay.out => hm2_7i80.0.gpio.062.out
+net z-enable => hm2_7i80.0.gpio.062.out
+
+
+
+# -- PROBE enable signal
+setp hm2_7i80.0.gpio.017.is_output true
+setp hm2_7i80.0.gpio.017.invert_output true
+
+# -- TOOL SETTER enable signal
+setp hm2_7i80.0.gpio.018.is_output true
+setp hm2_7i80.0.gpio.018.invert_output true
+
 
 # external input signals
 
@@ -110,6 +103,10 @@ setp   hm2_7i80.0.stepgen.00.control-type     1
 setp   hm2_7i80.0.stepgen.00.maxaccel         [JOINT_0]STEPGEN_MAXACCEL
 setp   hm2_7i80.0.stepgen.00.maxvel           [JOINT_0]STEPGEN_MAXVEL
 
+#setp   hm2_7i80.0.stepgen.00.direction.invert_output        1
+setp   hm2_7i80.0.stepgen.00.step.invert_output        1
+
+
 # ---closedloop stepper signals---
 
 net x-pos-cmd    <= joint.0.motor-pos-cmd
@@ -162,6 +159,10 @@ setp   hm2_7i80.0.stepgen.01.step_type        0
 setp   hm2_7i80.0.stepgen.01.control-type     1
 setp   hm2_7i80.0.stepgen.01.maxaccel         [JOINT_1]STEPGEN_MAXACCEL
 setp   hm2_7i80.0.stepgen.01.maxvel           [JOINT_1]STEPGEN_MAXVEL
+
+#setp   hm2_7i80.0.stepgen.01.direction.invert_output        1
+setp   hm2_7i80.0.stepgen.01.step.invert_output        1
+
 
 # ---closedloop stepper signals---
 
