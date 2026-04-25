@@ -1,0 +1,4 @@
+# Load the Pico CNC HMI bridge as a userspace HAL component.
+# Uses the hmi_venv Python (which has hidapi installed) but inherits
+# system site-packages for hal/linuxcnc C extensions.
+loadusr -Wn hmi /home/cnc/linuxcnc/configs/fmx3.probebasic/python/hmi_venv/bin/python3 /home/cnc/linuxcnc/configs/fmx3.probebasic/hmi.py

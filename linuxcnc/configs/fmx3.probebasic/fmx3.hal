@@ -2,10 +2,15 @@ loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS num_dio=6 num_aio=3
 loadrt hostmot2
 loadrt hm2_eth board_ip="192.168.1.121" config="num_encoders=0 num_pwmgens=0 num_stepgens=4" 
-setp    hm2_7i80.0.watchdog.timeout_ns 5000000
+setp hm2_7i80.0.watchdog.timeout_ns 5000000
 loadrt pid names=pid.x,pid.y,pid.z,pid.s
+loadrt near names=near.t99
+loadrt conv_s32_float names=conv-s32-float.t99
+loadrt mux_generic config="bb2"
 
 addf hm2_7i80.0.read          servo-thread
+addf near.t99		      servo-thread
+addf conv-s32-float.t99       servo-thread
 addf motion-command-handler   servo-thread
 addf motion-controller        servo-thread
 addf pid.x.do-pid-calcs       servo-thread
@@ -13,6 +18,7 @@ addf pid.y.do-pid-calcs       servo-thread
 addf pid.z.do-pid-calcs       servo-thread
 addf pid.s.do-pid-calcs       servo-thread
 addf hm2_7i80.0.write         servo-thread
+addf mux-gen.00		      servo-thread
 
 setp hm2_7i80.0.dpll.01.timer-us -50
 setp hm2_7i80.0.stepgen.timer-number 1
@@ -42,13 +48,6 @@ net z-enable => hm2_7i80.0.gpio.062.out
 
 
 
-# -- PROBE enable signal
-setp hm2_7i80.0.gpio.017.is_output true
-setp hm2_7i80.0.gpio.017.invert_output true
-
-# -- TOOL SETTER enable signal
-setp hm2_7i80.0.gpio.018.is_output true
-setp hm2_7i80.0.gpio.018.invert_output true
 
 
 # external input signals
@@ -263,9 +262,9 @@ net spindle-run spindle-vfd.spindle-on <= spindle.0.on
 # connect the VFD at-speed to the spindle at-speed
 net spindle-at-speed spindle.0.at-speed <= spindle-vfd.at-speed
 
-net spindle-rpm <= spindle-vfd.motor-RPM
 
-net spindle-load <= spindle-vfd.current-load-percentage
+
+
 
 # connect the spindle RPM to the VF-S11
 #net spindle-cmd spindle-vfd.speed-command <= spindle.0.speed-out
@@ -358,6 +357,7 @@ net spindle-manual-cw     halui.spindle.0.forward
 net spindle-manual-ccw    halui.spindle.0.reverse
 net spindle-manual-stop   halui.spindle.0.stop
 net machine-is-on         halui.machine.is-on
+net machine-is-on spindle-vfd.enabled
 net jog-speed             halui.axis.jog-speed
 net MDI-mode              halui.mode.is-mdi
 
@@ -366,8 +366,46 @@ net MDI-mode              halui.mode.is-mdi
 net coolant-mist      <=  iocontrol.0.coolant-mist
 net coolant-flood     <=  iocontrol.0.coolant-flood
 
-#  ---probe signal---
-net probe-in <= hm2_7i80.0.gpio.006.in_not => motion.probe-input
+net probe-low-bat <= hm2_7i80.0.gpio.005.in
+net probe-alarm <= hm2_7i80.0.gpio.004.in
+
+#  ---probe & tool setter signals--
+#
+
+# manual control template (not used)
+# M65 P5 = tool setter selected
+# M64 P5 = touch probe selected
+# net probe-select <= motion.digital-out-05 => mux-gen.00.sel-bit-00
+
+net tool-setter-in <= mux-gen.00.in-bit-00 <= hm2_7i80.0.gpio.007.in
+net probe-in <= mux-gen.00.in-bit-01 <= hm2_7i80.0.gpio.006.in_not
+
+net probe-selected-out mux-gen.00.out-bit => motion.probe-input
+
+
+# -- PROBE enable signal
+# enables the receiver via relay AND switches the probe mux input
+# this helps save batteries as the probe goes into standby when disabled
+#
+setp hm2_7i80.0.gpio.017.is_output true
+setp hm2_7i80.0.gpio.017.invert_output true
+
+# convert tool number from S32 to float for 'near' comp below
+net tool-number-s32 conv-s32-float.t99.in <= iocontrol.0.tool-number
+
+# enable wireless touch probe receiver only when T99 is loaded
+setp near.t99.difference 0
+setp near.t99.in2 99.0
+net t99-in1 near.t99.in1 <= conv-s32-float.t99.out
+
+# when T99 it turns on the probe and sets the mux, otherwise the mux is set to the tool setter
+net probe-ena hm2_7i80.0.gpio.017.out <= near.t99.out => mux-gen.00.sel-bit-00
+
+# -- TOOL SETTER enable signal
+# wired to relay but not used at the moment, maybe use to disable tool setter power unless probing tools
+setp hm2_7i80.0.gpio.018.is_output true
+setp hm2_7i80.0.gpio.018.invert_output true
+
 
 #  ---motion control signals---
 

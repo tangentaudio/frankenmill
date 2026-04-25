@@ -1,8 +1,6 @@
-loadrt time
-loadrt not
-
-addf time.0 servo-thread
-addf not.0 servo-thread
+# probe_basic_postgui.hal — net/setp only
+# All loadrt and addf commands have been moved to hmi_wiring.hal
+# to avoid "already exists" errors (POSTGUI runs outside TWOPASS).
 
 net prog-running not.0.in <= halui.program.is-idle
 net prog-paused halui.program.is-paused => time.0.pause
@@ -24,3 +22,40 @@ net probe-in  <=  qtpyvcp.probe-led.on
 # *** Set line below for actual spindle readout from your hal file ***
 # net spindle-rpm-filtered scale_to_rpm.out  =>  qtpyvcp.spindle-encoder-rpm.in
 
+net spindle-rpm <= spindle-vfd.motor-RPM
+
+# spindle load
+net spindle-load <= spindle-vfd.current-load-percentage => qtpyvcp.spindle-load-indicator.in-f
+
+setp qtpyvcp.spindle-load-indicator.min-val 0
+setp qtpyvcp.spindle-load-indicator.max-val 120
+
+# =====================================================================
+# VFD Interlock Logic & Monitor Widget Wiring
+# =====================================================================
+
+# Drawbar active = NOT hardware-enable (active-low during tool change)
+net vfd-hw-enable spindle-vfd.hardware-enable => not.drawbar.in
+net drawbar-active <= not.drawbar.out
+
+# Spindle inhibit when drawbar active AND program is idle.
+net prog-running => and2.drawbar-idle.in1
+net drawbar-active => and2.drawbar-idle.in0
+net drawbar-idle-inhibit <= and2.drawbar-idle.out
+
+# Spindle inhibit = fault OR (drawbar-active AND idle)
+net vfd-fault spindle-vfd.fault => or2.spindle-inhibit.in0
+net drawbar-idle-inhibit => or2.spindle-inhibit.in1
+net spindle-inhibit or2.spindle-inhibit.out => spindle.0.inhibit
+
+# Abort running program on VFD fault
+net vfd-fault => halui.program.stop
+
+# --- VFD status signals for monitor widget ---
+net vfd-trip-code spindle-vfd.trip-code => vfd-monitor.trip-code
+net vfd-drive-ok spindle-vfd.drive-ok => vfd-monitor.drive-ok
+net vfd-fault => vfd-monitor.fault
+net drawbar-active => vfd-monitor.drawbar-active
+
+# Fault reset: monitor widget -> VFD driver
+net vfd-fault-reset vfd-monitor.fault-reset => spindle-vfd.fault-reset
