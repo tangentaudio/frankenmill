@@ -252,9 +252,8 @@ addf linear8.0 servo-thread
 loadusr -Wn spindle-vfd ./cmdrsk_vfd --ini cmdrsk.ini --name spindle-vfd --debug
 
 # connect the spindle direction pins to the VFD
-# NOTE: reversed direction due to the way it's wired
-net spindle-fwd spindle-vfd.spindle-rev <= spindle.0.forward
-net spindle-rev spindle-vfd.spindle-fwd <= spindle.0.reverse
+net spindle-fwd spindle-vfd.spindle-fwd <= spindle.0.forward
+net spindle-rev spindle-vfd.spindle-rev <= spindle.0.reverse
 
 # connect the spindle on pin to the VFD
 net spindle-run spindle-vfd.spindle-on <= spindle.0.on
