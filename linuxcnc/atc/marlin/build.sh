@@ -17,6 +17,19 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MARLIN_DIR="${SCRIPT_DIR}/Marlin"
 MARLIN_SRC="${MARLIN_DIR}/Marlin"
 
+# Find PlatformIO CLI — check PATH first, then VS Code extension location
+if ! command -v pio &>/dev/null; then
+    if [ -x "${HOME}/.platformio/penv/bin/pio" ]; then
+        export PATH="${HOME}/.platformio/penv/bin:${PATH}"
+        echo "Using PlatformIO from VS Code extension: $(which pio)"
+    else
+        echo "ERROR: PlatformIO CLI (pio) not found."
+        echo "Install via: pip install platformio"
+        echo "  or install the PlatformIO IDE extension in VS Code"
+        exit 1
+    fi
+fi
+
 # Verify submodule is initialized
 if [ ! -f "${MARLIN_SRC}/Configuration.h" ]; then
     echo "ERROR: Marlin submodule not initialized."
