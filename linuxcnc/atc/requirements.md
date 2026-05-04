@@ -928,17 +928,16 @@ config onto submodule and builds via PlatformIO. Upload via
 
 ---
 
-### Q4: Scope — INCREMENTAL BUILD
+### Q4: Scope & Development Approach — RESOLVED
 
-Approach is somewhere between full replacement and minimal — build incrementally:
-- Start with serial communication layer + basic carousel commands
-- Add state machine and tool tracking
-- Layer in full tool-change coordination
-- Iterate on Z-axis coordination approach as understanding deepens
+See [development.md](development.md) for the full development plan, phasing,
+hybrid sim/hardware environment setup, and file layout.
 
-The existing G-code subroutines (M10–M13, M21–M24, toolchange.ngc) are
-**Probe Basic boilerplate**, not custom-tuned code. They serve as useful
-reference for the tool-change sequence but are not worth preserving.
+**Summary:** Incremental 6-phase build from serial foundation through GUI
+integration. Development uses a hybrid environment: LinuxCNC simulator for
+HAL/G-code integration + real Marlin hardware (RAMPS + dummy motors) for
+serial protocol validation. The existing Probe Basic sim config (in the
+`pico-cnc-hmi` repo) provides the LinuxCNC simulator environment.
 
 ---
 
