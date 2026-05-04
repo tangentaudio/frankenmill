@@ -887,49 +887,44 @@ round-trip latency to a safety-relevant operation.
 
 ---
 
-### Q3: Marlin Axis Mapping — IN PROGRESS
+### Q3: Marlin Axis Mapping — RESOLVED
 
-**Planned mapping:**
-- **X axis** → Linear extend/retract motion
-- **C axis** → Carousel rotation
+**Final configuration (verified on hardware):**
 
-**Current bench test status:** A custom Marlin config and build environment
-exists. The rotation motor is currently running on the **Y axis** with
-steps-per-unit set so that linear mm values correspond to degrees. This was
-a quick bench test approach — it works but means `G0 Y90` rotates 90° rather
-than `G0 C90`, and Marlin doesn't know it's a rotational axis.
+| Marlin Axis | Internal Slot | ATC Function          | Units   | Driver            | Endstop    |
+|-------------|---------------|-----------------------|---------|-------------------|------------|
+| X           | X (slot 1)    | Linear extend/retract | mm      | TMC2208_STANDALONE | X-min (pin 3)  |
+| C           | I (slot 4)    | Carousel rotation     | degrees | TMC2208_STANDALONE | Z-min (pin 18) |
+| Y           | Y (slot 2)    | *Placeholder*         | —       | A4988 (no motor)  | —          |
+| Z           | Z (slot 3)    | *Placeholder*         | —       | A4988 (no motor)  | —          |
 
-**Target configuration:** Marlin 2.0.x (bugfix branch and later) supports a
-native C axis as a rotational axis. Configuration in `Configuration.h`:
+**Firmware:** Marlin `bugfix-2.1.x` (upgraded from 2.0.9.10 for native
+`AXIS4_ROTATES` support). Source tracked as git submodule.
+
+**Key configuration in `Configuration.h`:**
 
 ```cpp
-#define LINEAR_AXES 4        // X, Y, Z, + one more slot
-#define AXIS4_NAME 'C'       // Name the 4th axis 'C'
-#define AXIS4_ROTATES        // Mark it as rotational
+#define I_DRIVER_TYPE  TMC2208_STANDALONE  // Carousel rotation (C axis)
+#define AXIS4_NAME 'C'
+#define AXIS4_ROTATES
+#define I_STOP_PIN 18         // Homing switch on Z-min connector
+#define I_MIN_POS 0
+#define I_MAX_POS 360         // Full carousel rotation (degrees)
 ```
 
-This gives proper G-code commands like `G0 C90` (rotate to 90°) and `G28 C`
-(home rotation axis). Steps-per-unit would be configured as steps-per-degree.
+G-code examples: `G0 C90` (rotate to 90°), `G0 C180` (rotate to 180°),
+`G28 C` (home rotation axis). Units are native degrees.
 
 > [!NOTE]
-> Since only X and C are physically connected, the unused Y and Z axes in Marlin
-> would need to be disabled or left unconfigured. The `LINEAR_AXES` count needs
-> to accommodate the C axis slot (axis 4 requires at least `LINEAR_AXES 4`,
-> meaning Y and Z axis slots exist in firmware even if unused). This is a Marlin
-> configuration detail to work through together.
+> Y and Z driver types must remain defined (even with no physical motor)
+> because Marlin requires contiguous axis slots up to the I axis (slot 4).
+> Their feedrate/acceleration values are set to safe minimums.
 
-> [!TIP]
-> An alternative is to use Marlin's `I_DRIVER_TYPE` / `J_DRIVER_TYPE` approach
-> for axes beyond Z, which may be cleaner. The DerAndere1/Marlin fork wiki has
-> the most detailed multi-axis documentation.
+**Build environment:** `linuxcnc/atc/marlin/build.sh` — overlays custom
+config onto submodule and builds via PlatformIO. Upload via
+`./build.sh upload --upload-port /dev/ttyUSB0`.
 
-**Next step:** Work through the Marlin configuration changes to move from
-the Y-axis bench test to the proper X + C axis mapping. This can be validated
-on the existing hardware before any fatc code is written.
-
-**Units:**
-- X (linear): millimeters
-- C (rotation): degrees (with `AXIS4_ROTATES`, Marlin treats units as degrees)
+**Build stats:** RAM 34.7%, Flash 19.1% (ATmega2560)
 
 ---
 
