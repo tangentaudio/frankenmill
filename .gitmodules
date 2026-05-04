@@ -1,0 +1,4 @@
+[submodule "linuxcnc/atc/marlin/Marlin"]
+	path = linuxcnc/atc/marlin/Marlin
+	url = https://github.com/MarlinFirmware/Marlin.git
+	branch = bugfix-2.1.x
