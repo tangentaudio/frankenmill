@@ -132,15 +132,15 @@ can be toggled manually via `halcmd sets` during development.
 
 **Goal:** Reliable bidirectional Marlin communication.
 
-- [ ] Serial port open/close, baud rate config
-- [ ] G-code send with `ok` response parsing
-- [ ] Error response handling (`echo:`, `Error:`)
-- [ ] Command queue with timeout/retry
-- [ ] `M115` firmware identification on connect
-- [ ] `G28 X C` homing sequence
-- [ ] Basic `G0 X<pos>` and `G0 C<angle>` motion commands
-- [ ] `M114` position query and parsing
-- [ ] Startup/reconnection logic
+- [x] Serial port open/close, baud rate config
+- [x] G-code send with `ok` response parsing
+- [x] Error response handling (`echo:`, `Error:`)
+- [x] Command queue with timeout/retry
+- [x] `M115` firmware identification on connect
+- [ ] `G28 X C` homing sequence — deferred to real machine (no endstops on test bench)
+- [x] Basic `G0 X<pos>` and `G0 C<angle>` motion commands
+- [x] `M114` position query and parsing
+- [ ] Startup/reconnection logic — basic connect on startup done; auto-reconnect on loss deferred
 
 **Test method:** Direct Python script → Marlin hardware. No LinuxCNC needed
 yet. Validate with real serial responses from real firmware.
@@ -149,13 +149,13 @@ yet. Validate with real serial responses from real firmware.
 
 **Goal:** `fatc` loads as a LinuxCNC `loadusr` component with HAL pins.
 
-- [ ] Component entry point (`fatc.py` or compiled `.comp`)
-- [ ] INI file configuration loading (serial port, pocket count, etc.)
-- [ ] HAL pin creation (per section 5.4 of requirements)
-- [ ] Main loop: poll HAL pins → update state → write HAL pins
-- [ ] Serial connection management (connect on startup, reconnect on loss)
-- [ ] Basic status reporting via HAL pins
-- [ ] Persistent state file load/save (JSON tool-pocket map)
+- [x] Component entry point (`fatc.py`)
+- [x] INI file configuration loading (serial port, pocket count, etc.)
+- [x] HAL pin creation (per section 5.4 of requirements)
+- [x] Main loop: poll HAL pins → update state → write HAL pins
+- [x] Serial connection management (connect on startup)
+- [x] Basic status reporting via HAL pins
+- [x] Persistent state file load/save (`fatc_state.json`)
 
 **Test method:** `loadusr` in LinuxCNC sim. Monitor pins with `halshow`
 / `halmeter`. Marlin hardware connected.
@@ -164,14 +164,14 @@ yet. Validate with real serial responses from real firmware.
 
 **Goal:** Complete tool-change state machine (manual trigger via HAL pin).
 
-- [ ] State machine framework (enum states, transition validation)
-- [ ] Zone-based motion coordination ("traffic cop" model)
-- [ ] Tool-change sequence: full put-away → rotate → pick-up cycle
-- [ ] Parallel motion (carousel rotate while Z clears)
-- [ ] Tool-in-spindle tracking with persistent state
-- [ ] Carousel pocket sensor integration (HAL pin, simulated)
-- [ ] Error state entry on fault conditions
-- [ ] Configurable homing behavior (per Q6)
+- [x] State machine framework (enum states, transition validation)
+- [ ] Zone-based motion coordination ("traffic cop" model) — deferred, carousel motion not yet integrated
+- [x] Tool-change sequence: stow + load cycle working end-to-end in sim
+- [ ] Parallel motion (carousel rotate while Z clears) — deferred
+- [x] Tool-in-spindle tracking with persistent state
+- [ ] Carousel pocket sensor integration — deferred to real hardware
+- [x] Error state entry on fault conditions (`TOOL_NOT_FOUND`, timeouts)
+- [ ] Configurable homing behavior — deferred to real machine (G28 not yet used)
 
 **Test method:** Trigger tool changes via HAL pin (`fatc.tool-change`).
 Observe Marlin dummy motors moving through sequence. Verify state
@@ -179,14 +179,60 @@ transitions with `halshow`.
 
 ### Phase 4: M6 Remap Integration
 
-**Goal:** LinuxCNC `T<n> M6` triggers the full ATC sequence.
+**Goal:** LinuxCNC `T<n> M6` triggers the full ATC sequence via User M-codes and Unix socket IPC.
 
-- [ ] M6 remap G-code file (thin sequencer)
-- [ ] M68/M66 handshaking between remap and fatc component
-- [ ] Z-axis coordination (safe height before/after tool change)
-- [ ] Pre-dock parallel motion (carousel rotating during Z travel)
-- [ ] Tool table synchronization
-- [ ] Abort/cancel handling (M2, program stop)
+**Approach:** User M-codes (M101–M103) replace the previous M66/M68 HAL pin
+handshake. Each M-code is a small executable Python script on `SUBROUTINE_PATH`
+that connects to a Unix domain socket served by `fatc.py`, sends a JSON command,
+waits for a JSON response, and exits (0=ok, 1=error). The interpreter blocks
+for the entire duration of each call, eliminating all timing/edge-detection races.
+
+**Socket server in fatc.py:**
+- `socketserver.ThreadingUnixStreamServer` on `/tmp/fatc.sock` (path in INI)
+- Each connection handled in its own thread; posts a command to the state machine
+  via a `threading.Event` / queue and waits for the reply
+- Socket server starts after HAL `h.ready()` so pins exist before any M-code fires
+
+**M-code scripts (one file per code, executable, on `SUBROUTINE_PATH`):**
+
+| File  | Command sent | Fatc blocks until              | P arg         |
+|-------|--------------|--------------------------------|---------------|
+| `M101`| `BEGIN`      | Carousel extended (READY_FOR_Z)| selected_tool |
+| `M102`| `Z_ENGAGED`  | Drawbar op complete            | —             |
+| `M103`| `Z_CLEAR`    | Full sequence complete or error| —             |
+
+**`toolchange.ngc` structure:**
+```gcode
+G53 G0 Z0                          ; raise Z
+M101 P#<selected_tool>             ; BEGIN (blocks)
+; stow phase (if tool_in_spindle > 0):
+;   G53 G0 Z#<_ini[ATC]TC_HEIGHT>
+;   M102  (Z_ENGAGED stow — blocks)
+;   G53 G0 Z0
+;   M103  (Z_CLEAR stow — blocks)
+; load phase:
+G53 G0 Z#<_ini[ATC]TC_HEIGHT>
+M102                               ; Z_ENGAGED load (blocks)
+G53 G0 Z0
+M103                               ; Z_CLEAR load / COMPLETE (blocks)
+o<toolchange> endsub [1]
+```
+
+**HAL changes:** Remove `remap-cmd`, `remap-cmd-code`, `remap-tool-num`,
+`remap-ack`, `remap-ack-code` pins and all associated `motion.analog-out-*` /
+`motion.digital-out-*` wiring. `num_aio` / `num_dio` can revert to defaults.
+
+**Checklist:**
+- [x] Unix socket server added to `fatc.py` (starts after `h.ready()`)
+- [x] State machine command/response queue wired to socket handler thread
+- [x] `M101`, `M102`, `M103` scripts written, `chmod +x`, on `SUBROUTINE_PATH`
+- [x] `toolchange.ngc` rewritten using M101–M103
+- [x] Remap HAL pins removed from `fatc.py` and `fatc_sim.hal`
+- [x] `atc_sim.ini` `num_aio`/`num_dio` reverted to defaults
+- [x] Z-axis coordination verified (sim loopback): load-only and stow+load cycles tested
+- [ ] Pre-dock parallel motion (carousel rotate while Z travels) — deferred
+- [ ] Tool table synchronisation — deferred
+- [ ] Abort/cancel handling (M2 mid-sequence) — deferred
 
 **Test method:** Run G-code programs in LinuxCNC sim with `T1 M6`, `T2 M6`,
 etc. Verify full sequence including simulated Z motion and real Marlin motion.
@@ -213,7 +259,7 @@ verify graceful error handling and recovery paths.
 - [ ] Probe Basic / DynATC adapter (HAL pins → widget calls)
 - [ ] Error recovery UI (if needed beyond HAL error codes)
 - [ ] Per-pocket calibration wizard (future)
-- [ ] IPC mechanism evaluation (Unix socket / D-Bus) if HAL proves insufficient
+- [ ] IPC mechanism: Unix socket (chosen in Phase 4 — see requirements.md Q1)
 - [ ] Documentation and operator manual
 
 **Test method:** Full integration testing with Probe Basic GUI in sim mode.

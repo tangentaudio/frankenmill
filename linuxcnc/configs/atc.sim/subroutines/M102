@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+"""M102 — Z_ENGAGED.
+Tells fatc Z is at tool-change height; fatc operates drawbar.
+Blocks until drawbar op complete (DRAWBAR_DONE).
+Exit 0 = ok; exit 1 = error.
+"""
+import json
+import os
+import socket
+import sys
+
+SOCK_PATH = os.environ.get('FATC_SOCKET', '/tmp/fatc.sock')
+
+def ipc(cmd, **kwargs):
+    msg = {'cmd': cmd, **kwargs}
+    with socket.socket(socket.AF_UNIX) as s:
+        s.settimeout(60.0)
+        s.connect(SOCK_PATH)
+        s.sendall(json.dumps(msg).encode() + b'\n')
+        buf = b''
+        while b'\n' not in buf:
+            chunk = s.recv(4096)
+            if not chunk:
+                raise IOError('connection closed before response')
+            buf += chunk
+        return json.loads(buf.split(b'\n')[0])
+
+def main():
+    try:
+        resp = ipc('Z_ENGAGED')
+    except Exception as exc:
+        print(f'M102 error: {exc}', file=sys.stderr)
+        sys.exit(1)
+    if not resp.get('ok'):
+        print(f"M102 failed: {resp.get('error', 'unknown')}", file=sys.stderr)
+        sys.exit(1)
+
+main()

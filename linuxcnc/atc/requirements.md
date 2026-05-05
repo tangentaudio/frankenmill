@@ -1,7 +1,7 @@
 # FrankenMill ATC Component — Requirements Specification
 
 > **Document Status:** DRAFT v3 — post-review refactor  
-> **Date:** 2026-05-04  
+> **Date:** 2026-05-05  
 > **Author:** Steve / Antigravity  
 
 ---
@@ -159,10 +159,10 @@ loadusr -Wn fatc ./fatc --ini ffatc.ini --name fatc
 ### 4.4 Core Tool Change Sequence
 
 1. **Receive tool-change command** via HAL pin
-2. **Identify source pocket** — look up requested tool in pocket map
+2. **Identify target pocket** — look up requested tool in pocket map (error if not found, see §4.13.4)
 3. **Stow current tool** (if spindle loaded):
-   a. Find empty pocket
-   b. Rotate carousel to empty pocket (Marlin G-code)
+   a. Look up home pocket for the current spindle tool in pocket map (it must have come from somewhere)
+   b. Rotate carousel to stow pocket (Marlin G-code)
    c. Extend carousel (Marlin G-code)
    d. Coordinate Z-axis motion (see Q1)
    e. Activate drawbar (HAL pin or Marlin)
@@ -249,7 +249,12 @@ executions. Persistent state is stored in a local JSON file and survives
 component restarts, machine power cycles, and LinuxCNC restarts.
 
 **Persisted data:**
-- Tool-to-pocket mapping (which tool is in which pocket)
+- Tool-to-pocket mapping (which tool is in which pocket). **Tool numbers and
+  pocket numbers are fully independent** — any tool number can occupy any
+  pocket. Pocket numbers are physical slots (1..N); tool numbers come from
+  the LinuxCNC tool table and are assigned by the operator. See §4.13.
+- `inventory_valid` flag — false on fresh state, set true once the operator
+  has declared all pocket contents. When false, tool changes are refused.
 - Current pocket position (last known carousel rotation position)
 - Tool-in-spindle (which tool, if any, is loaded) — **see note below**
 - Calibration offsets (per-pocket rotation and linear fine-tuning — see 4.12)
@@ -505,8 +510,6 @@ before loading into the spindle, reducing contamination that causes TIR
 - **Control pin**: `fatc.air-blast-activate` (bit OUT)
 
 ### 4.12 Calibration & Tuning
-
-The carousel requires fine calibration of both rotational pocket positions
 and linear extend/retract positions for reliable tool changes. Calibration
 data is stored in the persistent state file (4.7) alongside the tool-pocket
 map.
@@ -532,6 +535,291 @@ map.
 > The calibration workflow should be designed early even if the GUI for it
 > comes later — command-line or halcmd-based calibration should work as a
 > fallback.
+
+---
+
+### 4.13 Tool Inventory Management
+
+**Tool numbers and pocket numbers are independent.** A pocket is a physical
+slot in the carousel, identified by number 1..N. A tool is a numbered item
+from the LinuxCNC tool table. Any tool can live in any pocket; pocket
+assignments change between jobs and over the machine's lifetime.
+
+#### 4.13.1 The Inventory Problem
+
+The fatc component must always know **which tool is in which pocket** to:
+- Find the right pocket when `T<n> M6` is requested
+- Find an empty pocket when stowing the current spindle tool
+- Detect mismatch errors before a crash can occur
+
+When `inventory_valid = false` (fresh install, state file deleted, or unknown
+state), the component cannot safely execute a tool change and must refuse,
+prompting the operator to declare the inventory.
+
+#### 4.13.2 How Inventory Becomes Valid
+
+Three mechanisms populate the pocket map:
+
+1. **ATC-driven change tracking** — every stow and load updates the map
+   automatically. Once the map is accurate, normal tool changes keep it
+   accurate indefinitely. This is the steady-state mode.
+
+2. **Manual operator declaration** — before first use, or after manually
+   moving tools, the operator declares the contents of each pocket via a
+   setup interface (GUI panel, HAL pin + tool number, or IPC command).
+   This is how the map is initially populated.
+
+3. **Carousel scan** (future, requires pocket sensor hardware) — the
+   component rotates through all pockets and reads the presence sensor.
+   This confirms occupied vs empty but does **not** identify which tool is
+   in an occupied pocket; it must be combined with operator declaration or
+   prior knowledge.
+
+#### 4.13.3 Job Setup Workflow
+
+For each job the operator:
+
+1. Decides which tools are needed and which pockets to place them in
+2. Manually loads physical tool holders into carousel pockets
+3. Declares the pocket contents to fatc (GUI or command)
+4. Declares the spindle contents if a tool is already loaded
+5. Runs the job — `T<n> M6` commands resolve tools by the declared map
+
+Between jobs, tools may be swapped. The operator must update the map
+whenever tools are **manually** moved in or out of the carousel. The map
+is **not** invalidated by ATC-driven changes (those are tracked).
+
+#### 4.13.4 "Tool Not Found" Behaviour
+
+If `T<n> M6` is requested and T<n> is not in the pocket map:
+
+- **Do not guess** (e.g. pocket = tool number). This is only valid as a
+  transient development fallback and must not be the production behaviour.
+- Enter error state with `TOOL_NOT_FOUND` code
+- Message operator: "T<n> not in carousel — load it and declare its pocket"
+- Operator loads the tool, declares the pocket via the setup interface,
+  resets the error, and re-runs
+
+- **Do not guess** (e.g. pocket = tool number). This is only valid as a
+  transient development fallback and must not be the production behaviour.
+- Enter error state with `TOOL_NOT_FOUND` code
+- Message operator: "T<n> not in carousel — load it and declare its pocket"
+- Operator loads the tool, declares the pocket via the setup interface,
+  resets the error, and re-runs
+
+#### 4.13.5 Manual Tool Change Fallback
+
+Some tools **cannot** live in the carousel — wrong taper geometry, no
+tool fork groove, oversize holders, or operator preference. These tools
+must be changed manually. The system needs to handle this gracefully as
+a first-class workflow, not an error condition.
+
+**Manual tool change flow:**
+
+1. The tool table (or a fatc-specific annotation) marks T<n> as
+   `manual_only` — not a carousel tool
+2. When `T<n> M6` is requested for a manual-only tool, fatc detects this
+   and does **not** attempt a carousel sequence
+3. The GUI prompts the operator: "Please manually change to T<n> and press
+   OK" (standard LinuxCNC toolchange dialog pattern)
+4. After operator confirms, the sequence completes normally
+
+**Stow-to-carousel offer:**
+
+When the outgoing spindle tool is a carousel tool and an empty pocket is
+available, the sequence should optionally offer: "Stow T<current> to
+carousel before manual change? [Yes / No]". This avoids a "put the manual
+tool in, then discover the old tool is still in your hand" situation and
+keeps the carousel inventory tidy.
+
+Conversely, after a successful manual change, the system could offer:
+"Store T<n> in an empty carousel slot? [Yes / Pocket N / No]" — useful if
+the operator decides mid-job to semi-automate a tool they initially loaded
+by hand.
+
+**Interaction with pocket map:**
+
+Manual-only tools never appear in the pocket map. `TOOL_NOT_FOUND` and
+`manual_only` are distinct states — `TOOL_NOT_FOUND` means the tool
+*could* be in the carousel but isn't declared; `manual_only` means it is
+by design never there. The system must not conflate them.
+
+> [!NOTE]
+> The exact UX for the manual change prompt (dialog, HAL pin, button on
+> ATC tab) and the stow/load offer is an open design question related to
+> §4.13.8. The underlying state machine logic in fatc can be designed
+> first; the UX wired on top later.
+
+#### 4.13.6 IPC Interface for Inventory Management
+
+The Unix socket server (§Q1) accepts inventory management commands in
+addition to the M-code handshake commands:
+
+| Command | Payload | Effect |
+|---------|---------|--------|
+| `SET_POCKET` | `pocket`, `tool` | Declare tool T in pocket P (0 = empty) |
+| `GET_INVENTORY` | — | Return full pocket→tool map |
+| `CLEAR_INVENTORY` | — | Mark all pockets empty, inventory_valid=false |
+| `SET_SPINDLE` | `tool` | Declare tool currently in spindle |
+
+These commands can be driven from the GUI, a setup script, or directly
+from the LinuxCNC MDI via a User M-code (e.g. `M104 P3 Q5` = pocket 3
+contains T5).
+
+> [!NOTE]
+> The `SET_POCKET` command with `tool=0` is how the operator declares that
+> a pocket is empty after manually removing a tool. The ATC cannot know about
+> manual carousel changes — the operator is responsible for keeping declarations
+> accurate.
+
+#### 4.13.7 Probe Basic / DynATC Integration
+
+The machine runs Probe Basic as its GUI. Probe Basic ships a `DynATC`
+QtQuickWidget (`src/widgets/atc_widget/atc.py`) that renders an animated
+carousel showing which tool is in which pocket.
+
+**How Probe Basic tracks the pocket map (their approach):**
+
+Probe Basic stores the pocket map in **LinuxCNC persistent NGC parameters**:
+`#[4000 + pocket]` = tool number in that pocket (e.g. `#4003` = tool in
+pocket 3). These are written to the `.var` parameter file and survive
+power cycles. The DynATC widget is a *display-only* layer — it holds an
+in-memory copy and is updated by calling its Python methods directly from
+NGC via qtpyvcp's debug-eval mechanism:
+
+```ngc
+(DEBUG, EVAL[vcp.getWidget{"dynatc"}.store_tool{#<pocket>, #<tool>}])
+```
+
+On carousel home (`M13`), the NGC macro iterates all pockets, reads each
+`#[4000+n]` value, and calls `store_tool` to sync the widget from the
+`.var` file. The widget name `"dynatc"` is the Qt object name set in the
+`.ui` file.
+
+**DynATC widget API** (methods callable via qtpyvcp EVAL):
+
+| Method | Args | Effect |
+|--------|------|--------|
+| `store_tool(pocket, tool)` | int, int | Show/hide tool in pocket slot on widget |
+| `load_tools()` | — | Redraw all pockets from `self.pockets` dict |
+| `rotate(steps, direction)` | int, "cw"/"ccw" | Animate carousel rotation |
+| `atc_message(msg)` | str | Display status message on widget |
+
+**Implications for fatc:**
+
+fatc uses `fatc_state.json` (not the `.var` file) as its authoritative
+pocket map, because the map is managed by the fatc daemon process, not
+by the NGC interpreter. This is a deliberate divergence from the Probe
+Basic approach, chosen because:
+
+- fatc is an autonomous daemon with its own serial state machine; the
+  authoritative source should live with the daemon
+- Atomic file writes in `fatc_state.json` are safer than `.var` file
+  manipulation from multiple contexts
+- The IPC `SET_POCKET` command provides an explicit, auditable setup
+  interface
+
+**Integration approach** — fatc must update the DynATC widget whenever
+the pocket map changes. This is done from `toolchange.ngc` using the
+same EVAL pattern, after each IPC response confirms a stow or load
+completed. The fatc `GET_INVENTORY` IPC command can also be called from
+an NGC macro at carousel home time to sync the widget from the authoritative
+state file, matching Probe Basic's `M13` sync pattern.
+
+> [!NOTE]
+> Probe Basic's approach has **no explicit "declare pocket" UI or command**
+> beyond running tool changes. Initial setup requires the operator to
+> directly edit the `.var` parameter file, or to run the carousel home
+> (`M13`) after which the widget reflects whatever is already in the
+> parameters. This is an ergonomic gap that fatc's `SET_POCKET` IPC command
+> addresses explicitly.
+
+#### 4.13.8 Setup UX — Open Design Question
+
+> [!WARNING]
+> **The operator-facing UX for loading/unloading the carousel is an open
+> design problem and has not been solved yet.**
+
+The core interaction — "I am setting up for a job, here are the tools I
+want in the carousel, which pockets should I use and how do I tell the
+machine" — requires deliberate UX design. Key open questions:
+
+- Does the operator drag tools into pocket slots on a visual carousel
+  display, or fill in a table, or use physical buttons on a panel?
+- When the operator declares "pocket 3 = T5", does the machine drive the
+  carousel to pocket 3 so the operator can physically load it, or does
+  the operator load first and then declare?
+- How are empty pockets cleared after a job where tools move around?
+- How does the DRO/status panel show the current pocket map at a glance?
+- What confirmation/validation flow prevents "I said T5 but loaded T6"?
+
+**Options to evaluate:**
+
+1. **Extend DynATC** — add an edit mode to the existing carousel widget
+   where clicking a pocket slot opens a tool-number picker. Requires
+   modifying Probe Basic's QML/Qt widget but re-uses the carousel graphic.
+
+2. **Separate setup panel** — a standalone tab or dialog (the Probe Basic
+   `user_atc_buttons` plugin point) with a pocket-to-tool assignment table
+   and "drive carousel to pocket" buttons. Simpler to implement, potentially
+   less intuitive.
+
+3. **From-scratch carousel UI** — replace DynATC entirely with a custom
+   widget tailored to this machine's workflow, retaining only the fatc
+   IPC protocol as the backend interface.
+
+4. **Combination** — use DynATC for display and animation, but build a
+   separate setup panel for initial declaration and job-change workflow.
+
+This needs to be explored before Phase 6 (GUI integration) begins. The
+right answer likely depends on how the physical carousel-loading workflow
+actually feels in practice on the real machine.
+
+---
+
+### 4.14 Tool Length Probing Integration
+
+> [!NOTE]
+> **Open design area — details TBD.** The hooks need to be identified early
+> so the tool change sequence leaves the right doors open.
+
+Automatic tool length measurement should be available as an optional step
+within the tool change flow, not bolted on as a separate manual operation.
+Key scenarios:
+
+- **On every ATC load** — probe immediately after a new tool is clamped,
+  before the job resumes. Guarantees `G43` offset is always current.
+- **On first use of a tool** — probe only if no length offset is stored yet
+  (tool is new to the table). Avoids re-probing tools whose length is known.
+- **On manual change** — prompt operator whether to probe after a manual
+  load, since manual changes are more likely to involve tools the system
+  hasn't seen before.
+- **On demand** — operator-triggered probe from the ATC tab, e.g. "re-probe
+  T<n>" after a tool is re-sharpened or a collet is changed.
+
+**Sequence integration point:**
+
+The natural place is immediately after the `M103` Z_CLEAR step in
+`toolchange.ngc`, before `endsub [1]`. At that point the tool is clamped,
+Z is clear, and the interpreter is still inside the remap. An optional
+subroutine call to a tool-setter routine can be inserted conditionally
+based on a flag or the tool table state.
+
+**Dependencies:**
+
+- Probe Basic includes tool-setter routines (`tool_touch_off.ngc`,
+  `toolsetter_wco.ngc`, etc.) that can potentially be called as subroutines
+- The tool setter's position must be known and reachable from inside the
+  remap (G53 coordinates)
+- `G43 H<tool>` must be applied *after* probing, not before — the current
+  `toolchange.ngc` must not apply G43 prematurely
+
+**Interaction with manual-only tools (§4.13.5):**
+
+Manual changes are the case where auto-probing is most valuable, since
+the operator is more likely to be loading an unfamiliar or recently
+modified tool. The manual change prompt (§4.13.5) should include a
+"probe after load" option.
 
 ---
 
@@ -799,80 +1087,112 @@ net z-pos-fb             joint.2.pos-fb                => fatc.z-position
 
 With this architecture, the G-code remap (`toolchange.ngc`) becomes a thin wrapper:
 1. Handle Z-axis motion (raise to clearance, lower to engagement)
-2. Signal the ATC component to do its work
-3. Wait for completion
+2. Signal the ATC component to do its work via User M-codes (blocking IPC)
+3. Return success or fault to the interpreter
 
-Or, if Z coordination is handled via HAL signal handshake pins, the remap
-may become unnecessary entirely.
+See Q1 for the chosen IPC mechanism.
 
 ---
 
 ## 10. Open Questions & Discussion
 
-### Q1: Z-Axis Motion Control — RESOLVED: Remap as Thin Sequencer
+### Q1: Z-Axis Motion Control — RESOLVED: User M-codes + Unix Socket IPC
 
 The Python component cannot directly command LinuxCNC axis motion. MDI
 commands (`linuxcnc.command().mdi()`) are **not available during M6** because
 the interpreter is occupied executing the remap subroutine — you cannot
 switch to `MODE_MDI` while a program is running.
 
-**Solution: M6 remap as thin sequencer with M66/M68 handshake.**
+**Solution: User M-codes (M101–M103) as synchronous RPC over a Unix domain socket.**
 
-The remap handles **only Z moves and handshake signals**. The fatc component
-handles everything else (carousel, drawbar, sensors, errors). Communication
-uses `M68` (set analog output — non-blocking) and `M66` (wait on analog
-input — blocking) which are standard LinuxCNC interpreter commands.
+When LinuxCNC executes a User M-code (`M101`–`M199`), it runs the corresponding
+executable found on `PROGRAM_PREFIX` or `SUBROUTINE_PATH`, passes P and Q
+arguments on the command line, and **blocks the interpreter until the process
+exits**. A non-zero exit code causes LinuxCNC to raise a fault. This is
+exactly a synchronous, blocking RPC — no polling, no timing races.
+
+`fatc.py` runs a `socketserver.ThreadingUnixStreamServer` on `/tmp/fatc.sock`.
+The M-code scripts are tiny Python programs (~15 lines each) that open a
+connection, send a JSON command, wait for a JSON response, and exit with 0
+(success) or 1 (error). The interpreter blocks for the entire duration.
+
+**M-code scripts and their roles:**
+
+| M-code | Script   | Command sent | Blocks until                          |
+|--------|----------|--------------|---------------------------------------|
+| M101   | `M101`   | `BEGIN`      | Carousel extended, READY_FOR_Z        |
+| M102   | `M102`   | `Z_ENGAGED`  | Drawbar op complete, DRAWBAR_DONE     |
+| M103   | `M103`   | `Z_CLEAR`    | Full sequence complete                |
+
+`toolchange.ngc` becomes:
 
 ```gcode
 o<toolchange> sub
-; Phase 1: Signal fatc to start pre-positioning NOW (non-blocking)
-M68 E0 Q1                       ; "start pre-dock for requested tool"
 
-; Phase 2: Move Z to safe height (runs IN PARALLEL with fatc pre-dock)
-G28 Z0
+o10 if [#<_task> EQ 0]
+    o<toolchange> endsub [1]
+    M2
+o10 endif
 
-; Phase 3: Wait for fatc pre-dock complete (may already be done)
-M66 E0 L1 Q60                   ; wait for fatc "pre-dock complete"
+o20 if [#<selected_tool> EQ #<tool_in_spindle>]
+    o<toolchange> endsub [1]
+    M2
+o20 endif
 
-; Phase 4: Z down to tool-change height
-G53 G0 Z[#<_tc_z_height>]
+G53 G0 Z0                              ; raise Z
+M101 P#<selected_tool>                 ; BEGIN — blocks until carousel extended
+; stow phase only if tool in spindle:
+o100 if [#<tool_in_spindle> GT 0]
+    G53 G0 Z#<_ini[ATC]TC_HEIGHT>      ; lower Z
+    M102                               ; Z_ENGAGED (stow) — blocks until drawbar done
+    G53 G0 Z0                          ; retract Z
+    M103                               ; Z_CLEAR (stow) — blocks until load ready
+o100 endif
+G53 G0 Z#<_ini[ATC]TC_HEIGHT>          ; lower Z
+M102                                   ; Z_ENGAGED (load) — blocks until drawbar done
+G53 G0 Z0                              ; retract Z
+M103                                   ; Z_CLEAR (load) — blocks until complete
 
-; Phase 5: Signal fatc "Z engaged", wait for drawbar ops
-M68 E1 Q1
-M66 E1 L1 Q30                   ; wait for fatc "drawbar done"
-
-; Phase 6: Z retract
-G28 Z0
-
-; Phase 7: Signal fatc "Z clear", wait for carousel retract
-M68 E2 Q1
-M66 E2 L1 Q30                   ; wait for fatc "all done"
-
+o<toolchange> endsub [1]
 o<toolchange> endsub
 ```
 
-**Why this works:**
+**Socket protocol:**
 
-- `M68` is non-blocking — it sets a pin and returns immediately, so the
-  next G-code line (G28) executes while fatc works in parallel
-- `M66` blocks until fatc responds, providing clean synchronization
-- Each actor does what it's good at: remap has axis control, fatc has
-  everything else
-- The remap is ~15 lines that rarely changes; all intelligence is in Python
-- Pre-dock parallel motion (4.5) is fully supported:
+Each M-code script sends one newline-delimited JSON object and reads one
+back before exiting:
+
+Request: `{"cmd": "BEGIN", "tool": 3}\n`
+Response: `{"ok": true}\n`  or  `{"ok": false, "error": "no empty pocket"}\n`
+
+**Why this is better than M66/M68 HAL pin handshake:**
+
+- `M101`–`M103` block the interpreter completely — zero timing race
+- No HAL AIO/DIO pins consumed for inter-process signalling
+- Error propagation is native: bad exit code → LinuxCNC fault, with message
+- `toolchange.ngc` is ~20 readable lines; no `M64`/`M65`/`M66`/`M68` ceremony
+- fatc.py state machine is driven by socket connections, not edge detection
+  on a pin polled every 10 ms
+
+**Timeline (parallel motion still supported):**
 
 ```
-Time ──────────────────────────────────────────────►
+Time ────────────────────────────────────────────────────────────►
 
-Remap:  [M68 signal][─── G28 Z home ───][M66 wait][ Z engage ]...
-fatc:   ........[── rotate ──][─ pre-dock ─][ ready ]...............
+NGC:   [M101 blocks─────────────────────────][G53 Z engage][M102 blocks─][G53 Z0][M103]
+fatc:  [rotate────────────────][extend──────][READY_FOR_Z ][drawbar op  ][DONE   ][retract]
 ```
+
+fatc begins carousel rotation immediately on receiving `BEGIN`. The M101
+call returns only once the carousel is fully extended (READY_FOR_Z), so
+Z engage and carousel extend happen in parallel during M101's block.
 
 > [!NOTE]
-> The specific M66/M68 pin numbers and signal conventions are TBD.
-> The remap will also need the stow sequence (similar phases in reverse
-> order) when there's a tool already in the spindle. The full remap may
-> be ~30 lines covering both stow and load phases.
+> M-code script files (`M101`, `M102`, `M103`) must be placed on
+> `PROGRAM_PREFIX` or one of the `SUBROUTINE_PATH` directories and must
+> be executable (`chmod +x`). They are plain Python scripts with a
+> `#!/usr/bin/env python3` shebang.
+> The socket path `/tmp/fatc.sock` is configurable via the INI `[ATC]` section.
 
 ---
 

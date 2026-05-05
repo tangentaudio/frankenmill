@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+"""M101 P<tool> — BEGIN tool change.
+Sends BEGIN to fatc and blocks until carousel is extended (READY_FOR_Z).
+P argument = target tool number.
+Exit 0 = ok; exit 1 = error (LinuxCNC raises fault).
+"""
+import json
+import os
+import socket
+import sys
+
+SOCK_PATH = os.environ.get('FATC_SOCKET', '/tmp/fatc.sock')
+
+def ipc(cmd, **kwargs):
+    msg = {'cmd': cmd, **kwargs}
+    with socket.socket(socket.AF_UNIX) as s:
+        s.settimeout(120.0)
+        s.connect(SOCK_PATH)
+        s.sendall(json.dumps(msg).encode() + b'\n')
+        buf = b''
+        while b'\n' not in buf:
+            chunk = s.recv(4096)
+            if not chunk:
+                raise IOError('connection closed before response')
+            buf += chunk
+        return json.loads(buf.split(b'\n')[0])
+
+def main():
+    tool = int(float(sys.argv[1])) if len(sys.argv) > 1 else 0
+    try:
+        resp = ipc('BEGIN', tool=tool)
+    except Exception as exc:
+        print(f'M101 error: {exc}', file=sys.stderr)
+        sys.exit(1)
+    if not resp.get('ok'):
+        print(f"M101 failed: {resp.get('error', 'unknown')}", file=sys.stderr)
+        sys.exit(1)
+
+main()

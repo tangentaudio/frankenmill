@@ -54,6 +54,9 @@ class Config:
     # --- Homing ---
     homing_required: bool = False          # set True for real machine; False for dev
 
+    # --- IPC ---
+    socket_path: str = '/tmp/fatc.sock'    # Unix socket for M101/M102/M103
+
 
 def load(ini_path: str, section: str = 'ATC') -> Config:
     """
@@ -113,6 +116,7 @@ def load(ini_path: str, section: str = 'ATC') -> Config:
     cfg.drawbar_unclamp_timeout = get('DRAWBAR_UNCLAMP_TIMEOUT', float, cfg.drawbar_unclamp_timeout)
 
     cfg.homing_required         = get('HOMING_REQUIRED', _bool,  cfg.homing_required)
+    cfg.socket_path             = get('SOCKET_PATH',      str,   cfg.socket_path)
 
     return cfg
 
