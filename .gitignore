@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.pyo
+*.log
+*.pickle
+fatc_state.json
+sim.var
+sim.var.bak

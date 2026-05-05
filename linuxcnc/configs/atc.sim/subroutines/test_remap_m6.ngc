@@ -1,0 +1,46 @@
+; test_remap_m6.ngc -- Experiment 3: minimal M6 remap validation
+;
+; This is the thinnest possible remap that proves:
+;  1. LinuxCNC calls this instead of the default tool-change mechanism
+;  2. change_prolog has set #<selected_tool>, #<tool_in_spindle>, etc.
+;  3. change_epilog fires correctly on return
+;
+; HOW TO ACTIVATE:
+;   Add to atc_sim.ini [RS274NGC]:
+;     REMAP = M6 modalgroup=6 prolog=change_prolog ngc=test_remap_m6 epilog=change_epilog
+;   Then run an M6 from MDI: T3 M6
+;
+; WHAT TO CHECK:
+;   DEBUG output shows correct values for:
+;     selected_tool    -- the T number requested
+;     tool_in_spindle  -- tool currently in spindle (0 if none)
+;     selected_pocket  -- tool table index for selected_tool
+;     current_pocket   -- tool table index for tool_in_spindle
+;   fatc.tool-change should pulse high (iocontrol still sends it via change_epilog)
+;   halshow: fatc.tool-prep-number should show the requested T number
+;
+; HOW TO DEACTIVATE:
+;   Comment out the REMAP line in atc_sim.ini (or remove it).
+;   The standard fatc stub will resume handling tool changes.
+
+o<test_remap_m6> sub
+
+(DEBUG, === M6 remap test ===)
+(DEBUG, selected_tool    = #<selected_tool>)
+(DEBUG, tool_in_spindle  = #<tool_in_spindle>)
+(DEBUG, selected_pocket  = #<selected_pocket>)
+(DEBUG, current_pocket   = #<current_pocket>)
+(DEBUG, _task            = #<_task>)
+
+; Bail out if running in task=0 context (e.g. GUI reload)
+o100 if [#<_task> EQ 0]
+    (DEBUG, task=0 -- skipping tool change)
+    o<test_remap_m6> return [999]
+o100 endif
+
+; Stub: just acknowledge immediately (same as current Phase 2 fatc stub)
+; In Phase 3, this is where we'll signal fatc and wait for completion.
+(DEBUG, Acknowledging tool change T#<selected_tool> with no carousel motion)
+
+(DEBUG, === M6 remap test complete ===)
+o<test_remap_m6> endsub [1]

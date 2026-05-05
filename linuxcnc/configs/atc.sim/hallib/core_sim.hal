@@ -1,0 +1,94 @@
+# core_sim.hal — FMX3 ATC Sim
+# 3-axis (XYZ) simulation HAL: loopback stepgens, estop loopback, spindle.
+# No Mesa hardware.  fatc component wiring lives in fatc_sim.hal.
+
+# --- RT modules ---
+loadrt [KINS]KINEMATICS
+loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS num_dio=6 num_aio=3
+
+# differentiators for velocity / accel display
+loadrt ddt names=ddt_x,ddt_xv,ddt_y,ddt_yv,ddt_z,ddt_zv
+loadrt hypot names=vel_xy,vel_xyz
+
+# --- servo-thread function chain ---
+addf motion-command-handler   servo-thread
+addf motion-controller        servo-thread
+addf ddt_x    servo-thread
+addf ddt_xv   servo-thread
+addf ddt_y    servo-thread
+addf ddt_yv   servo-thread
+addf ddt_z    servo-thread
+addf ddt_zv   servo-thread
+addf vel_xy   servo-thread
+addf vel_xyz  servo-thread
+
+# --- axis position loopback (sim: cmd == fb) ---
+net Xpos  joint.0.motor-pos-cmd => joint.0.motor-pos-fb  ddt_x.in
+net Ypos  joint.1.motor-pos-cmd => joint.1.motor-pos-fb  ddt_y.in
+net Zpos  joint.2.motor-pos-cmd => joint.2.motor-pos-fb  ddt_z.in
+
+# --- velocity / accel signals (for display) ---
+net Xvel   ddt_x.out  => ddt_xv.in  vel_xy.in0
+net Xacc  <= ddt_xv.out
+net Yvel   ddt_y.out  => ddt_yv.in  vel_xy.in1
+net Yacc  <= ddt_yv.out
+net Zvel   ddt_z.out  => ddt_zv.in  vel_xyz.in0
+net Zacc  <= ddt_zv.out
+net XYvel  vel_xy.out  => vel_xyz.in1
+net XYZvel <= vel_xyz.out
+
+# --- Z position exported for fatc zone-safety monitoring ---
+# (fatc_sim.hal connects fatc.z-position to this signal when loaded)
+net z-pos-fb <= joint.2.pos-fb
+
+# --- E-stop loopback (sim: no external E-stop hardware) ---
+# Single net: user-enable-out drives both the loopback and the estop-out signal
+net estop-out  iocontrol.0.user-enable-out  =>  iocontrol.0.emc-enable-in
+
+# --- Machine enable ---
+net machine-is-enabled  <=  motion.motion-enabled
+
+# --- Probe input (will be overridden in fatc_sim.hal or by GUI sim) ---
+net probe-in  =>  motion.probe-input
+
+# --- Coolant ---
+net flood   <=  iocontrol.0.coolant-flood
+net mist    <=  iocontrol.0.coolant-mist
+
+# --- Spindle direction signals (consumed by spindle_sim.hal) ---
+net spindle-fwd  <=  spindle.0.forward
+net spindle-rev  <=  spindle.0.reverse
+
+# --- Tool change signals ---
+# When fatc_sim.hal is loaded it replaces the loopback below with the
+# fatc component.  Until then, manual tool change dialog handles it.
+net tool-change-request   <=  iocontrol.0.tool-change
+net tool-change-confirmed  =>  iocontrol.0.tool-changed
+net tool-number            <=  iocontrol.0.tool-prep-number
+
+# Tool prepare loopback (fatc does not use iocontrol tool-prepare)
+net tool-prep-loopback  iocontrol.0.tool-prepare  =>  iocontrol.0.tool-prepared
+
+# --- HALUI misc ---
+net axis-select-x   halui.axis.x.select
+net jog-x-pos       halui.axis.x.plus
+net jog-x-neg       halui.axis.x.minus
+net x-is-homed      halui.joint.0.is-homed
+net axis-select-y   halui.axis.y.select
+net jog-y-pos       halui.axis.y.plus
+net jog-y-neg       halui.axis.y.minus
+net y-is-homed      halui.joint.1.is-homed
+net axis-select-z   halui.axis.z.select
+net jog-z-pos       halui.axis.z.plus
+net jog-z-neg       halui.axis.z.minus
+net z-is-homed      halui.joint.2.is-homed
+net jog-selected-pos   halui.axis.selected.plus
+net jog-selected-neg   halui.axis.selected.minus
+net spindle-manual-cw  halui.spindle.0.forward
+net spindle-manual-ccw halui.spindle.0.reverse
+net spindle-manual-stop halui.spindle.0.stop
+net machine-is-on      halui.machine.is-on
+net MDI-mode           halui.mode.is-mdi
+
+# TLO analog loopback used by probe_basic
+net tlo  motion.analog-in-01  <=  halui.tool.length_offset.z

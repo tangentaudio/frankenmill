@@ -1,0 +1,53 @@
+# fatc_sim.hal — FMX3 ATC Sim
+# Loads the fatc component and wires it to LinuxCNC's iocontrol signals.
+# Drawbar simulation loopbacks live in probe_basic_postgui.hal (where the
+# not.1 RT component is loaded and addf'd to the servo-thread).
+#
+# Phase 2: all lines active.
+#
+# Reference: linuxcnc/atc/development.md section 2.5
+
+# ---------------------------------------------------------------------------
+# Load fatc component (waits for component to register its HAL pins)
+# ---------------------------------------------------------------------------
+loadusr -Wn fatc python3 ../../atc/fatc/fatc.py --ini atc_sim.ini --name fatc
+
+# ---------------------------------------------------------------------------
+# Tool-change handshake
+# Signals tool-change-request, tool-change-confirmed, tool-number are
+# created by core_sim.hal.  We add fatc as a consumer/driver here.
+# ---------------------------------------------------------------------------
+net tool-change-request    =>  fatc.tool-change
+net tool-change-confirmed  <=  fatc.tool-changed
+net tool-number            =>  fatc.tool-prep-number
+
+# Disconnect the loopback from core_sim.hal and let fatc drive tool-prepared.
+unlinkp iocontrol.0.tool-prepared
+net tool-prep-ack  fatc.tool-prepared  =>  iocontrol.0.tool-prepared
+
+# ---------------------------------------------------------------------------
+# Safety interlocks
+# ---------------------------------------------------------------------------
+# fatc.abort is driven by NOT(machine-is-enabled) in probe_basic_postgui.hal
+# (requires not.2 addf'd to servo-thread, which happens in postgui)
+net machine-is-enabled =>  fatc.machine-enabled
+
+# Z position for zone-based safety (signal created in core_sim.hal)
+net z-pos-fb           =>  fatc.z-position
+
+# fatc error → stop running program
+net fatc-program-stop  fatc.program-stop  =>  halui.program.stop
+
+# ---------------------------------------------------------------------------
+# Spindle pre-sense sensor (optional hardware — sim: always present)
+# ---------------------------------------------------------------------------
+setp fatc.spindle-tool-sense true
+
+# ---------------------------------------------------------------------------
+# Drawbar simulation loopbacks live in probe_basic_postgui.hal
+# (requires not.1 addf'd to servo-thread, which happens in postgui).
+# ---------------------------------------------------------------------------
+# Notes on manual fault injection during development:
+#   halcmd sets fatc.tool-clamped-sensor false   # simulate clamp failure
+#   halcmd sets fatc.spindle-tool-sense false     # simulate missing tool
+# ---------------------------------------------------------------------------

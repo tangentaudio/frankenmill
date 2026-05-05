@@ -1,0 +1,40 @@
+# probe_basic_postgui.hal — FMX3 ATC Sim
+# Loaded by Probe Basic (QtPyVCP) after TWOPASS completes.
+# No VFD, no Mesa hardware.  All loadrt/addf moved here because POSTGUI
+# runs outside TWOPASS and cannot duplicate modules.
+
+loadrt time
+loadrt not names=not.0,not.1,not.2
+
+addf time.0   servo-thread
+addf not.0    servo-thread
+addf not.1    servo-thread
+addf not.2    servo-thread
+
+# *** Cycle timer — required for Probe Basic ***
+net prog-running   not.0.in  <=  halui.program.is-idle
+net prog-paused    halui.program.is-paused  =>  time.0.pause
+net cycle-timer    time.0.start  <=  not.0.out
+net cycle-seconds  qtpyvcp.timerseconds.in  <=  time.0.seconds
+net cycle-minutes  qtpyvcp.timerminutes.in  <=  time.0.minutes
+net cycle-hours    qtpyvcp.timerhours.in    <=  time.0.hours
+
+# *** Manual tool-change dialog: disabled — fatc handles tool changes ***
+# (qtpyvcp_manualtoolchange is still created by Probe Basic but not wired)
+
+# *** fatc abort: assert when machine is disabled/e-stopped (NOT of machine-is-enabled) ***
+net machine-is-enabled  =>  not.2.in
+net fatc-abort-signal   not.2.out  =>  fatc.abort
+
+# *** Drawbar simulation loopback (fatc_sim.hal loaded fatc; not.1 addf'd above) ***
+# drawbar-activate HIGH => tool releasing => unclamped-sensor HIGH, clamped-sensor LOW
+# drawbar-activate LOW  => tool clamped  => clamped-sensor HIGH,   unclamped-sensor LOW
+net sim-drawbar-out     fatc.drawbar-activate  =>  fatc.tool-unclamped-sensor  not.1.in
+net sim-drawbar-clamped not.1.out              =>  fatc.tool-clamped-sensor
+
+# *** Probe graphic simulation — push probe tip in GUI triggers probe input ***
+net probe-in  =>  qtpyvcp.probe-in.out
+net probe-in  <=  qtpyvcp.probe-led.on
+
+# *** Spindle RPM readout from simulated encoder (spindle_sim.hal) ***
+net spindle-rpm-filtered  scale_to_rpm.out  =>  qtpyvcp.spindle-encoder-rpm.in

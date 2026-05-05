@@ -1,0 +1,32 @@
+# sim_home.hal — FMX3 ATC Sim
+# Simulated home switches using comparators on the loopback position signals.
+# Home switch triggers when joint position crosses the configured home-switch position.
+
+loadrt comp names=comp_x,comp_y,comp_z
+
+addf comp_x  servo-thread
+addf comp_y  servo-thread
+addf comp_z  servo-thread
+
+# Home-switch trigger positions (machine units — inches)
+# X/Y home near max travel (positive end), Z homes at top (near 0)
+# net must come before sets so the signal exists when sets is called
+net Xhomeswpos  =>  comp_x.in0
+net Yhomeswpos  =>  comp_y.in0
+net Zhomeswpos  =>  comp_z.in0
+
+sets Xhomeswpos  15.5
+sets Yhomeswpos  6.0
+sets Zhomeswpos  0.3
+
+net Xpos  =>  comp_x.in1
+net Ypos  =>  comp_y.in1
+net Zpos  =>  comp_z.in1
+
+setp comp_x.hyst  0.02
+setp comp_y.hyst  0.02
+setp comp_z.hyst  0.02
+
+net Xhomesw  <=  comp_x.out  =>  joint.0.home-sw-in
+net Yhomesw  <=  comp_y.out  =>  joint.1.home-sw-in
+net Zhomesw  <=  comp_z.out  =>  joint.2.home-sw-in

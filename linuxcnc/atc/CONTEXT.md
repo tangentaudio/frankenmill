@@ -162,31 +162,116 @@ Key config changes from stock Marlin:
 
 ---
 
-## 8. What's Next (Phase 1)
+## 8. Current Status and What's Next
 
-The immediate next step is **Phase 1: Serial Foundation** — a standalone Python
-module that establishes reliable Marlin communication:
+### Completed Phases
 
-- Serial open/close, baud config
-- G-code send with `ok` response parsing
-- Error/timeout handling
-- `M115` identification, `M114` position query
-- `G91` relative moves (`G0 C30`, `G0 X10`, etc.)
-- Command queue with `M400` synchronization
+- ✅ **Phase 1**: `serial_marlin.py` — serial protocol, 6/6 tests on hardware
+- ✅ **Phase 2**: `config.py`, `serial_thread.py`, `persistent_state.py`, `fatc.py` — HAL component skeleton, sim launches with Probe Basic
+- ✅ **Heartbeat**: 1-second M114 idle poll in `serial_thread.py`; position on `fatc.marlin-x-position` / `fatc.marlin-c-position` HAL pins
 
-This can be developed as a standalone script first (no LinuxCNC dependency),
-then integrated as the serial layer of the `fatc` HAL component in Phase 2.
+### Current: Pre-Phase-3 Experiments
 
-**Planned file layout for fatc:**
+Before implementing the Phase 3 state machine, three assumptions need validation.
+Test files are in `linuxcnc/configs/atc.sim/subroutines/`:
+
+---
+
+#### Experiment 1 — M66/M68 analog handshake
+
+**Question:** Does `M66 E2 L1 Qn` actually block and return the pin value?
+
+**Files:** `subroutines/test_m66_m68.ngc` (already created)
+
+**Steps:**
+1. Launch the sim: `linuxcnc atc_sim.ini`
+2. Home all axes
+3. Load `test_m66_m68.ngc` and run it (or MDI: `O<test_m66_m68> CALL`)
+4. While blocked, open a terminal:
+   ```bash
+   halcmd setp motion.analog-in-02 99.0
+   ```
+5. Watch the LinuxCNC terminal / log for DEBUG output
+
+**Expected:** `DEBUG: RESULT: SUCCESS -- received value 99.0`
+
+**HAL slots used (both free):**
+- `M68 E2` → `motion.analog-out-02`
+- `M66 E2` ← `motion.analog-in-02`
+
+**Note:** `E0` is used by `program_coolant.ngc`. `E1` / `analog-in-01` is used for TLO. Use **E2** for fatc handshake.
+
+---
+
+#### Experiment 2 — M66 timeout and abort behavior
+
+**Question:** Does M66 return -1 cleanly on timeout? Does abort unblock it without hanging the interpreter?
+
+**Steps (timeout):**
+1. Run `test_m66_m68.ngc` but do NOT set the pin
+2. Wait 8 seconds for timeout
+3. Expected: `DEBUG: RESULT: TIMED OUT (_value is -1)`
+
+**Steps (abort):**
+1. Run `test_m66_m68.ngc`
+2. While blocked, hit Abort in the GUI
+3. Expected: interpreter aborts cleanly, `on_abort.ngc` runs, no hang
+
+---
+
+#### Experiment 3 — M6 REMAP mechanism
+
+**Question:** Does the REMAP prolog/epilog set `#<selected_tool>` and `#<tool_in_spindle>` correctly?
+
+**Files:** `subroutines/test_remap_m6.ngc` (already created)
+
+**Activate:** In `atc_sim.ini` `[RS274NGC]`, uncomment:
+```ini
+REMAP = M6 modalgroup=6 prolog=change_prolog ngc=test_remap_m6 epilog=change_epilog
 ```
-linuxcnc/atc/fatc/
-├── __init__.py
-├── fatc.py              # Main component entry point
-├── serial_marlin.py     # Marlin serial protocol layer  ← Phase 1 focus
-├── state_machine.py     # ATC state machine
-├── config.py            # INI file config loading
-└── persistent_state.py  # JSON tool-pocket map
-```
+
+**Steps:**
+1. Restart LinuxCNC (REMAP requires restart)
+2. Home axes
+3. MDI: `T3 M6` (request tool 3)
+4. Watch DEBUG output for correct values
+
+**Expected:**
+- `selected_tool = 3.0`
+- `tool_in_spindle = 0.0` (or previous tool if one was loaded)
+- `fatc.tool-change` still pulses (change_epilog fires)
+
+**Deactivate:** Comment out the REMAP line again and restart.
+
+---
+
+### Next: Phase 3 — State Machine Core
+
+Once experiments pass, implement the full tool-change sequence in `fatc.py` + write `toolchange.ngc` (the thin remap sequencer). The M6 flow is:
+
+**UNLOAD current tool (if spindle occupied):**
+1. Rotate to empty pocket → `ROTATING`
+2. Extend → `EXTENDING`
+3. Open drawbar, wait for `tool-unclamped-sensor` → `DRAWBAR_OP`
+4. Wait for remap to raise Z (`M66` from remap) → `Z_MOVING`
+5. Signal remap Z-is-clear (`M68` back to remap)
+6. Retract → `RETRACTING`
+
+**LOAD new tool:**
+7. Rotate to target pocket → `ROTATING`
+8. Extend → `EXTENDING`
+9. Wait for remap to lower Z to tool-change height (`M66`) → `Z_MOVING`
+10. Close drawbar, wait for `tool-clamped-sensor` → `DRAWBAR_OP`
+11. Signal remap drawbar-done
+12. Wait for remap to raise Z, signal done
+13. Retract → `RETRACTING`
+14. Update persistent state, ACK tool-change → `IDLE`
+
+**Key HAL analog slots for remap↔fatc handshake (E2 confirmed free):**
+- `E2`: remap signals fatc (pre-dock start, Z-engaged, Z-clear)
+- `E3` (if needed): fatc signals remap (pre-dock ready, drawbar done, all done)
+  — check `num_aio` in `core_sim.hal` first; currently set to 3 (slots 0–2 only)
+  — may need to increase to 4
 
 ---
 
