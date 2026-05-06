@@ -127,31 +127,112 @@ class _IpcCommand:
 
 
 class _SocketHandler(socketserver.StreamRequestHandler):
-    """Handles one M-code connection: read JSON command, wait for result, write JSON response."""
+    """Handles one Unix socket connection.
+
+    Two classes of command share the same socket:
+
+    Motion-sequencing commands (BEGIN / Z_ENGAGED / Z_CLEAR):
+        Posted to _ipc_queue and handled by the state machine's poll loop.
+        The handler thread blocks here until the state machine responds.
+
+    Management commands (GET_INVENTORY / SET_POCKET / CLEAR_INVENTORY /
+        SET_SPINDLE / SET_INVENTORY_VALID):
+        Handled entirely in this thread — they only touch PersistentState
+        and do not interact with the state machine's motion sequence.
+        Responded to immediately before returning.
+    """
+
+    # Commands that are handled synchronously here, never go to _ipc_queue.
+    _MANAGEMENT_CMDS = frozenset({
+        'GET_INVENTORY',
+        'SET_POCKET',
+        'CLEAR_INVENTORY',
+        'SET_SPINDLE',
+        'SET_INVENTORY_VALID',
+    })
 
     def handle(self):
         try:
             raw = self.rfile.readline()
             if not raw:
-                return  # EOF before command sent (connection closed early)
+                return
             data = json.loads(raw.decode().strip())
         except (json.JSONDecodeError, UnicodeDecodeError, OSError) as exc:
             self._send({'ok': False, 'error': f'bad request: {exc}'})
             return
 
+        cmd_name = str(data.get('cmd', ''))
+
+        if cmd_name in self._MANAGEMENT_CMDS:
+            self._send(self._handle_management(cmd_name, data))
+            return
+
+        # --- Motion-sequencing command: hand off to state machine ---
         cmd = _IpcCommand(
-            cmd=str(data.get('cmd', '')),
+            cmd=cmd_name,
             tool=int(data.get('tool', 0)),
         )
-        # Post to state machine
         self.server._fatc._ipc_queue.put(cmd)
 
-        # Block until state machine responds or timeout
         if not cmd.event.wait(timeout=120.0):
             self._send({'ok': False, 'error': 'timeout waiting for fatc'})
             return
 
         self._send(cmd.result)
+
+    def _handle_management(self, cmd_name: str, data: dict) -> dict:
+        """Handle an inventory management command and return the response dict."""
+        fatc = self.server._fatc
+        state = fatc._state  # PersistentState
+
+        if cmd_name == 'GET_INVENTORY':
+            return {
+                'ok': True,
+                'tool_in_spindle': state.tool_in_spindle,
+                'current_pocket': state.current_pocket,
+                'inventory_valid': state.inventory_valid,
+                'pocket_map': {str(k): v for k, v in sorted(state.pocket_map.items())},
+            }
+
+        if cmd_name == 'SET_POCKET':
+            pocket = int(data.get('pocket', 0))
+            tool   = int(data.get('tool',   0))
+            if pocket < 1 or pocket > fatc._cfg.pockets:
+                return {'ok': False, 'error': f'pocket {pocket} out of range (1–{fatc._cfg.pockets})'}
+            if tool < 0:
+                return {'ok': False, 'error': f'tool number must be >= 0'}
+            state.set_tool_in_pocket(pocket, tool)
+            state.save()
+            log.info("IPC SET_POCKET: pocket %d = T%d", pocket, tool)
+            return {'ok': True}
+
+        if cmd_name == 'CLEAR_INVENTORY':
+            for p in list(state.pocket_map.keys()):
+                state.pocket_map[p] = 0
+            state._dirty = True
+            state.set_tool_in_spindle(0)
+            state.set_inventory_valid(False)
+            state.save()
+            log.info("IPC CLEAR_INVENTORY: all pockets cleared")
+            return {'ok': True}
+
+        if cmd_name == 'SET_SPINDLE':
+            tool = int(data.get('tool', 0))
+            if tool < 0:
+                return {'ok': False, 'error': 'tool number must be >= 0'}
+            state.set_tool_in_spindle(tool)
+            state.save()
+            log.info("IPC SET_SPINDLE: T%d", tool)
+            return {'ok': True}
+
+        if cmd_name == 'SET_INVENTORY_VALID':
+            valid = bool(data.get('valid', False))
+            state.set_inventory_valid(valid)
+            state.save()
+            log.info("IPC SET_INVENTORY_VALID: %s", valid)
+            return {'ok': True}
+
+        return {'ok': False, 'error': f'unknown management command {cmd_name!r}'}
 
     def _send(self, payload: dict):
         try:
@@ -203,6 +284,7 @@ class FatcComponent:
 
         # Internal state tracking
         self._sm_state = State.INIT
+        self._state_entered_at: float = time.monotonic()
         self._error_code = ErrorCode.NONE
         self._poll_count = 0
         self._is_homed = False
@@ -218,6 +300,7 @@ class FatcComponent:
         self._prev_home_cmd    = False
         self._prev_abort       = False
         self._prev_error_reset = False
+        self._prev_tool_prep_num = 0
         self._first_poll       = True   # used to seed prev values from actual pin state
 
         # IPC socket server (M101/M102/M103 connect here)
@@ -377,6 +460,7 @@ class FatcComponent:
         self._prev_home_cmd    = home_cmd
         self._prev_abort       = abort
         self._prev_error_reset = error_reset
+        self._prev_tool_prep_num = tool_prep_num
         self._first_poll       = False
 
     # ------------------------------------------------------------------
@@ -495,52 +579,85 @@ class FatcComponent:
         except queue.Empty:
             return None
 
-    def _sm_idle(self, *, home_cmd, tool_change, tool_prep_num, tool_number, **_):
+    def _sm_idle(self, *, home_cmd, tool_change, tool_prep_num, tool_number, z_pos, **_):
         """IDLE state: handle command edges."""
-        # Home command edge
+        # Home command edge (HAL pin)
         if home_cmd and not self._prev_home_cmd:
-            log.info("Home command received")
+            log.info("Home command received (HAL)")
             self._pending_result = self._serial.command_home('XC')
             self._transition(State.HOMING)
             return
 
-        # Tool prepare: LinuxCNC sends tool-prep-number first, then tool-change.
-        # Acknowledge immediately (no carousel motion at prep time).
-        if tool_prep_num > 0 and not self._h['tool-prepared']:
-            log.info("Tool prep requested: T%d", tool_prep_num)
-            self._h['tool-prepared'] = True
+        # Tool prepare: iocontrol.0.tool-prepare / tool-prepared is handled by
+        # a HAL loopback (core_sim.hal or fatc_sim.hal).  fatc does not gate it.
+        # Log when we see a new prep number for diagnostics.
+        if tool_prep_num != self._prev_tool_prep_num:
+            log.info("Tool prep number changed: T%d -> T%d", self._prev_tool_prep_num, tool_prep_num)
 
-        # --- IPC path: M101 sends BEGIN ---
-        cmd = self._ipc_next_cmd('BEGIN')
+        # --- IPC command dispatch (single pop to avoid consuming wrong cmd) ---
+        cmd = self._ipc_next_cmd(None)
         if cmd is not None:
+            if cmd.cmd == 'HOME':
+                # M104: home the carousel
+                log.info("Home command received (IPC)")
+                self._active_ipc_cmd = cmd   # responded when homing completes
+                self._pending_result = self._serial.command_home('XC')
+                self._transition(State.HOMING)
+                return
             if cmd.cmd == 'BEGIN':
-                log.info("IPC BEGIN — T%d requested, spindle has T%d (lc) / T%d (state)",
-                         cmd.tool, tool_number, self._state.tool_in_spindle)
+                log.info("-" * 60)
+                log.info("  IPC>>> BEGIN T%d  z=%.3f  (spindle: lc=T%d  state=T%d)",
+                         cmd.tool, z_pos, tool_number, self._state.tool_in_spindle)
+                log.info("-" * 60)
+
+                # Guard: carousel must be homed before any tool change.
+                if not self._is_homed:
+                    log.error("BEGIN rejected: carousel not homed")
+                    cmd.respond(False, "carousel not homed — REF CAROUSEL first")
+                    return
+                # Belt-and-suspenders: Z must be at or above the clearance height.
+                # LinuxCNC's M1xx protocol already guarantees this (motion queue
+                # flush before User M-code), but log a warning if pos-fb disagrees.
+                if z_pos < self._cfg.z_tool_clearance_height:
+                    log.warning(
+                        "BEGIN: z=%.3f is below clearance %.3f — "
+                        "proceeding (LinuxCNC protocol guarantees Z is safe; "
+                        "check Z_TOOL_CLEARANCE_HEIGHT if this recurs)",
+                        z_pos, self._cfg.z_tool_clearance_height,
+                    )
                 self._pending_tool = cmd.tool
                 self._active_ipc_cmd = cmd   # responded when carousel reaches WAIT_Z
-                # LinuxCNC's tool-number is authoritative.  Sync persistent state.
-                if self._state.tool_in_spindle != tool_number:
-                    log.info("Syncing tool_in_spindle: state=%d -> lc=%d",
-                             self._state.tool_in_spindle, tool_number)
-                    self._state.set_tool_in_spindle(tool_number)
-                if tool_number > 0:
+
+                # fatc's persistent state is authoritative for what's physically
+                # in the spindle (it tracks actual drawbar clamp/unclamp ops).
+                # LinuxCNC's tool-number comes from the .var file and may be stale
+                # after a restart.  Use fatc's state for the stow/load decision.
+                fatc_spindle = self._state.tool_in_spindle
+                if fatc_spindle != tool_number:
+                    log.warning("Spindle mismatch: fatc=T%d, lc=T%d — "
+                                "trusting fatc (physical truth)",
+                                fatc_spindle, tool_number)
+
+                if fatc_spindle > 0:
                     self._start_stow()
                 else:
                     self._start_load()
-            else:
-                log.warning("Unexpected IPC cmd %r in IDLE", cmd.cmd)
-                cmd.respond(False, f"unexpected command {cmd.cmd!r} in IDLE")
+                return
+            log.warning("Unexpected IPC cmd %r in IDLE", cmd.cmd)
+            cmd.respond(False, f"unexpected command {cmd.cmd!r} in IDLE")
             return
 
-        # --- Non-REMAP fallback / iocontrol handshake cleanup ---
-        # With REMAP active, iocontrol.0.tool-change pulses high after
-        # change_epilog commits.  Ack it silently so iocontrol is satisfied.
+        # --- iocontrol tool-change / tool-changed handshake ---
+        # After change_epilog calls emccanon.CHANGE_TOOL(), iocontrol asserts
+        # tool-change=1 and waits for tool-changed=1.  We ack immediately.
         if tool_change and not self._prev_tool_change:
+            log.info("IOCTL: tool-change rising edge — acking tool-changed=TRUE  "
+                     "(prep=%d, lc_tool=%d)", tool_prep_num, tool_number)
             self._h['tool-changed'] = True
 
         if not tool_change and self._h['tool-changed']:
+            log.info("IOCTL: tool-change fell — clearing tool-changed")
             self._h['tool-changed'] = False
-            self._h['tool-prepared'] = False
 
     # ------------------------------------------------------------------
     # Sequence helpers
@@ -572,15 +689,12 @@ class FatcComponent:
         """Begin load sequence: rotate to target tool pocket."""
         target_pocket = self._state.find_pocket_for_tool(self._pending_tool)
         if target_pocket is None:
-            # Tool not in inventory — use tool number as pocket number (fallback)
-            if self._pending_tool < 1 or self._pending_tool > self._cfg.pockets:
-                log.error("T%d not in inventory and tool number exceeds pocket count (%d) — cannot load",
-                          self._pending_tool, self._cfg.pockets)
-                self._enter_error(ErrorCode.TOOL_NOT_FOUND)
-                return
-            target_pocket = self._pending_tool
-            log.warning("T%d not in inventory map — using pocket %d by number",
-                        self._pending_tool, target_pocket)
+            # TODO: Instead of erroring, fall back to a manual toolchange dialog
+            # so the operator can load tools that aren't in the carousel by hand.
+            log.error("T%d not found in carousel inventory — cannot load",
+                      self._pending_tool)
+            self._enter_error(ErrorCode.TOOL_NOT_FOUND)
+            return
         log.info("Load: rotating to pocket %d for T%d", target_pocket, self._pending_tool)
         self._state.set_current_pocket(target_pocket)
         angle = cfg_module.pocket_angle(self._cfg, target_pocket)
@@ -595,10 +709,13 @@ class FatcComponent:
     # STOW state handlers
     # ------------------------------------------------------------------
 
-    def _sm_stow_wait_z(self, **_):
+    def _sm_stow_wait_z(self, *, z_pos, **_):
         """STOW_WAIT_Z: respond READY_FOR_Z to BEGIN, then wait for Z_ENGAGED."""
         # Respond to the pending BEGIN command once carousel is extended
         if self._active_ipc_cmd is not None:
+            log.info("-" * 60)
+            log.info("  <<<IPC READY_FOR_Z (stow) — unblocking M101")
+            log.info("-" * 60)
             log.info("Stow: carousel extended — responding READY_FOR_Z")
             self._ipc_respond(True)
 
@@ -607,6 +724,10 @@ class FatcComponent:
         if cmd is None:
             return
         if cmd.cmd == 'Z_ENGAGED':
+            log.info("-" * 60)
+            log.info("  IPC>>> Z_ENGAGED (stow) — M102 fired, z=%.3f  (TC_HEIGHT=%.3f)",
+                     z_pos, self._cfg.z_tool_change_height)
+            log.info("-" * 60)
             log.info("Stow: Z engaged — unclamping drawbar")
             self._active_ipc_cmd = cmd   # responded when drawbar op complete
             self._h['drawbar-activate'] = True
@@ -620,11 +741,21 @@ class FatcComponent:
         if self._h['tool-unclamped-sensor']:
             log.info("Stow: tool unclamped — waiting for Z clear")
             self._transition(State.STOW_WAIT_Z_CLEAR)
+            return
+        elapsed = time.monotonic() - self._state_entered_at
+        if elapsed > self._cfg.drawbar_unclamp_timeout:
+            log.error("Drawbar unclamp timeout after %.1fs (limit %.1fs)",
+                      elapsed, self._cfg.drawbar_unclamp_timeout)
+            self._h['drawbar-activate'] = False   # de-energise solenoid on fault
+            self._enter_error(ErrorCode.DRAWBAR_TIMEOUT)
 
     def _sm_stow_wait_z_clear(self, **_):
         """STOW_WAIT_Z_CLEAR: respond DRAWBAR_DONE to Z_ENGAGED, then wait for Z_CLEAR."""
         # Respond to the pending Z_ENGAGED command once drawbar is open
         if self._active_ipc_cmd is not None:
+            log.info("-" * 60)
+            log.info("  <<<IPC DRAWBAR_DONE (stow) — unblocking M102")
+            log.info("-" * 60)
             log.info("Stow: drawbar open — responding DRAWBAR_DONE")
             self._ipc_respond(True)
 
@@ -633,6 +764,9 @@ class FatcComponent:
         if cmd is None:
             return
         if cmd.cmd == 'Z_CLEAR':
+            log.info("-" * 60)
+            log.info("  IPC>>> Z_CLEAR (stow) — M103 fired, Z at safe height")
+            log.info("-" * 60)
             log.info("Stow: Z clear — retracting carousel")
             self._active_ipc_cmd = cmd   # responded when load carousel reaches WAIT_Z
             self._h['drawbar-activate'] = False
@@ -653,10 +787,13 @@ class FatcComponent:
     # LOAD state handlers
     # ------------------------------------------------------------------
 
-    def _sm_load_wait_z(self, **_):
+    def _sm_load_wait_z(self, *, z_pos, **_):
         """LOAD_WAIT_Z: respond READY_FOR_Z (to BEGIN or stow Z_CLEAR), then wait for Z_ENGAGED."""
         # Respond to the pending command once carousel is extended
         if self._active_ipc_cmd is not None:
+            log.info("-" * 60)
+            log.info("  <<<IPC READY_FOR_Z (load) — unblocking M101 or M103")
+            log.info("-" * 60)
             log.info("Load: carousel extended — responding READY_FOR_Z")
             self._ipc_respond(True)
 
@@ -665,6 +802,10 @@ class FatcComponent:
         if cmd is None:
             return
         if cmd.cmd == 'Z_ENGAGED':
+            log.info("-" * 60)
+            log.info("  IPC>>> Z_ENGAGED (load) — M102 fired, z=%.3f  (TC_HEIGHT=%.3f)",
+                     z_pos, self._cfg.z_tool_change_height)
+            log.info("-" * 60)
             log.info("Load: Z engaged — clamping drawbar")
             self._active_ipc_cmd = cmd   # responded when drawbar clamped
             self._h['drawbar-activate'] = False  # deactivate = clamp
@@ -678,11 +819,20 @@ class FatcComponent:
         if self._h['tool-clamped-sensor']:
             log.info("Load: tool clamped — waiting for Z clear")
             self._transition(State.LOAD_WAIT_Z_CLEAR)
+            return
+        elapsed = time.monotonic() - self._state_entered_at
+        if elapsed > self._cfg.drawbar_clamp_timeout:
+            log.error("Drawbar clamp timeout after %.1fs (limit %.1fs)",
+                      elapsed, self._cfg.drawbar_clamp_timeout)
+            self._enter_error(ErrorCode.DRAWBAR_TIMEOUT)
 
     def _sm_load_wait_z_clear(self, **_):
         """LOAD_WAIT_Z_CLEAR: respond DRAWBAR_DONE to Z_ENGAGED, then wait for Z_CLEAR."""
         # Respond to the pending Z_ENGAGED command once drawbar is clamped
         if self._active_ipc_cmd is not None:
+            log.info("-" * 60)
+            log.info("  <<<IPC DRAWBAR_DONE (load) — unblocking M102")
+            log.info("-" * 60)
             log.info("Load: tool clamped — responding DRAWBAR_DONE")
             self._ipc_respond(True)
 
@@ -691,6 +841,9 @@ class FatcComponent:
         if cmd is None:
             return
         if cmd.cmd == 'Z_CLEAR':
+            log.info("-" * 60)
+            log.info("  IPC>>> Z_CLEAR (load) — M103 fired, Z at safe height")
+            log.info("-" * 60)
             log.info("Load: Z clear — retracting carousel")
             self._active_ipc_cmd = cmd   # responded when retract complete (COMPLETE)
             self._state.set_tool_in_pocket(self._state.current_pocket, 0)
@@ -722,9 +875,12 @@ class FatcComponent:
         if result.ok:
             log.info("Homing complete")
             self._is_homed = True
+            self._state.set_current_pocket(1)  # carousel homes to pocket 1
+            self._ipc_respond(True)   # unblock M104 if homing was IPC-triggered
             self._transition(State.IDLE)
         else:
             log.error("Homing failed: %s", result.error)
+            self._ipc_respond(False, "homing failed")  # unblock M104 with error
             self._enter_error(ErrorCode.HOME_TIMEOUT)
 
     # ------------------------------------------------------------------
@@ -765,9 +921,13 @@ class FatcComponent:
             # After STOW_EXTEND: carousel at spindle, wait for Z
             self._transition(next_state)
         elif next_state == State.LOAD_ROTATE:
-            # After STOW_RETRACT: start load rotation
-            self._transition(next_state)
-            self._start_load()
+            # After STOW_RETRACT: start load rotation (or finish for T0 stow-only)
+            if self._pending_tool == 0:
+                log.info("Stow-only (T0): sequence complete, skipping load phase")
+                self._sequence_complete()
+            else:
+                self._transition(next_state)
+                self._start_load()
         elif next_state == State.LOAD_EXTEND:
             # After LOAD_ROTATE: extend carousel
             log.info("Load: pocket aligned — extending carousel")
@@ -785,8 +945,10 @@ class FatcComponent:
 
     def _sequence_complete(self):
         """Called when LOAD_RETRACT finishes — the full sequence is done."""
+        log.info("-" * 60)
+        log.info("  <<<IPC COMPLETE — T%d loaded, unblocking M103", self._pending_tool)
+        log.info("-" * 60)
         log.info("Tool change complete: T%d loaded", self._pending_tool)
-        # Respond to the final Z_CLEAR IPC command (M103 load)
         self._ipc_respond(True)
         # Update HAL pin
         self._h['tool-in-spindle'] = self._pending_tool
@@ -822,8 +984,16 @@ class FatcComponent:
 
     def _transition(self, new_state: State):
         if new_state != self._sm_state:
-            log.info("State: %s -> %s", self._sm_state.name, new_state.name)
-        self._sm_state = new_state
+            log.info("=" * 60)
+            log.info("  STATE  %s  ->  %s", self._sm_state.name, new_state.name)
+            log.info("=" * 60)
+            self._sm_state = new_state
+            self._state_entered_at = time.monotonic()
+            if self._cfg.sim_stage_delay > 0.0:
+                log.info("  [sim_stage_delay %.1fs]", self._cfg.sim_stage_delay)
+                time.sleep(self._cfg.sim_stage_delay)
+        else:
+            self._sm_state = new_state
 
     def _enter_error(self, code: ErrorCode):
         self._error_code = code

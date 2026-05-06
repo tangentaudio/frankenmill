@@ -11,11 +11,16 @@ data_plugins:
     provider: qtpyvcp.plugins.tool_table:ToolTable
     kwargs:
       columns: TZDR
+      # fatc manages tool-in-spindle state; disable PB's built-in restore
+      # which issues M61 Q{n} on homing and conflicts with fatc's authority.
+      remember_tool_in_spindle: false
 
   offsettable:
     provider: qtpyvcp.plugins.offset_table:OffsetTable
     kwargs:
       columns: "XYZ"
+
+  # fatc_sync removed — DynFATC handles startup sync internally
 
 settings:
 

@@ -23,47 +23,93 @@ o20 if [#<selected_tool> EQ #<tool_in_spindle>]
     M2
 o20 endif
 
+(PRINT, )
+(PRINT, ================================================================)
+(PRINT, TOOLCHANGE: T#<tool_in_spindle> -> T#<selected_tool>)
+(PRINT, ================================================================)
+
 ; --- Raise Z to safe height before touching carousel ---
+(PRINT, [Z] raising to safe height Z0)
 G53 G0 Z0
 
 ; --- BEGIN: tell fatc which tool we want.
 ;     Blocks until fatc has the carousel extended at the stow pocket
 ;     (if a tool is in spindle) or the load pocket (if spindle empty).
+(PRINT, [IPC] M101: BEGIN T#<selected_tool> -- waiting for carousel READY_FOR_Z)
 M101 P#<selected_tool>
+(PRINT, [IPC] M101 returned: carousel extended and ready)
 
-; --- STOW phase (only if a tool is currently in spindle) ---
-o100 if [#<tool_in_spindle> GT 0]
+; --- STOW phase (only if fatc says a tool is physically in spindle) ---
+; Use fatc's HAL pin (physical truth) rather than #<tool_in_spindle> from
+; the interpreter, which can be stale from the .var file after restart.
+#<fatc_spindle_tool> = #<_hal[fatc.tool-in-spindle]>
+o100 if [#<fatc_spindle_tool> GT 0]
 
+    ; Capture stow pocket from fatc (set when carousel rotated to stow position).
+    #<stow_pocket> = #<_hal[fatc.current-pocket]>
+
+    (PRINT, )
+    (PRINT, -- STOW T#<fatc_spindle_tool> into pocket #<stow_pocket> --)
     ; Lower Z to tool-change height (collet into carousel pocket)
+    (PRINT, [Z] lowering to TC height for stow)
     G53 G0 Z#<_ini[ATC]TC_HEIGHT>
 
     ; Z_ENGAGED stow: fatc opens drawbar.
     ; Blocks until drawbar is fully open (DRAWBAR_DONE).
+    (PRINT, [IPC] M102: Z_ENGAGED stow -- waiting for DRAWBAR_DONE)
     M102
+    (PRINT, [IPC] M102 returned: drawbar open, tool released)
+    ; DynFATC handles visual update reactively from HAL pin changes.
 
     ; Retract Z -- tool is now sitting in pocket
+    (PRINT, [Z] retracting to Z0 -- tool now in pocket)
     G53 G0 Z0
 
-    ; Z_CLEAR stow: fatc stores tool, rotates to load pocket, extends.
-    ; Blocks until load carousel is extended (READY_FOR_Z).
+    ; Z_CLEAR stow: fatc stores tool.
+    ; For stow+load: blocks until load carousel extended (READY_FOR_Z).
+    ; For stow-only (T0): blocks until carousel retracted (COMPLETE).
+    (PRINT, [IPC] M103: Z_CLEAR stow)
     M103
+    (PRINT, [IPC] M103 returned)
 
 o100 endif
 
-; --- LOAD phase ---
+; --- LOAD phase (skip for T0 = stow-only) ---
+o200 if [#<selected_tool> GT 0]
 
+; Capture load pocket from fatc (updated by fatc when carousel rotated to load position).
+; Valid here for both stow+load and load-only paths.
+#<load_pocket> = #<_hal[fatc.current-pocket]>
+
+; --- LOAD T#<selected_tool> from pocket #<load_pocket> ---
+(PRINT, )
+(PRINT, -- LOAD T#<selected_tool> from pocket #<load_pocket> --)
 ; Lower Z to tool-change height (collet into carousel pocket)
+(PRINT, [Z] lowering to TC height for load)
 G53 G0 Z#<_ini[ATC]TC_HEIGHT>
 
 ; Z_ENGAGED load: fatc closes drawbar.
 ; Blocks until drawbar is fully clamped (DRAWBAR_DONE).
+(PRINT, [IPC] M102: Z_ENGAGED load -- waiting for DRAWBAR_DONE)
 M102
+(PRINT, [IPC] M102 returned: drawbar clamped, tool in spindle)
+; DynFATC handles visual update reactively from HAL pin changes.
 
 ; Retract Z -- tool is now in spindle
+(PRINT, [Z] retracting to Z0 -- tool loaded)
 G53 G0 Z0
 
 ; Z_CLEAR load: fatc retracts carousel, sequence complete.
 ; Blocks until carousel fully retracted (COMPLETE).
+(PRINT, [IPC] M103: Z_CLEAR load -- waiting for COMPLETE)
 M103
+(PRINT, [IPC] M103 returned: carousel retracted, sequence COMPLETE)
+
+o200 endif
+
+(PRINT, )
+(PRINT, ================================================================)
+(PRINT, TOOLCHANGE DONE: T#<selected_tool> loaded)
+(PRINT, ================================================================)
 
 o<toolchange> endsub [1]
