@@ -71,8 +71,8 @@
   #define MOTHERBOARD BOARD_RAMPS_CREALITY
 #endif
 
-// FrankenMill ATC: I axis (carousel rotation) homing switch on Z- connector (pin 18)
-#define I_STOP_PIN 18
+// FrankenMill ATC: I axis (carousel rotation) homing switch on Z+ connector (pin 19 = PD2)
+#define I_STOP_PIN 19
 
 // @section serial
 

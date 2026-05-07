@@ -1,5 +1,10 @@
 # FrankenMill ATC — Development Approach
 
+> **Status as of 2026-05-06:** Phases 1–5 are implemented and running in sim.
+> Phase 6 (Probe Basic GUI) is partially implemented (`fatc_atc.py` exists,
+> is loaded, and is functional for LOAD/STORE). Two open bugs remain before
+> the GUI tab can be called complete — see CONTEXT.md §8.
+
 ## 1. Overview
 
 The `fatc` component will be developed incrementally using a **hybrid
@@ -16,8 +21,9 @@ strategy.
 
 ### 2.1 Host: Dev Workstation
 
-- **LinuxCNC 2.9.x** in simulator mode (no real-time kernel required)
-- **Probe Basic / QtPyVCP** simulator config (from `pico-cnc-hmi` repo)
+- **LinuxCNC 2.9.8** in simulator mode (no real-time kernel required)
+- **Probe Basic / QtPyVCP** — dev install at `/home/steve/dev/probe_basic/` and `/home/steve/dev/qtpyvcp/`
+- Sim config: `linuxcnc/configs/atc.sim/` (in this repo — NOT in `pico-cnc-hmi`)
 - Python 3.x for `fatc` component development
 - Marlin serial connection via USB (`/dev/ttyUSB0`)
 
@@ -165,17 +171,14 @@ yet. Validate with real serial responses from real firmware.
 **Goal:** Complete tool-change state machine (manual trigger via HAL pin).
 
 - [x] State machine framework (enum states, transition validation)
-- [ ] Zone-based motion coordination ("traffic cop" model) — deferred, carousel motion not yet integrated
 - [x] Tool-change sequence: stow + load cycle working end-to-end in sim
-- [ ] Parallel motion (carousel rotate while Z clears) — deferred
 - [x] Tool-in-spindle tracking with persistent state
-- [ ] Carousel pocket sensor integration — deferred to real hardware
 - [x] Error state entry on fault conditions (`TOOL_NOT_FOUND`, timeouts)
-- [ ] Configurable homing behavior — deferred to real machine (G28 not yet used)
-
-**Test method:** Trigger tool changes via HAL pin (`fatc.tool-change`).
-Observe Marlin dummy motors moving through sequence. Verify state
-transitions with `halshow`.
+- [x] Drawbar timeout detection with `_state_entered_at` timer
+- [x] Abort handling via `fatc.abort` pin (rising edge, armed after first IDLE)
+- [ ] Carousel pocket sensor integration — deferred to real hardware
+- [ ] Configurable homing behavior — deferred to real machine
+- [ ] Parallel motion (carousel rotate while Z clears) — deferred
 
 ### Phase 4: M6 Remap Integration
 
@@ -232,20 +235,52 @@ o<toolchange> endsub [1]
 - [x] Z-axis coordination verified (sim loopback): load-only and stow+load cycles tested
 - [ ] Pre-dock parallel motion (carousel rotate while Z travels) — deferred
 - [ ] Tool table synchronisation — deferred
-- [ ] Abort/cancel handling (M2 mid-sequence) — deferred
+- [x] Abort mid-sequence: `_enter_error` unblocks active IPC cmd and drains queue; M-code exits non-zero; LinuxCNC raises fault
 
 **Test method:** Run G-code programs in LinuxCNC sim with `T1 M6`, `T2 M6`,
 etc. Verify full sequence including simulated Z motion and real Marlin motion.
+
+### Phase 4.5: Inventory IPC Commands
+
+**Goal:** Operator can declare and query tool/pocket assignments via Unix socket,
+without needing direct file access.
+
+- [x] `GET_INVENTORY` — returns pocket_map, tool_in_spindle, inventory_valid flag
+- [x] `SET_POCKET pocket=N tool=T` — assign tool T to pocket N (0 = empty)
+- [x] `CLEAR_INVENTORY` — zero all pockets, clear tool_in_spindle, mark invalid
+- [x] `SET_SPINDLE tool=T` — declare what tool is in the spindle
+- [x] `SET_INVENTORY_VALID valid=true/false` — mark inventory as trusted
+- [x] Management commands handled synchronously in socket handler thread (no state machine interaction)
+- [x] All management commands call `state.save()` immediately for durability
+
+**Test method:**
+```bash
+# Quick one-liner socket client:
+python3 -c "
+import socket, json
+s = socket.socket(socket.AF_UNIX)
+s.connect('/tmp/fatc.sock')
+s.sendall(json.dumps({'cmd': 'GET_INVENTORY'}).encode() + b'\n')
+print(json.loads(s.recv(4096)))
+"
+# Set pocket 3 = T5:
+# {'cmd': 'SET_POCKET', 'pocket': 3, 'tool': 5}
+# Clear all:
+# {'cmd': 'CLEAR_INVENTORY'}
+```
 
 ### Phase 5: Safety & Error Recovery
 
 **Goal:** Robust error handling and operator recovery.
 
-- [ ] Timeout detection (Marlin response, motion completion)
+- [x] Drawbar timeout detection: `_state_entered_at` recorded on every `_transition()`; `STOW_UNCLAMP` and `LOAD_CLAMP` enter `ERROR(DRAWBAR_TIMEOUT)` if sensor doesn't confirm within `DRAWBAR_UNCLAMP_TIMEOUT` / `DRAWBAR_CLAMP_TIMEOUT`
+- [x] De-energise solenoid on unclamp timeout (fail-safe: drawbar stays clamped)
+- [x] Drawbar sim delay: `timedelay` HAL component (0.5 s on/off) makes timeout path testable
+- [ ] Timeout detection (Marlin response, motion completion) — move timeout exists; sensor/comms timeouts in progress
 - [ ] Sensor disagreement detection (expected vs actual pocket state)
 - [ ] E-stop integration (Marlin power cut via hardwired relay)
 - [ ] Pause-and-recover architecture (operator can fix and resume)
-- [ ] Error code reporting via HAL pins
+- [x] Error code reporting via HAL pins (`fatc.error-code`)
 - [ ] State recovery after power cycle (from persistent state file)
 - [ ] Air blast integration
 
@@ -256,45 +291,73 @@ verify graceful error handling and recovery paths.
 
 **Goal:** Visual feedback and operator-friendly interface.
 
-- [ ] Probe Basic / DynATC adapter (HAL pins → widget calls)
-- [ ] Error recovery UI (if needed beyond HAL error codes)
-- [ ] Per-pocket calibration wizard (future)
-- [ ] IPC mechanism: Unix socket (chosen in Phase 4 — see requirements.md Q1)
-- [ ] Documentation and operator manual
+**Status: Partially implemented.**
 
-**Test method:** Full integration testing with Probe Basic GUI in sim mode.
+- [x] `fatc_atc.py` — Probe Basic ATC tab module (`class Atc(QWidget)`)
+  - DynATC carousel widget with HAL-driven rotation animation
+  - Status labels: fatc state, homed, error, Marlin connection, current pocket, tool in spindle
+  - Buttons: REF CAROUSEL, LOAD SPINDLE, STORE TOOL, UNLOAD SPINDLE, RESET ERROR
+  - 200ms poll loop updating all status from HAL pins and IPC
+  - Button state gating: machine_on + interp_idle + fatc_idle + is_homed
+- [x] `probe_basic.py` patched — `load_atc()` supports `ATC_USER_PATH` and `ATC_SKIP_BUILTIN_MODULES` INI keys
+- [x] LOAD SPINDLE: `T{n} M6` via `issue_mdi()` — confirmed working in sim
+- [ ] **OPEN BUG:** STORE TOOL hangs — `T0 M6` MDI issued but interpreter does not return to IDLE after sequence completes (see CONTEXT.md §8.1)
+- [ ] **OPEN BUG:** DynATC pocket not cleared after LOAD — NGC `DEBUG EVAL getWidget` may not reach the correct widget instance (see CONTEXT.md §8.2)
+- [ ] Per-pocket calibration wizard — future
+- [ ] Error recovery UI beyond current RESET ERROR button — future
 
 ---
 
-## 4. File Layout (Planned)
+## 4. File Layout (Actual)
 
 ```
 linuxcnc/atc/
+├── CONTEXT.md               # ★ Read first — full implementation context
 ├── requirements.md          # Architectural requirements
-├── development.md           # This file
+├── development.md           # This file — phases and status
 ├── README.md                # Project overview
 ├── fatc/                    # Python component source
-│   ├── __init__.py
-│   ├── fatc.py              # Main component entry point
-│   ├── serial_marlin.py     # Marlin serial protocol layer
-│   ├── state_machine.py     # ATC state machine
-│   ├── config.py            # INI file config loading
-│   └── persistent_state.py  # JSON tool-pocket map
-├── hal/                     # HAL configuration files
-│   ├── fatc.hal             # Component loading and pin wiring
-│   └── fatc_sim.hal         # Simulated I/O loopbacks for dev
-├── remap/                   # M6 remap G-code
-│   └── m6remap.ngc          # Thin sequencer
-├── marlin/                  # Marlin firmware (exists)
-│   ├── Configuration.h
-│   ├── Configuration_adv.h
-│   ├── build.sh
-│   ├── README.md
-│   └── Marlin/              # Git submodule
-└── tests/                   # Test scripts
-    ├── test_serial.py       # Standalone serial protocol tests
-    └── test_state_machine.py
+│   ├── fatc.py              # Main entry point: HAL component + state machine + IPC server
+│   ├── serial_marlin.py     # Marlin USB-serial protocol layer
+│   ├── serial_thread.py     # Background thread: serial commands, M114 heartbeat
+│   ├── config.py            # INI config loading
+│   └── persistent_state.py  # JSON tool-pocket map (fatc_state.json)
+└── marlin/                  # Marlin firmware (built and flashed)
+    ├── Configuration.h
+    ├── Configuration_adv.h
+    ├── platformio.ini
+    ├── build.sh
+    ├── README.md
+    └── Marlin/              # Git submodule (bugfix-2.1.x)
+
+linuxcnc/configs/atc.sim/    # ★ Active sim+dev config
+├── atc_sim.ini              # LinuxCNC config (Probe Basic, REMAP, ATC settings)
+├── fatc_launch.sh           # loadusr wrapper (logs to fatc.log)
+├── fatc_state.json          # Persistent state (written at runtime — reset before tests)
+├── tool.tbl                 # LinuxCNC tool table
+├── watch_state.py           # Diagnostic: streams LC stat + HAL pin changes
+├── lcstat.py                # One-shot state snapshot
+├── hallib/
+│   ├── core_sim.hal         # Axis sim, iocontrol, tool-change nets
+│   ├── fatc_sim.hal         # fatc wiring: tool-change handshake, program-stop
+│   ├── spindle_sim.hal      # Simulated spindle encoder
+│   └── probe_basic_postgui.hal  # Postgui: cycle timer, drawbar sim, abort
+├── subroutines/
+│   ├── toolchange.ngc       # M6 REMAP thin sequencer
+│   ├── M101                 # BEGIN IPC (Python executable)
+│   ├── M102                 # Z_ENGAGED IPC (Python executable)
+│   ├── M103                 # Z_CLEAR IPC (Python executable)
+│   ├── M104                 # HOME IPC (Python executable, called by m13.ngc)
+│   └── m13.ngc              # REF CAROUSEL (calls M104)
+├── python/
+│   ├── remap.py             # Local remap additions
+│   ├── stdglue.py           # change_prolog / change_epilog
+│   └── toplevel.py          # Interpreter toplevel
+└── atc/
+    └── fatc_atc/
+        └── fatc_atc.py      # Probe Basic ATC tab module
 ```
+
 
 ---
 
@@ -311,21 +374,10 @@ linuxcnc/atc/
 
 ---
 
-## 6. Open Questions
+## 6. Resolved Questions
 
-### Dev Environment
+- **Sim config location:** `linuxcnc/configs/atc.sim/` in this repo. ✅
+- **Phase 1 standalone serial:** Yes, done — `serial_marlin.py` tested stand-alone before HAL integration. ✅
+- **Marlin BUSY handling:** `serial_thread.py` reads responses in a background thread; `BUSY:processing` lines are consumed but do not block the state machine. `ok` response signals command complete. ✅
+- **M400 vs poll:** `ok` after the last queued move is sufficient; no explicit `M400` needed. ✅
 
-- **Q:** Where should the LinuxCNC sim config for ATC development live?
-  Currently sim configs are in the `pico-cnc-hmi` repo. Should a dedicated
-  ATC sim config be created in this repo, or added to the existing sim setup?
-
-- **Q:** Should we start Phase 1 with a standalone serial test script (no
-  LinuxCNC dependency) to validate the Marlin protocol layer in isolation?
-
-### Marlin Protocol
-
-- **Q:** Does the fatc component need to handle Marlin's `BUSY:processing`
-  messages during long moves, or is polling `M114` sufficient?
-
-- **Q:** Should we use Marlin's `M400` (wait for moves to finish) for
-  synchronization, or track `ok` responses to know when queued moves complete?

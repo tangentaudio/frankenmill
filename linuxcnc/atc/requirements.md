@@ -1,8 +1,12 @@
 # FrankenMill ATC Component — Requirements Specification
 
 > **Document Status:** DRAFT v3 — post-review refactor  
-> **Date:** 2026-05-05  
+> **Date:** 2026-05-06  
 > **Author:** Steve / Antigravity  
+>
+> **Implementation Status (2026-05-06):** Phases 1–5 complete; Phase 6
+> (GUI) partially complete. All Q1–Q7 open questions are now resolved.
+> For current implementation details, see CONTEXT.md.
 
 ---
 
@@ -98,9 +102,8 @@ G-code over serial instead of Modbus.
    and persistent state files. It has **no dependency on any specific LinuxCNC
    GUI** (Probe Basic, AXIS, gmoccapy, etc.). Any GUI visualization or
    operator interaction should be a **separate, modular layer**. This allows
-   switching GUIs without touching the core ATC logic. (Note: HAL pins alone
-   may be insufficient for rich error recovery UX — see Q7 for discussion of
-   supplementary communication channels.)
+   switching GUIs without touching the core ATC logic. (Supplementary IPC
+   via Unix socket `/tmp/fatc.sock` provides structured communication — see Q7.)
 
 2. **All intelligence in the component** — Tool tracking, state machine,
    motion planning, and error handling live in the Python component, not in
@@ -414,8 +417,8 @@ the ATC, and ATC errors must stop the machine.
 > **HAL pins alone may not provide a rich enough error recovery experience.**
 > Communicating error details, recovery options, and calibration data through
 > typed HAL pins (bit, s32, float) is tedious at best. A richer integration
-> with an ATC tab or error dialog in the GUI may require a supplementary
-> communication channel beyond HAL — see **Q7** for options.
+> with an ATC tab or error dialog in the GUI is provided via Unix socket IPC
+> — see **Q7** (now resolved) for the implemented protocol.
 
 #### 4.10.3 LinuxCNC Override Integration
 
@@ -1301,38 +1304,19 @@ Homing behavior should be configurable via INI. Options to support:
 
 ---
 
-### Q7: Component-to-GUI Communication — OPEN
+### Q7: Component-to-GUI Communication — **RESOLVED**
 
-HAL pins provide excellent status reporting (numeric state, error codes,
-boolean flags) but may be **insufficient for rich error recovery UX**. Specific
-limitations:
+**Decision:** Unix domain socket (`/tmp/fatc.sock`) with JSON newline-delimited
+messages. Implemented in Phase 4 as part of the M-code IPC layer.
 
-- HAL pins are typed (bit, s32, float) — no way to pass structured error
-  messages, calibration data arrays, or tool-pocket map contents
-- No event/notification mechanism — GUI must poll pins
-- No bidirectional structured data (e.g. "here are all 16 pocket assignments")
+The socket serves two purposes:
+1. **Sequencer handshake**: M101/M102/M103 Python executables connect during
+   toolchange.ngc execution to coordinate Z motion with the carousel state machine.
+2. **Management commands**: GUI (`fatc_atc.py`) and future tooling issue `HOME`,
+   `GET_INVENTORY`, `SET_POCKET`, `SET_SPINDLE`, `SET_INVENTORY_VALID` commands
+   at any time to read/modify state without touching the state machine.
 
-**Options under consideration:**
-
-- **(A) HAL-only**: Keep it simple. Error codes map to message strings in the
-  GUI adapter. Pocket assignments inferred from HAL state pins + the shared
-  persistent state file. Works but limits the richness of the GUI experience.
-- **(B) Shared state file**: GUI reads the same JSON state file the component
-  writes. Simple, no new IPC mechanism, but introduces file I/O coupling
-  and polling latency.
-- **(C) Unix domain socket / named pipe**: Component hosts a lightweight
-  IPC channel for structured messages (JSON). GUI adapter connects and
-  receives events, pocket maps, error details. More complex but enables
-  real-time structured communication.
-- **(D) D-Bus**: Standard Linux IPC. QtPyVCP (being Qt-based) has native
-  D-Bus support. Possible overkill for this use case.
-
-> [!NOTE]
-> This is a **future concern** — basic functionality works fine with HAL pins
-> alone. The decision can be deferred until error recovery UI or calibration
-> wizard development begins. The component should be structured so adding
-> an IPC channel later is straightforward (clean separation between state
-> machine logic and communication layers).
+See CONTEXT.md §4.5 for the full protocol specification.
 
 ---
 

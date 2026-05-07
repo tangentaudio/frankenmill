@@ -5,11 +5,13 @@
 
 loadrt time
 loadrt not names=not.0,not.1,not.2
+loadrt timedelay names=drawbar-delay
 
-addf time.0   servo-thread
-addf not.0    servo-thread
-addf not.1    servo-thread
-addf not.2    servo-thread
+addf time.0          servo-thread
+addf not.0           servo-thread
+addf not.1           servo-thread
+addf not.2           servo-thread
+addf drawbar-delay   servo-thread
 
 # *** Cycle timer — required for Probe Basic ***
 net prog-running   not.0.in  <=  halui.program.is-idle
@@ -26,10 +28,16 @@ net cycle-hours    qtpyvcp.timerhours.in    <=  time.0.hours
 net machine-is-enabled  =>  not.2.in
 net fatc-abort-signal   not.2.out  =>  fatc.abort
 
-# *** Drawbar simulation loopback (fatc_sim.hal loaded fatc; not.1 addf'd above) ***
-# drawbar-activate HIGH => tool releasing => unclamped-sensor HIGH, clamped-sensor LOW
-# drawbar-activate LOW  => tool clamped  => clamped-sensor HIGH,   unclamped-sensor LOW
-net sim-drawbar-out     fatc.drawbar-activate  =>  fatc.tool-unclamped-sensor  not.1.in
+# *** Drawbar simulation with realistic actuation delay ***
+# drawbar-activate HIGH => pneumatic unclamp => unclamped-sensor HIGH after on-delay
+# drawbar-activate LOW  => pneumatic clamp   => unclamped-sensor LOW  after off-delay
+# clamped-sensor is NOT(unclamped-sensor), so it changes after the same delay.
+# on-delay  = unclamp time; off-delay = clamp time.
+# Both are set well under fatc's DRAWBAR_*_TIMEOUT (2.0 s) so fatc never times out in sim.
+setp drawbar-delay.on-delay   1.5
+setp drawbar-delay.off-delay  5.0
+net sim-drawbar-out     fatc.drawbar-activate  =>  drawbar-delay.in
+net sim-drawbar-uncl    drawbar-delay.out      =>  fatc.tool-unclamped-sensor  not.1.in
 net sim-drawbar-clamped not.1.out              =>  fatc.tool-clamped-sensor
 
 # *** Probe graphic simulation — push probe tip in GUI triggers probe input ***

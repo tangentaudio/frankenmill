@@ -1,16 +1,18 @@
-(author: Chris P)
-(version: 0.2)
-(date: 06/27/24)
-
-(store spindle tool in carousel macro)
+; Stow the current spindle tool in the carousel (stow-only, no new tool loaded).
+; Called from the "STORE TOOL IN SPINDLE" button on the ATC tab.
+; Uses T0 M6 via our remap: fatc runs the stow sequence and skips the load phase.
 
 o<store_tool_in_carousel> sub
 (PRINT, o<store_tool_in_carousel>)
 
-G49
+; #<_current_tool> is the LinuxCNC predefined parameter for tool in spindle (#5400).
+; #<tool_in_spindle> is only available inside the M6 remap context (set by change_prolog).
+o100 if [#<_current_tool> LE 0]
+    (abort, No tool in spindle -- nothing to store)
+o100 endif
 
 T0 M6
 
 o<store_tool_in_carousel> endsub
 
-M2 (end program)
+M2

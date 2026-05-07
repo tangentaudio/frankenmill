@@ -34,7 +34,9 @@ _RE_OK = re.compile(r'^ok\b')
 _RE_ERROR = re.compile(r'^Error:', re.IGNORECASE)
 _RE_ECHO = re.compile(r'^echo:', re.IGNORECASE)
 _RE_TEMP = re.compile(r'^T\d*:\s*[\d.]+')          # T:nn.nn or T0:nn.nn
-_RE_BUSY = re.compile(r'^BUSY:', re.IGNORECASE)
+# Marlin sends keepalive as 'echo:busy: processing' (HOST_KEEPALIVE_FEATURE);
+# some other firmwares send 'BUSY:processing'. Match both.
+_RE_BUSY = re.compile(r'^(BUSY:|echo:busy:)', re.IGNORECASE)
 _RE_START = re.compile(r'^start\s*$', re.IGNORECASE)
 
 # M114 position report — covers both 3-axis and 3+C axis responses.

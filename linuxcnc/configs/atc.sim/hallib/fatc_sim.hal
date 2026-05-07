@@ -24,9 +24,10 @@ net tool-number            =>  fatc.tool-prep-number
 # fatc reads LinuxCNC's current tool-in-spindle to sync stow decisions with change_prolog
 net tool-in-spindle-lc  iocontrol.0.tool-number  =>  fatc.tool-number
 
-# Disconnect the loopback from core_sim.hal and let fatc drive tool-prepared.
-unlinkp iocontrol.0.tool-prepared
-net tool-prep-ack  fatc.tool-prepared  =>  iocontrol.0.tool-prepared
+# Tool-prepared: leave the core_sim.hal loopback in place.
+# iocontrol's prepare/prepared handshake is a simple ack cycle that
+# fatc has no need to gate.  Previously fatc drove tool-prepared and
+# failed to ack T0 prepares, causing T0 M6 to hang.
 
 # ---------------------------------------------------------------------------
 # Safety interlocks
@@ -50,8 +51,8 @@ net fatc-program-stop  fatc.program-stop  =>  halui.program.stop
 setp fatc.spindle-tool-sense true
 
 # ---------------------------------------------------------------------------
-# Drawbar simulation loopbacks live in probe_basic_postgui.hal
-# (requires not.1 addf'd to servo-thread, which happens in postgui).
+# Drawbar simulation with actuation delay lives in probe_basic_postgui.hal
+# (requires timedelay + not.1 addf'd to servo-thread, which happens in postgui).
 # ---------------------------------------------------------------------------
 # Notes on manual fault injection during development:
 #   halcmd sets fatc.tool-clamped-sensor false   # simulate clamp failure

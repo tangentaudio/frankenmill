@@ -30,7 +30,7 @@ from qtpy.QtGui import QFont, QColor
 from qtpy.QtWidgets import (
     QWidget, QHBoxLayout, QVBoxLayout, QGridLayout,
     QLabel, QPushButton, QLineEdit, QFrame, QSizePolicy,
-    QGroupBox, QSpacerItem,
+    QGroupBox, QSpacerItem, QMessageBox,
 )
 
 from qtpyvcp.actions.machine_actions import issue_mdi
@@ -331,6 +331,14 @@ class Atc(QWidget):
         self._btn_unload.clicked.connect(self._on_unload_spindle)
         lay.addWidget(self._btn_unload)
 
+        # --- REMOVE FROM CAROUSEL ---
+        self._btn_remove = QPushButton('REMOVE FROM CAROUSEL')
+        self._btn_remove.setStyleSheet(_BTN_STYLE)
+        self._btn_remove.setToolTip(
+            'Remove a tool from its carousel pocket after physically taking it out')
+        self._btn_remove.clicked.connect(self._on_remove_tool)
+        lay.addWidget(self._btn_remove)
+
         lay.addWidget(_hline())
 
         # --- RESET ERROR ---
@@ -424,11 +432,14 @@ class Atc(QWidget):
             self._reconcile_startup_tool(tool)
 
         # Error display
-        if in_error:
+        if in_error and error_code > 0:
             msg = _ERROR_MESSAGES.get(error_code, f'Unknown error (code {error_code})')
             self._error_label.setText(msg)
             self._error_frame.setVisible(True)
         else:
+            # Ignore transient in_error with no valid error code (startup race)
+            if in_error and error_code <= 0:
+                in_error = False  # don't lock out buttons for a phantom error
             self._error_frame.setVisible(False)
 
         self._update_button_states(state_int=state_int, is_homed=is_homed, in_error=in_error)
@@ -477,6 +488,9 @@ class Atc(QWidget):
         self._btn_unload.setEnabled(
             ready_for_ops and interp_idle)  # no carousel motion, no homed required
 
+        self._btn_remove.setEnabled(
+            ready_for_ops and fatc_idle and tool_num_valid)
+
         self._btn_reset.setEnabled(in_error)
 
     # ------------------------------------------------------------------
@@ -517,12 +531,128 @@ class Atc(QWidget):
         if not text.isdigit() or int(text) <= 0:
             return
         tool_num = int(text)
-        LOG.info('LOAD SPINDLE: T%d M6', tool_num)
-        # G43 is intentionally omitted here: issuing a second CMD.mdi() call
-        # immediately after T# M6 races with the interpreter still finishing
-        # change_epilog. G43 is handled by toolchange.ngc or by the operator's
-        # program preamble.
-        issue_mdi(f'T{tool_num} M6')
+
+        # Check if tool is in the carousel inventory
+        if self._tool_in_carousel(tool_num):
+            # Tool is in carousel — but check if current spindle tool is a
+            # manually-loaded tool (not in any pocket).  Auto-stow would
+            # silently put it into a carousel pocket.
+            current_tool = 0
+            try:
+                current_tool = int(hal.get_value('fatc.tool-in-spindle'))
+            except Exception:
+                pass
+
+            if current_tool > 0 and not self._tool_in_carousel(current_tool):
+                dlg = QMessageBox(self)
+                dlg.setWindowTitle('Tool Change')
+                dlg.setText(
+                    f'T{current_tool} is in the spindle but has no pocket in the carousel.\n\n'
+                    f'Would you like to put T{current_tool} into the carousel,\n'
+                    f'or take it out by hand first?'
+                )
+                btn_store = dlg.addButton('Put In Carousel', QMessageBox.AcceptRole)
+                btn_remove = dlg.addButton('Take Out By Hand', QMessageBox.DestructiveRole)
+                btn_cancel = dlg.addButton('Cancel', QMessageBox.RejectRole)
+                dlg.setDefaultButton(btn_cancel)
+                dlg.exec_()
+                clicked = dlg.clickedButton()
+                if clicked == btn_cancel:
+                    return
+                if clicked == btn_remove:
+                    # Remove from spindle record, then load requested tool
+                    LOG.info('Removing T%d from spindle before loading T%d',
+                             current_tool, tool_num)
+                    issue_mdi('M61 Q0')
+                    try:
+                        _fatc_ipc('SET_SPINDLE', tool=0, timeout=5.0)
+                    except Exception as exc:
+                        LOG.error('SET_SPINDLE IPC failed: %s', exc)
+                    if self.dynfatc:
+                        self.dynfatc.sync_from_fatc()
+                    QMessageBox.information(
+                        self, 'Tool Change',
+                        f'Take T{current_tool} out of the spindle,\n'
+                        f'then press LOAD SPINDLE again for T{tool_num}.',
+                    )
+                    return
+                # btn_store — put in carousel, proceed with normal T# M6
+                LOG.info('Storing T%d in carousel, then loading T%d', current_tool, tool_num)
+
+            LOG.info('LOAD SPINDLE: T%d M6 (from carousel)', tool_num)
+            issue_mdi(f'T{tool_num} M6')
+        else:
+            # Tool not in carousel — prompt for manual insertion
+            self._manual_tool_load(tool_num)
+
+    def _tool_in_carousel(self, tool_num):
+        """Check if tool_num is in any carousel pocket via fatc IPC."""
+        try:
+            result = _fatc_ipc('GET_INVENTORY', timeout=2.0)
+            pocket_map = result.get('pocket_map', {})
+            for pocket, tool in pocket_map.items():
+                if int(tool) == tool_num:
+                    return True
+        except Exception as exc:
+            LOG.warning('GET_INVENTORY failed, assuming tool not in carousel: %s', exc)
+        return False
+
+    def _manual_tool_load(self, tool_num):
+        """Prompt operator to manually insert a tool into the spindle."""
+        # Check if there's already a tool in the spindle that needs stowing
+        current_tool = 0
+        try:
+            current_tool = int(hal.get_value('fatc.tool-in-spindle'))
+        except Exception:
+            pass
+
+        if current_tool > 0:
+            reply = QMessageBox.question(
+                self, 'Tool Change',
+                f'T{tool_num} is not in the carousel.\n\n'
+                f'T{current_tool} is in the spindle and needs to be\n'
+                f'put away first. Stow T{current_tool} now?',
+                QMessageBox.Yes | QMessageBox.No,
+                QMessageBox.No,
+            )
+            if reply != QMessageBox.Yes:
+                LOG.info('Manual tool load cancelled (stow declined) for T%d', tool_num)
+                return
+            LOG.info('MANUAL LOAD: stowing T%d first, then load T%d', current_tool, tool_num)
+            # Stow current tool, then user must click LOAD SPINDLE again
+            issue_mdi('T0 M6')
+            QMessageBox.information(
+                self, 'Tool Change',
+                f'Stowing T{current_tool}...\n\n'
+                f'When finished, press LOAD SPINDLE\n'
+                f'again to put T{tool_num} in by hand.',
+            )
+            return
+
+        # Spindle is empty — prompt for manual insertion
+        reply = QMessageBox.question(
+            self, 'Manual Tool Change',
+            f'T{tool_num} is not in the carousel.\n\n'
+            f'Put T{tool_num} in the spindle by hand,\n'
+            f'then press Yes to confirm.',
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No,
+        )
+        if reply != QMessageBox.Yes:
+            LOG.info('Manual tool load cancelled for T%d', tool_num)
+            return
+
+        LOG.info('MANUAL LOAD: registering T%d in spindle', tool_num)
+        # Tell LinuxCNC the spindle now holds this tool
+        issue_mdi(f'M61 Q{tool_num}')
+        # Tell fatc the spindle now holds this tool
+        try:
+            _fatc_ipc('SET_SPINDLE', tool=tool_num, timeout=5.0)
+        except Exception as exc:
+            LOG.error('SET_SPINDLE IPC failed: %s', exc)
+        # Sync the DynFATC widget
+        if self.dynfatc:
+            self.dynfatc.sync_from_fatc()
 
     def _on_store_tool(self):
         # Determine what tool is actually in the spindle.
@@ -562,6 +692,55 @@ class Atc(QWidget):
             _fatc_ipc('SET_SPINDLE', tool=0, timeout=5.0)
         except Exception as exc:
             LOG.error('SET_SPINDLE IPC failed: %s', exc)
+
+    def _on_remove_tool(self):
+        """Remove a tool from its carousel pocket (operator physically removed it)."""
+        text = self._tool_entry.text().strip()
+        if not text.isdigit() or int(text) <= 0:
+            return
+        tool_num = int(text)
+
+        # Find which pocket has this tool
+        pocket_num = None
+        try:
+            result = _fatc_ipc('GET_INVENTORY', timeout=2.0)
+            pocket_map = result.get('pocket_map', {})
+            for pocket, tool in pocket_map.items():
+                if int(tool) == tool_num:
+                    pocket_num = int(pocket)
+                    break
+        except Exception as exc:
+            LOG.error('GET_INVENTORY failed: %s', exc)
+            return
+
+        if pocket_num is None:
+            QMessageBox.information(
+                self, 'Not Found',
+                f'T{tool_num} is not in any carousel pocket.',
+            )
+            return
+
+        reply = QMessageBox.question(
+            self, 'Remove Tool',
+            f'Remove T{tool_num} from pocket {pocket_num}?\n\n'
+            f'Make sure you have already taken the tool\n'
+            f'out of the carousel.',
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No,
+        )
+        if reply != QMessageBox.Yes:
+            return
+
+        LOG.info('REMOVE TOOL: clearing T%d from pocket %d', tool_num, pocket_num)
+        try:
+            _fatc_ipc('SET_POCKET', pocket=pocket_num, tool=0, timeout=5.0)
+        except Exception as exc:
+            LOG.error('SET_POCKET IPC failed: %s', exc)
+            return
+
+        if self.dynfatc:
+            self.dynfatc.sync_from_fatc()
+        LOG.info('T%d removed from pocket %d', tool_num, pocket_num)
 
     def _on_reset_error(self):
         """Pulse fatc.error-reset HAL pin to clear error state."""

@@ -47,8 +47,8 @@ Rectangle {
                                              topSection.width * 0.25)
     property real   forkLength: carouselRadius * 0.18
     property real   forkWidth: 8
-    property real   pocketCircleR: carouselRadius * 0.13
-    property real   toolCircleR: carouselRadius * 0.10
+    property real   pocketCircleR: carouselRadius * 0.09
+    property real   toolCircleR: carouselRadius * 0.09
 
     // =====================================================================
     // Top section — Top-down view (65% height)
@@ -196,7 +196,7 @@ Rectangle {
                     }
                 }
 
-                // Draw carousel ring procedurally
+                // Carousel body — simple circle
                 Canvas {
                     id: ringCanvas
                     anchors.fill: parent
@@ -205,122 +205,69 @@ Rectangle {
                         ctx.clearRect(0, 0, width, height);
                         var cx = width / 2;
                         var cy = height / 2;
-                        var r = carouselRadius - 10;
+                        var r = carouselRadius * 0.82;
 
-                        // Main ring
+                        // Main ring circle
                         ctx.beginPath();
                         ctx.arc(cx, cy, r, 0, Math.PI * 2);
-                        ctx.strokeStyle = "#778899";
-                        ctx.lineWidth = 4;
-                        ctx.stroke();
-
-                        // Inner ring
-                        ctx.beginPath();
-                        ctx.arc(cx, cy, r * 0.72, 0, Math.PI * 2);
                         ctx.strokeStyle = "#556677";
-                        ctx.lineWidth = 2;
+                        ctx.lineWidth = 3;
                         ctx.stroke();
-
-                        // Fork slots
-                        for (var i = 0; i < pocketCount; i++) {
-                            var angle = (i * 360 / pocketCount) * Math.PI / 180;
-                            // Fork is a U-shape opening outward
-                            var forkInner = r * 0.82;
-                            var forkOuter = r + 8;
-                            var forkHalfW = 6;
-
-                            var cos_a = Math.cos(angle);
-                            var sin_a = Math.sin(angle);
-                            // Perpendicular
-                            var px = -sin_a;
-                            var py = cos_a;
-
-                            ctx.beginPath();
-                            // Left prong
-                            ctx.moveTo(cx + cos_a * forkInner + px * forkHalfW,
-                                       cy + sin_a * forkInner + py * forkHalfW);
-                            ctx.lineTo(cx + cos_a * forkOuter + px * forkHalfW,
-                                       cy + sin_a * forkOuter + py * forkHalfW);
-                            // Top of U
-                            ctx.lineTo(cx + cos_a * forkOuter + px * (forkHalfW + 4),
-                                       cy + sin_a * forkOuter + py * (forkHalfW + 4));
-
-                            ctx.strokeStyle = "#8899aa";
-                            ctx.lineWidth = 2.5;
-                            ctx.lineCap = "round";
-                            ctx.stroke();
-
-                            // Right prong
-                            ctx.beginPath();
-                            ctx.moveTo(cx + cos_a * forkInner - px * forkHalfW,
-                                       cy + sin_a * forkInner - py * forkHalfW);
-                            ctx.lineTo(cx + cos_a * forkOuter - px * forkHalfW,
-                                       cy + sin_a * forkOuter - py * forkHalfW);
-                            ctx.lineTo(cx + cos_a * forkOuter - px * (forkHalfW + 4),
-                                       cy + sin_a * forkOuter - py * (forkHalfW + 4));
-                            ctx.stroke();
-                        }
                     }
                     Component.onCompleted: requestPaint()
                 }
 
-                // Pocket labels (P1..Pn) — positioned around ring
-                Repeater {
-                    model: pocketCount
-                    Item {
-                        id: pocketLabel
-                        property int pocketNum: index + 1
-                        property real angle: index * 360 / pocketCount
-                        property real labelR: carouselRadius * 0.58
-
-                        x: carouselRing.width/2 + labelR * Math.cos(angle * Math.PI/180) - 12
-                        y: carouselRing.height/2 + labelR * Math.sin(angle * Math.PI/180) - 8
-
-                        // Counter-rotate so text stays upright
-                        rotation: carouselAngle + 180
-
-                        Text {
-                            text: "P" + pocketLabel.pocketNum
-                            color: "#99aabb"
-                            font.pixelSize: 10
-                            font.bold: false
-                        }
-                    }
-                }
-
-                // Tool circles in pockets
+                // Pocket circles — empty = dashed outline, occupied = filled
                 Repeater {
                     id: toolRepeater
                     model: pocketCount
                     Item {
-                        id: toolItem
+                        id: pocketItem
                         property int pocketNum: index + 1
-                        property int toolNum: 0   // 0 = empty, set by Python
+                        property int toolNum: 0
                         property real angle: index * 360 / pocketCount
-                        property real toolR: carouselRadius * 0.82
+                        property real pocketR: carouselRadius * 0.82
 
-                        x: carouselRing.width/2 + toolR * Math.cos(angle * Math.PI/180) - toolCircleR
-                        y: carouselRing.height/2 + toolR * Math.sin(angle * Math.PI/180) - toolCircleR
+                        x: carouselRing.width/2 + pocketR * Math.cos(angle * Math.PI/180) - pocketCircleR
+                        y: carouselRing.height/2 + pocketR * Math.sin(angle * Math.PI/180) - pocketCircleR
+                        width: pocketCircleR * 2
+                        height: pocketCircleR * 2
 
-                        width: toolCircleR * 2
-                        height: toolCircleR * 2
-                        visible: toolNum > 0
+                        // Empty pocket — gray circle outline
+                        Rectangle {
+                            anchors.fill: parent
+                            radius: width / 2
+                            color: "transparent"
+                            border.color: "#556677"
+                            border.width: 1.5
+                            visible: pocketItem.toolNum === 0
+                            opacity: 0.6
 
+                            Text {
+                                anchors.centerIn: parent
+                                rotation: carouselAngle + 180
+                                text: "P" + pocketItem.pocketNum
+                                color: "#778899"
+                                font.pixelSize: 11
+                            }
+                        }
+
+                        // Occupied pocket — filled blue circle
                         Rectangle {
                             anchors.fill: parent
                             radius: width / 2
                             color: "#3498db"
                             border.color: "#5dade2"
                             border.width: 1.5
+                            visible: pocketItem.toolNum > 0
                             opacity: 0.9
 
-                            // Counter-rotate text
                             Text {
                                 anchors.centerIn: parent
                                 rotation: carouselAngle + 180
-                                text: "T" + toolItem.toolNum
+                                text: "T" + pocketItem.toolNum
                                 color: "white"
-                                font.pixelSize: 9
+                                font.pixelSize: 11
                                 font.bold: true
                             }
                         }

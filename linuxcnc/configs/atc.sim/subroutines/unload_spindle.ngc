@@ -1,17 +1,14 @@
-(author: Chris P)
-(version: 0.1)
-(date: 04/20/24)
-
-(unloads tool in spindle in software)
-; This is called form the ATC and tool pages
+; Declare the spindle empty (operator manually removed the tool).
+; Updates LinuxCNC and fatc tracking without any carousel motion.
+; Use "STORE TOOL IN CAROUSEL" to physically stow a tool first.
 
 o<unload_spindle> sub
-(PRINT, o<load_spindle_safety>)
+(PRINT, o<unload_spindle>)
 
-M61 Q0
-G49
-#3991 = 0
+M61 Q0   ; tell LinuxCNC spindle is empty
+G49      ; cancel tool length offset
+M105 P0  ; tell fatc spindle is empty (SET_SPINDLE tool=0)
 
 o<unload_spindle> endsub
 
-M2 (end program)
+M2

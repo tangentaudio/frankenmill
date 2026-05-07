@@ -52,10 +52,13 @@ class Config:
     position_poll_interval: float = 0.05   # seconds between M114 polls during motion
 
     # --- Homing ---
-    homing_required: bool = False          # set True for real machine; False for dev
+    homing_required: int = 0   # 0=skip all, 1=home both axes, 2=rotation-only (no linear sensor)
 
     # --- IPC ---
     socket_path: str = '/tmp/fatc.sock'    # Unix socket for M101/M102/M103
+
+    # --- Simulation / debug ---
+    sim_stage_delay: float = 0.0  # seconds to pause after each state transition (0 = off)
 
 
 def load(ini_path: str, section: str = 'ATC') -> Config:
@@ -109,14 +112,15 @@ def load(ini_path: str, section: str = 'ATC') -> Config:
     cfg.rotation_feedrate     = get('ROTATION_FEEDRATE',       int,   cfg.rotation_feedrate)
     cfg.linear_feedrate       = get('LINEAR_FEEDRATE',         int,   cfg.linear_feedrate)
 
-    cfg.z_tool_change_height    = get('Z_TOOL_CHANGE_HEIGHT',    float, cfg.z_tool_change_height)
+    cfg.z_tool_change_height    = get('TC_HEIGHT',               float, cfg.z_tool_change_height)
     cfg.z_tool_clearance_height = get('Z_TOOL_CLEARANCE_HEIGHT', float, cfg.z_tool_clearance_height)
 
     cfg.drawbar_clamp_timeout   = get('DRAWBAR_CLAMP_TIMEOUT',   float, cfg.drawbar_clamp_timeout)
     cfg.drawbar_unclamp_timeout = get('DRAWBAR_UNCLAMP_TIMEOUT', float, cfg.drawbar_unclamp_timeout)
 
-    cfg.homing_required         = get('HOMING_REQUIRED', _bool,  cfg.homing_required)
+    cfg.homing_required         = get('HOMING_REQUIRED', int,   cfg.homing_required)
     cfg.socket_path             = get('SOCKET_PATH',      str,   cfg.socket_path)
+    cfg.sim_stage_delay         = get('SIM_STAGE_DELAY',  float, cfg.sim_stage_delay)
 
     return cfg
 

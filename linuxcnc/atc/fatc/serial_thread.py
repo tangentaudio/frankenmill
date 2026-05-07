@@ -308,7 +308,7 @@ class SerialThread:
             self._marlin.connect()
             # On connect: set absolute mode, disable software endstops for dev
             self._marlin.send_gcode('G90')
-            if not self._cfg.homing_required:
+            if self._cfg.homing_required == 0:
                 self._marlin.disable_software_endstops()
             with self._connected_lock:
                 self._connected = True
@@ -454,14 +454,24 @@ class SerialThread:
         Home the requested axes.  Linear axis (X) must home first.
 
         Sends G28 X, waits for settle near 0, then G28 C.
+
+        HOMING_REQUIRED modes:
+          0 - skip all homing, return instant success (sim / bench)
+          1 - home both linear (X) and rotation (C) axes
+          2 - home rotation axis only (C), skip linear (testing with partial hardware)
         """
         cfg = self._cfg
+
+        if cfg.homing_required == 0:
+            log.info("HOMING_REQUIRED=0: skipping G28, returning instant home success")
+            return Result(ok=True)
+
         linear = cfg.linear_axis
         rotation = cfg.rotation_axis
 
-        if linear in axes:
+        if linear in axes and cfg.homing_required != 2:
             log.info("Homing linear axis (%s)", linear)
-            self._marlin.send_gcode(f'G28 {linear}')
+            self._marlin.send_gcode(f'G28 {linear}', timeout=cfg.home_timeout)
             # Wait for linear to reach home (0 mm)
             deadline = time.monotonic() + cfg.home_timeout
             while time.monotonic() < deadline:
@@ -477,7 +487,7 @@ class SerialThread:
 
         if rotation in axes:
             log.info("Homing rotation axis (%s)", rotation)
-            self._marlin.send_gcode(f'G28 {rotation}')
+            self._marlin.send_gcode(f'G28 {rotation}', timeout=cfg.home_timeout)
             deadline = time.monotonic() + cfg.home_timeout
             while time.monotonic() < deadline:
                 if self._abort_event.is_set() or self._stop_event.is_set():
